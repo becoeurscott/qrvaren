@@ -5,10 +5,7 @@ import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { BRAND_NAME, SITE_URL } from "@/shared/config";
-import { Nav } from "@/components/Nav";
-import { Footer } from "@/components/Footer";
-import { ConsentBanner } from "@/components/ConsentBanner";
-import { Cursor, ScrollFx } from "@/components/interactions";
+import { Analytics } from "@/components/Analytics";
 import "../globals.css";
 
 const anton = Anton({ variable: "--font-anton", weight: "400", subsets: ["latin"] });
@@ -36,12 +33,8 @@ export default async function LocaleLayout({ children, params }: { children: Rea
     <html lang={locale}>
       <body className={`${anton.variable} ${bricolage.variable} font-sans antialiased`}>
         <NextIntlClientProvider>
-          <Nav />
           {children}
-          <Footer />
-          <ConsentBanner />
-          <ScrollFx />
-          <Cursor />
+          <Analytics />
         </NextIntlClientProvider>
       </body>
     </html>

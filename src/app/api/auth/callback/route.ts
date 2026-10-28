@@ -23,6 +23,14 @@ export async function GET(request: NextRequest) {
     return fail("exchange_failed");
   }
   response.cookies.delete("insforge_code_verifier");
+  // Suspended accounts get no session: clear the cookies just set and send them back to login.
+  const { data: suspended } = await serverDb().rpc("is_suspended", { p_user: data.user.id });
+  if (suspended === true) {
+    const out = fail("suspended");
+    const clear = createAuthActions({ requestCookies: request.cookies, responseCookies: out.cookies });
+    await clear.signOut();
+    return out;
+  }
   try { await serverDb().rpc("track_event", { p: { name: "sign_in", locale } }); } catch {}
   return response;
 }
