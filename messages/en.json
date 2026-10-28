@@ -192,7 +192,49 @@
     "cardSub": "A hosted mobile page with your logo, hours, address, phone and socials. Customers tap Call, Save contact or Directions.",
     "cardCta": "Create my card",
     "cardPrice": "From {monthly}/month or {yearly}/year",
-    "tilt": "Move your phone"
+    "tilt": "Move your phone",
+    "headlines": [
+      {
+        "a": "QR codes that",
+        "b": "never expire."
+      },
+      {
+        "a": "Your QR code",
+        "b": "in 30 seconds."
+      },
+      {
+        "a": "Free forever.",
+        "b": "No sign-up."
+      },
+      {
+        "a": "Your WiFi,",
+        "b": "one scan away."
+      },
+      {
+        "a": "Print it once.",
+        "b": "It works forever."
+      },
+      {
+        "a": "Your logo. Your colors.",
+        "b": "Your QR."
+      },
+      {
+        "a": "Share your contact",
+        "b": "in a single scan."
+      },
+      {
+        "a": "No watermark.",
+        "b": "No catch."
+      },
+      {
+        "a": "Turn every flyer",
+        "b": "into a click."
+      },
+      {
+        "a": "Scan. Connect.",
+        "b": "Grow."
+      }
+    ]
   },
   "create": {
     "title": "Create a QR code",

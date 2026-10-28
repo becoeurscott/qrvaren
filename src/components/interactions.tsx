@@ -100,15 +100,20 @@ export function ScrollFx() {
       const [x, y] = angle === 90 ? [e.beta, -e.gamma] : angle === 270 || angle === -90 ? [-e.beta, e.gamma] : [e.gamma, e.beta];
       baseX ??= x; baseY ??= y;
       baseX += (x - baseX) * 0.01; baseY += (y - baseY) * 0.01;
-      tmx = clamp((x - baseX) / 25);
-      tmy = clamp((y - baseY) / 25);
+      tmx = clamp((x - baseX) / 15);
+      tmy = clamp((y - baseY) / 15);
+      if (!gotMotion) { gotMotion = true; dispatchEvent(new Event(MOTION_EVENT)); }
     };
+    let gotMotion = false;
+    // Listening is harmless before permission: browsers that need it just stay silent until granted.
     const startOrientation = () => addEventListener("deviceorientation", onOrient, { passive: true });
+    // iOS: the first tap anywhere on the page triggers the permission prompt.
+    const askOnTap = () => { requestMotion(); removeEventListener("touchend", askOnTap); };
 
     const frame = () => {
       const max = root.scrollHeight - innerHeight;
       root.style.setProperty("--scroll", String(max > 0 ? scrollY / max : 0));
-      mx += (tmx - mx) * 0.08; my += (tmy - my) * 0.08;
+      mx += (tmx - mx) * 0.1; my += (tmy - my) * 0.1;
       root.style.setProperty("--mx", mx.toFixed(4));
       root.style.setProperty("--my", my.toFixed(4));
       const mid = innerHeight / 2;
@@ -121,49 +126,54 @@ export function ScrollFx() {
       raf = requestAnimationFrame(frame);
     };
     if (finePointer()) addEventListener("pointermove", onMouse, { passive: true });
-    else if (!needsMotionPermission()) startOrientation();
-    // iOS: MotionPermission asks the user, then fires this event.
-    addEventListener(MOTION_EVENT, startOrientation);
+    else {
+      startOrientation();
+      if (isIOS()) addEventListener("touchend", askOnTap, { passive: true });
+    }
     raf = requestAnimationFrame(frame);
     return () => {
       cancelAnimationFrame(raf);
       mo.disconnect();
       removeEventListener("pointermove", onMouse);
       removeEventListener("deviceorientation", onOrient);
-      removeEventListener(MOTION_EVENT, startOrientation);
+      removeEventListener("touchend", askOnTap);
     };
   }, []);
 
   return <div className="scroll-progress" aria-hidden />;
 }
 
-const MOTION_EVENT = "motion:granted";
+/** Fired once the first real orientation reading arrives. */
+const MOTION_EVENT = "motion:active";
 type IOSOrientation = typeof DeviceOrientationEvent & { requestPermission?: () => Promise<"granted" | "denied"> };
-const needsMotionPermission = () =>
-  typeof DeviceOrientationEvent !== "undefined" && typeof (DeviceOrientationEvent as IOSOrientation).requestPermission === "function";
+// Only iOS Safari blocks motion behind a prompt; Chrome exposes requestPermission too but never needs it.
+const isIOS = () =>
+  typeof DeviceOrientationEvent !== "undefined" &&
+  typeof (DeviceOrientationEvent as IOSOrientation).requestPermission === "function" &&
+  (/iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1));
+
+let motionAsked = false;
+async function requestMotion() {
+  if (motionAsked || !isIOS()) return;
+  motionAsked = true;
+  try { await (DeviceOrientationEvent as IOSOrientation).requestPermission!(); } catch { motionAsked = false; }
+}
 
 /**
- * iOS Safari only gives motion data after a tap. This pill asks once, then hides.
- * Renders nothing on desktop, on Android (no prompt needed) and with reduced motion.
+ * iPhone hint: "Move your phone". Tapping it (or anywhere) shows Apple's prompt.
+ * Hidden on desktop, Android, with reduced motion, and as soon as motion data flows.
  */
 export function MotionPermission({ label }: { label: string }) {
   const [show, setShow] = useState(false);
   useEffect(() => {
-    if (finePointer() || reduced() || !needsMotionPermission()) return;
-    try { if (sessionStorage.getItem(MOTION_EVENT)) { dispatchEvent(new Event(MOTION_EVENT)); return; } } catch {}
+    if (finePointer() || reduced() || !isIOS()) return;
     setShow(true);
+    const hide = () => setShow(false);
+    addEventListener(MOTION_EVENT, hide);
+    return () => removeEventListener(MOTION_EVENT, hide);
   }, []);
   if (!show) return null;
-  const ask = async () => {
-    try {
-      const res = await (DeviceOrientationEvent as IOSOrientation).requestPermission!();
-      if (res === "granted") {
-        try { sessionStorage.setItem(MOTION_EVENT, "1"); } catch {}
-        dispatchEvent(new Event(MOTION_EVENT));
-      }
-    } catch {}
-    setShow(false);
-  };
+  const ask = () => { requestMotion(); };
   return (
     <button onClick={ask} className="rv-float inline-flex items-center gap-2 rounded-full bg-lime px-4 py-2 text-sm font-bold text-ink shadow-lg">
       <span aria-hidden>📱</span>{label}

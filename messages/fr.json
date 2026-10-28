@@ -192,7 +192,49 @@
     "cardSub": "Une page mobile hébergée avec ton logo, tes horaires, ton adresse, ton téléphone et tes réseaux. Tes clients appuient sur Appeler, Enregistrer ou Itinéraire.",
     "cardCta": "Créer ma carte",
     "cardPrice": "Dès {monthly}/mois ou {yearly}/an",
-    "tilt": "Bouge ton téléphone"
+    "tilt": "Bouge ton téléphone",
+    "headlines": [
+      {
+        "a": "Des QR codes qui",
+        "b": "n'expirent jamais."
+      },
+      {
+        "a": "Ton QR code",
+        "b": "en 30 secondes."
+      },
+      {
+        "a": "Gratuit pour toujours.",
+        "b": "Sans inscription."
+      },
+      {
+        "a": "Ton WiFi,",
+        "b": "à un scan près."
+      },
+      {
+        "a": "Imprime-le une fois.",
+        "b": "Il marche pour toujours."
+      },
+      {
+        "a": "Ton logo. Tes couleurs.",
+        "b": "Ton QR."
+      },
+      {
+        "a": "Partage ton contact",
+        "b": "en un seul scan."
+      },
+      {
+        "a": "Sans filigrane.",
+        "b": "Sans piège."
+      },
+      {
+        "a": "Chaque flyer devient",
+        "b": "un clic."
+      },
+      {
+        "a": "Scanne. Connecte.",
+        "b": "Grandis."
+      }
+    ]
   },
   "create": {
     "title": "Créer un QR code",

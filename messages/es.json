@@ -192,7 +192,49 @@
     "cardSub": "Una página móvil alojada con tu logo, horario, dirección, teléfono y redes. Tus clientes tocan Llamar, Guardar contacto o Cómo llegar.",
     "cardCta": "Crear mi tarjeta",
     "cardPrice": "Desde {monthly}/mes o {yearly}/año",
-    "tilt": "Mueve tu teléfono"
+    "tilt": "Mueve tu teléfono",
+    "headlines": [
+      {
+        "a": "Códigos QR que",
+        "b": "nunca caducan."
+      },
+      {
+        "a": "Tu código QR",
+        "b": "en 30 segundos."
+      },
+      {
+        "a": "Gratis para siempre.",
+        "b": "Sin registro."
+      },
+      {
+        "a": "Tu WiFi,",
+        "b": "a un escaneo."
+      },
+      {
+        "a": "Imprímelo una vez.",
+        "b": "Funciona para siempre."
+      },
+      {
+        "a": "Tu logo. Tus colores.",
+        "b": "Tu QR."
+      },
+      {
+        "a": "Comparte tu contacto",
+        "b": "en un solo escaneo."
+      },
+      {
+        "a": "Sin marca de agua.",
+        "b": "Sin trampas."
+      },
+      {
+        "a": "Cada flyer se convierte",
+        "b": "en un clic."
+      },
+      {
+        "a": "Escanea. Conecta.",
+        "b": "Crece."
+      }
+    ]
   },
   "create": {
     "title": "Crear un código QR",

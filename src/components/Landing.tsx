@@ -5,6 +5,7 @@ import { typeSlug } from "@/modules/qr/interface/slugs";
 import { Marquee, Pop, Reveal, WordReveal } from "./motion";
 import { QrObject3D, Tilt } from "./three";
 import { MotionPermission } from "./interactions";
+import { RotatingHeadline } from "./RotatingHeadline";
 import { Button } from "./ui/Button";
 
 const CARD_COLORS = ["bg-sky", "bg-pink", "bg-lime", "bg-sun", "bg-[#c9b8ff]", "bg-coral", "bg-white", "bg-[#9ff0d0]"];
@@ -36,10 +37,7 @@ export async function LandingHero() {
           <div className="rv-box relative border-2 border-dashed border-lime/80 px-4 py-6 sm:px-8 sm:py-8">
             <span className={`${handle} -left-1.5 -top-1.5`} /><span className={`${handle} -right-1.5 -top-1.5`} />
             <span className={`${handle} -bottom-1.5 -left-1.5`} /><span className={`${handle} -bottom-1.5 -right-1.5`} />
-            <h1 className="font-display text-5xl uppercase leading-[0.95] tracking-tight sm:text-7xl" aria-label={`${t("title1")} ${t("title2")}`}>
-              <WordReveal text={t("title1")} className="block" />
-              <WordReveal text={t("title2")} className="block text-lime" delay={200} />
-            </h1>
+            <RotatingHeadline items={t.raw("headlines") as { a: string; b: string }[]} />
           </div>
           <Reveal delay={450} y={40}><p className="mx-auto mt-8 max-w-xl text-lg text-white/85 md:mx-0">{t("sub")}</p></Reveal>
           <Reveal delay={600} y={30}>
