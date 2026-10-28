@@ -191,7 +191,8 @@
     "cardTitle": "Una página para tu negocio. Un QR para compartirla.",
     "cardSub": "Una página móvil alojada con tu logo, horario, dirección, teléfono y redes. Tus clientes tocan Llamar, Guardar contacto o Cómo llegar.",
     "cardCta": "Crear mi tarjeta",
-    "cardPrice": "Desde {monthly}/mes o {yearly}/año"
+    "cardPrice": "Desde {monthly}/mes o {yearly}/año",
+    "tilt": "Mueve tu teléfono"
   },
   "create": {
     "title": "Crear un código QR",

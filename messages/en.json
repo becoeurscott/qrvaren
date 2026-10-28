@@ -191,7 +191,8 @@
     "cardTitle": "One page for your business. One QR to share it.",
     "cardSub": "A hosted mobile page with your logo, hours, address, phone and socials. Customers tap Call, Save contact or Directions.",
     "cardCta": "Create my card",
-    "cardPrice": "From {monthly}/month or {yearly}/year"
+    "cardPrice": "From {monthly}/month or {yearly}/year",
+    "tilt": "Move your phone"
   },
   "create": {
     "title": "Create a QR code",

@@ -4,6 +4,7 @@ import { QR_TYPES } from "@/modules/qr/domain/encoders";
 import { typeSlug } from "@/modules/qr/interface/slugs";
 import { Marquee, Pop, Reveal, WordReveal } from "./motion";
 import { QrObject3D, Tilt } from "./three";
+import { MotionPermission } from "./interactions";
 import { Button } from "./ui/Button";
 
 const CARD_COLORS = ["bg-sky", "bg-pink", "bg-lime", "bg-sun", "bg-[#c9b8ff]", "bg-coral", "bg-white", "bg-[#9ff0d0]"];
@@ -53,6 +54,7 @@ export async function LandingHero() {
           <div className="mouse-depth" style={{ "--depth": "10px" } as React.CSSProperties}>
             <QrObject3D />
           </div>
+          <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 whitespace-nowrap md:hidden"><MotionPermission label={t("tilt")} /></div>
           <span className="rv-float absolute -top-6 left-4 hidden items-center gap-1 md:flex" aria-hidden>
             <svg width="22" height="22" viewBox="0 0 24 24" className="-mr-1 -mt-4"><path d="M3 2l7 19 2.5-7.5L20 11z" fill="#ff7bca" stroke="#17143a" strokeWidth="1.5" /></svg>
             <span className="rounded-full bg-pink px-3 py-1 text-xs font-bold text-ink">QR</span>

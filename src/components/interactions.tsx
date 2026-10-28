@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 // Mouse and scroll effects in the spirit of the Varen template.
 // Everything writes transforms or CSS variables inside requestAnimationFrame, and is off
@@ -88,6 +88,23 @@ export function ScrollFx() {
     mo.observe(document.body, { childList: true, subtree: true });
 
     const onMouse = (e: PointerEvent) => { tmx = (e.clientX / innerWidth) * 2 - 1; tmy = (e.clientY / innerHeight) * 2 - 1; };
+
+    // Phones: the gyroscope drives the same --mx/--my as the mouse. The neutral position
+    // follows how the phone is held (slow-moving baseline), so any holding angle works.
+    let baseX: number | null = null, baseY: number | null = null;
+    const clamp = (v: number) => Math.max(-1, Math.min(1, v));
+    const onOrient = (e: DeviceOrientationEvent) => {
+      if (e.beta == null || e.gamma == null) return;
+      const angle = screen.orientation?.angle ?? 0;
+      // Map device axes to screen axes for portrait and both landscapes.
+      const [x, y] = angle === 90 ? [e.beta, -e.gamma] : angle === 270 || angle === -90 ? [-e.beta, e.gamma] : [e.gamma, e.beta];
+      baseX ??= x; baseY ??= y;
+      baseX += (x - baseX) * 0.01; baseY += (y - baseY) * 0.01;
+      tmx = clamp((x - baseX) / 25);
+      tmy = clamp((y - baseY) / 25);
+    };
+    const startOrientation = () => addEventListener("deviceorientation", onOrient, { passive: true });
+
     const frame = () => {
       const max = root.scrollHeight - innerHeight;
       root.style.setProperty("--scroll", String(max > 0 ? scrollY / max : 0));
@@ -104,11 +121,54 @@ export function ScrollFx() {
       raf = requestAnimationFrame(frame);
     };
     if (finePointer()) addEventListener("pointermove", onMouse, { passive: true });
+    else if (!needsMotionPermission()) startOrientation();
+    // iOS: MotionPermission asks the user, then fires this event.
+    addEventListener(MOTION_EVENT, startOrientation);
     raf = requestAnimationFrame(frame);
-    return () => { cancelAnimationFrame(raf); mo.disconnect(); removeEventListener("pointermove", onMouse); };
+    return () => {
+      cancelAnimationFrame(raf);
+      mo.disconnect();
+      removeEventListener("pointermove", onMouse);
+      removeEventListener("deviceorientation", onOrient);
+      removeEventListener(MOTION_EVENT, startOrientation);
+    };
   }, []);
 
   return <div className="scroll-progress" aria-hidden />;
+}
+
+const MOTION_EVENT = "motion:granted";
+type IOSOrientation = typeof DeviceOrientationEvent & { requestPermission?: () => Promise<"granted" | "denied"> };
+const needsMotionPermission = () =>
+  typeof DeviceOrientationEvent !== "undefined" && typeof (DeviceOrientationEvent as IOSOrientation).requestPermission === "function";
+
+/**
+ * iOS Safari only gives motion data after a tap. This pill asks once, then hides.
+ * Renders nothing on desktop, on Android (no prompt needed) and with reduced motion.
+ */
+export function MotionPermission({ label }: { label: string }) {
+  const [show, setShow] = useState(false);
+  useEffect(() => {
+    if (finePointer() || reduced() || !needsMotionPermission()) return;
+    try { if (sessionStorage.getItem(MOTION_EVENT)) { dispatchEvent(new Event(MOTION_EVENT)); return; } } catch {}
+    setShow(true);
+  }, []);
+  if (!show) return null;
+  const ask = async () => {
+    try {
+      const res = await (DeviceOrientationEvent as IOSOrientation).requestPermission!();
+      if (res === "granted") {
+        try { sessionStorage.setItem(MOTION_EVENT, "1"); } catch {}
+        dispatchEvent(new Event(MOTION_EVENT));
+      }
+    } catch {}
+    setShow(false);
+  };
+  return (
+    <button onClick={ask} className="rv-float inline-flex items-center gap-2 rounded-full bg-lime px-4 py-2 text-sm font-bold text-ink shadow-lg">
+      <span aria-hidden>📱</span>{label}
+    </button>
+  );
 }
 
 /** Buttons that lean toward the pointer, like Framer's magnetic CTA. */
