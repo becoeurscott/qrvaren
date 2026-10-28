@@ -1,0 +1,4 @@
+# Licensed template photos: local only, not used by the app
+public/varen/
+migrations/
+AGENTS.md

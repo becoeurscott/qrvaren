@@ -87,17 +87,17 @@ export function Generator({ initialType = "url" }: { initialType?: QrType }) {
   const input = "w-full rounded-2xl border-2 border-ink/10 bg-white px-4 py-3 text-ink outline-none transition focus:border-violet";
 
   return (
-    <div className="grid gap-6 rounded-[2rem] bg-white p-4 shadow-[0_30px_80px_-30px_rgba(23,20,58,0.35)] md:grid-cols-[1.2fr_1fr] md:p-6">
-      <div className="space-y-6">
+    <div className="grid grid-cols-[minmax(0,1fr)] gap-6 rounded-[2rem] bg-white p-3 shadow-[0_30px_80px_-30px_rgba(23,20,58,0.35)] sm:p-4 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] md:p-6">
+      <div className="min-w-0 space-y-6">
         {/* Type picker */}
-        <div className="flex flex-wrap gap-2" role="tablist">
+        <div className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-1 [scrollbar-width:none] sm:flex-wrap sm:overflow-visible" role="tablist">
           {QR_TYPES.map((k) => (
             <button
               key={k}
               role="tab"
               aria-selected={type === k}
               onClick={() => setType(k)}
-              className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
+              className={`shrink-0 rounded-full px-4 py-2 text-sm font-semibold transition ${
                 type === k ? "bg-ink text-white" : "bg-lavender text-ink hover:bg-violet/10"
               }`}
             >
@@ -111,9 +111,9 @@ export function Generator({ initialType = "url" }: { initialType?: QrType }) {
           {NEEDS_ACCOUNT.includes(type) ? (
             <p className="rounded-2xl bg-sun/40 p-4 font-medium">{t("account")}</p>
           ) : (
-            <div className="grid gap-3 sm:grid-cols-2">
+            <div className="grid grid-cols-[minmax(0,1fr)] gap-3 sm:grid-cols-2">
               {type === "wifi" && (
-                <label className="sm:col-span-2 flex flex-wrap items-center gap-3 text-sm font-semibold">
+                <div className="flex flex-wrap items-center gap-2 text-sm font-semibold sm:col-span-2">
                   {t("fields.encryption")}
                   {(["WPA", "WEP", "nopass"] as const).map((e) => (
                     <button key={e} onClick={() => set("encryption", e)}
@@ -121,10 +121,10 @@ export function Generator({ initialType = "url" }: { initialType?: QrType }) {
                       {e === "nopass" ? "—" : e}
                     </button>
                   ))}
-                  <span className="ml-auto flex items-center gap-2">
+                  <span className="ml-auto flex items-center gap-2 whitespace-nowrap">
                     <input type="checkbox" checked={hidden} onChange={(e) => setHidden(e.target.checked)} /> {t("fields.hidden")}
                   </span>
-                </label>
+                </div>
               )}
               {FIELDS[type]
                 .filter((k) => !(type === "wifi" && k === "password" && fields.encryption === "nopass"))
@@ -146,7 +146,7 @@ export function Generator({ initialType = "url" }: { initialType?: QrType }) {
 
         <section>
           <h3 className="mb-3 font-display text-xl uppercase tracking-wide">{t("design")}</h3>
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid grid-cols-[minmax(0,1fr)] gap-4 sm:grid-cols-2">
             <ColorRow label={t("fg")} value={style.fg} swatches={SWATCHES} onChange={(fg) => setStyle((s) => ({ ...s, fg }))} />
             <ColorRow label={t("bg")} value={style.bg} swatches={["#ffffff", "#f3f1ff", "#fff7d6", "#e8fbff"]} onChange={(bg) => setStyle((s) => ({ ...s, bg }))} />
             <div className="sm:col-span-2">
@@ -162,9 +162,9 @@ export function Generator({ initialType = "url" }: { initialType?: QrType }) {
             </div>
             <div>
               <span className="mb-1 block text-sm font-semibold text-slate">{t("logo")}</span>
-              <div className="flex items-center gap-2">
+              <div className="flex min-w-0 flex-wrap items-center gap-2">
                 <input type="file" accept="image/png,image/jpeg,image/svg+xml,image/webp"
-                  className="w-full text-sm file:mr-3 file:rounded-full file:border-0 file:bg-lime file:px-4 file:py-2 file:font-semibold"
+                  className="w-full min-w-0 max-w-full text-sm file:mr-3 file:rounded-full file:border-0 file:bg-lime file:px-4 file:py-2 file:font-semibold"
                   onChange={(e) => onLogo(e.target.files?.[0])} />
                 {style.logo && <button className="text-sm underline" onClick={() => onLogo()}>{t("removeLogo")}</button>}
               </div>
@@ -178,7 +178,7 @@ export function Generator({ initialType = "url" }: { initialType?: QrType }) {
                 <div className="mt-2 space-y-2">
                   <input className={input} maxLength={20} aria-label={t("frameText")} value={style.frameText}
                     onChange={(e) => setStyle((s) => ({ ...s, frameText: e.target.value }))} />
-                  <div className="flex gap-2">
+                  <div className="flex flex-wrap gap-2">
                     {FRAME_SWATCHES.map((c) => (
                       <button key={c} aria-label={c} onClick={() => setStyle((s) => ({ ...s, frameColor: c }))}
                         className={`h-7 w-7 rounded-full ring-2 ${style.frameColor === c ? "ring-ink" : "ring-transparent"}`} style={{ background: c }} />
@@ -193,9 +193,9 @@ export function Generator({ initialType = "url" }: { initialType?: QrType }) {
 
       {/* Preview */}
       <div className="order-first flex flex-col gap-4 rounded-[1.5rem] bg-violet p-4 grid-bg sm:p-5 md:order-none md:sticky md:top-24 md:self-start">
-        <div className="flex aspect-square max-h-[46vh] items-center justify-center rounded-2xl bg-white/10 p-4 md:max-h-none">
+        <div className="mx-auto flex aspect-square w-full max-w-[min(100%,46vh)] items-center justify-center rounded-2xl bg-white/10 p-3 sm:p-4 md:max-w-none">
           {svg ? (
-            <div className="h-full w-auto max-w-[340px] [&>svg]:h-full [&>svg]:w-auto md:h-auto md:w-full [&>svg]:md:h-auto [&>svg]:md:w-full" data-testid="qr-preview" dangerouslySetInnerHTML={{ __html: svg.svg }} />
+            <div className="flex h-full w-full items-center justify-center [&>svg]:h-auto [&>svg]:max-h-full [&>svg]:w-auto [&>svg]:max-w-full" data-testid="qr-preview" dangerouslySetInnerHTML={{ __html: svg.svg }} />
           ) : (
             <p className="max-w-[16rem] text-center font-medium text-white/90">
               {capacity && !capacity.ok ? t("tooLong", { bytes: capacity.bytes }) : t("empty")}
@@ -211,7 +211,7 @@ export function Generator({ initialType = "url" }: { initialType?: QrType }) {
         <div className="grid grid-cols-3 gap-2">
           {(["png", "svg", "pdf"] as const).map((f) => (
             <button key={f} disabled={!svg || busy} onClick={() => exportAs(f)}
-              className="rounded-full bg-white px-3 py-3 font-semibold text-ink transition hover:bg-lime disabled:opacity-40">
+              className="min-w-0 rounded-full bg-white px-2 py-3 text-sm font-semibold text-ink transition hover:bg-lime disabled:opacity-40 sm:text-base">
               {f.toUpperCase()}
             </button>
           ))}
@@ -226,7 +226,7 @@ function ColorRow({ label, value, swatches, onChange }: { label: string; value: 
   return (
     <div>
       <span className="mb-1 block text-sm font-semibold text-slate">{label}</span>
-      <div className="flex items-center gap-2">
+      <div className="flex flex-wrap items-center gap-2">
         {swatches.map((c) => (
           <button key={c} aria-label={c} onClick={() => onChange(c)}
             className={`h-8 w-8 rounded-full border border-ink/10 ring-2 ${value === c ? "ring-violet" : "ring-transparent"}`} style={{ background: c }} />
