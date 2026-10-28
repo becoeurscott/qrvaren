@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { routing } from "@/i18n/routing";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Eyebrow, PageHero, PhoneMock } from "@/components/Landing";
 import { Pop, Reveal } from "@/components/motion";
@@ -10,7 +11,7 @@ import { getPrices } from "@/modules/entitlements/application/settings";
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "card" });
-  return { title: t("title"), description: t("sub") };
+  return { title: t("title"), description: t("sub"), alternates: { canonical: `/${locale}/business-card`, languages: Object.fromEntries(routing.locales.map((l) => [l, `/${l}/business-card`])) } };
 }
 
 export default async function BusinessCardPage({ params }: { params: Promise<{ locale: string }> }) {

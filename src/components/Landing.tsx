@@ -32,7 +32,7 @@ export async function LandingHero() {
       <div className="hero-out relative mx-auto grid max-w-6xl items-center gap-12 px-4 md:grid-cols-[1.1fr_0.9fr]">
         <div className="text-center md:text-left">
           <Pop rotate={-8}>
-            <span className="mb-6 inline-block rounded-md bg-lime px-3 py-1 font-mono text-xs font-bold text-ink">{t("eyebrow")}</span>
+            <h1 className="mb-6 inline-block rounded-md bg-lime px-3 py-1 font-mono text-xs font-bold text-ink">{t("eyebrow")}</h1>
           </Pop>
           <div className="rv-box relative border-2 border-dashed border-lime/80 px-4 py-6 sm:px-8 sm:py-8">
             <span className={`${handle} -left-1.5 -top-1.5`} /><span className={`${handle} -right-1.5 -top-1.5`} />

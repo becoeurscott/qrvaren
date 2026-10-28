@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { routing } from "@/i18n/routing";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { PageHero } from "@/components/Landing";
 import { Reveal } from "@/components/motion";
@@ -9,7 +10,7 @@ import { getPrices } from "@/modules/entitlements/application/settings";
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "pricing" });
-  return { title: t("title"), description: t("sub") };
+  return { title: t("title"), description: t("sub"), alternates: { canonical: `/${locale}/pricing`, languages: Object.fromEntries(routing.locales.map((l) => [l, `/${l}/pricing`])) } };
 }
 
 export default async function PricingPage({ params }: { params: Promise<{ locale: string }> }) {

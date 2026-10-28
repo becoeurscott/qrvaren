@@ -45,7 +45,7 @@ export function RotatingHeadline({ items, intervalMs = 20_000 }: { items: Headli
   const h = items[i];
   return (
     <>
-      <h1
+      <p
         className={`min-h-[1.9em] font-display text-5xl uppercase leading-[0.95] tracking-tight transition duration-[450ms] sm:text-7xl ${
           leaving ? "translate-y-[-12px] opacity-0 blur-sm" : ""
         }`}
@@ -54,7 +54,7 @@ export function RotatingHeadline({ items, intervalMs = 20_000 }: { items: Headli
       >
         <WordReveal key={`a${i}`} text={h.a} className="block" />
         <WordReveal key={`b${i}`} text={h.b} className="block text-lime" delay={h.a.split(" ").length * 70} />
-      </h1>
+      </p>
       {items.length > 1 && (
         <span className="absolute inset-x-0 -bottom-[3px] h-[3px] overflow-hidden" aria-hidden>
           <span
