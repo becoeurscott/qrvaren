@@ -6,6 +6,8 @@ import { QR_TYPES, type QrInput, type QrType, checkCapacity, encode } from "../d
 import { readabilityIssues } from "../domain/contrast";
 import { FRAME_TEXTS, TEMPLATES, TEMPLATE_KEYS, type TemplateKey } from "../domain/templates";
 import { TemplateThumb } from "./TemplateThumb";
+import { PRESETS, PRESET_IDS, type Preset, type PresetId } from "../domain/presets";
+import { presetIconDataUrl } from "./presetIcons";
 import { Link } from "@/i18n/routing";
 import { useSession } from "@/shared/useSession";
 import { composeSvg, download, pngToPdf, svgToPng, type DotShape, type QrStyle } from "../infrastructure/render";
@@ -41,21 +43,36 @@ const FIELDS: Record<QrType, string[]> = {
 };
 const MULTILINE = new Set(["text", "body", "message"]);
 
-export function Generator({ initialType = "url" }: { initialType?: QrType }) {
+const LOCAL_NAMES = new Set(["phone", "wifi", "contact"]);
+
+export function Generator({ initialType = "url", initialPreset }: { initialType?: QrType; initialPreset?: PresetId }) {
   const t = useTranslations("gen");
-  const [type, setType] = useState<QrType>(initialType);
+  const startPreset = initialPreset ? (PRESETS[initialPreset] as Preset) : undefined;
+  const [type, setType] = useState<QrType>(startPreset?.type ?? initialType);
+  const [preset, setPreset] = useState<PresetId | null>(initialPreset ?? null);
+  const p = preset ? (PRESETS[preset] as Preset) : undefined;
+  // Templates without their own QR type build a link from their fields.
+  const linkPreset = p && !p.type ? p : undefined;
   const [fields, setFields] = useState<Fields>({ encryption: "WPA" });
   const [hidden, setHidden] = useState(false);
-  const [template, setTemplate] = useState<TemplateKey | null>("varen");
+  const [template, setTemplate] = useState<TemplateKey | null>(startPreset ? null : "varen");
   const [captionEdited, setCaptionEdited] = useState(false);
-  const [style, setStyle] = useState<QrStyle>({
-    ...TEMPLATES.varen, logoRatio: 0.22, frameText: t(`frameTexts.${FRAME_TEXTS[initialType][0]}`),
-  });
+  const [style, setStyle] = useState<QrStyle>(() => ({
+    ...(startPreset ? startPreset.style : TEMPLATES.varen),
+    logo: initialPreset ? presetIconDataUrl(initialPreset) : undefined,
+    logoRatio: 0.22,
+    frameText: t(`frameTexts.${startPreset?.caption ?? FRAME_TEXTS[initialType][0]}`),
+  }));
+  // True while the center logo is the template icon (a template switch may replace it, an upload may not).
+  const [presetLogo, setPresetLogo] = useState(!!initialPreset);
   const [svg, setSvg] = useState<{ svg: string; width: number; height: number } | null>(null);
   const [busy, setBusy] = useState(false);
   const user = useSession();
 
-  const payload = useMemo(() => encode(toInput(type, fields, hidden)), [type, fields, hidden]);
+  const payload = useMemo(
+    () => (linkPreset ? linkPreset.build!(fields) : encode(toInput(type, fields, hidden))),
+    [linkPreset, type, fields, hidden],
+  );
   const capacity = payload ? checkCapacity(payload, style.logo ? "H" : "M") : null;
   const issues = readabilityIssues({ fg: style.fg, bg: style.bg, extra: [style.fg2, style.eye], logoRatio: style.logo ? style.logoRatio : 0 });
   const renderable = payload && capacity?.ok;
@@ -70,9 +87,28 @@ export function Generator({ initialType = "url" }: { initialType?: QrType }) {
   const set = (k: string, v: string) => setFields((f) => ({ ...f, [k]: v }));
 
   // Until the user types their own caption, the frame text follows the QR type (e.g. "FREE WIFI").
+  const captionKeys = p ? [p.caption, ...FRAME_TEXTS[p.type ?? "url"].filter((k) => k !== p.caption)].slice(0, 3) : FRAME_TEXTS[type];
   useEffect(() => {
-    if (!captionEdited) setStyle((s) => ({ ...s, frameText: t(`frameTexts.${FRAME_TEXTS[type][0]}`) }));
-  }, [type, captionEdited, t]);
+    if (!captionEdited) setStyle((s) => ({ ...s, frameText: t(`frameTexts.${p?.caption ?? FRAME_TEXTS[type][0]}`) }));
+  }, [type, p, captionEdited, t]);
+
+  // A use-case template sets the content fields, colors, icon and caption.
+  const applyPreset = (id: PresetId) => {
+    const next = PRESETS[id] as Preset;
+    const useIcon = presetLogo || !style.logo;
+    setPreset(id);
+    if (next.type) setType(next.type);
+    setFields({ encryption: "WPA" });
+    setTemplate(null);
+    setCaptionEdited(false);
+    setStyle((s) => ({ ...s, fg2: undefined, eye: undefined, ...next.style, logo: useIcon ? presetIconDataUrl(id) : s.logo }));
+    setPresetLogo(useIcon);
+  };
+  const selectType = (k: QrType) => {
+    setPreset(null);
+    setType(k);
+    if (presetLogo) { setStyle((s) => ({ ...s, logo: undefined })); setPresetLogo(false); }
+  };
 
   // A template sets every color and shape at once; logo and caption are kept.
   const applyTemplate = (k: TemplateKey) => {
@@ -87,6 +123,7 @@ export function Generator({ initialType = "url" }: { initialType?: QrType }) {
   };
 
   async function onLogo(file?: File) {
+    setPresetLogo(false);
     if (!file) return setStyle((s) => ({ ...s, logo: undefined }));
     if (!/^image\/(png|jpeg|svg\+xml|webp)$/.test(file.type) || file.size > 1_000_000) return;
     const url = await new Promise<string>((ok) => { const r = new FileReader(); r.onload = () => ok(r.result as string); r.readAsDataURL(file); });
@@ -97,11 +134,11 @@ export function Generator({ initialType = "url" }: { initialType?: QrType }) {
     if (!svg) return;
     setBusy(true);
     try {
-      const name = `qr-${type}.${fmt}`;
+      const name = `qr-${preset ?? type}.${fmt}`;
       if (fmt === "svg") return download(new Blob([svg.svg], { type: "image/svg+xml" }), name);
       const png = await svgToPng(svg.svg, svg.width, svg.height);
       download(fmt === "png" ? png : await pngToPdf(png, svg.width, svg.height), name);
-      window.dispatchEvent(new CustomEvent("qr:downloaded", { detail: { type, fmt } }));
+      window.dispatchEvent(new CustomEvent("qr:downloaded", { detail: { type: preset ?? type, fmt } }));
     } finally {
       setBusy(false);
     }
@@ -112,16 +149,38 @@ export function Generator({ initialType = "url" }: { initialType?: QrType }) {
   return (
     <div className="grid grid-cols-[minmax(0,1fr)] gap-6 rounded-[2rem] bg-white p-3 shadow-[0_30px_80px_-30px_rgba(23,20,58,0.35)] sm:p-4 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] md:p-6">
       <div className="min-w-0 space-y-6">
+        {/* Use-case templates */}
+        <section>
+          <h3 className="mb-3 font-display text-xl uppercase tracking-wide">{t("presetsTitle")}</h3>
+          <div className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-2 [scrollbar-width:none] sm:grid sm:grid-cols-6 sm:overflow-visible lg:grid-cols-8" role="radiogroup" aria-label={t("presetsTitle")}>
+            {PRESET_IDS.map((id) => {
+              const pr = PRESETS[id] as Preset;
+              const name = LOCAL_NAMES.has(id) ? t(`presetNames.${id}`) : pr.brand.replace(" (Twitter)", "");
+              return (
+                <button key={id} role="radio" aria-checked={preset === id} onClick={() => applyPreset(id)} data-cursor={name}
+                  className={`flex w-[4.5rem] shrink-0 flex-col items-center gap-1 rounded-2xl p-1.5 text-[11px] font-semibold transition sm:w-auto ${
+                    preset === id ? "bg-violet/10 ring-2 ring-violet" : "hover:bg-lavender"
+                  }`}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={presetIconDataUrl(id)} alt="" className="aspect-square w-full rounded-xl" />
+                  <span className="w-full truncate text-center">{name}</span>
+                </button>
+              );
+            })}
+          </div>
+        </section>
+
         {/* Type picker */}
+        <p className="-mb-3 text-xs font-bold uppercase tracking-widest text-slate">{t("orType")}</p>
         <div className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-1 [scrollbar-width:none] sm:flex-wrap sm:overflow-visible" role="tablist">
           {QR_TYPES.map((k) => (
             <button
               key={k}
               role="tab"
-              aria-selected={type === k}
-              onClick={() => setType(k)}
+              aria-selected={!linkPreset && type === k}
+              onClick={() => selectType(k)}
               className={`shrink-0 rounded-full px-4 py-2 text-sm font-semibold transition ${
-                type === k ? "bg-ink text-white" : "bg-lavender text-ink hover:bg-violet/10"
+                !linkPreset && type === k ? "bg-ink text-white" : "bg-lavender text-ink hover:bg-violet/10"
               }`}
             >
               {t(`types.${k}`)}
@@ -131,7 +190,22 @@ export function Generator({ initialType = "url" }: { initialType?: QrType }) {
 
         <section>
           <h3 className="mb-3 font-display text-xl uppercase tracking-wide">{t("content")}</h3>
-          {NEEDS_ACCOUNT.includes(type) ? (
+          {linkPreset ? (
+            <div className="grid grid-cols-[minmax(0,1fr)] gap-3">
+              {linkPreset.fields!.map((f, i) => (
+                <label key={f.key} className="text-sm font-semibold">
+                  <span className="mb-1 block text-slate">{t(`presetFields.${f.label}`)}</span>
+                  {f.kind === "multiline" ? (
+                    <textarea rows={3} className={input} value={fields[f.key] ?? ""} onChange={(e) => set(f.key, e.target.value)} />
+                  ) : (
+                    <input className={input} value={fields[f.key] ?? ""} onChange={(e) => set(f.key, e.target.value)} autoFocus={i === 0}
+                      type={f.kind === "tel" ? "tel" : f.kind === "url" ? "url" : "text"} inputMode={f.kind === "tel" ? "tel" : undefined}
+                      placeholder={f.label === "username" ? "@yourname" : f.kind === "tel" ? "+1 555 010 2030" : f.kind === "url" ? "https://" : undefined} />
+                  )}
+                </label>
+              ))}
+            </div>
+          ) : NEEDS_ACCOUNT.includes(type) ? (
             <div className="rounded-2xl bg-sun/40 p-4 font-medium">
               <p>{user ? t("accountReady") : t("account")}</p>
               <Link href={user ? "/dashboard" : "/login"} className="mt-3 inline-flex rounded-full bg-ink px-4 py-2 text-sm font-semibold text-white">
@@ -222,7 +296,7 @@ export function Generator({ initialType = "url" }: { initialType?: QrType }) {
                   <input className={input} maxLength={20} aria-label={t("frameText")} value={style.frameText}
                     onChange={(e) => { setCaptionEdited(true); setStyle((s) => ({ ...s, frameText: e.target.value })); }} />
                   <div className="flex flex-wrap gap-1.5" aria-label={t("frameSuggestions")}>
-                    {FRAME_TEXTS[type].map((key) => {
+                    {captionKeys.map((key) => {
                       const text = t(`frameTexts.${key}`);
                       return (
                         <button key={key} onClick={() => { setCaptionEdited(true); setStyle((s) => ({ ...s, frameText: text })); }}

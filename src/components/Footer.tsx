@@ -3,13 +3,16 @@ import { Link } from "@/i18n/routing";
 import { BRAND_NAME } from "@/shared/config";
 import { QR_TYPES } from "@/modules/qr/domain/encoders";
 import { typeSlug } from "@/modules/qr/interface/slugs";
+import { PRESETS, PRESET_IDS, type Preset } from "@/modules/qr/domain/presets";
+
+const LOCAL = new Set(["phone"]);
 
 export async function Footer() {
   const t = await getTranslations("footer");
   const g = await getTranslations("gen.types");
   return (
     <footer className="bg-ink px-6 pb-10 pt-16 text-white">
-      <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-[2fr_1fr_1fr]">
+      <div className="mx-auto grid max-w-6xl gap-10 sm:grid-cols-2 md:grid-cols-[2fr_1fr_1fr_1fr]">
         <div>
           <p className="font-display text-5xl tracking-wide sm:text-7xl">{BRAND_NAME}</p>
           <p className="mt-3 max-w-sm text-white/70">{t("tagline")}</p>
@@ -17,6 +20,13 @@ export async function Footer() {
         <ul className="space-y-2 text-sm font-semibold">
           {QR_TYPES.map((k) => (
             <li key={k}><Link className="hover:text-lime" href={`/create/${typeSlug(k)}`}>{g(k)}</Link></li>
+          ))}
+        </ul>
+        <ul className="space-y-2 text-sm font-semibold">
+          {PRESET_IDS.filter((id) => (PRESETS[id] as Preset).slug && !LOCAL.has(id)).map((id) => (
+            <li key={id}>
+              <Link className="hover:text-lime" href={`/create/${(PRESETS[id] as Preset).slug}`}>{(PRESETS[id] as Preset).brand}</Link>
+            </li>
           ))}
         </ul>
         <ul className="space-y-2 text-sm font-semibold">

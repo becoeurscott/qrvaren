@@ -74,7 +74,7 @@
     "accountReady": "Tu es connecté. L'éditeur de carte de visite arrive bientôt dans ton tableau de bord.",
     "goDashboard": "Ouvrir mon tableau de bord",
     "signIn": "Se connecter avec Google",
-    "templatesTitle": "Modèles",
+    "templatesTitle": "Styles",
     "templates": {
       "varen": "Varen",
       "classic": "Classique",
@@ -102,7 +102,31 @@
       "textUs": "ENVOIE UN SMS",
       "seeMenu": "VOIR LE MENU",
       "viewPdf": "VOIR LE PDF",
-      "myCard": "MA CARTE"
+      "myCard": "MA CARTE",
+      "followUs": "SUIS-NOUS",
+      "chatWithUs": "DISCUTONS",
+      "addMe": "AJOUTE-MOI",
+      "subscribe": "ABONNE-TOI",
+      "connect": "CONNECTONS-NOUS",
+      "joinUs": "REJOINS-NOUS",
+      "payMe": "PAYER ICI",
+      "listenNow": "ÉCOUTE MAINTENANT",
+      "findUs": "TROUVE-NOUS",
+      "callUs": "APPELLE-NOUS"
+    },
+    "presetsTitle": "Modèles",
+    "orType": "Ou choisis un type",
+    "presetNames": {
+      "phone": "Appel",
+      "wifi": "WiFi",
+      "contact": "Contact"
+    },
+    "presetFields": {
+      "username": "Nom d'utilisateur ou lien du profil",
+      "phone": "Numéro (avec indicatif pays)",
+      "message": "Message pré-rempli (facultatif)",
+      "address": "Adresse ou nom du lieu",
+      "link": "Lien de partage"
     }
   },
   "types": {
@@ -492,5 +516,109 @@
         }
       ]
     }
+  },
+  "seoPresets": {
+    "instagram": {
+      "title": "Générateur gratuit de QR code Instagram",
+      "h1": "QR code Instagram",
+      "desc": "Transforme ton profil Instagram en QR code. Un scan et on te suit."
+    },
+    "whatsapp": {
+      "title": "Générateur gratuit de QR code WhatsApp",
+      "h1": "QR code WhatsApp",
+      "desc": "Ouvre une discussion WhatsApp avec toi, message pré-rempli, en un scan. Idéal pour les commerces et restaurants."
+    },
+    "snapchat": {
+      "title": "Générateur gratuit de QR code Snapchat",
+      "h1": "QR code Snapchat",
+      "desc": "Transforme ton profil Snapchat en QR code. Un scan et on te suit."
+    },
+    "tiktok": {
+      "title": "Générateur gratuit de QR code TikTok",
+      "h1": "QR code TikTok",
+      "desc": "Transforme ton profil TikTok en QR code. Un scan et on te suit."
+    },
+    "facebook": {
+      "title": "Générateur gratuit de QR code Facebook",
+      "h1": "QR code Facebook",
+      "desc": "Transforme ton profil Facebook en QR code. Un scan et on te suit."
+    },
+    "youtube": {
+      "title": "Générateur gratuit de QR code YouTube",
+      "h1": "QR code YouTube",
+      "desc": "Transforme ton profil YouTube en QR code. Un scan et on te suit."
+    },
+    "x": {
+      "title": "Générateur gratuit de QR code X (Twitter)",
+      "h1": "QR code X (Twitter)",
+      "desc": "Transforme ton profil X (Twitter) en QR code. Un scan et on te suit."
+    },
+    "linkedin": {
+      "title": "Générateur gratuit de QR code LinkedIn",
+      "h1": "QR code LinkedIn",
+      "desc": "Transforme ton profil LinkedIn en QR code. Un scan et on te suit."
+    },
+    "telegram": {
+      "title": "Générateur gratuit de QR code Telegram",
+      "h1": "QR code Telegram",
+      "desc": "Transforme ton profil Telegram en QR code. Un scan et on te suit."
+    },
+    "venmo": {
+      "title": "Générateur gratuit de QR code Venmo",
+      "h1": "QR code Venmo",
+      "desc": "Reçois des paiements Venmo en un scan : tes clients arrivent directement sur ton profil."
+    },
+    "paypal": {
+      "title": "Générateur gratuit de QR code PayPal",
+      "h1": "QR code PayPal",
+      "desc": "Reçois des paiements PayPal.Me en un scan : tes clients arrivent sur ta page de paiement."
+    },
+    "spotify": {
+      "title": "Générateur gratuit de QR code Spotify",
+      "h1": "QR code Spotify",
+      "desc": "Partage un titre, un album, une playlist ou un podcast Spotify en un scan."
+    },
+    "maps": {
+      "title": "Générateur gratuit de QR code Google Maps",
+      "h1": "QR code Google Maps",
+      "desc": "Envoie tes clients vers ton adresse sur Google Maps en un scan."
+    },
+    "phone": {
+      "title": "Générateur gratuit de QR code Appel téléphonique",
+      "h1": "QR code Appel téléphonique",
+      "desc": "On t'appelle en un scan, sans taper le numéro."
+    }
+  },
+  "home": {
+    "title": "Générateur de QR code gratuit — Logo, couleurs, SVG et PDF",
+    "desc": "Générateur de QR code gratuit : crée des QR codes pour URL, WiFi, vCard, email, SMS, WhatsApp et plus. Ajoute ton logo et tes couleurs, télécharge en PNG, SVG ou PDF. Sans inscription, sans filigrane, sans expiration.",
+    "gen": "Crée ton QR code maintenant",
+    "faqTitle": "Questions fréquentes",
+    "faq": [
+      {
+        "q": "Ce générateur de QR code est-il vraiment gratuit ?",
+        "a": "Oui. Les QR codes statiques sont gratuits pour toujours, sans inscription, sans filigrane et sans limite de scans. Usage commercial autorisé."
+      },
+      {
+        "q": "Les QR codes expirent-ils ?",
+        "a": "Non. Un QR code statique contient directement ton contenu, il fonctionne donc pour toujours."
+      },
+      {
+        "q": "Puis-je ajouter un logo à mon QR code ?",
+        "a": "Oui. Importe ton logo, choisis les couleurs, le style des points et des coins, et ajoute un cadre avec un texte comme « Scanne-moi »."
+      },
+      {
+        "q": "Quels formats de téléchargement sont disponibles ?",
+        "a": "PNG pour le web et les réseaux, SVG vectoriel pour l'impression à toute taille, et PDF prêt à imprimer."
+      },
+      {
+        "q": "Vers quoi un QR code peut-il pointer ?",
+        "a": "Une URL, un réseau WiFi, une vCard, un email, un SMS, un numéro de téléphone, un PDF, WhatsApp, Instagram, Google Maps et bien plus."
+      },
+      {
+        "q": "Quelle différence entre QR code statique et dynamique ?",
+        "a": "Un QR statique stocke les données dans le motif et ne peut pas être modifié. Un QR dynamique pointe vers un lien court modifiable avec suivi des scans."
+      }
+    ]
   }
 }

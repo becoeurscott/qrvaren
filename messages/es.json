@@ -74,7 +74,7 @@
     "accountReady": "Has iniciado sesión. El editor de tarjetas llega pronto a tu panel.",
     "goDashboard": "Abrir mi panel",
     "signIn": "Entrar con Google",
-    "templatesTitle": "Plantillas",
+    "templatesTitle": "Estilos",
     "templates": {
       "varen": "Varen",
       "classic": "Clásico",
@@ -102,7 +102,31 @@
       "textUs": "ENVÍANOS SMS",
       "seeMenu": "VER EL MENÚ",
       "viewPdf": "VER PDF",
-      "myCard": "MI TARJETA"
+      "myCard": "MI TARJETA",
+      "followUs": "SÍGUENOS",
+      "chatWithUs": "ESCRÍBENOS",
+      "addMe": "AGRÉGAME",
+      "subscribe": "SUSCRÍBETE",
+      "connect": "CONECTEMOS",
+      "joinUs": "ÚNETE",
+      "payMe": "PAGA AQUÍ",
+      "listenNow": "ESCUCHA AHORA",
+      "findUs": "ENCUÉNTRANOS",
+      "callUs": "LLÁMANOS"
+    },
+    "presetsTitle": "Plantillas",
+    "orType": "O elige un tipo",
+    "presetNames": {
+      "phone": "Llamada",
+      "wifi": "WiFi",
+      "contact": "Contacto"
+    },
+    "presetFields": {
+      "username": "Usuario o enlace del perfil",
+      "phone": "Teléfono (con código de país)",
+      "message": "Mensaje prellenado (opcional)",
+      "address": "Dirección o nombre del lugar",
+      "link": "Enlace para compartir"
     }
   },
   "types": {
@@ -492,5 +516,109 @@
         }
       ]
     }
+  },
+  "seoPresets": {
+    "instagram": {
+      "title": "Generador gratis de código QR de Instagram",
+      "h1": "Código QR de Instagram",
+      "desc": "Convierte tu perfil de Instagram en un código QR. Un escaneo y te siguen."
+    },
+    "whatsapp": {
+      "title": "Generador gratis de código QR de WhatsApp",
+      "h1": "Código QR de WhatsApp",
+      "desc": "Abre un chat de WhatsApp contigo, con mensaje prellenado, en un escaneo. Ideal para tiendas y restaurantes."
+    },
+    "snapchat": {
+      "title": "Generador gratis de código QR de Snapchat",
+      "h1": "Código QR de Snapchat",
+      "desc": "Convierte tu perfil de Snapchat en un código QR. Un escaneo y te siguen."
+    },
+    "tiktok": {
+      "title": "Generador gratis de código QR de TikTok",
+      "h1": "Código QR de TikTok",
+      "desc": "Convierte tu perfil de TikTok en un código QR. Un escaneo y te siguen."
+    },
+    "facebook": {
+      "title": "Generador gratis de código QR de Facebook",
+      "h1": "Código QR de Facebook",
+      "desc": "Convierte tu perfil de Facebook en un código QR. Un escaneo y te siguen."
+    },
+    "youtube": {
+      "title": "Generador gratis de código QR de YouTube",
+      "h1": "Código QR de YouTube",
+      "desc": "Convierte tu perfil de YouTube en un código QR. Un escaneo y te siguen."
+    },
+    "x": {
+      "title": "Generador gratis de código QR de X (Twitter)",
+      "h1": "Código QR de X (Twitter)",
+      "desc": "Convierte tu perfil de X (Twitter) en un código QR. Un escaneo y te siguen."
+    },
+    "linkedin": {
+      "title": "Generador gratis de código QR de LinkedIn",
+      "h1": "Código QR de LinkedIn",
+      "desc": "Convierte tu perfil de LinkedIn en un código QR. Un escaneo y te siguen."
+    },
+    "telegram": {
+      "title": "Generador gratis de código QR de Telegram",
+      "h1": "Código QR de Telegram",
+      "desc": "Convierte tu perfil de Telegram en un código QR. Un escaneo y te siguen."
+    },
+    "venmo": {
+      "title": "Generador gratis de código QR de Venmo",
+      "h1": "Código QR de Venmo",
+      "desc": "Cobra por Venmo en un escaneo: tus clientes llegan directo a tu perfil."
+    },
+    "paypal": {
+      "title": "Generador gratis de código QR de PayPal",
+      "h1": "Código QR de PayPal",
+      "desc": "Cobra con PayPal.Me en un escaneo: tus clientes llegan a tu página de pago."
+    },
+    "spotify": {
+      "title": "Generador gratis de código QR de Spotify",
+      "h1": "Código QR de Spotify",
+      "desc": "Comparte una canción, álbum, playlist o pódcast de Spotify en un escaneo."
+    },
+    "maps": {
+      "title": "Generador gratis de código QR de Google Maps",
+      "h1": "Código QR de Google Maps",
+      "desc": "Lleva a tus clientes a tu dirección en Google Maps en un escaneo."
+    },
+    "phone": {
+      "title": "Generador gratis de código QR de Llamada",
+      "h1": "Código QR de Llamada",
+      "desc": "Que te llamen en un escaneo, sin escribir el número."
+    }
+  },
+  "home": {
+    "title": "Generador de códigos QR gratis — Logo, colores, SVG y PDF",
+    "desc": "Generador de códigos QR gratis: crea QR para URL, WiFi, vCard, email, SMS, WhatsApp y más. Añade tu logo y colores, descarga en PNG, SVG o PDF. Sin registro, sin marca de agua, nunca caduca.",
+    "gen": "Crea tu código QR ahora",
+    "faqTitle": "Preguntas frecuentes",
+    "faq": [
+      {
+        "q": "¿Este generador de códigos QR es realmente gratis?",
+        "a": "Sí. Los códigos QR estáticos son gratis para siempre, sin registro, sin marca de agua y sin límite de escaneos. Puedes usarlos comercialmente."
+      },
+      {
+        "q": "¿Los códigos QR caducan?",
+        "a": "No. Los QR estáticos codifican tu contenido directamente, así que funcionan para siempre."
+      },
+      {
+        "q": "¿Puedo añadir un logo a mi código QR?",
+        "a": "Sí. Sube tu logo, elige colores, estilos de puntos y esquinas, y añade un marco con un texto como \"Escanéame\"."
+      },
+      {
+        "q": "¿En qué formatos puedo descargarlo?",
+        "a": "PNG para web y redes, SVG vectorial para imprimir a cualquier tamaño y PDF listo para imprimir."
+      },
+      {
+        "q": "¿A qué puede enlazar un código QR?",
+        "a": "Una URL, red WiFi, contacto vCard, email, SMS, teléfono, PDF, WhatsApp, Instagram, Google Maps y mucho más."
+      },
+      {
+        "q": "¿Qué diferencia hay entre QR estático y dinámico?",
+        "a": "Un QR estático guarda los datos en el patrón y no se puede editar. Uno dinámico apunta a un enlace corto que puedes cambiar y medir."
+      }
+    ]
   }
 }
