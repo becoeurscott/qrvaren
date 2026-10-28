@@ -127,7 +127,21 @@
       "message": "Message pré-rempli (facultatif)",
       "address": "Adresse ou nom du lieu",
       "link": "Lien de partage"
-    }
+    },
+    "image": "Image ou logo",
+    "imagePlacement": "Position",
+    "imageModes": {
+      "center": "Au centre",
+      "background": "En arrière-plan"
+    },
+    "imageShape": "Forme",
+    "imageShapes": {
+      "original": "Originale",
+      "square": "Carré",
+      "rounded": "Arrondi",
+      "circle": "Cercle"
+    },
+    "imageStrength": "Intensité de l'image"
   },
   "types": {
     "title": "Tous les QR qu'il te faut",

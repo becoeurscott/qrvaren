@@ -10,7 +10,7 @@ import { PRESETS, PRESET_IDS, type Preset, type PresetId } from "../domain/prese
 import { presetIconDataUrl } from "./presetIcons";
 import { Link } from "@/i18n/routing";
 import { useSession } from "@/shared/useSession";
-import { composeSvg, download, pngToPdf, svgToPng, type DotShape, type QrStyle } from "../infrastructure/render";
+import { composeSvg, darkTone, download, pngToPdf, shapeImage, svgToPng, type DotShape, type LogoShape, type QrStyle } from "../infrastructure/render";
 
 // Types that need a stored file or hosted page come later (account required).
 const NEEDS_ACCOUNT: QrType[] = ["pdf", "card"];
@@ -45,6 +45,13 @@ const MULTILINE = new Set(["text", "body", "message"]);
 
 const LOCAL_NAMES = new Set(["phone", "wifi", "contact"]);
 
+/** Blend two hex colors: t=0 gives a, t=1 gives b. */
+function mix(a: string, b: string, t: number) {
+  const p = (h: string) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
+  const [x, y] = [p(a), p(b)];
+  return `#${x.map((v, i) => Math.round(v + (y[i] - v) * t).toString(16).padStart(2, "0")).join("")}`;
+}
+
 export function Generator({ initialType = "url", initialPreset }: { initialType?: QrType; initialPreset?: PresetId }) {
   const t = useTranslations("gen");
   const startPreset = initialPreset ? (PRESETS[initialPreset] as Preset) : undefined;
@@ -59,12 +66,36 @@ export function Generator({ initialType = "url", initialPreset }: { initialType?
   const [captionEdited, setCaptionEdited] = useState(false);
   const [style, setStyle] = useState<QrStyle>(() => ({
     ...(startPreset ? startPreset.style : TEMPLATES.varen),
-    logo: initialPreset ? presetIconDataUrl(initialPreset) : undefined,
     logoRatio: 0.22,
     frameText: t(`frameTexts.${startPreset?.caption ?? FRAME_TEXTS[initialType][0]}`),
   }));
   // True while the center logo is the template icon (a template switch may replace it, an upload may not).
   const [presetLogo, setPresetLogo] = useState(!!initialPreset);
+  // The user's image (or the template icon), shown in the center in a chosen shape or behind the code.
+  const [image, setImage] = useState<string | undefined>(initialPreset ? presetIconDataUrl(initialPreset) : undefined);
+  const [imageMode, setImageMode] = useState<"center" | "background">("center");
+  const [logoShape, setLogoShape] = useState<LogoShape>("original");
+  const [bgStrength, setBgStrength] = useState(0.3);
+  const [shaped, setShaped] = useState<string | undefined>(image);
+  const [imageDark, setImageDark] = useState("#000000");
+  useEffect(() => {
+    if (!image || imageMode !== "background") return;
+    let live = true;
+    darkTone(image).then((c) => live && setImageDark(c)).catch(() => live && setImageDark("#000000"));
+    return () => { live = false; };
+  }, [image, imageMode]);
+  useEffect(() => {
+    if (!image || imageMode !== "center") { setShaped(undefined); return; }
+    let live = true;
+    shapeImage(image, logoShape).then((u) => live && setShaped(u)).catch(() => live && setShaped(image));
+    return () => { live = false; };
+  }, [image, imageMode, logoShape]);
+  const renderStyle = useMemo<QrStyle>(() => ({
+    ...style,
+    logo: imageMode === "center" ? shaped : undefined,
+    bgImage: imageMode === "background" ? image : undefined,
+    bgStrength,
+  }), [style, imageMode, shaped, image, bgStrength]);
   const [svg, setSvg] = useState<{ svg: string; width: number; height: number } | null>(null);
   const [busy, setBusy] = useState(false);
   const user = useSession();
@@ -73,16 +104,18 @@ export function Generator({ initialType = "url", initialPreset }: { initialType?
     () => (linkPreset ? linkPreset.build!(fields) : encode(toInput(type, fields, hidden))),
     [linkPreset, type, fields, hidden],
   );
-  const capacity = payload ? checkCapacity(payload, style.logo ? "H" : "M") : null;
-  const issues = readabilityIssues({ fg: style.fg, bg: style.bg, extra: [style.fg2, style.eye], logoRatio: style.logo ? style.logoRatio : 0 });
+  const capacity = payload ? checkCapacity(payload, renderStyle.logo ? "H" : "M") : null;
+  // A background image darkens the area under the modules: check against its dark tones at the chosen intensity.
+  const effectiveBg = renderStyle.bgImage ? mix(style.bg, imageDark, bgStrength) : style.bg;
+  const issues = readabilityIssues({ fg: style.fg, bg: effectiveBg, extra: [style.fg2, style.eye], logoRatio: renderStyle.logo ? style.logoRatio : 0 });
   const renderable = payload && capacity?.ok;
 
   useEffect(() => {
     if (!renderable) { setSvg(null); return; }
     let live = true;
-    const id = setTimeout(() => composeSvg(payload!, style).then((r) => live && setSvg(r)), 120);
+    const id = setTimeout(() => composeSvg(payload!, renderStyle).then((r) => live && setSvg(r)), 120);
     return () => { live = false; clearTimeout(id); };
-  }, [payload, renderable, style]);
+  }, [payload, renderable, renderStyle]);
 
   const set = (k: string, v: string) => setFields((f) => ({ ...f, [k]: v }));
 
@@ -95,19 +128,20 @@ export function Generator({ initialType = "url", initialPreset }: { initialType?
   // A use-case template sets the content fields, colors, icon and caption.
   const applyPreset = (id: PresetId) => {
     const next = PRESETS[id] as Preset;
-    const useIcon = presetLogo || !style.logo;
+    const useIcon = presetLogo || !image;
     setPreset(id);
     if (next.type) setType(next.type);
     setFields({ encryption: "WPA" });
     setTemplate(null);
     setCaptionEdited(false);
-    setStyle((s) => ({ ...s, fg2: undefined, eye: undefined, ...next.style, logo: useIcon ? presetIconDataUrl(id) : s.logo }));
+    setStyle((s) => ({ ...s, fg2: undefined, eye: undefined, ...next.style }));
+    if (useIcon) { setImage(presetIconDataUrl(id)); setImageMode("center"); }
     setPresetLogo(useIcon);
   };
   const selectType = (k: QrType) => {
     setPreset(null);
     setType(k);
-    if (presetLogo) { setStyle((s) => ({ ...s, logo: undefined })); setPresetLogo(false); }
+    if (presetLogo) { setImage(undefined); setPresetLogo(false); }
   };
 
   // A template sets every color and shape at once; logo and caption are kept.
@@ -124,10 +158,10 @@ export function Generator({ initialType = "url", initialPreset }: { initialType?
 
   async function onLogo(file?: File) {
     setPresetLogo(false);
-    if (!file) return setStyle((s) => ({ ...s, logo: undefined }));
+    if (!file) return setImage(undefined);
     if (!/^image\/(png|jpeg|svg\+xml|webp)$/.test(file.type) || file.size > 1_000_000) return;
     const url = await new Promise<string>((ok) => { const r = new FileReader(); r.onload = () => ok(r.result as string); r.readAsDataURL(file); });
-    setStyle((s) => ({ ...s, logo: url }));
+    setImage(url);
   }
 
   async function exportAs(fmt: "png" | "svg" | "pdf") {
@@ -171,7 +205,7 @@ export function Generator({ initialType = "url", initialPreset }: { initialType?
         </section>
 
         {/* Type picker */}
-        <p className="-mb-3 text-xs font-bold uppercase tracking-widest text-slate">{t("orType")}</p>
+        <p className="text-xs font-bold uppercase tracking-widest text-slate">{t("orType")}</p>
         <div className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-1 [scrollbar-width:none] sm:flex-wrap sm:overflow-visible" role="tablist">
           {QR_TYPES.map((k) => (
             <button
@@ -277,14 +311,45 @@ export function Generator({ initialType = "url", initialPreset }: { initialType?
                 ))}
               </div>
             </div>
-            <div>
-              <span className="mb-1 block text-sm font-semibold text-slate">{t("logo")}</span>
+            <div className="sm:col-span-2">
+              <span className="mb-1 block text-sm font-semibold text-slate">{t("image")}</span>
               <div className="flex min-w-0 flex-wrap items-center gap-2">
                 <input type="file" accept="image/png,image/jpeg,image/svg+xml,image/webp"
-                  className="w-full min-w-0 max-w-full text-sm file:mr-3 file:rounded-full file:border-0 file:bg-lime file:px-4 file:py-2 file:font-semibold"
+                  className="w-full min-w-0 max-w-full text-sm file:mr-3 file:rounded-full file:border-0 file:bg-lime file:px-4 file:py-2 file:font-semibold sm:w-auto"
                   onChange={(e) => onLogo(e.target.files?.[0])} />
-                {style.logo && <button className="text-sm underline" onClick={() => onLogo()}>{t("removeLogo")}</button>}
+                {image && <button className="text-sm underline" onClick={() => onLogo()}>{t("removeLogo")}</button>}
               </div>
+              {image && (
+                <div className="mt-3 space-y-3 rounded-2xl bg-lavender p-3">
+                  <div className="flex flex-wrap gap-2" role="radiogroup" aria-label={t("imagePlacement")}>
+                    {(["center", "background"] as const).map((m) => (
+                      <button key={m} role="radio" aria-checked={imageMode === m} onClick={() => setImageMode(m)}
+                        className={`rounded-full px-4 py-2 text-sm font-semibold ${imageMode === m ? "bg-ink text-white" : "bg-white"}`}>
+                        {t(`imageModes.${m}`)}
+                      </button>
+                    ))}
+                  </div>
+                  {imageMode === "center" ? (
+                    <div className="flex flex-wrap items-center gap-2" role="radiogroup" aria-label={t("imageShape")}>
+                      {(["original", "square", "rounded", "circle"] as LogoShape[]).map((sh) => (
+                        <button key={sh} role="radio" aria-checked={logoShape === sh} onClick={() => setLogoShape(sh)} title={t(`imageShapes.${sh}`)}
+                          className={`flex items-center gap-2 rounded-full px-3 py-1.5 text-sm font-semibold ${logoShape === sh ? "bg-violet text-white" : "bg-white"}`}>
+                          <span aria-hidden className={`inline-block h-4 w-4 border-2 border-current ${
+                            sh === "circle" ? "rounded-full" : sh === "rounded" ? "rounded-[5px]" : sh === "square" ? "" : "rounded-sm border-dashed"
+                          }`} />
+                          {t(`imageShapes.${sh}`)}
+                        </button>
+                      ))}
+                    </div>
+                  ) : (
+                    <label className="block text-sm font-semibold text-slate">
+                      {t("imageStrength")} · {Math.round(bgStrength * 100)}%
+                      <input type="range" min={10} max={60} step={5} value={Math.round(bgStrength * 100)}
+                        onChange={(e) => setBgStrength(Number(e.target.value) / 100)} className="mt-1 w-full accent-violet" />
+                    </label>
+                  )}
+                </div>
+              )}
             </div>
             <div>
               <label className="flex items-center gap-2 text-sm font-semibold text-slate">

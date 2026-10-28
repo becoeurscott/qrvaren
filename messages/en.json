@@ -127,7 +127,21 @@
       "message": "Pre-filled message (optional)",
       "address": "Address or place name",
       "link": "Share link"
-    }
+    },
+    "image": "Image or logo",
+    "imagePlacement": "Placement",
+    "imageModes": {
+      "center": "In the center",
+      "background": "As background"
+    },
+    "imageShape": "Shape",
+    "imageShapes": {
+      "original": "Original",
+      "square": "Square",
+      "rounded": "Rounded",
+      "circle": "Circle"
+    },
+    "imageStrength": "Image intensity"
   },
   "types": {
     "title": "Every QR you need",
