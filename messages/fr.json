@@ -377,7 +377,8 @@
     "google": "Continuer avec Google",
     "why": "Un compte n'est nécessaire que pour une carte de visite, les QR PDF et les statistiques de scans.",
     "soon": "La connexion ouvre avec le lancement de la carte de visite.",
-    "error": "La connexion n'a pas abouti. Réessaie."
+    "error": "La connexion n'a pas abouti. Réessaie.",
+    "suspended": "Ce compte a été suspendu. Si tu penses que c’est une erreur, écris-nous à l’adresse indiquée sur la page Confidentialité."
   },
   "dash": {
     "title": "Tableau de bord",

@@ -377,7 +377,8 @@
     "google": "Continue with Google",
     "why": "You only need an account for a business card, PDF QR codes and scan statistics.",
     "soon": "Sign-in opens with the business card launch.",
-    "error": "Sign-in didn't finish. Please try again."
+    "error": "Sign-in didn't finish. Please try again.",
+    "suspended": "This account has been suspended. If you think this is a mistake, contact us at the address on the privacy page."
   },
   "dash": {
     "title": "Dashboard",

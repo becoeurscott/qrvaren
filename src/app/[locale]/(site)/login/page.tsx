@@ -27,7 +27,7 @@ export default async function LoginPage({ params, searchParams }: {
       <section className="mx-auto max-w-md px-4 py-20">
         <Reveal>
           <div className="rounded-[2rem] bg-white p-8 shadow-[0_30px_60px_-30px_rgba(23,20,58,0.4)]">
-            {error && <p className="mb-4 rounded-xl bg-coral/15 p-3 text-sm font-medium text-ink">{t("error")}</p>}
+            {error && <p className="mb-4 rounded-xl bg-coral/15 p-3 text-sm font-medium text-ink">{t(error === "suspended" ? "suspended" : "error")}</p>}
             <form action={signInWithGoogle}>
               <input type="hidden" name="locale" value={locale} />
               <button className="btn flex w-full items-center justify-center gap-3 rounded-full bg-ink px-6 py-4 font-semibold text-white transition hover:bg-violet">

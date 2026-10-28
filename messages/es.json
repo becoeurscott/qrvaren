@@ -377,7 +377,8 @@
     "google": "Continuar con Google",
     "why": "Solo necesitas una cuenta para una tarjeta de visita, QR de PDF y estadísticas de escaneos.",
     "soon": "El inicio de sesión abre con el lanzamiento de la tarjeta.",
-    "error": "No se completó el inicio de sesión. Inténtalo de nuevo."
+    "error": "No se completó el inicio de sesión. Inténtalo de nuevo.",
+    "suspended": "Esta cuenta ha sido suspendida. Si crees que es un error, escríbenos a la dirección de la página de privacidad."
   },
   "dash": {
     "title": "Panel",
