@@ -24,7 +24,7 @@ export default async function BusinessCardPage({ params }: { params: Promise<{ l
   return (
     <main>
       <PageHero eyebrow={l("cardEyebrow")} title={t("title")} sub={t("sub")}>
-        <Reveal delay={400}><div className="mt-8 flex justify-center md:justify-start"><Button href="/login" variant="lime" size="lg">{t("cta")}</Button></div></Reveal>
+        <Reveal delay={400}><div className="mt-8 flex justify-center md:justify-start"><Button href="/dashboard" variant="lime" size="lg">{t("cta")}</Button></div></Reveal>
       </PageHero>
       <section className="mx-auto grid max-w-6xl grid-cols-[minmax(0,1fr)] items-start gap-12 px-4 py-20 md:grid-cols-[1fr_0.8fr]">
         <div className="grid min-w-0 grid-cols-[minmax(0,1fr)] gap-4 sm:grid-cols-2">

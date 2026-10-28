@@ -69,8 +69,11 @@
     "lowContrast": "Contraste faible : les scanners risquent d'échouer. Utilise un code foncé sur fond clair.",
     "inverted": "Code clair sur fond foncé : certains scanners ne le lisent pas.",
     "logoTooBig": "Le logo couvre trop le code.",
-    "account": "Nécessite un compte gratuit — bientôt disponible.",
-    "neverExpires": "QR statique — fonctionne pour toujours."
+    "account": "Les QR PDF et la carte de visite nécessitent un compte gratuit.",
+    "neverExpires": "QR statique — fonctionne pour toujours.",
+    "accountReady": "Tu es connecté. L'éditeur de carte de visite arrive bientôt dans ton tableau de bord.",
+    "goDashboard": "Ouvrir mon tableau de bord",
+    "signIn": "Se connecter avec Google"
   },
   "types": {
     "title": "Tous les QR qu'il te faut",
@@ -305,7 +308,8 @@
     "sub": "Un clic avec Google. Aucun mot de passe à retenir.",
     "google": "Continuer avec Google",
     "why": "Un compte n'est nécessaire que pour une carte de visite, les QR PDF et les statistiques de scans.",
-    "soon": "La connexion ouvre avec le lancement de la carte de visite."
+    "soon": "La connexion ouvre avec le lancement de la carte de visite.",
+    "error": "La connexion n'a pas abouti. Réessaie."
   },
   "dash": {
     "title": "Tableau de bord",
@@ -315,6 +319,148 @@
     "empty": "Rien ici pour l'instant.",
     "newQr": "Nouveau QR code",
     "account": "Compte",
-    "logout": "Déconnexion"
+    "logout": "Déconnexion",
+    "hello": "Salut, {name}",
+    "signedInAs": "Connecté en tant que",
+    "cardSoon": "L'éditeur de carte de visite hébergée est la prochaine fonctionnalité. Ton compte est prêt.",
+    "soon": "Bientôt"
+  },
+  "legal": {
+    "updated": "Dernière mise à jour : 28 octobre 2026",
+    "contact": "Contact",
+    "privacy": {
+      "title": "Politique de confidentialité",
+      "intro": "Nous avons conçu ce service pour collecter le moins possible. Cette page explique précisément ce que nous traitons, pourquoi, et ce que tu peux faire.",
+      "sections": [
+        {
+          "h": "Les QR codes sont créés dans ton navigateur",
+          "p": [
+            "Quand tu crées un QR code sans compte, tout se passe sur ton appareil : le lien, le mot de passe WiFi, les coordonnées ou le texte que tu saisis, et le logo que tu ajoutes ne sont jamais envoyés à nos serveurs.",
+            "Les téléchargements (PNG, SVG, PDF) sont aussi générés sur ton appareil. Nous ne conservons pas les QR codes créés de cette façon."
+          ]
+        },
+        {
+          "h": "Ton compte",
+          "p": [
+            "Un compte n'est nécessaire que pour la carte de visite, les QR PDF et les statistiques de scans. Tu te connectes avec Google, qui nous transmet ton nom, ton adresse email et ta photo de profil ; nous ne voyons jamais ton mot de passe Google.",
+            "Nous utilisons ces informations uniquement pour faire fonctionner ton compte. Elles sont hébergées par notre prestataire InsForge, aux États-Unis."
+          ]
+        },
+        {
+          "h": "Cookies et stockage local",
+          "p": [
+            "Nous utilisons seulement ce dont le site a besoin : deux cookies de connexion (insforge_access_token, insforge_refresh_token), un cookie temporaire pendant la connexion Google (insforge_code_verifier, 10 minutes), un cookie qui retient ta langue (NEXT_LOCALE) et une entrée de stockage local qui retient ton choix sur les cookies.",
+            "Nous n'utilisons ni cookies publicitaires ni traceurs tiers."
+          ]
+        },
+        {
+          "h": "Mesure d'audience",
+          "p": [
+            "Pour savoir quelles pages sont utiles, nos propres serveurs enregistrent des événements anonymes : la page vue, la langue, les téléchargements de QR (type et format uniquement, jamais le contenu), le type d'appareil, le pays estimé à partir de la connexion et le site d'où tu viens. Nous ne conservons pas ton adresse IP et aucune société d'analyse externe ne reçoit ces données.",
+            "Si tu cliques sur Accepter dans le bandeau cookies, un identifiant aléatoire conservé uniquement pour l'onglet en cours est ajouté, afin de compter les visiteurs uniques. Si tu choisis Essentiels seulement, aucun identifiant n'est utilisé."
+          ]
+        },
+        {
+          "h": "Liste d'attente",
+          "p": [
+            "Si tu laisses ton email pour être prévenu de l'ouverture des cartes de visite, nous l'utilisons uniquement pour ce message. Il n'est ni ajouté à une newsletter ni partagé."
+          ]
+        },
+        {
+          "h": "Cartes de visite et paiements (à venir)",
+          "p": [
+            "Les informations que tu mets sur une carte (nom du business, logo, photos, horaires, adresse, téléphone, liens) sont publiées sur une page publique : c'est son rôle.",
+            "Les paiements seront gérés par Stripe. Ton numéro de carte bancaire va directement chez Stripe et ne passe jamais par nos serveurs.",
+            "À la fin d'un abonnement, la carte est suspendue pendant 30 jours pour te laisser revenir, puis supprimée."
+          ]
+        },
+        {
+          "h": "Statistiques de scans",
+          "p": [
+            "Pour les cartes de visite et les QR suivis, nous comptons le nombre de scans. Nous ne créons pas de profil des personnes qui scannent et nous ne vendons jamais ces données."
+          ]
+        },
+        {
+          "h": "Qui traite les données pour nous",
+          "p": [
+            "InsForge (base de données, connexion, stockage de fichiers), Vercel (hébergement du site), Google (connexion) et, quand les paiements ouvriront, Stripe. Chacun agit sur nos instructions et uniquement pour le service qu'il fournit."
+          ]
+        },
+        {
+          "h": "Nous ne vendons jamais tes données",
+          "p": [
+            "Nous ne vendons ni ne louons d'informations personnelles et ne les partageons pas à des fins publicitaires, y compris au sens de la loi californienne sur la vie privée (CCPA)."
+          ]
+        },
+        {
+          "h": "Tes droits",
+          "p": [
+            "Tu peux demander à voir les informations que nous détenons sur toi, à les corriger, ou à supprimer ton compte et tout ce qui y est lié. Les résidents de Californie ont ces droits au titre du CCPA ; nous les offrons à tout le monde. Écris-nous à l'adresse ci-dessous, nous répondons sous 30 jours."
+          ]
+        },
+        {
+          "h": "Enfants",
+          "p": [
+            "Ce service ne s'adresse pas aux enfants de moins de 13 ans et nous ne collectons pas sciemment leurs informations."
+          ]
+        },
+        {
+          "h": "Modifications",
+          "p": [
+            "Si nous changeons notre façon de traiter les données, nous mettrons à jour cette page et la date en haut avant que le changement s'applique."
+          ]
+        }
+      ]
+    },
+    "terms": {
+      "title": "Conditions d'utilisation",
+      "intro": "Ces conditions s'appliquent quand tu utilises le générateur de QR codes et, une fois disponible, la carte de visite digitale.",
+      "sections": [
+        {
+          "h": "Le générateur gratuit",
+          "p": [
+            "Tu peux créer et télécharger des QR codes gratuitement, sans compte et sans filigrane.",
+            "Les QR codes de liens, WiFi, texte, vCard, email et SMS sont statiques : l'information est dans le code lui-même, ils fonctionnent donc pour toujours et ne dépendent pas de notre service."
+          ]
+        },
+        {
+          "h": "Ton contenu",
+          "p": [
+            "Tu es responsable de ce que tu mets dans un QR code ou sur une carte de visite, et des sites vers lesquels tes codes renvoient. Vérifie un code imprimé avant de le diffuser."
+          ]
+        },
+        {
+          "h": "Ce qui est interdit",
+          "p": [
+            "N'utilise pas le service pour de l'hameçonnage, des logiciels malveillants, des arnaques, du contenu illégal, du harcèlement ou pour te faire passer pour quelqu'un d'autre. Chaque page de carte a un bouton Signaler ; nous pouvons masquer ou supprimer un contenu qui enfreint ces règles et suspendre le compte concerné."
+          ]
+        },
+        {
+          "h": "Abonnement carte de visite (à venir)",
+          "p": [
+            "La carte de visite hébergée est un abonnement payant, mensuel ou annuel, au prix affiché sur la page Tarifs au moment de la souscription. Il se renouvelle automatiquement jusqu'à résiliation, possible à tout moment.",
+            "Si un paiement échoue ou si tu résilies, la carte reste suspendue 30 jours puis est supprimée. L'adresse de ta carte ne change jamais, donc tes QR imprimés pointent au bon endroit tant que la carte existe."
+          ]
+        },
+        {
+          "h": "Disponibilité",
+          "p": [
+            "Nous faisons en sorte que le service reste en ligne, sans pouvoir garantir qu'il soit toujours disponible ou sans erreur. Les QR statiques déjà téléchargés ne sont pas concernés par une panne."
+          ]
+        },
+        {
+          "h": "Responsabilité",
+          "p": [
+            "Le service est fourni tel quel. Dans la mesure permise par la loi, nous ne sommes pas responsables des pertes indirectes, ni des pertes causées par un contenu que toi ou d'autres publiez."
+          ]
+        },
+        {
+          "h": "Modification des conditions",
+          "p": [
+            "Nous pouvons mettre à jour ces conditions. Nous changerons la date en haut et, pour les changements importants, nous préviendrons les titulaires de compte par email avant leur application."
+          ]
+        }
+      ]
+    }
   }
 }

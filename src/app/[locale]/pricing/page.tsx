@@ -19,8 +19,8 @@ export default async function PricingPage({ params }: { params: Promise<{ locale
   const prices = await getPrices();
   const plans = [
     { key: "free", price: t("free.price"), period: "", items: t.raw("free.items") as string[], href: "/create", variant: "ink" as const, bg: "bg-white" },
-    { key: "monthly", price: `$${prices.monthly}`, period: t("monthly.period"), items: t.raw("monthly.items") as string[], href: "/login", variant: "lime" as const, bg: "bg-violet text-white" },
-    { key: "yearly", price: `$${prices.yearly}`, period: t("yearly.period"), items: t.raw("monthly.items") as string[], href: "/login", variant: "lime" as const, bg: "bg-ink text-white", badge: t("yearly.badge") },
+    { key: "monthly", price: `$${prices.monthly}`, period: t("monthly.period"), items: t.raw("monthly.items") as string[], href: "/dashboard", variant: "lime" as const, bg: "bg-violet text-white" },
+    { key: "yearly", price: `$${prices.yearly}`, period: t("yearly.period"), items: t.raw("monthly.items") as string[], href: "/dashboard", variant: "lime" as const, bg: "bg-ink text-white", badge: t("yearly.badge") },
   ];
   return (
     <main>

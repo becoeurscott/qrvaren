@@ -3,6 +3,7 @@ import { Link } from "@/i18n/routing";
 import { BRAND_NAME } from "@/shared/config";
 import { LocaleSwitcher } from "./LocaleSwitcher";
 import { MobileMenu } from "./MobileMenu";
+import { AuthLink } from "./AuthLink";
 import { Button } from "./ui/Button";
 
 // Floating pill navigation, as in the Varen template. Below md the links move into MobileMenu.
@@ -22,12 +23,15 @@ export async function Nav() {
           <span className="text-lime" aria-hidden>✺</span>
           {BRAND_NAME}
         </Link>
-        {items.map((it) => (
+        {items.slice(0, 3).map((it) => (
           <Link key={it.href} href={it.href} className="hidden px-2 text-sm font-semibold transition hover:text-lime md:block">{it.label}</Link>
         ))}
+        <span className="hidden md:block">
+          <AuthLink login={t("login")} dashboard={t("dashboard")} className="px-2 text-sm font-semibold transition hover:text-lime" />
+        </span>
         <span className="hidden md:block"><LocaleSwitcher current={locale} /></span>
         <span className="hidden sm:block"><Button href="/create" variant="light" size="sm">{t("cta")}</Button></span>
-        <MobileMenu items={items} cta={{ href: "/create", label: t("cta") }} locale={locale} openLabel={t("menu")} closeLabel={t("close")} />
+        <MobileMenu items={items} cta={{ href: "/create", label: t("cta") }} locale={locale} openLabel={t("menu")} closeLabel={t("close")} dashboardLabel={t("dashboard")} />
       </nav>
     </header>
   );

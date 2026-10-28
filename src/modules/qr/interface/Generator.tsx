@@ -4,6 +4,8 @@ import { useEffect, useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import { QR_TYPES, type QrInput, type QrType, checkCapacity, encode } from "../domain/encoders";
 import { readabilityIssues } from "../domain/contrast";
+import { Link } from "@/i18n/routing";
+import { useSession } from "@/shared/useSession";
 import { composeSvg, download, pngToPdf, svgToPng, type DotShape, type QrStyle } from "../infrastructure/render";
 
 // Types that need a stored file or hosted page come later (account required).
@@ -48,6 +50,7 @@ export function Generator({ initialType = "url" }: { initialType?: QrType }) {
   });
   const [svg, setSvg] = useState<{ svg: string; width: number; height: number } | null>(null);
   const [busy, setBusy] = useState(false);
+  const user = useSession();
 
   const payload = useMemo(() => encode(toInput(type, fields, hidden)), [type, fields, hidden]);
   const capacity = payload ? checkCapacity(payload, style.logo ? "H" : "M") : null;
@@ -109,7 +112,12 @@ export function Generator({ initialType = "url" }: { initialType?: QrType }) {
         <section>
           <h3 className="mb-3 font-display text-xl uppercase tracking-wide">{t("content")}</h3>
           {NEEDS_ACCOUNT.includes(type) ? (
-            <p className="rounded-2xl bg-sun/40 p-4 font-medium">{t("account")}</p>
+            <div className="rounded-2xl bg-sun/40 p-4 font-medium">
+              <p>{user ? t("accountReady") : t("account")}</p>
+              <Link href={user ? "/dashboard" : "/login"} className="mt-3 inline-flex rounded-full bg-ink px-4 py-2 text-sm font-semibold text-white">
+                {user ? t("goDashboard") : t("signIn")}
+              </Link>
+            </div>
           ) : (
             <div className="grid grid-cols-[minmax(0,1fr)] gap-3 sm:grid-cols-2">
               {type === "wifi" && (

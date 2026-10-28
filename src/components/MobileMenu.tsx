@@ -4,13 +4,17 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { Link, usePathname } from "@/i18n/routing";
 import { LocaleSwitcher } from "./LocaleSwitcher";
+import { useSession } from "@/shared/useSession";
 
 type Item = { href: string; label: string };
 
 // Full-screen menu for small screens; the desktop nav shows the same links inline.
-export function MobileMenu({ items, cta, locale, openLabel, closeLabel }: {
-  items: Item[]; cta: Item; locale: string; openLabel: string; closeLabel: string;
+export function MobileMenu({ items: baseItems, cta, locale, openLabel, closeLabel, dashboardLabel }: {
+  items: Item[]; cta: Item; locale: string; openLabel: string; closeLabel: string; dashboardLabel: string;
 }) {
+  const user = useSession();
+  // Signed-in users get their dashboard instead of "Log in".
+  const items = baseItems.map((it) => (user && it.href === "/login" ? { href: "/dashboard", label: dashboardLabel } : it));
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const pathname = usePathname();

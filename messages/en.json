@@ -69,8 +69,11 @@
     "lowContrast": "Low contrast: scanners may fail. Use a darker code on a lighter background.",
     "inverted": "Light code on dark background: some scanners can't read it.",
     "logoTooBig": "The logo covers too much of the code.",
-    "account": "Needs a free account — coming soon.",
-    "neverExpires": "Static code — works forever."
+    "account": "PDF QR codes and business cards need a free account.",
+    "neverExpires": "Static code — works forever.",
+    "accountReady": "You're signed in. The business card editor opens soon in your dashboard.",
+    "goDashboard": "Open my dashboard",
+    "signIn": "Sign in with Google"
   },
   "types": {
     "title": "Every QR you need",
@@ -305,7 +308,8 @@
     "sub": "One click with Google. No password to remember.",
     "google": "Continue with Google",
     "why": "You only need an account for a business card, PDF QR codes and scan statistics.",
-    "soon": "Sign-in opens with the business card launch."
+    "soon": "Sign-in opens with the business card launch.",
+    "error": "Sign-in didn't finish. Please try again."
   },
   "dash": {
     "title": "Dashboard",
@@ -315,6 +319,148 @@
     "empty": "Nothing here yet.",
     "newQr": "New QR code",
     "account": "Account",
-    "logout": "Log out"
+    "logout": "Log out",
+    "hello": "Hi, {name}",
+    "signedInAs": "Signed in as",
+    "cardSoon": "Your hosted business card editor is the next feature we're shipping. Your account is ready for it.",
+    "soon": "Coming soon"
+  },
+  "legal": {
+    "updated": "Last updated: October 28, 2026",
+    "contact": "Contact",
+    "privacy": {
+      "title": "Privacy policy",
+      "intro": "We built this service to collect as little as possible. This page explains exactly what we handle, why, and what you can do about it.",
+      "sections": [
+        {
+          "h": "QR codes are made in your browser",
+          "p": [
+            "When you create a QR code without an account, everything happens on your device: the link, WiFi password, contact details or text you type, and any logo you add, are never sent to our servers.",
+            "Downloads (PNG, SVG, PDF) are generated on your device too. We do not store the QR codes you create this way."
+          ]
+        },
+        {
+          "h": "Your account",
+          "p": [
+            "An account is only needed for the business card, PDF QR codes and scan statistics. You sign in with Google. Google shares your name, email address and profile picture with us; we never see your Google password.",
+            "We use this information only to run your account. Account data is stored by our backend provider, InsForge, in the United States."
+          ]
+        },
+        {
+          "h": "Cookies and local storage",
+          "p": [
+            "We use only what the site needs to work: two sign-in cookies (insforge_access_token, insforge_refresh_token), a short-lived cookie used during Google sign-in (insforge_code_verifier, 10 minutes), a cookie that remembers your language (NEXT_LOCALE), and a local-storage entry that remembers your cookie choice.",
+            "We do not use advertising cookies or third-party trackers."
+          ]
+        },
+        {
+          "h": "Visit measurement",
+          "p": [
+            "To know which pages are useful, our own servers record anonymous events: the page viewed, the language, QR downloads (type and format only, never the content), the type of device, the country estimated from the connection and the site you came from. We do not store your IP address and no outside analytics company receives this data.",
+            "If you click Accept on the cookie banner, a random identifier kept only for the current browser tab is added, so we can count unique visitors. If you choose Essential only, no identifier is used."
+          ]
+        },
+        {
+          "h": "Waiting list",
+          "p": [
+            "If you leave your email to be told when business cards open, we use it only for that message. We do not add it to a newsletter or share it."
+          ]
+        },
+        {
+          "h": "Business cards and payments (when available)",
+          "p": [
+            "The information you put on a business card (business name, logo, photos, hours, address, phone, links) is published on a public page, because that is its purpose.",
+            "Payments will be handled by Stripe. Your card number goes directly to Stripe and never passes through our servers.",
+            "When a subscription ends, the card is suspended for 30 days so you can come back, then deleted."
+          ]
+        },
+        {
+          "h": "Scan statistics",
+          "p": [
+            "For business cards and tracked QR codes, we count how many times they are scanned. We do not build profiles of the people who scan, and we never sell this data."
+          ]
+        },
+        {
+          "h": "Who processes data for us",
+          "p": [
+            "InsForge (database, sign-in, file storage), Vercel (website hosting), Google (sign-in) and, once payments open, Stripe. Each acts on our instructions and only for the service it provides."
+          ]
+        },
+        {
+          "h": "We never sell your data",
+          "p": [
+            "We do not sell or rent personal information, and we do not share it for advertising. This includes the meaning of sale and sharing under the California Consumer Privacy Act (CCPA)."
+          ]
+        },
+        {
+          "h": "Your rights",
+          "p": [
+            "You can ask to see the personal information we hold about you, to correct it, or to delete your account and everything linked to it. California residents have these rights under the CCPA; we offer them to everyone. Write to us at the address below and we will answer within 30 days."
+          ]
+        },
+        {
+          "h": "Children",
+          "p": [
+            "This service is not intended for children under 13, and we do not knowingly collect their information."
+          ]
+        },
+        {
+          "h": "Changes",
+          "p": [
+            "If we change how we handle data, we will update this page and the date at the top before the change applies."
+          ]
+        }
+      ]
+    },
+    "terms": {
+      "title": "Terms of use",
+      "intro": "These terms apply when you use the QR code generator and, once available, the digital business card.",
+      "sections": [
+        {
+          "h": "The free generator",
+          "p": [
+            "You can create and download QR codes for free, without an account and without a watermark.",
+            "QR codes for links, WiFi, text, vCards, email and SMS are static: the information is inside the code itself, so they keep working forever and do not depend on our service."
+          ]
+        },
+        {
+          "h": "Your content",
+          "p": [
+            "You are responsible for what you put in a QR code or on a business card, and for the sites your codes point to. Check a printed code before distributing it."
+          ]
+        },
+        {
+          "h": "What is not allowed",
+          "p": [
+            "Do not use the service for phishing, malware, scams, illegal content, harassment, or to impersonate someone else. Every public card page has a Report button; we may hide or remove content that breaks these rules, and suspend the account behind it."
+          ]
+        },
+        {
+          "h": "Business card subscription (when available)",
+          "p": [
+            "The hosted business card is a paid subscription, monthly or yearly, at the price shown on the pricing page at the time you subscribe. It renews automatically until you cancel, and you can cancel at any time.",
+            "If a payment fails or you cancel, the card stays suspended for 30 days and is then deleted. Your card's address (its slug) never changes, so printed QR codes keep pointing to the right place while the card exists."
+          ]
+        },
+        {
+          "h": "Availability",
+          "p": [
+            "We work to keep the service online but cannot promise it will always be available or error-free. Static QR codes you downloaded are not affected by any outage."
+          ]
+        },
+        {
+          "h": "Liability",
+          "p": [
+            "The service is provided as is. To the extent the law allows, we are not liable for indirect losses, or for losses caused by content you or others publish."
+          ]
+        },
+        {
+          "h": "Changes to these terms",
+          "p": [
+            "We may update these terms. We will change the date at the top, and for important changes we will tell account holders by email before they apply."
+          ]
+        }
+      ]
+    }
   }
 }

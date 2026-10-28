@@ -69,8 +69,11 @@
     "lowContrast": "Contraste bajo: los escáneres pueden fallar. Usa un código oscuro sobre fondo claro.",
     "inverted": "Código claro sobre fondo oscuro: algunos escáneres no lo leen.",
     "logoTooBig": "El logo cubre demasiado el código.",
-    "account": "Requiere una cuenta gratuita — próximamente.",
-    "neverExpires": "QR estático — funciona para siempre."
+    "account": "Los QR de PDF y la tarjeta de visita requieren una cuenta gratuita.",
+    "neverExpires": "QR estático — funciona para siempre.",
+    "accountReady": "Has iniciado sesión. El editor de tarjetas llega pronto a tu panel.",
+    "goDashboard": "Abrir mi panel",
+    "signIn": "Entrar con Google"
   },
   "types": {
     "title": "Todos los QR que necesitas",
@@ -305,7 +308,8 @@
     "sub": "Un clic con Google. Sin contraseña que recordar.",
     "google": "Continuar con Google",
     "why": "Solo necesitas una cuenta para una tarjeta de visita, QR de PDF y estadísticas de escaneos.",
-    "soon": "El inicio de sesión abre con el lanzamiento de la tarjeta."
+    "soon": "El inicio de sesión abre con el lanzamiento de la tarjeta.",
+    "error": "No se completó el inicio de sesión. Inténtalo de nuevo."
   },
   "dash": {
     "title": "Panel",
@@ -315,6 +319,148 @@
     "empty": "Nada aquí todavía.",
     "newQr": "Nuevo código QR",
     "account": "Cuenta",
-    "logout": "Cerrar sesión"
+    "logout": "Cerrar sesión",
+    "hello": "Hola, {name}",
+    "signedInAs": "Sesión iniciada como",
+    "cardSoon": "El editor de tarjeta de visita alojada es la próxima función. Tu cuenta ya está lista.",
+    "soon": "Próximamente"
+  },
+  "legal": {
+    "updated": "Última actualización: 28 de octubre de 2026",
+    "contact": "Contacto",
+    "privacy": {
+      "title": "Política de privacidad",
+      "intro": "Creamos este servicio para recopilar lo mínimo posible. Esta página explica exactamente qué tratamos, por qué y qué puedes hacer.",
+      "sections": [
+        {
+          "h": "Los códigos QR se crean en tu navegador",
+          "p": [
+            "Cuando creas un código QR sin cuenta, todo ocurre en tu dispositivo: el enlace, la contraseña WiFi, los datos de contacto o el texto que escribes, y el logo que añades, nunca se envían a nuestros servidores.",
+            "Las descargas (PNG, SVG, PDF) también se generan en tu dispositivo. No guardamos los códigos QR creados de esta forma."
+          ]
+        },
+        {
+          "h": "Tu cuenta",
+          "p": [
+            "Solo necesitas una cuenta para la tarjeta de visita, los QR de PDF y las estadísticas de escaneos. Inicias sesión con Google, que nos comparte tu nombre, tu email y tu foto de perfil; nunca vemos tu contraseña de Google.",
+            "Usamos esta información solo para que tu cuenta funcione. Se aloja con nuestro proveedor InsForge, en Estados Unidos."
+          ]
+        },
+        {
+          "h": "Cookies y almacenamiento local",
+          "p": [
+            "Solo usamos lo que el sitio necesita: dos cookies de sesión (insforge_access_token, insforge_refresh_token), una cookie temporal durante el inicio con Google (insforge_code_verifier, 10 minutos), una cookie que recuerda tu idioma (NEXT_LOCALE) y una entrada de almacenamiento local que recuerda tu elección sobre cookies.",
+            "No usamos cookies publicitarias ni rastreadores de terceros."
+          ]
+        },
+        {
+          "h": "Medición de visitas",
+          "p": [
+            "Para saber qué páginas son útiles, nuestros propios servidores registran eventos anónimos: la página vista, el idioma, las descargas de QR (solo tipo y formato, nunca el contenido), el tipo de dispositivo, el país estimado a partir de la conexión y el sitio del que vienes. No guardamos tu dirección IP y ninguna empresa de analítica externa recibe estos datos.",
+            "Si pulsas Aceptar en el aviso de cookies, se añade un identificador aleatorio que solo dura la pestaña actual, para contar visitantes únicos. Si eliges Solo esenciales, no se usa ningún identificador."
+          ]
+        },
+        {
+          "h": "Lista de espera",
+          "p": [
+            "Si dejas tu email para que te avisemos cuando abran las tarjetas de visita, lo usamos solo para ese mensaje. No lo añadimos a un boletín ni lo compartimos."
+          ]
+        },
+        {
+          "h": "Tarjetas de visita y pagos (próximamente)",
+          "p": [
+            "La información que pones en una tarjeta (nombre del negocio, logo, fotos, horario, dirección, teléfono, enlaces) se publica en una página pública: ese es su propósito.",
+            "Los pagos los gestionará Stripe. El número de tu tarjeta va directamente a Stripe y nunca pasa por nuestros servidores.",
+            "Cuando termina una suscripción, la tarjeta se suspende 30 días para que puedas volver y después se elimina."
+          ]
+        },
+        {
+          "h": "Estadísticas de escaneos",
+          "p": [
+            "Para las tarjetas de visita y los QR con seguimiento, contamos cuántas veces se escanean. No creamos perfiles de quienes escanean y nunca vendemos estos datos."
+          ]
+        },
+        {
+          "h": "Quién trata datos por nosotros",
+          "p": [
+            "InsForge (base de datos, inicio de sesión, almacenamiento de archivos), Vercel (alojamiento del sitio), Google (inicio de sesión) y, cuando abran los pagos, Stripe. Cada uno actúa según nuestras instrucciones y solo para el servicio que presta."
+          ]
+        },
+        {
+          "h": "Nunca vendemos tus datos",
+          "p": [
+            "No vendemos ni alquilamos información personal ni la compartimos con fines publicitarios, incluido el sentido de la ley de privacidad de California (CCPA)."
+          ]
+        },
+        {
+          "h": "Tus derechos",
+          "p": [
+            "Puedes pedir ver la información personal que tenemos sobre ti, corregirla o eliminar tu cuenta y todo lo vinculado a ella. Los residentes de California tienen estos derechos según la CCPA; los ofrecemos a todos. Escríbenos a la dirección de abajo y responderemos en 30 días."
+          ]
+        },
+        {
+          "h": "Menores",
+          "p": [
+            "Este servicio no está dirigido a menores de 13 años y no recopilamos su información a sabiendas."
+          ]
+        },
+        {
+          "h": "Cambios",
+          "p": [
+            "Si cambiamos cómo tratamos los datos, actualizaremos esta página y la fecha de arriba antes de que el cambio se aplique."
+          ]
+        }
+      ]
+    },
+    "terms": {
+      "title": "Condiciones de uso",
+      "intro": "Estas condiciones se aplican cuando usas el generador de códigos QR y, cuando esté disponible, la tarjeta de visita digital.",
+      "sections": [
+        {
+          "h": "El generador gratuito",
+          "p": [
+            "Puedes crear y descargar códigos QR gratis, sin cuenta y sin marca de agua.",
+            "Los QR de enlaces, WiFi, texto, vCard, email y SMS son estáticos: la información está dentro del propio código, así que funcionan para siempre y no dependen de nuestro servicio."
+          ]
+        },
+        {
+          "h": "Tu contenido",
+          "p": [
+            "Eres responsable de lo que pones en un código QR o en una tarjeta de visita, y de los sitios a los que apuntan tus códigos. Revisa un código impreso antes de distribuirlo."
+          ]
+        },
+        {
+          "h": "Lo que no está permitido",
+          "p": [
+            "No uses el servicio para phishing, malware, estafas, contenido ilegal, acoso ni para hacerte pasar por otra persona. Cada página de tarjeta tiene un botón Denunciar; podemos ocultar o eliminar contenido que incumpla estas reglas y suspender la cuenta responsable."
+          ]
+        },
+        {
+          "h": "Suscripción a la tarjeta de visita (próximamente)",
+          "p": [
+            "La tarjeta de visita alojada es una suscripción de pago, mensual o anual, al precio que muestre la página de precios al suscribirte. Se renueva automáticamente hasta que la canceles, lo que puedes hacer en cualquier momento.",
+            "Si un pago falla o cancelas, la tarjeta queda suspendida 30 días y después se elimina. La dirección de tu tarjeta nunca cambia, así que tus QR impresos apuntan al sitio correcto mientras la tarjeta exista."
+          ]
+        },
+        {
+          "h": "Disponibilidad",
+          "p": [
+            "Trabajamos para mantener el servicio en línea, pero no podemos garantizar que esté siempre disponible o libre de errores. Los QR estáticos ya descargados no se ven afectados por una caída."
+          ]
+        },
+        {
+          "h": "Responsabilidad",
+          "p": [
+            "El servicio se ofrece tal cual. En la medida en que la ley lo permita, no somos responsables de pérdidas indirectas ni de pérdidas causadas por contenido que tú u otros publiquen."
+          ]
+        },
+        {
+          "h": "Cambios en estas condiciones",
+          "p": [
+            "Podemos actualizar estas condiciones. Cambiaremos la fecha de arriba y, para cambios importantes, avisaremos por email a los titulares de cuenta antes de que se apliquen."
+          ]
+        }
+      ]
+    }
   }
 }
