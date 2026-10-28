@@ -1,0 +1,277 @@
+{
+  "nav": {
+    "generator": "Crear",
+    "types": "Tipos de QR",
+    "card": "Tarjeta de visita",
+    "pricing": "Precios",
+    "login": "Iniciar sesión",
+    "cta": "Crear un QR",
+    "dashboard": "Panel",
+    "menu": "Menú",
+    "close": "Cerrar el menú"
+  },
+  "hero": {
+    "badge": "Gratis · Sin registro · Nunca caduca",
+    "title1": "Crea tu código QR",
+    "title2": "en 30 segundos.",
+    "sub": "Enlaces, WiFi, vCards y más. Colores, logo y marco personalizados. Descarga en PNG, SVG o PDF — sin cuenta, sin marca de agua, y los QR de enlaces nunca caducan."
+  },
+  "gen": {
+    "content": "Contenido",
+    "design": "Diseño",
+    "download": "Descargar",
+    "types": {
+      "url": "URL",
+      "wifi": "WiFi",
+      "text": "Texto",
+      "vcard": "vCard",
+      "email": "Email",
+      "sms": "SMS",
+      "pdf": "PDF",
+      "card": "Tarjeta de visita"
+    },
+    "fields": {
+      "url": "URL del sitio",
+      "text": "Tu texto",
+      "ssid": "Nombre de la red (SSID)",
+      "password": "Contraseña",
+      "encryption": "Seguridad",
+      "hidden": "Red oculta",
+      "firstName": "Nombre",
+      "lastName": "Apellido",
+      "org": "Empresa",
+      "title": "Cargo",
+      "phone": "Teléfono",
+      "email": "Email",
+      "website": "Sitio web",
+      "address": "Dirección",
+      "to": "Para",
+      "subject": "Asunto",
+      "body": "Mensaje",
+      "message": "Mensaje"
+    },
+    "fg": "Color del código",
+    "bg": "Fondo",
+    "dots": "Forma de los módulos",
+    "logo": "Logo central",
+    "removeLogo": "Quitar",
+    "frame": "Marco",
+    "frameText": "Texto del marco",
+    "frameDefault": "ESCANÉAME",
+    "shapes": {
+      "square": "Cuadrado",
+      "dots": "Puntos",
+      "rounded": "Redondeado",
+      "classy": "Elegante"
+    },
+    "empty": "Completa el contenido para ver tu código QR.",
+    "tooLong": "Este contenido es demasiado largo para un QR legible ({bytes} bytes). Acórtalo o usa un enlace.",
+    "lowContrast": "Contraste bajo: los escáneres pueden fallar. Usa un código oscuro sobre fondo claro.",
+    "inverted": "Código claro sobre fondo oscuro: algunos escáneres no lo leen.",
+    "logoTooBig": "El logo cubre demasiado el código.",
+    "account": "Requiere una cuenta gratuita — próximamente.",
+    "neverExpires": "QR estático — funciona para siempre."
+  },
+  "types": {
+    "title": "Todos los QR que necesitas",
+    "sub": "Ocho tipos, un generador. Elige el tuyo y empieza."
+  },
+  "trust": {
+    "title": "Sin trampas.",
+    "items": [
+      {
+        "t": "Nunca caduca",
+        "d": "Los QR de enlaces, WiFi y contactos son estáticos. Siguen funcionando después de imprimirlos."
+      },
+      {
+        "t": "Sin registro",
+        "d": "Crea y descarga al instante. No te pedimos tu email."
+      },
+      {
+        "t": "Sin marca de agua",
+        "d": "Tu código, tu marca. No añadimos nada."
+      }
+    ]
+  },
+  "seo": {
+    "url": {
+      "title": "Generador gratis de código QR de URL",
+      "h1": "Código QR de enlace",
+      "desc": "Convierte cualquier enlace en un QR que nunca caduca."
+    },
+    "wifi": {
+      "title": "Generador gratis de código QR WiFi",
+      "h1": "Código QR WiFi",
+      "desc": "Tus invitados se conectan a tu WiFi con un escaneo — ideal para Airbnb, cafés y oficinas."
+    },
+    "text": {
+      "title": "Generador gratis de código QR de texto",
+      "h1": "Código QR de texto",
+      "desc": "Pon cualquier texto en un QR, legible sin conexión."
+    },
+    "vcard": {
+      "title": "Generador gratis de código QR vCard",
+      "h1": "Código QR vCard",
+      "desc": "Comparte tus datos de contacto con un escaneo."
+    },
+    "email": {
+      "title": "Generador gratis de código QR de email",
+      "h1": "Código QR de email",
+      "desc": "Abre un email prellenado con un escaneo."
+    },
+    "sms": {
+      "title": "Generador gratis de código QR SMS",
+      "h1": "Código QR SMS",
+      "desc": "Abre un SMS prellenado con un escaneo."
+    },
+    "pdf": {
+      "title": "Generador de código QR PDF",
+      "h1": "Código QR PDF",
+      "desc": "Comparte un menú, folleto o flyer PDF con un escaneo."
+    },
+    "card": {
+      "title": "Tarjeta de visita digital con código QR",
+      "h1": "Tarjeta de visita digital",
+      "desc": "Una página móvil para tu negocio: llamar, guardar contacto, cómo llegar."
+    }
+  },
+  "footer": {
+    "tagline": "Códigos QR gratis que nunca caducan.",
+    "rights": "Todos los derechos reservados.",
+    "privacy": "Privacidad",
+    "terms": "Términos"
+  },
+  "consent": {
+    "text": "Usamos cookies esenciales. Con tu permiso también medimos visitas para mejorar el sitio. Nunca vendemos tus datos.",
+    "accept": "Aceptar",
+    "decline": "Solo esenciales"
+  },
+  "landing": {
+    "eyebrow": "Generador de códigos QR gratis",
+    "title1": "Códigos QR que",
+    "title2": "nunca caducan.",
+    "sub": "Crea un código QR para un enlace, WiFi, vCard, email o SMS en 30 segundos. Sin cuenta, sin marca de agua, sin caducidad. Descárgalo en PNG, SVG o PDF.",
+    "cta": "Crear un código QR",
+    "cta2": "Ver la tarjeta de visita",
+    "stats": [
+      {
+        "v": "8",
+        "l": "Tipos de QR"
+      },
+      {
+        "v": "3",
+        "l": "Formatos de exportación"
+      },
+      {
+        "v": "0 $",
+        "l": "Para QR de enlaces"
+      },
+      {
+        "v": "∞",
+        "l": "Nunca caduca"
+      }
+    ],
+    "how": "Cómo funciona",
+    "howTitle": "Tres pasos. Treinta segundos.",
+    "steps": [
+      {
+        "t": "Elige un tipo",
+        "d": "Enlace, WiFi, texto, vCard, email, SMS, PDF o tarjeta de visita."
+      },
+      {
+        "t": "Hazlo tuyo",
+        "d": "Colores, forma de los módulos, tu logo y un marco que dice escanéame."
+      },
+      {
+        "t": "Descarga",
+        "d": "PNG para la web, SVG para imprimir, PDF para un flyer. Igual que la vista previa."
+      }
+    ],
+    "cardEyebrow": "Tarjeta de visita digital",
+    "cardTitle": "Una página para tu negocio. Un QR para compartirla.",
+    "cardSub": "Una página móvil alojada con tu logo, horario, dirección, teléfono y redes. Tus clientes tocan Llamar, Guardar contacto o Cómo llegar.",
+    "cardCta": "Crear mi tarjeta",
+    "cardPrice": "Desde {monthly}/mes o {yearly}/año"
+  },
+  "create": {
+    "title": "Crear un código QR",
+    "sub": "Elige un tipo, personaliza, descarga. Nada se guarda, nada caduca."
+  },
+  "card": {
+    "title": "Tarjeta de visita digital",
+    "sub": "Una página móvil para tu negocio, con un código QR que nunca cambia.",
+    "features": [
+      {
+        "t": "Todo lo que busca un cliente",
+        "d": "Logo, foto, eslogan, descripción, teléfono, email, dirección con mapa, horario, web, redes, galería y enlaces."
+      },
+      {
+        "t": "Tres botones de acción",
+        "d": "Llamar, Guardar contacto y Cómo llegar, justo debajo de tu nombre."
+      },
+      {
+        "t": "Tu propia dirección",
+        "d": "tarjetas.tudominio.com/tu-negocio — corta, estable e imprimible."
+      },
+      {
+        "t": "Estadísticas de escaneos",
+        "d": "Mira cuántas personas escanearon tu tarjeta, sin vender datos de nadie."
+      }
+    ],
+    "cta": "Empezar mi tarjeta",
+    "soon": "Las tarjetas abren pronto. Deja tu email para avisarte.",
+    "notify": "Avisarme",
+    "notified": "Gracias, te avisaremos."
+  },
+  "pricing": {
+    "title": "Precios simples",
+    "sub": "El generador es gratis, para siempre. Solo pagas por una tarjeta de visita alojada.",
+    "free": {
+      "name": "Generador",
+      "price": "Gratis",
+      "items": [
+        "8 tipos de QR",
+        "Colores, formas, logo, marco",
+        "PNG, SVG, PDF",
+        "Sin cuenta, sin marca de agua",
+        "Los QR de enlaces nunca caducan"
+      ],
+      "cta": "Crear un código QR"
+    },
+    "monthly": {
+      "name": "Tarjeta de visita",
+      "period": "/mes",
+      "items": [
+        "Página móvil alojada",
+        "Botones Llamar, Guardar, Cómo llegar",
+        "Tu propia dirección",
+        "Código QR y estadísticas",
+        "Cancela cuando quieras"
+      ],
+      "cta": "Empezar mensual"
+    },
+    "yearly": {
+      "name": "Tarjeta de visita, anual",
+      "period": "/año",
+      "badge": "2 meses gratis",
+      "cta": "Empezar anual"
+    }
+  },
+  "auth": {
+    "title": "Iniciar sesión",
+    "sub": "Un clic con Google. Sin contraseña que recordar.",
+    "google": "Continuar con Google",
+    "why": "Solo necesitas una cuenta para una tarjeta de visita, QR de PDF y estadísticas de escaneos.",
+    "soon": "El inicio de sesión abre con el lanzamiento de la tarjeta."
+  },
+  "dash": {
+    "title": "Panel",
+    "card": "Mi tarjeta de visita",
+    "qrs": "Mis códigos QR",
+    "scans": "Escaneos",
+    "empty": "Nada aquí todavía.",
+    "newQr": "Nuevo código QR",
+    "account": "Cuenta",
+    "logout": "Cerrar sesión"
+  }
+}

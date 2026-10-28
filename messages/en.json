@@ -1,0 +1,277 @@
+{
+  "nav": {
+    "generator": "Create",
+    "types": "QR types",
+    "card": "Business card",
+    "pricing": "Pricing",
+    "login": "Log in",
+    "cta": "Create a QR",
+    "dashboard": "Dashboard",
+    "menu": "Menu",
+    "close": "Close menu"
+  },
+  "hero": {
+    "badge": "Free · No sign-up · Never expires",
+    "title1": "Make a QR code",
+    "title2": "in 30 seconds.",
+    "sub": "Links, WiFi, vCards and more. Custom colors, logo and frame. Download PNG, SVG or PDF — no account, no watermark, and link codes never expire."
+  },
+  "gen": {
+    "content": "Content",
+    "design": "Design",
+    "download": "Download",
+    "types": {
+      "url": "URL",
+      "wifi": "WiFi",
+      "text": "Text",
+      "vcard": "vCard",
+      "email": "Email",
+      "sms": "SMS",
+      "pdf": "PDF",
+      "card": "Business card"
+    },
+    "fields": {
+      "url": "Website URL",
+      "text": "Your text",
+      "ssid": "Network name (SSID)",
+      "password": "Password",
+      "encryption": "Security",
+      "hidden": "Hidden network",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "org": "Company",
+      "title": "Job title",
+      "phone": "Phone",
+      "email": "Email",
+      "website": "Website",
+      "address": "Address",
+      "to": "Send to",
+      "subject": "Subject",
+      "body": "Message",
+      "message": "Message"
+    },
+    "fg": "Code color",
+    "bg": "Background",
+    "dots": "Module shape",
+    "logo": "Center logo",
+    "removeLogo": "Remove",
+    "frame": "Frame",
+    "frameText": "Frame text",
+    "frameDefault": "SCAN ME",
+    "shapes": {
+      "square": "Square",
+      "dots": "Dots",
+      "rounded": "Rounded",
+      "classy": "Classy"
+    },
+    "empty": "Fill in the content to see your QR code.",
+    "tooLong": "This content is too long for a QR code that scans reliably ({bytes} bytes). Shorten it or use a link.",
+    "lowContrast": "Low contrast: scanners may fail. Use a darker code on a lighter background.",
+    "inverted": "Light code on dark background: some scanners can't read it.",
+    "logoTooBig": "The logo covers too much of the code.",
+    "account": "Needs a free account — coming soon.",
+    "neverExpires": "Static code — works forever."
+  },
+  "types": {
+    "title": "Every QR you need",
+    "sub": "Eight types, one generator. Pick yours and start."
+  },
+  "trust": {
+    "title": "No traps.",
+    "items": [
+      {
+        "t": "Never expires",
+        "d": "Link, WiFi and contact codes are static. They keep working after you print them."
+      },
+      {
+        "t": "No sign-up",
+        "d": "Create and download right away. We don't ask for your email."
+      },
+      {
+        "t": "No watermark",
+        "d": "Your code, your brand. Nothing added to it."
+      }
+    ]
+  },
+  "seo": {
+    "url": {
+      "title": "Free URL QR code generator",
+      "h1": "Link QR code",
+      "desc": "Turn any link into a QR code that never expires."
+    },
+    "wifi": {
+      "title": "Free WiFi QR code generator",
+      "h1": "WiFi QR code",
+      "desc": "Let guests join your WiFi with one scan — perfect for Airbnbs, cafés and offices."
+    },
+    "text": {
+      "title": "Free text QR code generator",
+      "h1": "Text QR code",
+      "desc": "Put any text in a QR code, readable offline."
+    },
+    "vcard": {
+      "title": "Free vCard QR code generator",
+      "h1": "vCard QR code",
+      "desc": "Share your contact details in one scan."
+    },
+    "email": {
+      "title": "Free email QR code generator",
+      "h1": "Email QR code",
+      "desc": "Open a pre-filled email with one scan."
+    },
+    "sms": {
+      "title": "Free SMS QR code generator",
+      "h1": "SMS QR code",
+      "desc": "Open a pre-filled text message with one scan."
+    },
+    "pdf": {
+      "title": "PDF QR code generator",
+      "h1": "PDF QR code",
+      "desc": "Share a PDF menu, brochure or flyer with one scan."
+    },
+    "card": {
+      "title": "Digital business card with QR code",
+      "h1": "Digital business card",
+      "desc": "A mobile page for your business: call, save contact, directions."
+    }
+  },
+  "footer": {
+    "tagline": "Free QR codes that never expire.",
+    "rights": "All rights reserved.",
+    "privacy": "Privacy",
+    "terms": "Terms"
+  },
+  "consent": {
+    "text": "We use essential cookies. With your OK we also measure visits to improve the site. We never sell your data.",
+    "accept": "Accept",
+    "decline": "Essential only"
+  },
+  "landing": {
+    "eyebrow": "Free QR code generator",
+    "title1": "QR codes that",
+    "title2": "never expire.",
+    "sub": "Create a QR code for a link, WiFi, vCard, email or SMS in 30 seconds. No account, no watermark, no expiry. Download it as PNG, SVG or PDF.",
+    "cta": "Create a QR code",
+    "cta2": "See the business card",
+    "stats": [
+      {
+        "v": "8",
+        "l": "QR types"
+      },
+      {
+        "v": "3",
+        "l": "Export formats"
+      },
+      {
+        "v": "$0",
+        "l": "For link QR codes"
+      },
+      {
+        "v": "∞",
+        "l": "Never expires"
+      }
+    ],
+    "how": "How it works",
+    "howTitle": "Three steps. Thirty seconds.",
+    "steps": [
+      {
+        "t": "Pick a type",
+        "d": "Link, WiFi, text, vCard, email, SMS, PDF or business card."
+      },
+      {
+        "t": "Make it yours",
+        "d": "Colors, module shape, your logo and a frame that says scan me."
+      },
+      {
+        "t": "Download",
+        "d": "PNG for the web, SVG for print, PDF for a flyer. Exactly like the preview."
+      }
+    ],
+    "cardEyebrow": "Digital business card",
+    "cardTitle": "One page for your business. One QR to share it.",
+    "cardSub": "A hosted mobile page with your logo, hours, address, phone and socials. Customers tap Call, Save contact or Directions.",
+    "cardCta": "Create my card",
+    "cardPrice": "From {monthly}/month or {yearly}/year"
+  },
+  "create": {
+    "title": "Create a QR code",
+    "sub": "Choose a type, customize, download. Nothing is stored, nothing expires."
+  },
+  "card": {
+    "title": "Digital business card",
+    "sub": "A mobile page for your business, with a QR code that never changes.",
+    "features": [
+      {
+        "t": "Everything a customer needs",
+        "d": "Logo, photo, tagline, description, phone, email, address with map, hours, website, socials, gallery and custom links."
+      },
+      {
+        "t": "Three action buttons",
+        "d": "Call, Save contact and Directions, right under your name."
+      },
+      {
+        "t": "Your own address",
+        "d": "cards.yourdomain.com/your-business — short, stable and printable."
+      },
+      {
+        "t": "Scan statistics",
+        "d": "See how many people scanned your card, without selling anyone's data."
+      }
+    ],
+    "cta": "Start my card",
+    "soon": "Business cards open soon. Leave your email to get notified.",
+    "notify": "Notify me",
+    "notified": "Thanks, we'll let you know."
+  },
+  "pricing": {
+    "title": "Simple pricing",
+    "sub": "The generator is free, forever. Pay only for a hosted business card.",
+    "free": {
+      "name": "Generator",
+      "price": "Free",
+      "items": [
+        "8 QR types",
+        "Colors, shapes, logo, frame",
+        "PNG, SVG, PDF",
+        "No account, no watermark",
+        "Link QR codes never expire"
+      ],
+      "cta": "Create a QR code"
+    },
+    "monthly": {
+      "name": "Business card",
+      "period": "/month",
+      "items": [
+        "Hosted mobile page",
+        "Call, Save, Directions buttons",
+        "Your own address",
+        "QR code and scan statistics",
+        "Cancel anytime"
+      ],
+      "cta": "Start monthly"
+    },
+    "yearly": {
+      "name": "Business card, yearly",
+      "period": "/year",
+      "badge": "2 months free",
+      "cta": "Start yearly"
+    }
+  },
+  "auth": {
+    "title": "Log in",
+    "sub": "One click with Google. No password to remember.",
+    "google": "Continue with Google",
+    "why": "You only need an account for a business card, PDF QR codes and scan statistics.",
+    "soon": "Sign-in opens with the business card launch."
+  },
+  "dash": {
+    "title": "Dashboard",
+    "card": "My business card",
+    "qrs": "My QR codes",
+    "scans": "Scans",
+    "empty": "Nothing here yet.",
+    "newQr": "New QR code",
+    "account": "Account",
+    "logout": "Log out"
+  }
+}

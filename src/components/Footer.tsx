@@ -1,0 +1,32 @@
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/routing";
+import { BRAND_NAME } from "@/shared/config";
+import { QR_TYPES } from "@/modules/qr/domain/encoders";
+import { typeSlug } from "@/modules/qr/interface/slugs";
+
+export async function Footer() {
+  const t = await getTranslations("footer");
+  const g = await getTranslations("gen.types");
+  return (
+    <footer className="bg-ink px-6 pb-10 pt-16 text-white">
+      <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-[2fr_1fr_1fr]">
+        <div>
+          <p className="font-display text-5xl tracking-wide sm:text-7xl">{BRAND_NAME}</p>
+          <p className="mt-3 max-w-sm text-white/70">{t("tagline")}</p>
+        </div>
+        <ul className="space-y-2 text-sm font-semibold">
+          {QR_TYPES.map((k) => (
+            <li key={k}><Link className="hover:text-lime" href={`/create/${typeSlug(k)}`}>{g(k)}</Link></li>
+          ))}
+        </ul>
+        <ul className="space-y-2 text-sm font-semibold">
+          <li><Link className="hover:text-lime" href="/privacy">{t("privacy")}</Link></li>
+          <li><Link className="hover:text-lime" href="/terms">{t("terms")}</Link></li>
+        </ul>
+      </div>
+      <p className="mx-auto mt-12 max-w-6xl border-t border-white/10 pt-6 text-xs text-white/50">
+        © {new Date().getFullYear()} {BRAND_NAME}. {t("rights")}
+      </p>
+    </footer>
+  );
+}

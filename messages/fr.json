@@ -1,0 +1,277 @@
+{
+  "nav": {
+    "generator": "Créer",
+    "types": "Types de QR",
+    "card": "Carte de visite",
+    "pricing": "Tarifs",
+    "login": "Connexion",
+    "cta": "Créer un QR",
+    "dashboard": "Tableau de bord",
+    "menu": "Menu",
+    "close": "Fermer le menu"
+  },
+  "hero": {
+    "badge": "Gratuit · Sans inscription · N'expire jamais",
+    "title1": "Crée ton QR code",
+    "title2": "en 30 secondes.",
+    "sub": "Liens, WiFi, vCards et plus. Couleurs, logo et cadre personnalisés. Télécharge en PNG, SVG ou PDF — sans compte, sans filigrane, et les QR de liens n'expirent jamais."
+  },
+  "gen": {
+    "content": "Contenu",
+    "design": "Design",
+    "download": "Télécharger",
+    "types": {
+      "url": "URL",
+      "wifi": "WiFi",
+      "text": "Texte",
+      "vcard": "vCard",
+      "email": "Email",
+      "sms": "SMS",
+      "pdf": "PDF",
+      "card": "Carte de visite"
+    },
+    "fields": {
+      "url": "Adresse du site",
+      "text": "Ton texte",
+      "ssid": "Nom du réseau (SSID)",
+      "password": "Mot de passe",
+      "encryption": "Sécurité",
+      "hidden": "Réseau masqué",
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "org": "Entreprise",
+      "title": "Poste",
+      "phone": "Téléphone",
+      "email": "Email",
+      "website": "Site web",
+      "address": "Adresse",
+      "to": "Destinataire",
+      "subject": "Objet",
+      "body": "Message",
+      "message": "Message"
+    },
+    "fg": "Couleur du code",
+    "bg": "Fond",
+    "dots": "Forme des modules",
+    "logo": "Logo au centre",
+    "removeLogo": "Retirer",
+    "frame": "Cadre",
+    "frameText": "Texte du cadre",
+    "frameDefault": "SCANNE-MOI",
+    "shapes": {
+      "square": "Carré",
+      "dots": "Points",
+      "rounded": "Arrondi",
+      "classy": "Élégant"
+    },
+    "empty": "Remplis le contenu pour voir ton QR code.",
+    "tooLong": "Ce contenu est trop long pour un QR code lisible ({bytes} octets). Raccourcis-le ou utilise un lien.",
+    "lowContrast": "Contraste faible : les scanners risquent d'échouer. Utilise un code foncé sur fond clair.",
+    "inverted": "Code clair sur fond foncé : certains scanners ne le lisent pas.",
+    "logoTooBig": "Le logo couvre trop le code.",
+    "account": "Nécessite un compte gratuit — bientôt disponible.",
+    "neverExpires": "QR statique — fonctionne pour toujours."
+  },
+  "types": {
+    "title": "Tous les QR qu'il te faut",
+    "sub": "Huit types, un seul générateur. Choisis le tien et commence."
+  },
+  "trust": {
+    "title": "Aucun piège.",
+    "items": [
+      {
+        "t": "N'expire jamais",
+        "d": "Les QR de liens, WiFi et contacts sont statiques. Ils fonctionnent même après impression."
+      },
+      {
+        "t": "Sans inscription",
+        "d": "Crée et télécharge tout de suite. On ne te demande pas ton email."
+      },
+      {
+        "t": "Sans filigrane",
+        "d": "Ton code, ta marque. Rien n'y est ajouté."
+      }
+    ]
+  },
+  "seo": {
+    "url": {
+      "title": "Générateur gratuit de QR code URL",
+      "h1": "QR code de lien",
+      "desc": "Transforme n'importe quel lien en QR code qui n'expire jamais."
+    },
+    "wifi": {
+      "title": "Générateur gratuit de QR code WiFi",
+      "h1": "QR code WiFi",
+      "desc": "Tes invités se connectent à ton WiFi en un scan — idéal pour Airbnb, cafés et bureaux."
+    },
+    "text": {
+      "title": "Générateur gratuit de QR code texte",
+      "h1": "QR code texte",
+      "desc": "Mets n'importe quel texte dans un QR code, lisible hors ligne."
+    },
+    "vcard": {
+      "title": "Générateur gratuit de QR code vCard",
+      "h1": "QR code vCard",
+      "desc": "Partage tes coordonnées en un scan."
+    },
+    "email": {
+      "title": "Générateur gratuit de QR code email",
+      "h1": "QR code email",
+      "desc": "Ouvre un email pré-rempli en un scan."
+    },
+    "sms": {
+      "title": "Générateur gratuit de QR code SMS",
+      "h1": "QR code SMS",
+      "desc": "Ouvre un SMS pré-rempli en un scan."
+    },
+    "pdf": {
+      "title": "Générateur de QR code PDF",
+      "h1": "QR code PDF",
+      "desc": "Partage un menu, une brochure ou un flyer PDF en un scan."
+    },
+    "card": {
+      "title": "Carte de visite digitale avec QR code",
+      "h1": "Carte de visite digitale",
+      "desc": "Une page mobile pour ton business : appel, contact, itinéraire."
+    }
+  },
+  "footer": {
+    "tagline": "Des QR codes gratuits qui n'expirent jamais.",
+    "rights": "Tous droits réservés.",
+    "privacy": "Confidentialité",
+    "terms": "Conditions"
+  },
+  "consent": {
+    "text": "Nous utilisons des cookies essentiels. Avec ton accord, nous mesurons aussi les visites pour améliorer le site. Nous ne vendons jamais tes données.",
+    "accept": "Accepter",
+    "decline": "Essentiels seulement"
+  },
+  "landing": {
+    "eyebrow": "Générateur de QR code gratuit",
+    "title1": "Des QR codes qui",
+    "title2": "n'expirent jamais.",
+    "sub": "Crée un QR code pour un lien, un WiFi, une vCard, un email ou un SMS en 30 secondes. Sans compte, sans filigrane, sans expiration. Télécharge-le en PNG, SVG ou PDF.",
+    "cta": "Créer un QR code",
+    "cta2": "Voir la carte de visite",
+    "stats": [
+      {
+        "v": "8",
+        "l": "Types de QR"
+      },
+      {
+        "v": "3",
+        "l": "Formats d'export"
+      },
+      {
+        "v": "0 $",
+        "l": "Pour les QR de liens"
+      },
+      {
+        "v": "∞",
+        "l": "N'expire jamais"
+      }
+    ],
+    "how": "Comment ça marche",
+    "howTitle": "Trois étapes. Trente secondes.",
+    "steps": [
+      {
+        "t": "Choisis un type",
+        "d": "Lien, WiFi, texte, vCard, email, SMS, PDF ou carte de visite."
+      },
+      {
+        "t": "Personnalise",
+        "d": "Couleurs, forme des modules, ton logo et un cadre « scanne-moi »."
+      },
+      {
+        "t": "Télécharge",
+        "d": "PNG pour le web, SVG pour l'impression, PDF pour un flyer. Identique à l'aperçu."
+      }
+    ],
+    "cardEyebrow": "Carte de visite digitale",
+    "cardTitle": "Une page pour ton business. Un QR pour la partager.",
+    "cardSub": "Une page mobile hébergée avec ton logo, tes horaires, ton adresse, ton téléphone et tes réseaux. Tes clients appuient sur Appeler, Enregistrer ou Itinéraire.",
+    "cardCta": "Créer ma carte",
+    "cardPrice": "Dès {monthly}/mois ou {yearly}/an"
+  },
+  "create": {
+    "title": "Créer un QR code",
+    "sub": "Choisis un type, personnalise, télécharge. Rien n'est stocké, rien n'expire."
+  },
+  "card": {
+    "title": "Carte de visite digitale",
+    "sub": "Une page mobile pour ton business, avec un QR code qui ne change jamais.",
+    "features": [
+      {
+        "t": "Tout ce qu'un client cherche",
+        "d": "Logo, photo, slogan, description, téléphone, email, adresse avec carte, horaires, site, réseaux, galerie et liens."
+      },
+      {
+        "t": "Trois boutons d'action",
+        "d": "Appeler, Enregistrer le contact et Itinéraire, juste sous ton nom."
+      },
+      {
+        "t": "Ta propre adresse",
+        "d": "cartes.tondomaine.com/ton-business — courte, stable, imprimable."
+      },
+      {
+        "t": "Statistiques de scans",
+        "d": "Vois combien de personnes ont scanné ta carte, sans vendre les données de personne."
+      }
+    ],
+    "cta": "Démarrer ma carte",
+    "soon": "Les cartes ouvrent bientôt. Laisse ton email pour être prévenu.",
+    "notify": "Me prévenir",
+    "notified": "Merci, on te tient au courant."
+  },
+  "pricing": {
+    "title": "Des tarifs simples",
+    "sub": "Le générateur est gratuit, pour toujours. Tu paies seulement pour une carte de visite hébergée.",
+    "free": {
+      "name": "Générateur",
+      "price": "Gratuit",
+      "items": [
+        "8 types de QR",
+        "Couleurs, formes, logo, cadre",
+        "PNG, SVG, PDF",
+        "Sans compte, sans filigrane",
+        "Les QR de liens n'expirent jamais"
+      ],
+      "cta": "Créer un QR code"
+    },
+    "monthly": {
+      "name": "Carte de visite",
+      "period": "/mois",
+      "items": [
+        "Page mobile hébergée",
+        "Boutons Appeler, Enregistrer, Itinéraire",
+        "Ta propre adresse",
+        "QR code et statistiques de scans",
+        "Résiliable à tout moment"
+      ],
+      "cta": "Démarrer en mensuel"
+    },
+    "yearly": {
+      "name": "Carte de visite, annuel",
+      "period": "/an",
+      "badge": "2 mois offerts",
+      "cta": "Démarrer en annuel"
+    }
+  },
+  "auth": {
+    "title": "Connexion",
+    "sub": "Un clic avec Google. Aucun mot de passe à retenir.",
+    "google": "Continuer avec Google",
+    "why": "Un compte n'est nécessaire que pour une carte de visite, les QR PDF et les statistiques de scans.",
+    "soon": "La connexion ouvre avec le lancement de la carte de visite."
+  },
+  "dash": {
+    "title": "Tableau de bord",
+    "card": "Ma carte de visite",
+    "qrs": "Mes QR codes",
+    "scans": "Scans",
+    "empty": "Rien ici pour l'instant.",
+    "newQr": "Nouveau QR code",
+    "account": "Compte",
+    "logout": "Déconnexion"
+  }
+}
