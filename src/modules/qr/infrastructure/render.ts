@@ -5,6 +5,10 @@ export type DotShape = "square" | "dots" | "rounded" | "classy";
 
 export type QrStyle = {
   fg: string;
+  /** Optional second color: modules get a diagonal gradient from fg to fg2. */
+  fg2?: string;
+  /** Optional accent for the three corner "eyes"; defaults to fg. */
+  eye?: string;
   bg: string;
   dots: DotShape;
   logo?: string; // data URL
@@ -28,9 +32,15 @@ async function rawQrSvg(data: string, style: QrStyle): Promise<string> {
     data,
     image: style.logo,
     qrOptions: { errorCorrectionLevel: style.logo ? "H" : "M" },
-    dotsOptions: { color: style.fg, type: style.dots },
-    cornersSquareOptions: { color: style.fg, type: style.dots === "dots" ? "extra-rounded" : style.dots === "square" ? "square" : "extra-rounded" },
-    cornersDotOptions: { color: style.fg, type: style.dots === "square" ? "square" : "dot" },
+    dotsOptions: {
+      color: style.fg,
+      type: style.dots,
+      ...(style.fg2 && {
+        gradient: { type: "linear" as const, rotation: Math.PI / 4, colorStops: [{ offset: 0, color: style.fg }, { offset: 1, color: style.fg2 }] },
+      }),
+    },
+    cornersSquareOptions: { color: style.eye ?? style.fg, type: style.dots === "dots" ? "extra-rounded" : style.dots === "square" ? "square" : "extra-rounded" },
+    cornersDotOptions: { color: style.eye ?? style.fg, type: style.dots === "square" ? "square" : "dot" },
     backgroundOptions: { color: style.bg },
     imageOptions: { imageSize: style.logoRatio, margin: 6, hideBackgroundDots: true, crossOrigin: "anonymous" },
   });

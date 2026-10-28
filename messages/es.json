@@ -73,7 +73,37 @@
     "neverExpires": "QR estático — funciona para siempre.",
     "accountReady": "Has iniciado sesión. El editor de tarjetas llega pronto a tu panel.",
     "goDashboard": "Abrir mi panel",
-    "signIn": "Entrar con Google"
+    "signIn": "Entrar con Google",
+    "templatesTitle": "Plantillas",
+    "templates": {
+      "varen": "Varen",
+      "classic": "Clásico",
+      "lime": "Lima pop",
+      "midnight": "Medianoche",
+      "sunset": "Atardecer",
+      "ocean": "Océano",
+      "forest": "Bosque",
+      "bubblegum": "Chicle",
+      "gold": "Oro",
+      "coral": "Coral",
+      "royal": "Real",
+      "minimal": "Minimal"
+    },
+    "frameSuggestions": "Sugerencias",
+    "frameTexts": {
+      "scanMe": "ESCANÉAME",
+      "visitUs": "VISÍTANOS",
+      "openLink": "ABRIR ENLACE",
+      "freeWifi": "WIFI GRATIS",
+      "scanWifi": "ESCANEA PARA WIFI",
+      "readMe": "LÉEME",
+      "saveContact": "GUARDAR CONTACTO",
+      "emailUs": "ESCRÍBENOS",
+      "textUs": "ENVÍANOS SMS",
+      "seeMenu": "VER EL MENÚ",
+      "viewPdf": "VER PDF",
+      "myCard": "MI TARJETA"
+    }
   },
   "types": {
     "title": "Todos los QR que necesitas",

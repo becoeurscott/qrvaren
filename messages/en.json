@@ -73,7 +73,37 @@
     "neverExpires": "Static code — works forever.",
     "accountReady": "You're signed in. The business card editor opens soon in your dashboard.",
     "goDashboard": "Open my dashboard",
-    "signIn": "Sign in with Google"
+    "signIn": "Sign in with Google",
+    "templatesTitle": "Templates",
+    "templates": {
+      "varen": "Varen",
+      "classic": "Classic",
+      "lime": "Lime pop",
+      "midnight": "Midnight",
+      "sunset": "Sunset",
+      "ocean": "Ocean",
+      "forest": "Forest",
+      "bubblegum": "Bubblegum",
+      "gold": "Gold",
+      "coral": "Coral",
+      "royal": "Royal",
+      "minimal": "Minimal"
+    },
+    "frameSuggestions": "Suggestions",
+    "frameTexts": {
+      "scanMe": "SCAN ME",
+      "visitUs": "VISIT US",
+      "openLink": "OPEN LINK",
+      "freeWifi": "FREE WIFI",
+      "scanWifi": "SCAN FOR WIFI",
+      "readMe": "READ ME",
+      "saveContact": "SAVE CONTACT",
+      "emailUs": "EMAIL US",
+      "textUs": "TEXT US",
+      "seeMenu": "SEE THE MENU",
+      "viewPdf": "VIEW PDF",
+      "myCard": "MY CARD"
+    }
   },
   "types": {
     "title": "Every QR you need",

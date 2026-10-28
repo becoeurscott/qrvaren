@@ -73,7 +73,37 @@
     "neverExpires": "QR statique — fonctionne pour toujours.",
     "accountReady": "Tu es connecté. L'éditeur de carte de visite arrive bientôt dans ton tableau de bord.",
     "goDashboard": "Ouvrir mon tableau de bord",
-    "signIn": "Se connecter avec Google"
+    "signIn": "Se connecter avec Google",
+    "templatesTitle": "Modèles",
+    "templates": {
+      "varen": "Varen",
+      "classic": "Classique",
+      "lime": "Lime pop",
+      "midnight": "Minuit",
+      "sunset": "Coucher de soleil",
+      "ocean": "Océan",
+      "forest": "Forêt",
+      "bubblegum": "Bubblegum",
+      "gold": "Or",
+      "coral": "Corail",
+      "royal": "Royal",
+      "minimal": "Minimal"
+    },
+    "frameSuggestions": "Suggestions",
+    "frameTexts": {
+      "scanMe": "SCANNE-MOI",
+      "visitUs": "VISITE-NOUS",
+      "openLink": "OUVRIR LE LIEN",
+      "freeWifi": "WIFI GRATUIT",
+      "scanWifi": "SCANNE POUR LE WIFI",
+      "readMe": "LIS-MOI",
+      "saveContact": "ENREGISTRER",
+      "emailUs": "ÉCRIS-NOUS",
+      "textUs": "ENVOIE UN SMS",
+      "seeMenu": "VOIR LE MENU",
+      "viewPdf": "VOIR LE PDF",
+      "myCard": "MA CARTE"
+    }
   },
   "types": {
     "title": "Tous les QR qu'il te faut",

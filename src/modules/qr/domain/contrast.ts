@@ -21,11 +21,13 @@ export const MAX_LOGO_RATIO = 0.25;
 
 export type ReadabilityIssue = "low_contrast" | "inverted" | "logo_too_big";
 
-export function readabilityIssues(opts: { fg: string; bg: string; logoRatio?: number }): ReadabilityIssue[] {
+/** extra: other code colors (gradient end, corner accent) that must also stand out from bg. */
+export function readabilityIssues(opts: { fg: string; bg: string; extra?: (string | undefined)[]; logoRatio?: number }): ReadabilityIssue[] {
   const issues: ReadabilityIssue[] = [];
-  if (contrastRatio(opts.fg, opts.bg) < MIN_CONTRAST) issues.push("low_contrast");
+  const colors = [opts.fg, ...(opts.extra ?? [])].filter((c): c is string => !!c);
+  if (colors.some((c) => contrastRatio(c, opts.bg) < MIN_CONTRAST)) issues.push("low_contrast");
   // Many scanners fail on light-on-dark codes.
-  else if (luminance(opts.fg) > luminance(opts.bg)) issues.push("inverted");
+  else if (colors.some((c) => luminance(c) > luminance(opts.bg))) issues.push("inverted");
   if ((opts.logoRatio ?? 0) > MAX_LOGO_RATIO) issues.push("logo_too_big");
   return issues;
 }

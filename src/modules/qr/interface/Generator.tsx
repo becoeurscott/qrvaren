@@ -4,6 +4,8 @@ import { useEffect, useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import { QR_TYPES, type QrInput, type QrType, checkCapacity, encode } from "../domain/encoders";
 import { readabilityIssues } from "../domain/contrast";
+import { FRAME_TEXTS, TEMPLATES, TEMPLATE_KEYS, type TemplateKey } from "../domain/templates";
+import { TemplateThumb } from "./TemplateThumb";
 import { Link } from "@/i18n/routing";
 import { useSession } from "@/shared/useSession";
 import { composeSvg, download, pngToPdf, svgToPng, type DotShape, type QrStyle } from "../infrastructure/render";
@@ -44,9 +46,10 @@ export function Generator({ initialType = "url" }: { initialType?: QrType }) {
   const [type, setType] = useState<QrType>(initialType);
   const [fields, setFields] = useState<Fields>({ encryption: "WPA" });
   const [hidden, setHidden] = useState(false);
+  const [template, setTemplate] = useState<TemplateKey | null>("varen");
+  const [captionEdited, setCaptionEdited] = useState(false);
   const [style, setStyle] = useState<QrStyle>({
-    fg: "#17143a", bg: "#ffffff", dots: "rounded", logoRatio: 0.22,
-    frame: true, frameText: t("frameDefault"), frameColor: "#5546ff",
+    ...TEMPLATES.varen, logoRatio: 0.22, frameText: t(`frameTexts.${FRAME_TEXTS[initialType][0]}`),
   });
   const [svg, setSvg] = useState<{ svg: string; width: number; height: number } | null>(null);
   const [busy, setBusy] = useState(false);
@@ -54,7 +57,7 @@ export function Generator({ initialType = "url" }: { initialType?: QrType }) {
 
   const payload = useMemo(() => encode(toInput(type, fields, hidden)), [type, fields, hidden]);
   const capacity = payload ? checkCapacity(payload, style.logo ? "H" : "M") : null;
-  const issues = readabilityIssues({ fg: style.fg, bg: style.bg, logoRatio: style.logo ? style.logoRatio : 0 });
+  const issues = readabilityIssues({ fg: style.fg, bg: style.bg, extra: [style.fg2, style.eye], logoRatio: style.logo ? style.logoRatio : 0 });
   const renderable = payload && capacity?.ok;
 
   useEffect(() => {
@@ -65,6 +68,23 @@ export function Generator({ initialType = "url" }: { initialType?: QrType }) {
   }, [payload, renderable, style]);
 
   const set = (k: string, v: string) => setFields((f) => ({ ...f, [k]: v }));
+
+  // Until the user types their own caption, the frame text follows the QR type (e.g. "FREE WIFI").
+  useEffect(() => {
+    if (!captionEdited) setStyle((s) => ({ ...s, frameText: t(`frameTexts.${FRAME_TEXTS[type][0]}`) }));
+  }, [type, captionEdited, t]);
+
+  // A template sets every color and shape at once; logo and caption are kept.
+  const applyTemplate = (k: TemplateKey) => {
+    const tpl: Partial<QrStyle> = TEMPLATES[k];
+    setTemplate(k);
+    setStyle((s) => ({ ...s, fg2: undefined, eye: undefined, ...tpl }));
+  };
+  // Manual edits leave the template; changing the code color drops its gradient and accent.
+  const edit = (patch: Partial<QrStyle>) => {
+    setTemplate(null);
+    setStyle((s) => ({ ...s, ...("fg" in patch ? { fg2: undefined, eye: undefined } : {}), ...patch }));
+  };
 
   async function onLogo(file?: File) {
     if (!file) return setStyle((s) => ({ ...s, logo: undefined }));
@@ -153,15 +173,30 @@ export function Generator({ initialType = "url" }: { initialType?: QrType }) {
         </section>
 
         <section>
+          <h3 className="mb-3 font-display text-xl uppercase tracking-wide">{t("templatesTitle")}</h3>
+          <div className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-2 [scrollbar-width:none] sm:grid sm:grid-cols-4 sm:overflow-visible lg:grid-cols-6" role="radiogroup" aria-label={t("templatesTitle")}>
+            {TEMPLATE_KEYS.map((k) => (
+              <button key={k} role="radio" aria-checked={template === k} onClick={() => applyTemplate(k)}
+                className={`group flex w-20 shrink-0 flex-col items-center gap-1.5 rounded-2xl p-1.5 text-xs font-semibold transition sm:w-auto ${
+                  template === k ? "bg-violet/10 ring-2 ring-violet" : "hover:bg-lavender"
+                }`}>
+                <TemplateThumb tpl={TEMPLATES[k]} />
+                <span className="truncate">{t(`templates.${k}`)}</span>
+              </button>
+            ))}
+          </div>
+        </section>
+
+        <section>
           <h3 className="mb-3 font-display text-xl uppercase tracking-wide">{t("design")}</h3>
           <div className="grid grid-cols-[minmax(0,1fr)] gap-4 sm:grid-cols-2">
-            <ColorRow label={t("fg")} value={style.fg} swatches={SWATCHES} onChange={(fg) => setStyle((s) => ({ ...s, fg }))} />
-            <ColorRow label={t("bg")} value={style.bg} swatches={["#ffffff", "#f3f1ff", "#fff7d6", "#e8fbff"]} onChange={(bg) => setStyle((s) => ({ ...s, bg }))} />
+            <ColorRow label={t("fg")} value={style.fg} swatches={SWATCHES} onChange={(fg) => edit({ fg })} />
+            <ColorRow label={t("bg")} value={style.bg} swatches={["#ffffff", "#f3f1ff", "#fff7d6", "#e8fbff"]} onChange={(bg) => edit({ bg })} />
             <div className="sm:col-span-2">
               <span className="mb-1 block text-sm font-semibold text-slate">{t("dots")}</span>
               <div className="flex flex-wrap gap-2">
                 {(["square", "dots", "rounded", "classy"] as DotShape[]).map((d) => (
-                  <button key={d} onClick={() => setStyle((s) => ({ ...s, dots: d }))}
+                  <button key={d} onClick={() => edit({ dots: d })}
                     className={`rounded-full px-4 py-2 text-sm font-semibold ${style.dots === d ? "bg-violet text-white" : "bg-lavender"}`}>
                     {t(`shapes.${d}`)}
                   </button>
@@ -179,16 +214,27 @@ export function Generator({ initialType = "url" }: { initialType?: QrType }) {
             </div>
             <div>
               <label className="flex items-center gap-2 text-sm font-semibold text-slate">
-                <input type="checkbox" checked={style.frame} onChange={(e) => setStyle((s) => ({ ...s, frame: e.target.checked }))} />
+                <input type="checkbox" checked={style.frame} onChange={(e) => edit({ frame: e.target.checked })} />
                 {t("frame")}
               </label>
               {style.frame && (
                 <div className="mt-2 space-y-2">
                   <input className={input} maxLength={20} aria-label={t("frameText")} value={style.frameText}
-                    onChange={(e) => setStyle((s) => ({ ...s, frameText: e.target.value }))} />
+                    onChange={(e) => { setCaptionEdited(true); setStyle((s) => ({ ...s, frameText: e.target.value })); }} />
+                  <div className="flex flex-wrap gap-1.5" aria-label={t("frameSuggestions")}>
+                    {FRAME_TEXTS[type].map((key) => {
+                      const text = t(`frameTexts.${key}`);
+                      return (
+                        <button key={key} onClick={() => { setCaptionEdited(true); setStyle((s) => ({ ...s, frameText: text })); }}
+                          className={`rounded-full px-3 py-1 text-xs font-bold tracking-wide ${style.frameText === text ? "bg-ink text-white" : "bg-lavender text-ink"}`}>
+                          {text}
+                        </button>
+                      );
+                    })}
+                  </div>
                   <div className="flex flex-wrap gap-2">
                     {FRAME_SWATCHES.map((c) => (
-                      <button key={c} aria-label={c} onClick={() => setStyle((s) => ({ ...s, frameColor: c }))}
+                      <button key={c} aria-label={c} onClick={() => edit({ frameColor: c })}
                         className={`h-7 w-7 rounded-full ring-2 ${style.frameColor === c ? "ring-ink" : "ring-transparent"}`} style={{ background: c }} />
                     ))}
                   </div>
