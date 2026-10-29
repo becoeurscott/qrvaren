@@ -394,7 +394,10 @@
     "soon": "Abrir el editor",
     "myCards": "Mis tarjetas",
     "editCard": "Editar mi tarjeta",
-    "scans30": "Escaneos del QR de tu tarjeta, últimos 30 días"
+    "scans30": "Escaneos del QR de tu tarjeta, últimos 30 días",
+    "printTitle": "Tarjeta impresa",
+    "printText": "Diseña una tarjeta de visita en papel con tu código QR y descárgala en PDF.",
+    "printCta": "Diseñar mi tarjeta"
   },
   "legal": {
     "updated": "Última actualización: 28 de octubre de 2026",
@@ -795,5 +798,82 @@
       "sat": "Sábado",
       "sun": "Domingo"
     }
+  },
+  "print": {
+    "title": "Tarjeta de visita impresa",
+    "sub": "Diseña tu tarjeta en papel como en Canva: elige una plantilla, mueve los elementos, añade tu código QR y descarga un PDF listo para imprimir.",
+    "front": "Anverso",
+    "back": "Reverso",
+    "background": "Fondo",
+    "hint": "Arrastra para mover · círculo para cambiar tamaño · flechas para ajustar · Supr para borrar",
+    "newText": "Tu texto",
+    "addText": "Texto",
+    "addQr": "Código QR",
+    "addImage": "Imagen",
+    "addLogo": "Mi logo",
+    "addShape": "Forma",
+    "safeWarn": "Un elemento sale de la línea punteada: puede cortarse al imprimir.",
+    "downloadPdf": "PDF para la imprenta",
+    "downloadSheet": "Imprimir en casa ({paper}, 10 por hoja)",
+    "exporting": "Preparando…",
+    "exportHelp": "El PDF de imprenta incluye anverso y reverso con 3 mm de sangrado a 300 dpi. La hoja casera tiene marcas de corte: imprime a doble cara, volteo por el borde largo.",
+    "done": "Listo",
+    "font": "Fuente",
+    "size": "Tamaño",
+    "color": "Color",
+    "qrLink": "Enlace del código QR",
+    "useCardLink": "Usar el enlace de mi tarjeta",
+    "qrColor": "Código",
+    "qrBg": "Fondo",
+    "qrSmall": "Por debajo de 2 cm algunos teléfonos no lo leen bien. Hazlo más grande.",
+    "round": "Recorte redondo",
+    "radius": "Esquinas",
+    "forward": "Adelante",
+    "backward": "Atrás",
+    "center": "Centrar",
+    "delete": "Eliminar",
+    "templates": "Plantillas",
+    "templateNote": "Una plantilla reemplaza ambas caras con tus datos de abajo.",
+    "details": "Tus datos",
+    "detailsNote": "Los usan las plantillas. También puedes editar cada texto en la tarjeta.",
+    "format": "Formato",
+    "kind": {
+      "text": "Texto",
+      "qr": "Código QR",
+      "image": "Imagen",
+      "shape": "Forma"
+    },
+    "fonts": {
+      "sans": "Sans",
+      "serif": "Serif",
+      "mono": "Máquina de escribir",
+      "rounded": "Redondeada",
+      "display": "Título"
+    },
+    "align": {
+      "start": "Izquierda",
+      "middle": "Centro",
+      "end": "Derecha"
+    },
+    "tpl": {
+      "classic": "Clásica",
+      "bold": "Audaz",
+      "minimal": "Minimal",
+      "night": "Noche"
+    },
+    "info": {
+      "name": "Nombre",
+      "title": "Cargo",
+      "phone": "Teléfono",
+      "email": "Email",
+      "website": "Sitio web",
+      "address": "Dirección",
+      "qr": "Enlace del código QR"
+    },
+    "sizes": {
+      "us": "EE. UU.",
+      "eu": "Europa"
+    },
+    "backLink": "Panel"
   }
 }

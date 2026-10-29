@@ -394,7 +394,10 @@
     "soon": "Ouvrir l'éditeur",
     "myCards": "Mes cartes",
     "editCard": "Modifier ma carte",
-    "scans30": "Scans du QR de ta carte, 30 derniers jours"
+    "scans30": "Scans du QR de ta carte, 30 derniers jours",
+    "printTitle": "Carte imprimée",
+    "printText": "Crée une carte de visite papier avec ton QR code et télécharge-la en PDF.",
+    "printCta": "Créer ma carte papier"
   },
   "legal": {
     "updated": "Dernière mise à jour : 28 octobre 2026",
@@ -795,5 +798,82 @@
       "sat": "Samedi",
       "sun": "Dimanche"
     }
+  },
+  "print": {
+    "title": "Carte de visite imprimée",
+    "sub": "Crée ta carte papier comme sur Canva : choisis un modèle, déplace les éléments, ajoute ton QR code, puis télécharge un PDF prêt à imprimer.",
+    "front": "Recto",
+    "back": "Verso",
+    "background": "Fond",
+    "hint": "Glisse pour déplacer · rond pour redimensionner · flèches pour ajuster · Suppr pour effacer",
+    "newText": "Ton texte",
+    "addText": "Texte",
+    "addQr": "QR code",
+    "addImage": "Image",
+    "addLogo": "Mon logo",
+    "addShape": "Forme",
+    "safeWarn": "Un élément dépasse la ligne pointillée : il risque d'être coupé à l'impression.",
+    "downloadPdf": "PDF pour l'imprimeur",
+    "downloadSheet": "Imprimer chez moi ({paper}, 10 par page)",
+    "exporting": "Préparation…",
+    "exportHelp": "Le PDF imprimeur contient recto et verso avec 3 mm de fond perdu, en 300 dpi. La planche maison a des traits de coupe : imprime en recto verso, retournement bord long.",
+    "done": "Terminé",
+    "font": "Police",
+    "size": "Taille",
+    "color": "Couleur",
+    "qrLink": "Lien du QR code",
+    "useCardLink": "Utiliser le lien de ma carte",
+    "qrColor": "Code",
+    "qrBg": "Fond",
+    "qrSmall": "Sous 2 cm, certains téléphones ont du mal à scanner. Agrandis-le.",
+    "round": "Rogner en rond",
+    "radius": "Coins",
+    "forward": "Devant",
+    "backward": "Derrière",
+    "center": "Centrer",
+    "delete": "Supprimer",
+    "templates": "Modèles",
+    "templateNote": "Un modèle remplace les deux faces avec tes infos ci-dessous.",
+    "details": "Tes infos",
+    "detailsNote": "Utilisées par les modèles. Tu peux aussi modifier chaque texte sur la carte.",
+    "format": "Format",
+    "kind": {
+      "text": "Texte",
+      "qr": "QR code",
+      "image": "Image",
+      "shape": "Forme"
+    },
+    "fonts": {
+      "sans": "Sans",
+      "serif": "Serif",
+      "mono": "Machine à écrire",
+      "rounded": "Arrondie",
+      "display": "Titre"
+    },
+    "align": {
+      "start": "Gauche",
+      "middle": "Centre",
+      "end": "Droite"
+    },
+    "tpl": {
+      "classic": "Classique",
+      "bold": "Audacieux",
+      "minimal": "Minimal",
+      "night": "Nuit"
+    },
+    "info": {
+      "name": "Nom",
+      "title": "Fonction",
+      "phone": "Téléphone",
+      "email": "Email",
+      "website": "Site web",
+      "address": "Adresse",
+      "qr": "Lien du QR code"
+    },
+    "sizes": {
+      "us": "US",
+      "eu": "Europe"
+    },
+    "backLink": "Tableau de bord"
   }
 }

@@ -394,7 +394,10 @@
     "soon": "Open the editor",
     "myCards": "My cards",
     "editCard": "Edit my card",
-    "scans30": "QR scans of your card, last 30 days"
+    "scans30": "QR scans of your card, last 30 days",
+    "printTitle": "Printed card",
+    "printText": "Design a paper business card with your QR code and download it as PDF.",
+    "printCta": "Design my card"
   },
   "legal": {
     "updated": "Last updated: October 28, 2026",
@@ -795,5 +798,82 @@
       "sat": "Saturday",
       "sun": "Sunday"
     }
+  },
+  "print": {
+    "back": "Back",
+    "title": "Printed business card",
+    "sub": "Design your paper card like on Canva: pick a template, move things around, add your QR code, then download a print-ready PDF.",
+    "front": "Front",
+    "background": "Background",
+    "hint": "Drag to move · round handle to resize · arrows to nudge · Delete to remove",
+    "newText": "Your text",
+    "addText": "Text",
+    "addQr": "QR code",
+    "addImage": "Image",
+    "addLogo": "My logo",
+    "addShape": "Shape",
+    "safeWarn": "Something is outside the dashed line: it may be cut off when printed.",
+    "downloadPdf": "Download PDF for the printer",
+    "downloadSheet": "Print at home ({paper}, 10 per page)",
+    "exporting": "Preparing…",
+    "exportHelp": "The printer PDF has the front and back with 1/8 in bleed at 300 dpi. The home sheet has cut marks; print double-sided, flip on long edge.",
+    "done": "Done",
+    "font": "Font",
+    "size": "Size",
+    "color": "Color",
+    "qrLink": "Link in the QR code",
+    "useCardLink": "Use my card link",
+    "qrColor": "Code",
+    "qrBg": "Behind",
+    "qrSmall": "Below 0.75 in, some phones struggle to scan. Make it bigger.",
+    "round": "Round crop",
+    "radius": "Corners",
+    "forward": "Forward",
+    "backward": "Backward",
+    "center": "Center",
+    "delete": "Delete",
+    "templates": "Templates",
+    "templateNote": "A template replaces both sides with your details below.",
+    "details": "Your details",
+    "detailsNote": "Used by templates. Edit any text directly on the card too.",
+    "format": "Format",
+    "kind": {
+      "text": "Text",
+      "qr": "QR code",
+      "image": "Image",
+      "shape": "Shape"
+    },
+    "fonts": {
+      "sans": "Sans",
+      "serif": "Serif",
+      "mono": "Typewriter",
+      "rounded": "Friendly",
+      "display": "Display"
+    },
+    "align": {
+      "start": "Left",
+      "middle": "Center",
+      "end": "Right"
+    },
+    "tpl": {
+      "classic": "Classic",
+      "bold": "Bold",
+      "minimal": "Minimal",
+      "night": "Night"
+    },
+    "info": {
+      "name": "Name",
+      "title": "Title",
+      "phone": "Phone",
+      "email": "Email",
+      "website": "Website",
+      "address": "Address",
+      "qr": "QR code link"
+    },
+    "sizes": {
+      "us": "US",
+      "eu": "Europe"
+    },
+    "backLink": "Dashboard"
   }
 }

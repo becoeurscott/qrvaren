@@ -85,6 +85,15 @@ export default async function DashboardPage({ params }: { params: Promise<{ loca
             <Link href="/dashboard/card" className="mt-6 inline-flex w-max rounded-full bg-lime px-4 py-2 text-sm font-bold text-ink">{t("soon")} →</Link>
           </div>
         </Reveal>}
+        <Reveal>
+          <div className="flex h-full flex-col justify-between rounded-[1.75rem] bg-lime p-6 text-ink">
+            <div>
+              <p className="text-sm font-bold uppercase tracking-widest">{t("printTitle")}</p>
+              <p className="mt-3 text-ink/80">{t("printText")}</p>
+            </div>
+            <Link href="/dashboard/print" className="mt-6 inline-flex w-max rounded-full bg-ink px-4 py-2 text-sm font-bold text-white">{t("printCta")} →</Link>
+          </div>
+        </Reveal>
         {(["qrs", "scans"] as const).map((k, i) => (
           <Reveal key={k} delay={(i + 1) * 100}>
             <div className="rounded-[1.75rem] bg-white p-6">
