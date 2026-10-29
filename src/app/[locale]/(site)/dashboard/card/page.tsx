@@ -20,7 +20,7 @@ export default async function CardDashboardPage({ params, searchParams }: Props)
   const q = await searchParams;
   setRequestLocale(locale);
   const user = await getUser();
-  if (!user) redirect(`/${locale}/login`);
+  if (!user) redirect(`/${locale}/login?next=/dashboard/card`);
   const t = await getTranslations("cardEditor");
   const p = await getTranslations("cardPage");
   const card = await getMyCard();

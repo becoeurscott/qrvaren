@@ -6,7 +6,7 @@ import type { CardContent } from "../domain/card";
 
 export type PublicCard =
   | ({ status: "active"; slug: string; updated_at: string } & CardContent)
-  | { status: "suspended"; slug: string; locale: CardContent["locale"]; name: string };
+  | { status: "suspended" | "draft"; slug: string; locale: CardContent["locale"]; name: string };
 
 /** Public card by slug (only what the page shows), or null when it doesn't exist. Deduped per request. */
 export const getPublicCard = cache(async (slug: string): Promise<PublicCard | null> => {

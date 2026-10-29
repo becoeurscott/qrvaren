@@ -4,6 +4,7 @@ import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { createAuthActions } from "@insforge/sdk/ssr";
 import { routing } from "@/i18n/routing";
+import { safeNext } from "@/shared/safeNext";
 
 const safeLocale = (l: string) => ((routing.locales as readonly string[]).includes(l) ? l : routing.defaultLocale);
 
@@ -32,6 +33,10 @@ export async function signInWithGoogle(formData: FormData) {
     path: "/",
     maxAge: 600,
   });
+  // Where to land after sign-in (e.g. the card editor), kept for the callback.
+  const next = safeNext(String(formData.get("next") ?? ""));
+  if (next) cookieStore.set("after_login", next, { httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: "lax", path: "/", maxAge: 600 });
+  else cookieStore.delete("after_login");
   redirect(data.url);
 }
 

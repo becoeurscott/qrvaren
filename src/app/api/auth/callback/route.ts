@@ -2,6 +2,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { createAuthActions } from "@insforge/sdk/ssr";
 import { routing } from "@/i18n/routing";
 import { serverDb } from "@/shared/insforge";
+import { safeNext } from "@/shared/safeNext";
 
 // OAuth return: exchange the code for a session and set the auth cookies, then go to the dashboard.
 export async function GET(request: NextRequest) {
@@ -17,7 +18,8 @@ export async function GET(request: NextRequest) {
 
   // Signing in on admin.<domain> lands on the admin home; the main site lands on the dashboard.
   const onAdmin = /^admin\./i.test(request.headers.get("host") ?? "");
-  const response = NextResponse.redirect(new URL(onAdmin ? `/${locale}` : `/${locale}/dashboard`, request.url));
+  const next = safeNext(request.cookies.get("after_login")?.value);
+  const response = NextResponse.redirect(new URL(onAdmin ? `/${locale}` : `/${locale}${next ?? "/dashboard"}`, request.url));
   const auth = createAuthActions({ requestCookies: request.cookies, responseCookies: response.cookies });
   const { data, error } = await auth.exchangeOAuthCode(code, codeVerifier);
   if (error || !data?.user) {
@@ -25,6 +27,7 @@ export async function GET(request: NextRequest) {
     return fail("exchange_failed");
   }
   response.cookies.delete("insforge_code_verifier");
+  response.cookies.delete("after_login");
   // Suspended accounts get no session: clear the cookies just set and send them back to login.
   const { data: suspended } = await serverDb().rpc("is_suspended", { p_user: data.user.id });
   if (suspended === true) {

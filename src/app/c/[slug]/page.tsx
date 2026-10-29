@@ -30,13 +30,19 @@ export default async function PublicCardPage({ params }: Props) {
   const home = `${SITE_URL}/${card?.locale ?? "en"}/business-card`;
 
   // Never a bare 404: suspended or missing cards explain and point to the site (spec 5.2).
+  // A draft points its owner to the dashboard to publish it.
   if (!card || card.status !== "active") {
+    const draft = card?.status === "draft";
     return (
       <main className="flex min-h-screen items-center justify-center px-4 text-center text-white grid-bg">
         <div className="max-w-sm">
-          <p className="font-display text-5xl uppercase text-lime">{card ? t("suspendedTitle") : t("missingTitle")}</p>
-          <p className="mt-4 text-white/80">{card ? t("suspendedText", { name: card.name }) : t("missingText")}</p>
-          <a href={home} className="mt-8 inline-block rounded-full bg-lime px-6 py-3 font-semibold text-ink">{t("makeYours")}</a>
+          <p className="font-display text-5xl uppercase text-lime">{draft ? t("draftTitle") : card ? t("suspendedTitle") : t("missingTitle")}</p>
+          <p className="mt-4 text-white/80">{draft ? t("draftText", { name: card.name }) : card ? t("suspendedText", { name: card.name }) : t("missingText")}</p>
+          {draft ? (
+            <a href={`${SITE_URL}/${card.locale}/dashboard/card`} className="mt-8 inline-block rounded-full bg-lime px-6 py-3 font-semibold text-ink">{t("draftOwner")}</a>
+          ) : (
+            <a href={home} className="mt-8 inline-block rounded-full bg-lime px-6 py-3 font-semibold text-ink">{t("makeYours")}</a>
+          )}
         </div>
       </main>
     );

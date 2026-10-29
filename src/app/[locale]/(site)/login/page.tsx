@@ -5,6 +5,7 @@ import { PageHero } from "@/components/Landing";
 import { Reveal } from "@/components/motion";
 import { signInWithGoogle } from "@/app/actions/auth";
 import { getUser } from "@/shared/auth";
+import { safeNext } from "@/shared/safeNext";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -14,12 +15,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export default async function LoginPage({ params, searchParams }: {
   params: Promise<{ locale: string }>;
-  searchParams: Promise<{ error?: string }>;
+  searchParams: Promise<{ error?: string; next?: string }>;
 }) {
   const { locale } = await params;
-  const { error } = await searchParams;
+  const { error, next } = await searchParams;
+  const after = safeNext(next);
   setRequestLocale(locale);
-  if (await getUser()) redirect(`/${locale}/dashboard`);
+  if (await getUser()) redirect(`/${locale}${after ?? "/dashboard"}`);
   const t = await getTranslations("auth");
   return (
     <main>
@@ -30,6 +32,7 @@ export default async function LoginPage({ params, searchParams }: {
             {error && <p className="mb-4 rounded-xl bg-coral/15 p-3 text-sm font-medium text-ink">{t(error === "suspended" ? "suspended" : "error")}</p>}
             <form action={signInWithGoogle}>
               <input type="hidden" name="locale" value={locale} />
+              {after && <input type="hidden" name="next" value={after} />}
               <button className="btn flex w-full items-center justify-center gap-3 rounded-full bg-ink px-6 py-4 font-semibold text-white transition hover:bg-violet">
                 <svg width="20" height="20" viewBox="0 0 48 48" aria-hidden>
                   <path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3l5.7-5.7C34.1 6.1 29.3 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.4-.4-3.5z" />
