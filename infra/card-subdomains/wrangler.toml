@@ -1,0 +1,9 @@
+name = "qrvaren-card-subdomains"
+main = "worker.js"
+compatibility_date = "2026-10-01"
+
+# Every card subdomain goes through the Worker. The apex (qrvaren.online) is not matched,
+# so the main site keeps being served directly by the InsForge/Vercel deployment.
+routes = [
+  { pattern = "*.qrvaren.online/*", zone_name = "qrvaren.online" },
+]
