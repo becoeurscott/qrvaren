@@ -18,13 +18,17 @@ const MAX_SIDE = 1600;
 const IMAGE_TYPES = /^image\/(png|jpeg|webp)$/;
 let storage: ReturnType<typeof createBrowserClient>["storage"] | undefined;
 
-const supportsWebp: Promise<boolean> = (async () => {
-  if (typeof document === "undefined") return false;
-  const c = document.createElement("canvas");
-  c.width = c.height = 1;
-  const blob = await new Promise<Blob | null>((ok) => c.toBlob(ok, "image/webp", 0.8));
-  return blob?.type === "image/webp";
-})();
+let _webpResult: boolean | undefined;
+async function canWebp(): Promise<boolean> {
+  if (_webpResult !== undefined) return _webpResult;
+  try {
+    if (typeof document === "undefined") return (_webpResult = false);
+    const c = document.createElement("canvas");
+    c.width = c.height = 1;
+    const blob = await new Promise<Blob | null>((ok) => { try { c.toBlob(ok, "image/webp", 0.8); } catch { ok(null); } });
+    return (_webpResult = blob?.type === "image/webp");
+  } catch { return (_webpResult = false); }
+}
 
 async function shrink(file: File): Promise<{ file: File; w: number; h: number }> {
   const url = URL.createObjectURL(file);
@@ -36,11 +40,12 @@ async function shrink(file: File): Promise<{ file: File; w: number; h: number }>
     c.width = Math.round(w * Math.min(1, k));
     c.height = Math.round(h * Math.min(1, k));
     c.getContext("2d")!.drawImage(img, 0, 0, c.width, c.height);
-    const webp = (await supportsWebp)
-      ? await new Promise<Blob | null>((ok) => c.toBlob(ok, "image/webp", 0.82))
-      : null;
+    let webp: Blob | null = null;
+    try {
+      if (await canWebp()) webp = await new Promise<Blob | null>((ok) => { try { c.toBlob(ok, "image/webp", 0.82); } catch { ok(null); } });
+    } catch { /* fall through to jpeg/png */ }
     const fallbackType = file.type === "image/jpeg" ? "image/jpeg" : "image/png";
-    const fallback = webp ? null : await new Promise<Blob | null>((ok) => c.toBlob(ok, fallbackType, 0.86));
+    const fallback = webp ? null : await new Promise<Blob | null>((ok) => { try { c.toBlob(ok, fallbackType, 0.86); } catch { ok(null); } });
     const blob = webp ?? fallback;
     const out = { w: c.width, h: c.height };
     c.width = c.height = 0;
