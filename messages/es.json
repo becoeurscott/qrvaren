@@ -947,7 +947,13 @@
       "classic": "Clásica",
       "bold": "Audaz",
       "minimal": "Minimal",
-      "night": "Noche"
+      "night": "Noche",
+      "corporate": "Corporativo",
+      "elegant": "Elegante",
+      "split": "Bicolor",
+      "creative": "Creativo",
+      "nature": "Naturaleza",
+      "tech": "Tech"
     },
     "info": {
       "name": "Nombre",

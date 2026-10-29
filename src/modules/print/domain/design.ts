@@ -98,7 +98,7 @@ const logo = (src: string | undefined, p: Pick<ImageEl, "x" | "y" | "w" | "h"> &
 
 const contact = (i: Info) => [i.phone, i.email, i.website.replace(/^https?:\/\/(www\.)?/, ""), i.address].filter(Boolean).join("\n");
 
-export const TEMPLATE_IDS = ["classic", "bold", "minimal", "night"] as const;
+export const TEMPLATE_IDS = ["classic", "bold", "minimal", "night", "corporate", "elegant", "split", "creative", "nature", "tech"] as const;
 export type TemplateId = (typeof TEMPLATE_IDS)[number];
 
 /** A full design for the given details, laid out for the chosen size. */
@@ -107,7 +107,109 @@ export function template(id: TemplateId, i: Info, size: SizeId): Design {
   const name = i.name || "Your Name";
   const lines = contact(i) || "+1 555 010 2030\nhello@example.com";
   const q = Math.round(h * 0.5);
+  const n = lines.split("\n").length;
+  // Contact block sitting on the bottom safe margin, for a given text size.
+  const bottom = (size: number, gap = 18) => h - gap - n * size * LINE;
   switch (id) {
+    case "corporate": {
+      const band = Math.round(w * 0.36), x0 = band + 14;
+      return {
+        size,
+        front: { bg: "#ffffff", els: [
+          shape({ x: 0, y: 0, w: band, h, fill: "#1e2a4a" }),
+          ...(i.logo ? logo(i.logo, { x: band / 2 - 22, y: h / 2 - 22, w: 44, h: 44 })
+            : [text({ x: SAFE + 4, y: h / 2 - 18, w: band - 2 * SAFE - 8, text: name.charAt(0).toUpperCase(), size: 28, color: "#ffffff", font: "display", align: "middle" })]),
+          text({ x: x0, y: 22, w: w - x0 - 18, text: name, size: 13, bold: true, color: "#1e2a4a" }),
+          text({ x: x0, y: 40, w: w - x0 - 18, text: i.title, size: 8, color: "#2f6fd6" }),
+          shape({ x: x0, y: 54, w: 24, h: 1.5, fill: "#2f6fd6" }),
+          text({ x: x0, y: bottom(7), w: w - x0 - 18, text: lines, size: 7, color: "#3b3852" }),
+        ] },
+        back: { bg: "#1e2a4a", els: [
+          qr({ x: w / 2 - q / 2, y: h / 2 - q / 2 - 8, data: i.qr, size: q, fg: "#1e2a4a", bg: "#ffffff" }),
+          text({ x: 18, y: h / 2 + q / 2 - 2, w: w - 36, text: "SCAN ME", size: 7.5, color: "#ffffff", bold: true, align: "middle" }),
+        ] },
+      };
+    }
+    case "elegant":
+      return {
+        size,
+        front: { bg: "#111111", els: [
+          shape({ x: SAFE + 3, y: SAFE + 3, w: w - 2 * SAFE - 6, h: 0.75, fill: "#d4b373" }),
+          shape({ x: SAFE + 3, y: h - SAFE - 3.75, w: w - 2 * SAFE - 6, h: 0.75, fill: "#d4b373" }),
+          text({ x: 18, y: h / 2 - 28, w: w - 36, text: name, size: 16, font: "serif", color: "#d4b373", align: "middle" }),
+          shape({ x: w / 2 - 20, y: h / 2 - 4, w: 40, h: 1, fill: "#d4b373" }),
+          text({ x: 18, y: h / 2 + 4, w: w - 36, text: i.title, size: 7.5, color: "#e9e2d0", align: "middle" }),
+          text({ x: 18, y: h - 34, w: w - 36, text: lines.split("\n").slice(0, 2).join("  ·  "), size: 7, color: "#bfb7a3", align: "middle" }),
+        ] },
+        back: { bg: "#d4b373", els: [
+          qr({ x: w / 2 - q / 2, y: h / 2 - q / 2 - 8, data: i.qr, size: q, fg: "#111111", bg: "#d4b373" }),
+          text({ x: 18, y: h / 2 + q / 2 - 2, w: w - 36, text: name, size: 8, font: "serif", color: "#111111", align: "middle" }),
+        ] },
+      };
+    case "split": {
+      const top = Math.round(h * 0.48), q2 = Math.round(h * 0.42);
+      return {
+        size,
+        front: { bg: "#ffffff", els: [
+          shape({ x: 0, y: 0, w, h: top, fill: "#ff6b4a" }),
+          text({ x: 18, y: 20, w: w - 36, text: name, size: 17, color: "#ffffff", font: "display" }),
+          text({ x: 18, y: 44, w: w - 36, text: i.title, size: 8, color: "#fff3ee", bold: true }),
+          text({ x: 18, y: bottom(7), w: w - q2 - 46, text: lines, size: 7, color: "#2b2b2b" }),
+          qr({ x: w - q2 - 18, y: h - q2 - 18, data: i.qr, size: q2, fg: "#2b2b2b", bg: "#ffffff" }),
+        ] },
+        back: { bg: "#ff6b4a", els: [
+          ...logo(i.logo, { x: w / 2 - 26, y: h / 2 - 40, w: 52, h: 52 }),
+          text({ x: 18, y: i.logo ? h / 2 + 18 : h / 2 - 12, w: w - 36, text: name, size: 18, color: "#ffffff", font: "display", align: "middle" }),
+        ] },
+      };
+    }
+    case "creative":
+      return {
+        size,
+        front: { bg: "#ffd23f", els: [
+          shape({ x: w - 90, y: -40, w: 140, h: 140, fill: "#ff5d8f", radius: 70 }),
+          shape({ x: w - 70, y: h - 45, w: 90, h: 90, fill: "#3a86ff", radius: 45 }),
+          text({ x: 18, y: 22, w: w - 110, text: name, size: 18, color: "#17143a", font: "display" }),
+          text({ x: 18, y: 46, w: w - 110, text: i.title, size: 8, color: "#17143a", bold: true }),
+          text({ x: 18, y: bottom(7.5), w: w - 110, text: lines, size: 7.5, color: "#17143a" }),
+        ] },
+        back: { bg: "#17143a", els: [
+          qr({ x: w / 2 - q / 2, y: h / 2 - q / 2 - 8, data: i.qr, size: q, fg: "#17143a", bg: "#ffd23f" }),
+          text({ x: 18, y: h / 2 + q / 2 - 2, w: w - 36, text: "SCAN ME", size: 8, color: "#ffd23f", bold: true, align: "middle" }),
+        ] },
+      };
+    case "nature":
+      return {
+        size,
+        front: { bg: "#eef3ea", els: [
+          shape({ x: w - 64, y: 18, w: 46, h: 46, fill: "#a8c3a0", radius: 23 }),
+          ...logo(i.logo, { x: w - 64, y: 18, w: 46, h: 46, round: true }),
+          shape({ x: -20, y: h - 40, w: 70, h: 70, fill: "#d5e3cf", radius: 35 }),
+          text({ x: 18, y: 22, w: w - 100, text: name, size: 15, font: "serif", color: "#2d4a35" }),
+          text({ x: 18, y: 42, w: w - 100, text: i.title, size: 8, color: "#5f7f64" }),
+          text({ x: 60, y: bottom(7.5), w: w - 78, text: lines, size: 7.5, color: "#2d4a35" }),
+        ] },
+        back: { bg: "#2d4a35", els: [
+          qr({ x: w / 2 - q / 2, y: h / 2 - q / 2 - 8, data: i.qr, size: q, fg: "#2d4a35", bg: "#eef3ea" }),
+          text({ x: 18, y: h / 2 + q / 2 - 2, w: w - 36, text: name, size: 8, font: "serif", color: "#eef3ea", align: "middle" }),
+        ] },
+      };
+    case "tech":
+      return {
+        size,
+        front: { bg: "#0f172a", els: [
+          shape({ x: 0, y: h - 6, w, h: 6, fill: "#22d3ee" }),
+          shape({ x: 0, y: h - 10, w: Math.round(w * 0.4), h: 4, fill: "#a78bfa" }),
+          text({ x: 18, y: 22, w: w - q - 46, text: name, size: 14, color: "#ffffff", bold: true }),
+          text({ x: 18, y: 40, w: w - q - 46, text: i.title, size: 7.5, color: "#22d3ee", font: "mono" }),
+          text({ x: 18, y: bottom(7, 24), w: w - q - 46, text: lines, size: 7, color: "#cbd5e1", font: "mono" }),
+          qr({ x: w - q - 18, y: h / 2 - q / 2 - 6, data: i.qr, size: q, fg: "#0f172a", bg: "#ffffff" }),
+        ] },
+        back: { bg: "#22d3ee", els: [
+          ...logo(i.logo, { x: w / 2 - 26, y: h / 2 - 40, w: 52, h: 52 }),
+          text({ x: 18, y: i.logo ? h / 2 + 18 : h / 2 - 12, w: w - 36, text: name, size: 18, color: "#0f172a", font: "display", align: "middle" }),
+        ] },
+      };
     case "bold":
       return {
         size,

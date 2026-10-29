@@ -947,7 +947,13 @@
       "classic": "Classic",
       "bold": "Bold",
       "minimal": "Minimal",
-      "night": "Night"
+      "night": "Night",
+      "corporate": "Corporate",
+      "elegant": "Elegant",
+      "split": "Split",
+      "creative": "Creative",
+      "nature": "Nature",
+      "tech": "Tech"
     },
     "info": {
       "name": "Name",
