@@ -1,17 +1,22 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <rect width="64" height="64" rx="14" fill="#5546ff"/>
-  <g fill="none" stroke="#bfff0a" stroke-width="4">
-    <rect x="10" y="10" width="17" height="17" rx="3"/>
-    <rect x="37" y="10" width="17" height="17" rx="3"/>
-    <rect x="10" y="37" width="17" height="17" rx="3"/>
-  </g>
   <g fill="#bfff0a">
-    <rect x="15.5" y="15.5" width="6" height="6" rx="1"/>
-    <rect x="42.5" y="15.5" width="6" height="6" rx="1"/>
-    <rect x="15.5" y="42.5" width="6" height="6" rx="1"/>
-    <rect x="37" y="37" width="7" height="7" rx="1.5"/>
-    <rect x="47" y="47" width="7" height="7" rx="1.5"/>
-    <rect x="47" y="37" width="7" height="7" rx="1.5" opacity=".55"/>
-    <rect x="37" y="47" width="7" height="7" rx="1.5" opacity=".55"/>
+    <path d="M32 29 C30.6 22 30.4 16 32 9 C33.6 16 33.4 22 32 29Z" transform="rotate(0.0 32 32)"/>
+    <path d="M32 29 C30.6 22 30.4 16 32 9 C33.6 16 33.4 22 32 29Z" transform="rotate(22.5 32 32)"/>
+    <path d="M32 29 C30.6 22 30.4 16 32 9 C33.6 16 33.4 22 32 29Z" transform="rotate(45.0 32 32)"/>
+    <path d="M32 29 C30.6 22 30.4 16 32 9 C33.6 16 33.4 22 32 29Z" transform="rotate(67.5 32 32)"/>
+    <path d="M32 29 C30.6 22 30.4 16 32 9 C33.6 16 33.4 22 32 29Z" transform="rotate(90.0 32 32)"/>
+    <path d="M32 29 C30.6 22 30.4 16 32 9 C33.6 16 33.4 22 32 29Z" transform="rotate(112.5 32 32)"/>
+    <path d="M32 29 C30.6 22 30.4 16 32 9 C33.6 16 33.4 22 32 29Z" transform="rotate(135.0 32 32)"/>
+    <path d="M32 29 C30.6 22 30.4 16 32 9 C33.6 16 33.4 22 32 29Z" transform="rotate(157.5 32 32)"/>
+    <path d="M32 29 C30.6 22 30.4 16 32 9 C33.6 16 33.4 22 32 29Z" transform="rotate(180.0 32 32)"/>
+    <path d="M32 29 C30.6 22 30.4 16 32 9 C33.6 16 33.4 22 32 29Z" transform="rotate(202.5 32 32)"/>
+    <path d="M32 29 C30.6 22 30.4 16 32 9 C33.6 16 33.4 22 32 29Z" transform="rotate(225.0 32 32)"/>
+    <path d="M32 29 C30.6 22 30.4 16 32 9 C33.6 16 33.4 22 32 29Z" transform="rotate(247.5 32 32)"/>
+    <path d="M32 29 C30.6 22 30.4 16 32 9 C33.6 16 33.4 22 32 29Z" transform="rotate(270.0 32 32)"/>
+    <path d="M32 29 C30.6 22 30.4 16 32 9 C33.6 16 33.4 22 32 29Z" transform="rotate(292.5 32 32)"/>
+    <path d="M32 29 C30.6 22 30.4 16 32 9 C33.6 16 33.4 22 32 29Z" transform="rotate(315.0 32 32)"/>
+    <path d="M32 29 C30.6 22 30.4 16 32 9 C33.6 16 33.4 22 32 29Z" transform="rotate(337.5 32 32)"/>
+    <circle cx="32" cy="32" r="3"/>
   </g>
 </svg>
