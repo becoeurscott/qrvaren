@@ -1,5 +1,7 @@
 import "server-only";
-import { notFound } from "next/navigation";
+import { headers } from "next/headers";
+import { notFound, redirect } from "next/navigation";
+import { getLocale } from "next-intl/server";
 import { getUser, userDb } from "@/shared/auth";
 
 export type Role = "super_admin" | "admin" | "support" | "moderator" | "analyst";
@@ -16,7 +18,11 @@ export const ROLE_LABEL: Record<Role, string> = {
 export async function requireAdmin(panel: string, perm?: Perm) {
   if (!process.env.ADMIN_PATH || panel !== process.env.ADMIN_PATH) notFound();
   const user = await getUser();
-  if (!user) notFound();
+  if (!user) {
+    // admin.<domain> is openly the admin, so send visitors to sign in; on the main site stay a plain 404.
+    if (/^admin\./i.test((await headers()).get("host") ?? "")) redirect(`/${await getLocale()}/login`);
+    notFound();
+  }
   const db = await userDb();
   const { data } = await db.rpc("my_admin_perms");
   const me = data as { role: Role | null; perms: Perm[] } | null;
