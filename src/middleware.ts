@@ -1,7 +1,8 @@
-import { NextResponse, type NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import createMiddleware from "next-intl/middleware";
 import { updateSession } from "@insforge/sdk/ssr/middleware";
 import { routing } from "./i18n/routing";
+import { countryLocale } from "./i18n/detect";
 
 const intl = createMiddleware(routing);
 const LOCALE_PATH = new RegExp(`^/(${routing.locales.join("|")})(/.*)?$`);
@@ -19,9 +20,22 @@ function adminRewrite(request: NextRequest) {
   return NextResponse.rewrite(url);
 }
 
+// First visit without a locale in the URL: the router follows the phone language. When the phone uses a
+// language we don't offer, the visitor's country picks it instead (sent to the router as the preferred language).
+// A language chosen in the menu is kept in the NEXT_LOCALE cookie and always wins.
+function withCountryLocale(request: NextRequest): NextRequest {
+  if (LOCALE_PATH.test(request.nextUrl.pathname) || request.cookies.has("NEXT_LOCALE")) return request;
+  const country = request.headers.get("x-vercel-ip-country") ?? request.headers.get("cf-ipcountry");
+  const locale = countryLocale(request.headers.get("accept-language"), country, routing.locales);
+  if (!locale) return request;
+  const headers = new Headers(request.headers);
+  headers.set("accept-language", locale);
+  return new NextRequest(request.url, { headers });
+}
+
 // Locale routing first, then refresh the InsForge session so pages render with a valid token.
 export default async function middleware(request: NextRequest) {
-  const response = adminRewrite(request) ?? intl(request);
+  const response = adminRewrite(request) ?? intl(withCountryLocale(request));
   await updateSession({ requestCookies: request.cookies, responseCookies: response.cookies });
   return response;
 }

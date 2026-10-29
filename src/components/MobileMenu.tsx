@@ -64,7 +64,7 @@ export function MobileMenu({ items: baseItems, cta, locale, openLabel, closeLabe
             className={`mt-4 self-start text-xl font-semibold underline underline-offset-4 transition duration-500 disabled:opacity-50 ${open ? "opacity-100" : "opacity-0"}`} />
         </nav>
         <div className="flex items-center justify-between gap-4">
-          <span className="rounded-full bg-violet-deep px-2 py-1"><LocaleSwitcher current={locale} /></span>
+          <span className="rounded-full bg-violet-deep p-1"><LocaleSwitcher current={locale} up /></span>
           <Link href={cta.href} className="rounded-full bg-lime px-6 py-3 font-semibold text-ink">{cta.label}</Link>
         </div>
       </div>,
