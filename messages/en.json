@@ -968,6 +968,20 @@
       "us": "US",
       "eu": "Europe"
     },
-    "backLink": "Dashboard"
+    "backLink": "Dashboard",
+    "qr": {
+      "title": "QR code",
+      "none": "No QR code",
+      "link": "From a link",
+      "image": "Upload my QR",
+      "change": "Change",
+      "uploadedNote": "This is your uploaded QR picture. Change it in the QR code section.",
+      "notFound": "We couldn't find a QR code in this picture. Check that it scans before printing.",
+      "hint": {
+        "none": "Your card prints without a QR code.",
+        "link": "We create the QR code from this link. By default it opens your online card.",
+        "image": "Your own QR picture is printed as it is. Use a sharp image with a white border."
+      }
+    }
   }
 }

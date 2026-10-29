@@ -968,6 +968,20 @@
       "us": "US",
       "eu": "Europe"
     },
-    "backLink": "Tableau de bord"
+    "backLink": "Tableau de bord",
+    "qr": {
+      "title": "QR code",
+      "none": "Pas de QR code",
+      "link": "Depuis un lien",
+      "image": "Importer mon QR",
+      "change": "Changer",
+      "uploadedNote": "C’est l’image de QR que vous avez importée. Changez-la dans la section QR code.",
+      "notFound": "Nous n’avons pas trouvé de QR code dans cette image. Vérifiez qu’il se scanne avant d’imprimer.",
+      "hint": {
+        "none": "Votre carte s’imprime sans QR code.",
+        "link": "Nous créons le QR code à partir de ce lien. Par défaut, il ouvre votre carte en ligne.",
+        "image": "Votre image de QR est imprimée telle quelle. Utilisez une image nette avec une bordure blanche."
+      }
+    }
   }
 }

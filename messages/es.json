@@ -968,6 +968,20 @@
       "us": "EE. UU.",
       "eu": "Europa"
     },
-    "backLink": "Panel"
+    "backLink": "Panel",
+    "qr": {
+      "title": "Código QR",
+      "none": "Sin código QR",
+      "link": "Desde un enlace",
+      "image": "Subir mi QR",
+      "change": "Cambiar",
+      "uploadedNote": "Esta es la imagen de QR que subiste. Cámbiala en la sección Código QR.",
+      "notFound": "No encontramos un código QR en esta imagen. Comprueba que se escanea antes de imprimir.",
+      "hint": {
+        "none": "Tu tarjeta se imprime sin código QR.",
+        "link": "Creamos el código QR a partir de este enlace. Por defecto abre tu tarjeta en línea.",
+        "image": "Tu imagen de QR se imprime tal cual. Usa una imagen nítida con borde blanco."
+      }
+    }
   }
 }

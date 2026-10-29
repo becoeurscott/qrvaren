@@ -23,7 +23,8 @@ export type FontId = keyof typeof FONTS;
 
 type Box = { id: string; x: number; y: number };
 export type TextEl = Box & { kind: "text"; text: string; w: number; size: number; color: string; font: FontId; bold: boolean; align: "start" | "middle" | "end" };
-export type QrEl = Box & { kind: "qr"; data: string; size: number; fg: string; bg: string };
+/** A QR code drawn from `data`, or the user's own QR picture when `image` is set. */
+export type QrEl = Box & { kind: "qr"; data: string; size: number; fg: string; bg: string; image?: string };
 export type ImageEl = Box & { kind: "image"; src: string; w: number; h: number; round: boolean };
 export type ShapeEl = Box & { kind: "shape"; w: number; h: number; fill: string; radius: number };
 export type El = TextEl | QrEl | ImageEl | ShapeEl;
@@ -31,6 +32,9 @@ export type Side = { bg: string; els: El[] };
 export type Design = { size: SizeId; front: Side; back: Side };
 
 export type Info = { name: string; title: string; phone: string; email: string; website: string; address: string; logo?: string; qr: string };
+
+/** Where the card's QR code comes from: none, a link (drawn by us), or a picture the user uploads. */
+export type QrSource = { mode: "none" } | { mode: "link" } | { mode: "image"; src: string };
 
 export const uid = () => Math.random().toString(36).slice(2, 9);
 
@@ -75,7 +79,7 @@ export function sideSvg(side: Side, size: SizeId, qrImages: Record<string, strin
       const spans = textLines(el).map((line, i) => `<tspan x="${ax}" y="${el.y + el.size * (0.95 + i * LINE)}">${esc(line) || " "}</tspan>`).join("");
       parts.push(`<text font-family="${esc(FONTS[el.font])}" font-size="${el.size}" font-weight="${el.bold ? 700 : 400}" fill="${esc(el.color)}" text-anchor="${el.align}" xml:space="preserve">${spans}</text>`);
     } else if (el.kind === "qr") {
-      const src = qrImages[el.id];
+      const src = el.image ?? qrImages[el.id];
       if (src) parts.push(`<image x="${el.x}" y="${el.y}" width="${el.size}" height="${el.size}" href="${esc(src)}"/>`);
       else parts.push(`<rect x="${el.x}" y="${el.y}" width="${el.size}" height="${el.size}" fill="${esc(el.bg)}" stroke="${esc(el.fg)}" stroke-dasharray="4 3"/>`);
     } else if (el.src) {
@@ -101,8 +105,52 @@ const contact = (i: Info) => [i.phone, i.email, i.website.replace(/^https?:\/\/(
 export const TEMPLATE_IDS = ["classic", "bold", "minimal", "night", "corporate", "elegant", "split", "creative", "nature", "tech"] as const;
 export type TemplateId = (typeof TEMPLATE_IDS)[number];
 
-/** A full design for the given details, laid out for the chosen size. */
-export function template(id: TemplateId, i: Info, size: SizeId): Design {
+/** A full design for the given details, laid out for the chosen size, with the QR code from `qr`. */
+export function template(id: TemplateId, i: Info, size: SizeId, qr: QrSource = { mode: "link" }): Design {
+  const d = layout(id, i, size);
+  return qr.mode === "none" ? withoutQr(d, i) : applyQrSource(d, qr, i.qr);
+}
+
+/** Points every QR code at the link, or at the uploaded picture. "none" removes them. */
+export function applyQrSource(d: Design, qr: QrSource, link: string): Design {
+  const side = (s: Side): Side => ({
+    ...s,
+    els: qr.mode === "none" ? s.els.filter((e) => e.kind !== "qr")
+      : s.els.map((e) => (e.kind !== "qr" ? e : qr.mode === "image" ? { ...e, image: qr.src } : { ...e, data: link, image: undefined })),
+  });
+  return { ...d, front: side(d.front), back: side(d.back) };
+}
+
+/** A QR code for a design that has none: bottom right of the front, inside the safe area. */
+export function newQr(size: SizeId, qr: QrSource, link: string): QrEl {
+  const { w, h } = SIZES[size];
+  const q = Math.round(h * 0.42);
+  return { id: uid(), kind: "qr", data: link, x: w - q - 18, y: h - q - 18, size: q, fg: "#17143a", bg: "#ffffff", ...(qr.mode === "image" ? { image: qr.src } : {}) };
+}
+
+const SCAN_LABEL = "SCAN ME";
+
+/** Template without a QR code: the code and its caption go; a side left without a real text shows the logo and name. */
+function withoutQr(d: Design, i: Info): Design {
+  const { w, h } = SIZES[d.size];
+  const side = (s: Side, ink: string): Side => {
+    if (!s.els.some((e) => e.kind === "qr")) return s;
+    // Small centred lines on a QR side are captions of the code ("SCAN ME", the name under it).
+    const caption = (e: El) => e.kind === "text" && (e.text === SCAN_LABEL || (e.align === "middle" && e.size < 10));
+    const els = s.els.filter((e) => e.kind !== "qr");
+    if (els.some((e) => e.kind === "text" && !caption(e))) return { ...s, els: els.filter((e) => !(e.kind === "text" && e.text === SCAN_LABEL)) };
+    return { ...s, els: [
+      ...els.filter((e) => !caption(e)),
+      ...logo(i.logo, { x: w / 2 - 26, y: h / 2 - 40, w: 52, h: 52 }),
+      text({ x: 18, y: i.logo ? h / 2 + 18 : h / 2 - 12, w: w - 36, text: i.name || "Your Name", size: 18, color: ink, font: "display", align: "middle" }),
+    ] };
+  };
+  // Dark name on a light background, white on a dark one.
+  const inkOn = (bg: string) => (parseInt(bg.slice(1, 3), 16) * 0.299 + parseInt(bg.slice(3, 5), 16) * 0.587 + parseInt(bg.slice(5, 7), 16) * 0.114 > 150 ? "#17143a" : "#ffffff");
+  return { ...d, front: side(d.front, inkOn(d.front.bg)), back: side(d.back, inkOn(d.back.bg)) };
+}
+
+function layout(id: TemplateId, i: Info, size: SizeId): Design {
   const { w, h } = SIZES[size];
   const name = i.name || "Your Name";
   const lines = contact(i) || "+1 555 010 2030\nhello@example.com";
@@ -126,7 +174,7 @@ export function template(id: TemplateId, i: Info, size: SizeId): Design {
         ] },
         back: { bg: "#1e2a4a", els: [
           qr({ x: w / 2 - q / 2, y: h / 2 - q / 2 - 8, data: i.qr, size: q, fg: "#1e2a4a", bg: "#ffffff" }),
-          text({ x: 18, y: h / 2 + q / 2 - 2, w: w - 36, text: "SCAN ME", size: 7.5, color: "#ffffff", bold: true, align: "middle" }),
+          text({ x: 18, y: h / 2 + q / 2 - 2, w: w - 36, text: SCAN_LABEL, size: 7.5, color: "#ffffff", bold: true, align: "middle" }),
         ] },
       };
     }
@@ -175,7 +223,7 @@ export function template(id: TemplateId, i: Info, size: SizeId): Design {
         ] },
         back: { bg: "#17143a", els: [
           qr({ x: w / 2 - q / 2, y: h / 2 - q / 2 - 8, data: i.qr, size: q, fg: "#17143a", bg: "#ffd23f" }),
-          text({ x: 18, y: h / 2 + q / 2 - 2, w: w - 36, text: "SCAN ME", size: 8, color: "#ffd23f", bold: true, align: "middle" }),
+          text({ x: 18, y: h / 2 + q / 2 - 2, w: w - 36, text: SCAN_LABEL, size: 8, color: "#ffd23f", bold: true, align: "middle" }),
         ] },
       };
     case "nature":
@@ -236,7 +284,7 @@ export function template(id: TemplateId, i: Info, size: SizeId): Design {
         ] },
         back: { bg: "#17143a", els: [
           qr({ x: w / 2 - q / 2, y: h / 2 - q / 2 - 8, data: i.qr, size: q, fg: "#17143a", bg: "#fbf8f1" }),
-          text({ x: 18, y: h / 2 + q / 2 - 2, w: w - 36, text: "SCAN ME", size: 8, color: "#fbf8f1", bold: true, align: "middle" }),
+          text({ x: 18, y: h / 2 + q / 2 - 2, w: w - 36, text: SCAN_LABEL, size: 8, color: "#fbf8f1", bold: true, align: "middle" }),
         ] },
       };
     case "night":

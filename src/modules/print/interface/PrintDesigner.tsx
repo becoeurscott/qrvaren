@@ -4,14 +4,24 @@ import { useEffect, useMemo, useRef, useState, type PointerEvent as RPointerEven
 import { useTranslations } from "next-intl";
 import { download } from "@/modules/qr/infrastructure/render";
 import {
-  FONTS, SAFE, SIZES, TEMPLATE_IDS, bounds, outsideSafe, resize, sideSvg, template, uid,
-  type Design, type El, type FontId, type Info, type SizeId, type TemplateId,
+  FONTS, SAFE, SIZES, TEMPLATE_IDS, applyQrSource, bounds, newQr, outsideSafe, resize, sideSvg, template, uid,
+  type Design, type El, type FontId, type Info, type QrSource, type SizeId, type TemplateId,
 } from "../domain/design";
 import { cardPdf, qrDataUrl, sheetPdf, toDataUrl } from "./exportPdf";
 
 const STORE = "qrv.print.v1";
 const svgUrl = (svg: string) => `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
 const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
+/** Finds a QR code in a picture where the browser can (Chrome, Android); null when it can't tell. */
+async function hasQrCode(src: string): Promise<boolean | null> {
+  const Detector = (globalThis as { BarcodeDetector?: new (o: { formats: string[] }) => { detect: (i: ImageBitmapSource) => Promise<unknown[]> } }).BarcodeDetector;
+  if (!Detector) return null;
+  try {
+    const img = await createImageBitmap(await (await fetch(src)).blob());
+    return (await new Detector({ formats: ["qr_code"] }).detect(img)).length > 0;
+  } catch { return null; }
+}
+
 type Drag = { id: string; mode: "move" | "resize"; px: number; py: number; start: El; scale: number };
 
 /** Canva-style editor for a printable business card (front + back), exported as PDF. */
@@ -19,6 +29,8 @@ export function PrintDesigner({ initial }: { initial: Info }) {
   const t = useTranslations("print");
   const [info, setInfo] = useState<Info>(initial);
   const [design, setDesign] = useState<Design>(() => template("classic", initial, "us"));
+  const [qrSource, setQrSource] = useState<QrSource>({ mode: "link" });
+  const [qrWarn, setQrWarn] = useState(false);
   const [sideKey, setSideKey] = useState<"front" | "back">("front");
   const [sel, setSel] = useState<string | null>(null);
   const [qr, setQr] = useState<Record<string, string>>({});
@@ -26,6 +38,7 @@ export function PrintDesigner({ initial }: { initial: Info }) {
   const [loaded, setLoaded] = useState(false);
   const canvas = useRef<HTMLDivElement>(null);
   const drag = useRef<Drag | null>(null);
+  const qrUpload = useRef<HTMLInputElement>(null);
 
   const side = design[sideKey];
   const { w: W, h: H } = SIZES[design.size];
@@ -35,7 +48,11 @@ export function PrintDesigner({ initial }: { initial: Info }) {
   useEffect(() => {
     try {
       const raw = localStorage.getItem(STORE);
-      if (raw) { const saved = JSON.parse(raw) as { design: Design; info: Info }; setDesign(saved.design); setInfo({ ...initial, ...saved.info }); }
+      if (raw) {
+        const saved = JSON.parse(raw) as { design: Design; info: Info; qrSource?: QrSource };
+        setDesign(saved.design); setInfo({ ...initial, ...saved.info });
+        if (saved.qrSource) setQrSource(saved.qrSource);
+      }
     } catch {}
     setLoaded(true);
     // The card's logo is a remote file: inline it so it shows inside the SVG and the PDF.
@@ -50,15 +67,16 @@ export function PrintDesigner({ initial }: { initial: Info }) {
   }, [initial]);
   useEffect(() => {
     if (!loaded) return;
-    try { localStorage.setItem(STORE, JSON.stringify({ design, info })); } catch {}
-  }, [design, info, loaded]);
+    try { localStorage.setItem(STORE, JSON.stringify({ design, info, qrSource })); } catch {}
+  }, [design, info, qrSource, loaded]);
 
   // Draw every QR element (both sides) whenever its content or colors change.
   const qrEls = useMemo(() => [...design.front.els, ...design.back.els].filter((e) => e.kind === "qr"), [design]);
-  const qrKey = qrEls.map((e) => e.kind === "qr" && `${e.id}|${e.data}|${e.fg}|${e.bg}`).join(";");
+  const qrKey = qrEls.map((e) => e.kind === "qr" && `${e.id}|${e.data}|${e.fg}|${e.bg}|${e.image ? "img" : ""}`).join(";");
   useEffect(() => {
     let live = true;
-    Promise.all(qrEls.map(async (e) => [e.id, e.kind === "qr" ? await qrDataUrl(e) : ""] as const)).then((pairs) => live && setQr(Object.fromEntries(pairs)));
+    // Uploaded QR pictures are drawn as they are (sideSvg reads them from the element).
+    Promise.all(qrEls.map(async (e) => [e.id, e.kind === "qr" && !e.image ? await qrDataUrl(e) : ""] as const)).then((pairs) => live && setQr(Object.fromEntries(pairs)));
     return () => { live = false; };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [qrKey]);
@@ -70,14 +88,14 @@ export function PrintDesigner({ initial }: { initial: Info }) {
     const id = setTimeout(async () => {
       const out: Partial<Record<TemplateId, string>> = {};
       for (const tid of TEMPLATE_IDS) {
-        const d = template(tid, info, design.size);
-        const codes = Object.fromEntries(await Promise.all(d.front.els.filter((e) => e.kind === "qr").map(async (e) => [e.id, e.kind === "qr" ? await qrDataUrl(e) : ""] as const)));
+        const d = template(tid, info, design.size, qrSource);
+        const codes = Object.fromEntries(await Promise.all(d.front.els.filter((e) => e.kind === "qr").map(async (e) => [e.id, e.kind === "qr" && !e.image ? await qrDataUrl(e) : ""] as const)));
         out[tid] = svgUrl(sideSvg(d.front, d.size, codes).svg);
       }
       if (live) setThumbs(out);
     }, 300);
     return () => { live = false; clearTimeout(id); };
-  }, [info, design.size]);
+  }, [info, design.size, qrSource]);
 
   const preview = useMemo(() => svgUrl(sideSvg(side, design.size, qr).svg), [side, design.size, qr]);
 
@@ -134,8 +152,23 @@ export function PrintDesigner({ initial }: { initial: Info }) {
   });
 
   function applyTemplate(id: TemplateId) {
-    setDesign(template(id, info, design.size));
+    setDesign(template(id, info, design.size, qrSource));
     setSel(null);
+  }
+  /** Switches where the QR code comes from, on both sides. A design without a code gets one added. */
+  function chooseQr(next: QrSource, link = info.qr) {
+    setQrSource(next);
+    setSel(null);
+    setDesign((d) => {
+      if (next.mode === "none" || [...d.front.els, ...d.back.els].some((e) => e.kind === "qr")) return applyQrSource(d, next, link);
+      return { ...d, front: { ...d.front, els: [...d.front.els, newQr(d.size, next, link)] } };
+    });
+  }
+  async function uploadQr(file?: File) {
+    if (!file || !/^image\/(png|jpeg|webp|svg\+xml)$/.test(file.type)) return;
+    const src = await toDataUrl(URL.createObjectURL(file), 800);
+    setQrWarn((await hasQrCode(src)) === false);
+    chooseQr({ mode: "image", src });
   }
   async function addImage(file?: File) {
     if (!file || !/^image\/(png|jpeg|webp|svg\+xml)$/.test(file.type)) return;
@@ -200,7 +233,11 @@ export function PrintDesigner({ initial }: { initial: Info }) {
 
         <div className="flex flex-wrap gap-2">
           <button type="button" className={chip(false)} onClick={() => add({ id: uid(), kind: "text", text: t("newText"), x: 30, y: 30, w: 140, size: 10, color: "#17143a", font: "sans", bold: false, align: "start" })}>+ {t("addText")}</button>
-          <button type="button" className={chip(false)} onClick={() => add({ id: uid(), kind: "qr", data: info.qr, x: Math.round(W / 2 - 36), y: Math.round(H / 2 - 36), size: 72, fg: "#17143a", bg: "#ffffff" })}>+ {t("addQr")}</button>
+          <button type="button" className={chip(false)} onClick={() => {
+            const src: QrSource = qrSource.mode === "none" ? { mode: "link" } : qrSource;
+            if (qrSource.mode === "none") setQrSource(src);
+            add({ ...newQr(design.size, src, info.qr), x: Math.round(W / 2 - 36), y: Math.round(H / 2 - 36), size: 72 });
+          }}>+ {t("addQr")}</button>
           <label className={`${chip(false)} cursor-pointer`}>
             + {t("addImage")}
             <input type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml" className="sr-only" onChange={(e) => { addImage(e.target.files?.[0]); e.target.value = ""; }} />
@@ -253,7 +290,8 @@ export function PrintDesigner({ initial }: { initial: Info }) {
                   </div>
                 </>
               )}
-              {selected.kind === "qr" && (
+              {selected.kind === "qr" && selected.image && <p className="text-slate">{t("qr.uploadedNote")}</p>}
+              {selected.kind === "qr" && !selected.image && (
                 <>
                   <label className="block">{t("qrLink")}
                     <input className={input} value={selected.data} onChange={(e) => patch(selected.id, { data: e.target.value })} />
@@ -306,6 +344,40 @@ export function PrintDesigner({ initial }: { initial: Info }) {
         )}
 
         <section className={box}>
+          <h2 className="mb-3 font-display text-xl uppercase">{t("qr.title")}</h2>
+          <div className="flex flex-wrap gap-2">
+            {(["none", "link", "image"] as const).map((m) => (
+              <button key={m} type="button" aria-pressed={qrSource.mode === m} className={chip(qrSource.mode === m)}
+                onClick={() => (m === "image" ? qrUpload.current?.click() : chooseQr({ mode: m }))}>
+                {t(`qr.${m}`)}
+              </button>
+            ))}
+            <input ref={qrUpload} type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml" className="sr-only"
+              onChange={(e) => { uploadQr(e.target.files?.[0]); e.target.value = ""; }} />
+          </div>
+          {qrSource.mode === "link" && (
+            <div className="mt-3">
+              <label className="block text-xs font-semibold text-slate">{t("info.qr")}
+                <input className={`${input} mt-1`} inputMode="url" value={info.qr} placeholder="https://"
+                  onChange={(e) => { const qr = e.target.value; setInfo((s) => ({ ...s, qr })); setDesign((d) => applyQrSource(d, { mode: "link" }, qr)); }} />
+              </label>
+              {initial.qr && info.qr !== initial.qr && (
+                <button type="button" className="mt-2 text-sm underline" onClick={() => { setInfo((s) => ({ ...s, qr: initial.qr })); chooseQr({ mode: "link" }, initial.qr); }}>{t("useCardLink")}</button>
+              )}
+            </div>
+          )}
+          {qrSource.mode === "image" && (
+            <div className="mt-3 flex items-center gap-3">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={qrSource.src} alt="" className="h-16 w-16 rounded-lg bg-white object-contain ring-1 ring-ink/10" />
+              <button type="button" className="rounded-full bg-lime px-4 py-2 text-sm font-semibold" onClick={() => qrUpload.current?.click()}>{t("qr.change")}</button>
+            </div>
+          )}
+          {qrSource.mode === "image" && qrWarn && <p className="mt-2 rounded-xl bg-sun/40 p-2 text-xs">{t("qr.notFound")}</p>}
+          <p className="mt-2 text-xs text-slate">{t(`qr.hint.${qrSource.mode}`)}</p>
+        </section>
+
+        <section className={box}>
           <h2 className="mb-3 font-display text-xl uppercase">{t("details")}</h2>
           <div className="grid grid-cols-[minmax(0,1fr)] gap-2 sm:grid-cols-2">
             {(["name", "title", "phone", "email", "website", "address"] as const).map((k) => (
@@ -313,9 +385,6 @@ export function PrintDesigner({ initial }: { initial: Info }) {
                 <input className={`${input} mt-1`} value={info[k]} onChange={(e) => setInfo((s) => ({ ...s, [k]: e.target.value }))} />
               </label>
             ))}
-            <label className="block text-xs font-semibold text-slate sm:col-span-2">{t("info.qr")}
-              <input className={`${input} mt-1`} value={info.qr} onChange={(e) => setInfo((s) => ({ ...s, qr: e.target.value }))} />
-            </label>
           </div>
           <p className="mt-2 text-xs text-slate">{t("detailsNote")}</p>
         </section>
