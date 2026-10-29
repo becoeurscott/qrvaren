@@ -2,7 +2,7 @@ import { unstable_cache } from "next/cache";
 import { serverDb } from "@/shared/insforge";
 
 // Settings live in InsForge; the admin edits them, the app reads them through a short cache.
-export const DEFAULTS = { monthly: 3, yearly: 30, graceDays: 30, cacheSeconds: 60 };
+export const DEFAULTS = { monthly: 2.99, yearly: 29.99, graceDays: 30, cacheSeconds: 60 };
 
 export const getPrices = unstable_cache(
   async () => {
