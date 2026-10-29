@@ -71,7 +71,9 @@ export function slugCandidates(name: string, count = 6): string[] {
 export const isValidSlug = (s: string) => SLUG_RE.test(s) && !RESERVED_SLUGS.has(s);
 
 const optText = (max: number) => z.string().trim().max(max).optional().nullable().transform((v) => (v ? v : null));
-const url = z.string().trim().max(300).refine((v) => /^https?:\/\/[^\s.]+\.[^\s]+$/i.test(v), "url");
+/** "example.com" → "https://example.com"; links that already have a scheme are kept. */
+export const withScheme = (v: string) => (v && !/^[a-z][a-z0-9+.-]*:/i.test(v) ? `https://${v.replace(/^\/+/, "")}` : v);
+const url = z.string().trim().max(300).transform(withScheme).refine((v) => /^https?:\/\/[^\s.]+\.[^\s]+$/i.test(v), "url");
 const time = z.string().regex(/^([01]\d|2[0-3]):[0-5]\d$/);
 
 /** Validates editor input before it is written (the database re-checks lengths and formats). */

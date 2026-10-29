@@ -4,7 +4,7 @@ import { useState, useTransition } from "react";
 import { useTranslations } from "next-intl";
 import { createBrowserClient } from "@insforge/sdk/ssr";
 import { saveCard } from "../application/actions";
-import { DAYS, SOCIALS, type Card, type CardContent, type Day, type MediaRef } from "../domain/card";
+import { DAYS, SOCIALS, withScheme, type Card, type CardContent, type Day, type MediaRef } from "../domain/card";
 import { CardView, type CardLabels } from "./CardView";
 
 const MAX_BYTES = 5 * 1024 * 1024;
@@ -31,9 +31,10 @@ export function CardEditor({ card, previewLabels }: { card: Card; previewLabels:
   const t = useTranslations("cardEditor");
   const [c, setC] = useState<CardContent>(() => pick(card));
   const [status, setStatus] = useState<"idle" | "saved" | string>("idle");
+  const [errPath, setErrPath] = useState<string | null>(null);
   const [busy, setBusy] = useState<string | null>(null);
   const [pending, start] = useTransition();
-  const set = <K extends keyof CardContent>(k: K, v: CardContent[K]) => { setC((s) => ({ ...s, [k]: v })); setStatus("idle"); };
+  const set = <K extends keyof CardContent>(k: K, v: CardContent[K]) => { setC((s) => ({ ...s, [k]: v })); setStatus("idle"); setErrPath(null); };
 
   async function onImage(kind: "logo" | "photo", file?: File) {
     if (!file) return;
@@ -67,16 +68,26 @@ export function CardEditor({ card, previewLabels }: { card: Card; previewLabels:
   const input = "w-full rounded-2xl border-2 border-ink/10 bg-white px-4 py-3 text-ink outline-none transition focus:border-violet";
   const box = "rounded-[1.75rem] bg-white p-5 sm:p-6";
   const h2 = "mb-4 font-display text-xl uppercase tracking-wide";
+  // Field the server rejected ("website", "links.1.url"…): outlined in red with the message below it.
+  const bad = (path: string) => errPath === path || errPath?.startsWith(`${path}.`);
+  const inputFor = (path: string) => `${input} ${bad(path) ? "!border-coral" : ""}`;
+  const hint = (path: string) => bad(path) && errorKey ? <span className="mt-1 block text-xs font-semibold text-coral">{t(`errors.${errorKey}` as never)}</span> : null;
   const field = (k: "name" | "tagline" | "phone" | "email" | "website" | "address", type = "text", max = 120) => (
-    <label className="block text-sm font-semibold">
+    <label className="block text-sm font-semibold" data-field={k}>
       <span className="mb-1 block text-slate">{t(`fields.${k}`)}</span>
-      <input className={input} type={type} maxLength={max} value={(c[k] as string) ?? ""} onChange={(e) => set(k, e.target.value)}
-        placeholder={k === "website" ? "https://" : k === "phone" ? "+1 555 010 2030" : undefined} />
+      <input className={inputFor(k)} type={k === "website" ? "text" : type} inputMode={k === "website" ? "url" : undefined} maxLength={max}
+        value={(c[k] as string) ?? ""} onChange={(e) => set(k, e.target.value)}
+        onBlur={k === "website" ? (e) => set(k, withScheme(e.target.value.trim())) : undefined}
+        placeholder={k === "website" ? "www.example.com" : k === "phone" ? "+1 555 010 2030" : undefined} />
+      {hint(k)}
     </label>
   );
   const save = () => start(async () => {
     const r = await saveCard(c);
+    setErrPath(r.ok ? null : r.error);
     setStatus(r.ok ? "saved" : r.error.split(".")[0]);
+    if (!r.ok) document.querySelector(`[data-field="${r.error.split(".").slice(0, 2).join(".")}"], [data-field="${r.error.split(".")[0]}"]`)
+      ?.scrollIntoView({ behavior: "smooth", block: "center" });
   });
   const errorKey = status !== "idle" && status !== "saved" ? (["name", "email", "phone", "website", "links", "upload", "slug_taken", "auth"].includes(status) ? status : "invalid") : null;
 
@@ -157,12 +168,16 @@ export function CardEditor({ card, previewLabels }: { card: Card; previewLabels:
           <h2 className={h2}>{t("sections.links")}</h2>
           <div className="space-y-2">
             {c.links.map((l, i) => (
-              <div key={i} className="grid grid-cols-[minmax(0,1fr)] gap-2 sm:grid-cols-[1fr_2fr_auto]">
-                <input className={input} placeholder={t("fields.linkLabel")} maxLength={40} value={l.label}
-                  onChange={(e) => set("links", c.links.map((x, j) => (j === i ? { ...x, label: e.target.value } : x)))} />
-                <input className={input} placeholder="https://" maxLength={300} value={l.url}
-                  onChange={(e) => set("links", c.links.map((x, j) => (j === i ? { ...x, url: e.target.value } : x)))} />
-                <button type="button" className="text-sm underline" onClick={() => set("links", c.links.filter((_, j) => j !== i))}>{t("fields.remove")}</button>
+              <div key={i} data-field={`links.${i}`}>
+                <div className="grid grid-cols-[minmax(0,1fr)] gap-2 sm:grid-cols-[1fr_2fr_auto]">
+                  <input className={inputFor(`links.${i}.label`)} placeholder={t("fields.linkLabel")} maxLength={40} value={l.label}
+                    onChange={(e) => set("links", c.links.map((x, j) => (j === i ? { ...x, label: e.target.value } : x)))} />
+                  <input className={inputFor(`links.${i}.url`)} placeholder="www.example.com" inputMode="url" maxLength={300} value={l.url}
+                    onChange={(e) => set("links", c.links.map((x, j) => (j === i ? { ...x, url: e.target.value } : x)))}
+                    onBlur={(e) => set("links", c.links.map((x, j) => (j === i ? { ...x, url: withScheme(e.target.value.trim()) } : x)))} />
+                  <button type="button" className="text-sm underline" onClick={() => set("links", c.links.filter((_, j) => j !== i))}>{t("fields.remove")}</button>
+                </div>
+                {hint(`links.${i}`)}
               </div>
             ))}
             {c.links.length < 8 && (

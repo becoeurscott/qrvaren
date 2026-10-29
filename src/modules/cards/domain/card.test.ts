@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { CardContentSchema, RESERVED_SLUGS, cardVCard, isValidSlug, slugCandidates, slugify, socialUrl } from "./card";
+import { CardContentSchema, RESERVED_SLUGS, cardVCard, isValidSlug, slugCandidates, slugify, socialUrl, withScheme } from "./card";
 import { RESERVED } from "../../../../infra/card-subdomains/worker.js";
 
 describe("slugs", () => {
@@ -53,5 +53,19 @@ describe("links and vCard", () => {
     expect(v).toContain("ADR;TYPE=WORK:;;1 Main St\\, NYC;;;;");
     expect(v).toContain("URL;TYPE=card:https://joe.qrvaren.online");
     expect(v.startsWith("BEGIN:VCARD\r\n")).toBe(true);
+  });
+});
+
+describe("withScheme", () => {
+  it("adds https to bare domains and keeps existing schemes", () => {
+    expect(withScheme("example.com")).toBe("https://example.com");
+    expect(withScheme("www.blue-bakery.com/menu")).toBe("https://www.blue-bakery.com/menu");
+    expect(withScheme("http://x.com")).toBe("http://x.com");
+    expect(withScheme("")).toBe("");
+  });
+  it("accepts a website typed without https", () => {
+    const r = CardContentSchema.safeParse({ name: "A", hours: [], socials: {}, links: [{ label: "Menu", url: "menu.example.com" }], gallery: [], locale: "en", website: "example.com" });
+    expect(r.success && r.data.website).toBe("https://example.com");
+    expect(r.success && r.data.links[0].url).toBe("https://menu.example.com");
   });
 });
