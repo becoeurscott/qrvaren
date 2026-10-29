@@ -8,7 +8,8 @@
     "cta": "Crear un QR",
     "dashboard": "Panel",
     "menu": "Menú",
-    "close": "Cerrar el menú"
+    "close": "Cerrar el menú",
+    "logout": "Cerrar sesión"
   },
   "hero": {
     "badge": "Gratis · Sin registro · Nunca caduca",

@@ -4,6 +4,7 @@ import { BRAND_NAME } from "@/shared/config";
 import { LocaleSwitcher } from "./LocaleSwitcher";
 import { MobileMenu } from "./MobileMenu";
 import { AuthLink } from "./AuthLink";
+import { LogoutButton } from "./LogoutButton";
 import { Button } from "./ui/Button";
 
 // Floating pill navigation, as in the Varen template. Below md the links move into MobileMenu.
@@ -29,9 +30,12 @@ export async function Nav() {
         <span className="hidden md:block">
           <AuthLink login={t("login")} dashboard={t("dashboard")} className="px-2 text-sm font-semibold transition hover:text-lime" />
         </span>
+        <span className="hidden md:block">
+          <LogoutButton label={t("logout")} locale={locale} className="px-2 text-sm font-semibold text-white/75 transition hover:text-lime disabled:opacity-50" />
+        </span>
         <span className="hidden md:block"><LocaleSwitcher current={locale} /></span>
         <span className="hidden sm:block"><Button href="/create" variant="light" size="sm">{t("cta")}</Button></span>
-        <MobileMenu items={items} cta={{ href: "/create", label: t("cta") }} locale={locale} openLabel={t("menu")} closeLabel={t("close")} dashboardLabel={t("dashboard")} />
+        <MobileMenu items={items} cta={{ href: "/create", label: t("cta") }} locale={locale} openLabel={t("menu")} closeLabel={t("close")} dashboardLabel={t("dashboard")} logoutLabel={t("logout")} />
       </nav>
     </header>
   );

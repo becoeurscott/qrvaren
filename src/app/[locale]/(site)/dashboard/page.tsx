@@ -4,7 +4,6 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Reveal } from "@/components/motion";
 import { Button } from "@/components/ui/Button";
 import { Link } from "@/i18n/routing";
-import { signOut } from "@/app/actions/auth";
 import { getUser, userDb } from "@/shared/auth";
 import { getMyPages } from "@/modules/cards/application/actions";
 import { cardHostLabel, cardUrl } from "@/modules/cards/domain/cardUrl";
@@ -44,10 +43,6 @@ export default async function DashboardPage({ params }: { params: Promise<{ loca
         </div>
         <div className="flex flex-wrap items-center gap-3">
           <Button href="/create" variant="ink">{t("newQr")}</Button>
-          <form action={signOut}>
-            <input type="hidden" name="locale" value={locale} />
-            <button className="rounded-full px-5 py-3 font-semibold ring-2 ring-ink/15 transition hover:bg-white">{t("logout")}</button>
-          </form>
         </div>
       </div>
 

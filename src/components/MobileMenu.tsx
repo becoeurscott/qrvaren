@@ -5,12 +5,13 @@ import { createPortal } from "react-dom";
 import { Link, usePathname } from "@/i18n/routing";
 import { LocaleSwitcher } from "./LocaleSwitcher";
 import { useSession } from "@/shared/useSession";
+import { LogoutButton } from "./LogoutButton";
 
 type Item = { href: string; label: string };
 
 // Full-screen menu for small screens; the desktop nav shows the same links inline.
-export function MobileMenu({ items: baseItems, cta, locale, openLabel, closeLabel, dashboardLabel }: {
-  items: Item[]; cta: Item; locale: string; openLabel: string; closeLabel: string; dashboardLabel: string;
+export function MobileMenu({ items: baseItems, cta, locale, openLabel, closeLabel, dashboardLabel, logoutLabel }: {
+  items: Item[]; cta: Item; locale: string; openLabel: string; closeLabel: string; dashboardLabel: string; logoutLabel: string;
 }) {
   const user = useSession();
   // Signed-in users get their dashboard instead of "Log in".
@@ -59,6 +60,8 @@ export function MobileMenu({ items: baseItems, cta, locale, openLabel, closeLabe
               {it.label}
             </Link>
           ))}
+          <LogoutButton label={logoutLabel} locale={locale}
+            className={`mt-4 self-start text-xl font-semibold underline underline-offset-4 transition duration-500 disabled:opacity-50 ${open ? "opacity-100" : "opacity-0"}`} />
         </nav>
         <div className="flex items-center justify-between gap-4">
           <span className="rounded-full bg-violet-deep px-2 py-1"><LocaleSwitcher current={locale} /></span>

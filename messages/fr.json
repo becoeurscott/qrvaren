@@ -8,7 +8,8 @@
     "cta": "Créer un QR",
     "dashboard": "Tableau de bord",
     "menu": "Menu",
-    "close": "Fermer le menu"
+    "close": "Fermer le menu",
+    "logout": "Déconnexion"
   },
   "hero": {
     "badge": "Gratuit · Sans inscription · N'expire jamais",

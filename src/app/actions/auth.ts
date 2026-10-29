@@ -40,9 +40,8 @@ export async function signInWithGoogle(formData: FormData) {
   redirect(data.url);
 }
 
-export async function signOut(formData: FormData) {
-  const locale = safeLocale(String(formData.get("locale") ?? ""));
+/** Ends the session (clears the httpOnly cookies). The caller reloads the page so every component sees it. */
+export async function signOut() {
   const auth = createAuthActions({ cookies: await cookies() });
   await auth.signOut();
-  redirect(`/${locale}`);
 }
