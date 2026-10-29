@@ -19,7 +19,9 @@ const RADIUS = { square: "6px", rounded: "16px", pill: "9999px" } as const;
 
 /** Inline style for the logo image inside its frame: fill or fit, then the user's zoom and offset. */
 export function logoStyle(l: Design["logo"], fit: Design["logo"]["fit"] = l.fit): CSSProperties {
-  return { objectFit: fit, transform: `translate(${l.x}%, ${l.y}%) scale(${l.zoom})` };
+  // No transform when untouched: a transformed image gets its own graphics layer, which costs memory on phones.
+  const moved = l.x !== 0 || l.y !== 0 || l.zoom !== 1;
+  return { objectFit: fit, ...(moved ? { transform: `translate(${l.x}%, ${l.y}%) scale(${l.zoom})` } : {}) };
 }
 
 /** Inline style for a link button in the design's button style. */

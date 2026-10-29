@@ -11,30 +11,47 @@ import { CardView, type CardLabels } from "./CardView";
 import { DesignEditor } from "./DesignEditor";
 import { LogoAdjuster } from "./LogoAdjuster";
 
-const MAX_BYTES = 5 * 1024 * 1024;
+/** Largest file we accept from the picker; it is shrunk before upload. */
+const MAX_BYTES = 25 * 1024 * 1024;
+/** Longest side kept for card images. Phone photos (4000+ px) are shrunk to this before upload. */
+const MAX_SIDE = 1600;
 const IMAGE_TYPES = /^image\/(png|jpeg|webp)$/;
 let storage: ReturnType<typeof createBrowserClient>["storage"] | undefined;
 
-/** Uploads one image to the public card-media bucket and returns its url + key. */
-async function upload(file: File, prefix: string): Promise<MediaRef> {
-  if (!IMAGE_TYPES.test(file.type) || file.size > MAX_BYTES) throw new Error("upload");
+/**
+ * Shrinks a large photo to MAX_SIDE so pages stay light: a full-size phone photo decodes to ~50 MB,
+ * shown several times in the editor, and can crash Safari on iPhone. PNG/WebP keep transparency.
+ */
+async function shrink(file: File): Promise<{ file: File; w: number; h: number }> {
+  const url = URL.createObjectURL(file);
+  try {
+    const img = await new Promise<HTMLImageElement>((ok, ko) => { const i = new Image(); i.onload = () => ok(i); i.onerror = ko; i.src = url; });
+    const w = img.naturalWidth, h = img.naturalHeight, k = MAX_SIDE / Math.max(w, h);
+    if (k >= 1 && file.size <= 1.5 * 1024 * 1024) return { file, w, h };
+    const c = document.createElement("canvas");
+    c.width = Math.round(w * Math.min(1, k));
+    c.height = Math.round(h * Math.min(1, k));
+    c.getContext("2d")!.drawImage(img, 0, 0, c.width, c.height);
+    const type = file.type === "image/jpeg" ? "image/jpeg" : "image/png";
+    const blob = await new Promise<Blob | null>((ok) => c.toBlob(ok, type, 0.86));
+    const out = { w: c.width, h: c.height };
+    c.width = c.height = 0; // frees the bitmap right away (Safari keeps canvas memory until then)
+    if (!blob || blob.size >= file.size) return { file, w, h };
+    return { file: new File([blob], file.name, { type }), ...out };
+  } finally { URL.revokeObjectURL(url); }
+}
+
+/** Uploads one image (shrunk first) to the public card-media bucket and returns its url + key and size. */
+async function upload(original: File, prefix: string): Promise<MediaRef & { w: number; h: number }> {
+  if (!IMAGE_TYPES.test(original.type) || original.size > MAX_BYTES) throw new Error("upload");
+  const { file, w, h } = await shrink(original);
   storage ??= createBrowserClient().storage;
   const ext = file.type === "image/png" ? "png" : file.type === "image/webp" ? "webp" : "jpg";
   const { data, error } = await storage.from("card-media").upload(`${prefix}/${crypto.randomUUID()}.${ext}`, file);
   if (error || !data) throw new Error("upload");
-  return { url: data.url, key: data.key };
+  return { url: data.url, key: data.key, w, h };
 }
 
-/** Natural size of an image file (0×0 if it can't be read). */
-function imageSize(file: File): Promise<{ w: number; h: number }> {
-  return new Promise((resolve) => {
-    const url = URL.createObjectURL(file);
-    const img = new Image();
-    img.onload = () => { resolve({ w: img.naturalWidth, h: img.naturalHeight }); URL.revokeObjectURL(url); };
-    img.onerror = () => { resolve({ w: 0, h: 0 }); URL.revokeObjectURL(url); };
-    img.src = url;
-  });
-}
 
 type EditorState = CardContent & { theme: string; design: Design };
 
@@ -69,10 +86,10 @@ export function CardEditor({ card, previewLabels, publish }: {
     if (!file) return;
     setBusy(kind);
     try {
-      const [m, size] = await Promise.all([upload(file, card.id), imageSize(file)]);
+      const m = await upload(file, card.id);
       // A new logo starts with a framing that suits its shape; the user adjusts from there.
       setC((s) => ({ ...s, [`${kind}_url`]: m.url, [`${kind}_key`]: m.key,
-        ...(kind === "logo" ? { design: { ...s.design, logo: logoFraming(size.w, size.h) } } : {}) }));
+        ...(kind === "logo" ? { design: { ...s.design, logo: logoFraming(m.w, m.h) } } : {}) }));
       setStatus("idle");
     } catch { setStatus("upload"); } finally { setBusy(null); }
   }
@@ -81,7 +98,9 @@ export function CardEditor({ card, previewLabels, publish }: {
     setBusy("gallery");
     try {
       const room = 8 - c.gallery.length;
-      const added = await Promise.all([...files].slice(0, room).map((f) => upload(f, card.id)));
+      // One at a time: decoding several phone photos at once is what runs Safari out of memory.
+      const added: MediaRef[] = [];
+      for (const f of [...files].slice(0, room)) { const { url, key } = await upload(f, card.id); added.push({ url, key }); }
       setC((s) => ({ ...s, gallery: [...s.gallery, ...added].slice(0, 8) }));
       setStatus("idle");
     } catch { setStatus("upload"); } finally { setBusy(null); }
