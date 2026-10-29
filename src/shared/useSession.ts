@@ -1,20 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { createBrowserClient } from "@insforge/sdk/ssr";
 
 export type SessionUser = { id: string; email?: string | null; profile?: { name?: string | null; avatar_url?: string | null } | null };
 
-let client: ReturnType<typeof createBrowserClient> | undefined;
 let pending: Promise<SessionUser | null> | undefined;
 
 // One lookup per page load, shared by every component that needs it (nav, generator, CTAs).
+// Asked of the server: the session cookies are httpOnly, so the browser SDK can't see them.
 function loadUser() {
   pending ??= (async () => {
     try {
-      client ??= createBrowserClient();
-      const { data } = await client.auth.getCurrentUser();
-      return (data?.user as SessionUser | null) ?? null;
+      const r = await fetch("/api/auth/me", { credentials: "same-origin", cache: "no-store" });
+      if (!r.ok) return null;
+      return ((await r.json()) as { user: SessionUser | null }).user;
     } catch {
       return null;
     }
