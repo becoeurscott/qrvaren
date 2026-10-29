@@ -5,8 +5,10 @@ import { useLocale, useTranslations } from "next-intl";
 import { COUNTRIES, flag, joinPhone, splitPhone } from "../domain/phone";
 import { createBrowserClient } from "@insforge/sdk/ssr";
 import { saveCard, startCheckout } from "../application/actions";
-import { CARD_THEMES, DAYS, SOCIALS, withScheme, type Card, type CardContent, type Day, type MediaRef } from "../domain/card";
-import { CardView, THEMES, type CardLabels } from "./CardView";
+import { DAYS, SOCIALS, withScheme, type Card, type CardContent, type Day, type MediaRef, type PageKind } from "../domain/card";
+import { resolveDesign, type Design } from "../domain/design";
+import { CardView, type CardLabels } from "./CardView";
+import { DesignEditor } from "./DesignEditor";
 
 const MAX_BYTES = 5 * 1024 * 1024;
 const IMAGE_TYPES = /^image\/(png|jpeg|webp)$/;
@@ -22,11 +24,13 @@ async function upload(file: File, prefix: string): Promise<MediaRef> {
   return { url: data.url, key: data.key };
 }
 
-const pick = (c: Card): CardContent => ({
+type EditorState = CardContent & { theme: string; design: Design };
+
+const pick = (c: Card): EditorState => ({
   name: c.name, tagline: c.tagline ?? "", description: c.description ?? "", phone: c.phone ?? "", email: c.email ?? "",
   website: c.website ?? "", address: c.address ?? "", hours: c.hours ?? [], socials: c.socials ?? {}, links: c.links ?? [],
   gallery: c.gallery ?? [], logo_url: c.logo_url, logo_key: c.logo_key, photo_url: c.photo_url, photo_key: c.photo_key, locale: c.locale,
-  theme: c.theme ?? "lavender",
+  theme: c.theme ?? "lavender", design: resolveDesign(c.theme, c.design),
 });
 
 export function CardEditor({ card, previewLabels, publish }: {
@@ -36,7 +40,8 @@ export function CardEditor({ card, previewLabels, publish }: {
 }) {
   const [askPublish, setAskPublish] = useState(false);
   const t = useTranslations("cardEditor");
-  const [c, setC] = useState<CardContent>(() => pick(card));
+  const kind: PageKind = card.kind ?? "card";
+  const [c, setC] = useState<EditorState>(() => pick(card));
   const [status, setStatus] = useState<"idle" | "saved" | string>("idle");
   const [errPath, setErrPath] = useState<string | null>(null);
   // Kept apart from the number because +1 is shared (US, Canada…).
@@ -46,7 +51,7 @@ export function CardEditor({ card, previewLabels, publish }: {
   const countryName = (iso: string) => names.of(iso) ?? iso;
   const [busy, setBusy] = useState<string | null>(null);
   const [pending, start] = useTransition();
-  const set = <K extends keyof CardContent>(k: K, v: CardContent[K]) => { setC((s) => ({ ...s, [k]: v })); setStatus("idle"); setErrPath(null); };
+  const set = <K extends keyof EditorState>(k: K, v: EditorState[K]) => { setC((s) => ({ ...s, [k]: v })); setStatus("idle"); setErrPath(null); };
 
   async function onImage(kind: "logo" | "photo", file?: File) {
     if (!file) return;
@@ -95,7 +100,7 @@ export function CardEditor({ card, previewLabels, publish }: {
     </label>
   );
   const save = () => start(async () => {
-    const r = await saveCard(c);
+    const r = await saveCard(c, kind);
     setErrPath(r.ok ? null : r.error);
     setStatus(r.ok ? "saved" : r.error.split(".")[0]);
     if (r.ok && publish) setAskPublish(true);
@@ -135,7 +140,7 @@ export function CardEditor({ card, previewLabels, publish }: {
           </div>
         </section>
 
-        <section className={box}>
+        {kind === "card" && <section className={box}>
           <h2 className={h2}>{t("sections.contact")}</h2>
           <div className="grid grid-cols-[minmax(0,1fr)] gap-3 sm:grid-cols-2">
             <label className="block text-sm font-semibold" data-field="phone">
@@ -152,9 +157,9 @@ export function CardEditor({ card, previewLabels, publish }: {
             </label>
             {field("email", "email")}{field("website", "url", 300)}{field("address", "text", 200)}
           </div>
-        </section>
+        </section>}
 
-        <section className={box}>
+        {kind === "card" && <section className={box}>
           <h2 className={h2}>{t("sections.hours")}</h2>
           <div className="space-y-2">
             {DAYS.map((d) => {
@@ -174,7 +179,7 @@ export function CardEditor({ card, previewLabels, publish }: {
               );
             })}
           </div>
-        </section>
+        </section>}
 
         <section className={box}>
           <h2 className={h2}>{t("sections.socials")}</h2>
@@ -213,7 +218,7 @@ export function CardEditor({ card, previewLabels, publish }: {
           </div>
         </section>
 
-        <section className={box}>
+        {kind === "card" && <section className={box}>
           <h2 className={h2}>{t("sections.gallery")}</h2>
           <div className="grid grid-cols-4 gap-2">
             {c.gallery.map((g) => (
@@ -231,22 +236,12 @@ export function CardEditor({ card, previewLabels, publish }: {
               <input type="file" multiple accept="image/png,image/jpeg,image/webp" className="sr-only" onChange={(e) => onGallery(e.target.files)} />
             </label>
           )}
-        </section>
+        </section>}
 
         <section className={box}>
-          <h2 className={h2}>{t("sections.theme")}</h2>
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-            {CARD_THEMES.map((k) => (
-              <button key={k} type="button" onClick={() => set("theme", k)} aria-pressed={c.theme === k}
-                className={`overflow-hidden rounded-2xl text-left text-sm font-bold ring-2 transition ${c.theme === k ? "ring-violet" : "ring-ink/10 hover:ring-ink/30"}`}>
-                <span className={`block h-12 ${THEMES[k].cover}`} />
-                <span className={`flex items-center justify-between px-3 py-2 ${THEMES[k].article}`}>
-                  {t(`themes.${k}`)}
-                  <span className={`h-3 w-3 rounded-full ${THEMES[k].primary.replace(/!/g, "")}`} />
-                </span>
-              </button>
-            ))}
-          </div>
+          <h2 className={h2}>{t("sections.design")}</h2>
+          <DesignEditor theme={c.theme} design={c.design} upload={(f) => upload(f, card.id)}
+            onChange={(theme, design) => setC((s) => { setStatus("idle"); return { ...s, theme, design }; })} />
         </section>
 
         <section className={box}>
@@ -272,7 +267,7 @@ export function CardEditor({ card, previewLabels, publish }: {
 
       <aside className="min-w-0 lg:sticky lg:top-24 lg:self-start">
         <p className="mb-3 text-sm font-bold uppercase tracking-widest text-slate">{t("preview")}</p>
-        <CardView card={c} labels={previewLabels} />
+        <CardView card={c} kind={kind} labels={previewLabels} />
       </aside>
 
       {/* After a save, an unpublished card is offered checkout right away (or kept as a draft). */}
@@ -288,6 +283,7 @@ export function CardEditor({ card, previewLabels, publish }: {
                 <form key={plan} action={startCheckout}>
                   <input type="hidden" name="locale" value={publish.locale} />
                   <input type="hidden" name="plan" value={plan} />
+                  <input type="hidden" name="kind" value={kind} />
                   <button className={`btn w-full rounded-full px-6 py-4 font-semibold ${plan === "yearly" ? "bg-lime text-ink" : "bg-ink text-white"}`}>
                     {t(plan, { price: `$${publish.prices[plan]}` })}
                   </button>

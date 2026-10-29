@@ -4,10 +4,10 @@ import { useEffect, useState, useTransition } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/routing";
 import { checkSlug, createCard, suggestSlug } from "../application/actions";
-import { slugify } from "../domain/card";
+import { slugify, type PageKind } from "../domain/card";
 
 /** First step: business name and the permanent card address (suggested, editable, checked live). */
-export function CreateCardForm({ hostSuffix }: { hostSuffix: string }) {
+export function CreateCardForm({ hostSuffix, kind = "card" }: { hostSuffix: string; kind?: PageKind }) {
   const t = useTranslations("cardEditor");
   const locale = useLocale() as "en" | "es" | "fr";
   const router = useRouter();
@@ -46,14 +46,14 @@ export function CreateCardForm({ hostSuffix }: { hostSuffix: string }) {
         e.preventDefault();
         setError(null);
         start(async () => {
-          const r = await createCard({ name, slug, locale });
+          const r = await createCard({ name, slug, locale, kind });
           if (r.ok) router.refresh();
           else setError(t(`errors.${r.error}` as never));
         });
       }}
     >
       <label className="block text-sm font-semibold">
-        <span className="mb-1 block text-slate">{t("nameLabel")}</span>
+        <span className="mb-1 block text-slate">{t(kind === "bio" ? "nameLabelBio" : "nameLabel")}</span>
         <input className={input} value={name} maxLength={80} required autoFocus onChange={(e) => setName(e.target.value)} placeholder="Blue Bakery" />
       </label>
       <label className="block text-sm font-semibold">

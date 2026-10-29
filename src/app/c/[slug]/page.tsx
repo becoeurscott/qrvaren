@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { getPublicCard } from "@/modules/cards/application/public";
 import { cardUrl } from "@/modules/cards/domain/cardUrl";
 import { CardView, type CardLabels } from "@/modules/cards/interface/CardView";
+import { backgroundCss, resolveDesign } from "@/modules/cards/domain/design";
 import { BRAND_NAME, SITE_URL } from "@/shared/config";
 import { ClickTracker, ReportCard, ViewBeacon } from "./CardActions";
 
@@ -39,7 +40,7 @@ export default async function PublicCardPage({ params }: Props) {
           <p className="font-display text-5xl uppercase text-lime">{draft ? t("draftTitle") : card ? t("suspendedTitle") : t("missingTitle")}</p>
           <p className="mt-4 text-white/80">{draft ? t("draftText", { name: card.name }) : card ? t("suspendedText", { name: card.name }) : t("missingText")}</p>
           {draft ? (
-            <a href={`${SITE_URL}/${card.locale}/dashboard/card`} className="mt-8 inline-block rounded-full bg-lime px-6 py-3 font-semibold text-ink">{t("draftOwner")}</a>
+            <a href={`${SITE_URL}/${card.locale}/dashboard`} className="mt-8 inline-block rounded-full bg-lime px-6 py-3 font-semibold text-ink">{t("draftOwner")}</a>
           ) : (
             <a href={home} className="mt-8 inline-block rounded-full bg-lime px-6 py-3 font-semibold text-ink">{t("makeYours")}</a>
           )}
@@ -49,13 +50,17 @@ export default async function PublicCardPage({ params }: Props) {
   }
 
   const keys = ["call", "save", "directions", "hours", "contact", "links", "gallery", "closed", "website", "email", "phone", "address", "today"] as const;
+  const design = resolveDesign(card.theme, card.design);
+  const kind = card.kind === "bio" ? "bio" : "card";
   const labels = { ...Object.fromEntries(keys.map((k) => [k, t(k)])), days: t.raw("days") } as CardLabels;
   return (
-    <main className="min-h-screen px-3 py-6 grid-bg sm:py-12">
+    <main className="min-h-screen px-3 py-6 sm:py-12" style={{ background: backgroundCss(design.bg), backgroundAttachment: "fixed", color: design.text }}>
       <CardView
         card={card}
+        kind={kind}
+        framed={false}
         labels={labels}
-        vcfHref={`/c/${card.slug}/vcf`}
+        vcfHref={kind === "card" ? `/c/${card.slug}/vcf` : undefined}
         footer={
           <div className="mt-8 space-y-3 border-t border-current/10 pt-5">
             <a href={home} className="block text-center text-xs font-semibold opacity-60">{t("madeWith", { brand: BRAND_NAME })}</a>

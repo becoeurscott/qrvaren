@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { profileUrl, whatsappUrl } from "../../qr/domain/presets";
+import { DesignSchema, type Design } from "./design";
 
 // Business card model shared by the editor, the public page and the vCard download.
 
@@ -12,9 +13,9 @@ export type Social = (typeof SOCIALS)[number];
 
 export type MediaRef = { url: string; key: string };
 
-/** Visual templates for the public card (must match the cards.theme check). */
-export const CARD_THEMES = ["lavender", "midnight", "minimal", "sunset"] as const;
-export type CardTheme = (typeof CARD_THEMES)[number];
+/** The two hosted products: a business card, or a link-in-bio page. */
+export const PAGE_KINDS = ["card", "bio"] as const;
+export type PageKind = (typeof PAGE_KINDS)[number];
 
 /** Taps counted on the public card (must match public.record_card_click). */
 export type ClickTarget = "call" | "save" | "directions" | "website" | "email" | "link" | Social;
@@ -36,11 +37,14 @@ export type CardContent = {
   photo_url?: string | null;
   photo_key?: string | null;
   locale: "en" | "es" | "fr";
-  theme?: CardTheme;
+  /** Preset the design started from, or "custom". */
+  theme?: string;
+  design?: Partial<Design> | null;
 };
 
 export type Card = CardContent & {
   id: string;
+  kind: PageKind;
   slug: string;
   status: "draft" | "active" | "suspended" | "hidden";
   plan?: "monthly" | "yearly" | null;
@@ -103,7 +107,8 @@ export const CardContentSchema = z.object({
   photo_url: z.string().url().nullable().optional(),
   photo_key: z.string().nullable().optional(),
   locale: z.enum(["en", "es", "fr"]),
-  theme: z.enum(CARD_THEMES).default("lavender"),
+  theme: z.string().regex(/^[a-z0-9-]{1,30}$/).default("lavender"),
+  design: DesignSchema.optional(),
 });
 
 /** Public link for a social handle (usernames or pasted profile links). */

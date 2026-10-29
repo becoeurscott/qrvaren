@@ -6,6 +6,10 @@ type Setting = { key: string; value: unknown; updated_at: string };
 const HINTS: Record<string, string> = {
   "price.card.monthly_usd": "Business card price per month (USD)",
   "price.card.yearly_usd": "Business card price per year (USD)",
+  "price.bio.monthly_usd": "Link-in-bio page price per month (USD)",
+  "price.bio.yearly_usd": "Link-in-bio page price per year (USD)",
+  "stripe.price.bio_monthly": "Stripe price id (\"price_…\") for the monthly link-in-bio plan",
+  "stripe.price.bio_yearly": "Stripe price id (\"price_…\") for the yearly link-in-bio plan",
   "card.grace_days": "Days a card stays online after a subscription ends",
   config_cache_seconds: "How long the site caches these settings",
   config_version: "Bumped automatically on every change",

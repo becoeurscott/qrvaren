@@ -397,7 +397,12 @@
     "scans30": "QR scans of your card, last 30 days",
     "printTitle": "Printed card",
     "printText": "Design a paper business card with your QR code and download it as PDF.",
-    "printCta": "Design my card"
+    "printCta": "Design my card",
+    "bio": "My link page",
+    "bioPitch": "One link for your bio with all your links, fully customisable.",
+    "bioCta": "Create my page",
+    "edit": "Edit",
+    "open": "Open"
   },
   "legal": {
     "updated": "Last updated: October 28, 2026",
@@ -664,7 +669,7 @@
       "links": "Links",
       "gallery": "Gallery",
       "language": "Card language",
-      "theme": "Template"
+      "design": "Design"
     },
     "fields": {
       "country": "Country",
@@ -737,12 +742,6 @@
       "sat": "Saturday",
       "sun": "Sunday"
     },
-    "themes": {
-      "lavender": "Lavender",
-      "midnight": "Midnight",
-      "minimal": "Minimal",
-      "sunset": "Sunset"
-    },
     "stats": "Last 30 days: {views} visits · {scans} from QR scans · {links} from the link",
     "clicksTitle": "Taps on your card (30 days)",
     "noClicks": "No taps yet.",
@@ -760,7 +759,87 @@
       "linkedin": "LinkedIn",
       "youtube": "YouTube",
       "whatsapp": "WhatsApp"
-    }
+    },
+    "design": {
+      "theme": "Theme",
+      "custom": "Custom",
+      "header": "Header",
+      "layout": "Layout",
+      "bg": "Background",
+      "buttons": "Buttons",
+      "text": "Text",
+      "colors": "Colours",
+      "presets": {
+        "lavender": "Lavender",
+        "midnight": "Midnight",
+        "minimal": "Minimal",
+        "sunset": "Sunset",
+        "forest": "Forest",
+        "candy": "Candy",
+        "editorial": "Editorial",
+        "terminal": "Terminal"
+      },
+      "layouts": {
+        "classic": "Classic",
+        "hero": "Hero",
+        "banner": "Banner",
+        "cutout": "Cutout",
+        "shape": "Shape"
+      },
+      "layoutHint": {
+        "classic": "Round profile picture above your name.",
+        "hero": "Your profile picture fills the top of the page.",
+        "banner": "Your cover image across the top, profile picture on it.",
+        "cutout": "Your profile picture without a frame: best with a transparent PNG.",
+        "shape": "Your profile picture in an organic shape."
+      },
+      "titleStyle": "Title style",
+      "title": {
+        "text": "Text",
+        "logo": "Logo"
+      },
+      "uploadLogo": "Upload logo",
+      "uploadImage": "Upload image",
+      "change": "Change",
+      "titleFont": "Title font",
+      "samePage": "Same as page",
+      "titleColor": "Title colour",
+      "bgTypes": {
+        "solid": "Solid",
+        "gradient": "Gradient",
+        "image": "Image"
+      },
+      "color": "Colour",
+      "from": "From",
+      "to": "To",
+      "angle": "Angle",
+      "dim": "Darken image",
+      "style": "Style",
+      "buttonStyles": {
+        "fill": "Filled",
+        "outline": "Outline",
+        "shadow": "Hard shadow",
+        "soft": "Soft"
+      },
+      "corners": "Corners",
+      "radii": {
+        "square": "Square",
+        "rounded": "Rounded",
+        "pill": "Pill"
+      },
+      "buttonColor": "Button colour",
+      "buttonText": "Button text",
+      "font": "Page font",
+      "textColor": "Text colour",
+      "mutedColor": "Secondary text",
+      "accent": "Accent",
+      "panel": "Boxes"
+    },
+    "nameLabelBio": "Your name or brand",
+    "createTitleBio": "Create your link page",
+    "createSubBio": "One link for everything you share: socials, shop, videos. Start with your name.",
+    "viewBio": "Open my page",
+    "qrTitleBio": "Your page's QR code"
   },
   "cardPage": {
     "call": "Call",

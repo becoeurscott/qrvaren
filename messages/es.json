@@ -397,7 +397,12 @@
     "scans30": "Escaneos del QR de tu tarjeta, últimos 30 días",
     "printTitle": "Tarjeta impresa",
     "printText": "Diseña una tarjeta de visita en papel con tu código QR y descárgala en PDF.",
-    "printCta": "Diseñar mi tarjeta"
+    "printCta": "Diseñar mi tarjeta",
+    "bio": "Mi página de enlaces",
+    "bioPitch": "Un solo enlace para tu bio con todos tus enlaces, totalmente personalizable.",
+    "bioCta": "Crear mi página",
+    "edit": "Editar",
+    "open": "Abrir"
   },
   "legal": {
     "updated": "Última actualización: 28 de octubre de 2026",
@@ -664,7 +669,7 @@
       "links": "Enlaces",
       "gallery": "Galería",
       "language": "Idioma de la tarjeta",
-      "theme": "Plantilla"
+      "design": "Diseño"
     },
     "fields": {
       "country": "País",
@@ -737,12 +742,6 @@
       "sat": "Sábado",
       "sun": "Domingo"
     },
-    "themes": {
-      "lavender": "Lavanda",
-      "midnight": "Medianoche",
-      "minimal": "Minimalista",
-      "sunset": "Atardecer"
-    },
     "stats": "Últimos 30 días: {views} visitas · {scans} por escaneo del QR · {links} por el enlace",
     "clicksTitle": "Toques en tu tarjeta (30 días)",
     "noClicks": "Aún no hay toques.",
@@ -760,7 +759,87 @@
       "linkedin": "LinkedIn",
       "youtube": "YouTube",
       "whatsapp": "WhatsApp"
-    }
+    },
+    "design": {
+      "theme": "Tema",
+      "custom": "Personalizado",
+      "header": "Encabezado",
+      "layout": "Disposición",
+      "bg": "Fondo",
+      "buttons": "Botones",
+      "text": "Texto",
+      "colors": "Colores",
+      "presets": {
+        "lavender": "Lavanda",
+        "midnight": "Medianoche",
+        "minimal": "Minimalista",
+        "sunset": "Atardecer",
+        "forest": "Bosque",
+        "candy": "Caramelo",
+        "editorial": "Editorial",
+        "terminal": "Terminal"
+      },
+      "layouts": {
+        "classic": "Clásico",
+        "hero": "Hero",
+        "banner": "Banner",
+        "cutout": "Recortado",
+        "shape": "Forma"
+      },
+      "layoutHint": {
+        "classic": "Foto de perfil redonda sobre tu nombre.",
+        "hero": "Tu foto de perfil ocupa la parte superior.",
+        "banner": "Tu imagen de portada arriba, con tu foto de perfil encima.",
+        "cutout": "Tu foto de perfil sin marco: ideal con un PNG transparente.",
+        "shape": "Tu foto de perfil en una forma orgánica."
+      },
+      "titleStyle": "Estilo del título",
+      "title": {
+        "text": "Texto",
+        "logo": "Logo"
+      },
+      "uploadLogo": "Subir logo",
+      "uploadImage": "Subir imagen",
+      "change": "Cambiar",
+      "titleFont": "Fuente del título",
+      "samePage": "Igual que la página",
+      "titleColor": "Color del título",
+      "bgTypes": {
+        "solid": "Sólido",
+        "gradient": "Degradado",
+        "image": "Imagen"
+      },
+      "color": "Color",
+      "from": "Desde",
+      "to": "Hasta",
+      "angle": "Ángulo",
+      "dim": "Oscurecer imagen",
+      "style": "Estilo",
+      "buttonStyles": {
+        "fill": "Relleno",
+        "outline": "Contorno",
+        "shadow": "Sombra",
+        "soft": "Suave"
+      },
+      "corners": "Esquinas",
+      "radii": {
+        "square": "Rectas",
+        "rounded": "Redondeadas",
+        "pill": "Píldora"
+      },
+      "buttonColor": "Color de botones",
+      "buttonText": "Texto de botones",
+      "font": "Fuente de la página",
+      "textColor": "Color del texto",
+      "mutedColor": "Texto secundario",
+      "accent": "Acento",
+      "panel": "Recuadros"
+    },
+    "nameLabelBio": "Tu nombre o marca",
+    "createTitleBio": "Crea tu página de enlaces",
+    "createSubBio": "Un solo enlace para todo lo que compartes: redes, tienda, vídeos. Empieza con tu nombre.",
+    "viewBio": "Abrir mi página",
+    "qrTitleBio": "El código QR de tu página"
   },
   "cardPage": {
     "call": "Llamar",

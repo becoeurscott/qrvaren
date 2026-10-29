@@ -40,17 +40,17 @@ export function ReportCard({ slug, labels }: { slug: string; labels: { report: s
   const [open, setOpen] = useState(false);
   const [text, setText] = useState("");
   const [done, setDone] = useState(false);
-  if (done) return <p className="text-center text-xs text-white/70">{labels.reportThanks}</p>;
-  if (!open) return <button onClick={() => setOpen(true)} className="mx-auto block text-xs text-white/60 underline">{labels.report}</button>;
+  if (done) return <p className="text-center text-xs opacity-70">{labels.reportThanks}</p>;
+  if (!open) return <button onClick={() => setOpen(true)} className="mx-auto block text-xs underline opacity-60">{labels.report}</button>;
   return (
     <form
       className="space-y-2"
       onSubmit={async (e) => { e.preventDefault(); if (await reportCard(slug, text)) setDone(true); }}
     >
-      <label className="block text-xs text-white/80">
+      <label className="block text-xs opacity-80">
         {labels.reportReason}
         <textarea required maxLength={500} rows={3} value={text} onChange={(e) => setText(e.target.value)}
-          className="mt-1 w-full rounded-xl bg-white/10 p-2 text-sm text-white outline-none ring-1 ring-white/20 focus:ring-lime" />
+          className="mt-1 w-full rounded-xl bg-black/5 p-2 text-sm text-inherit outline-none ring-1 ring-current/25 focus:ring-current" />
       </label>
       <button className="rounded-full bg-lime px-4 py-2 text-xs font-bold text-ink">{labels.reportSend}</button>
     </form>

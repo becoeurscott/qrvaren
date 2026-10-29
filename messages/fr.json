@@ -397,7 +397,12 @@
     "scans30": "Scans du QR de ta carte, 30 derniers jours",
     "printTitle": "Carte imprimée",
     "printText": "Crée une carte de visite papier avec ton QR code et télécharge-la en PDF.",
-    "printCta": "Créer ma carte papier"
+    "printCta": "Créer ma carte papier",
+    "bio": "Ma page de liens",
+    "bioPitch": "Un seul lien pour ta bio avec tous tes liens, entièrement personnalisable.",
+    "bioCta": "Créer ma page",
+    "edit": "Modifier",
+    "open": "Ouvrir"
   },
   "legal": {
     "updated": "Dernière mise à jour : 28 octobre 2026",
@@ -664,7 +669,7 @@
       "links": "Liens",
       "gallery": "Galerie",
       "language": "Langue de la carte",
-      "theme": "Modèle"
+      "design": "Design"
     },
     "fields": {
       "country": "Pays",
@@ -737,12 +742,6 @@
       "sat": "Samedi",
       "sun": "Dimanche"
     },
-    "themes": {
-      "lavender": "Lavande",
-      "midnight": "Minuit",
-      "minimal": "Minimal",
-      "sunset": "Coucher de soleil"
-    },
     "stats": "30 derniers jours : {views} visites · {scans} par scan du QR · {links} par le lien",
     "clicksTitle": "Clics sur votre carte (30 jours)",
     "noClicks": "Aucun clic pour le moment.",
@@ -760,7 +759,87 @@
       "linkedin": "LinkedIn",
       "youtube": "YouTube",
       "whatsapp": "WhatsApp"
-    }
+    },
+    "design": {
+      "theme": "Thème",
+      "custom": "Personnalisé",
+      "header": "En-tête",
+      "layout": "Disposition",
+      "bg": "Fond d'écran",
+      "buttons": "Boutons",
+      "text": "Texte",
+      "colors": "Couleurs",
+      "presets": {
+        "lavender": "Lavande",
+        "midnight": "Minuit",
+        "minimal": "Minimal",
+        "sunset": "Coucher de soleil",
+        "forest": "Forêt",
+        "candy": "Bonbon",
+        "editorial": "Éditorial",
+        "terminal": "Terminal"
+      },
+      "layouts": {
+        "classic": "Classique",
+        "hero": "Hero",
+        "banner": "Bannière",
+        "cutout": "Détouré",
+        "shape": "Forme"
+      },
+      "layoutHint": {
+        "classic": "Photo de profil ronde au-dessus de ton nom.",
+        "hero": "Ta photo de profil occupe le haut de la page.",
+        "banner": "Ton image de couverture en haut, ta photo de profil dessus.",
+        "cutout": "Ta photo de profil sans cadre : idéal avec un PNG transparent.",
+        "shape": "Ta photo de profil dans une forme organique."
+      },
+      "titleStyle": "Style du titre",
+      "title": {
+        "text": "Texte",
+        "logo": "Logo"
+      },
+      "uploadLogo": "Ajouter un logo",
+      "uploadImage": "Ajouter une image",
+      "change": "Modifier",
+      "titleFont": "Police du titre",
+      "samePage": "Même que la page",
+      "titleColor": "Couleur du titre",
+      "bgTypes": {
+        "solid": "Uni",
+        "gradient": "Dégradé",
+        "image": "Image"
+      },
+      "color": "Couleur",
+      "from": "De",
+      "to": "À",
+      "angle": "Angle",
+      "dim": "Assombrir l'image",
+      "style": "Style",
+      "buttonStyles": {
+        "fill": "Plein",
+        "outline": "Contour",
+        "shadow": "Ombre portée",
+        "soft": "Doux"
+      },
+      "corners": "Coins",
+      "radii": {
+        "square": "Carrés",
+        "rounded": "Arrondis",
+        "pill": "Pilule"
+      },
+      "buttonColor": "Couleur des boutons",
+      "buttonText": "Texte des boutons",
+      "font": "Police de la page",
+      "textColor": "Couleur du texte",
+      "mutedColor": "Texte secondaire",
+      "accent": "Accent",
+      "panel": "Encadrés"
+    },
+    "nameLabelBio": "Ton nom ou ta marque",
+    "createTitleBio": "Crée ta page de liens",
+    "createSubBio": "Un seul lien pour tout ce que tu partages : réseaux, boutique, vidéos. Commence par ton nom.",
+    "viewBio": "Ouvrir ma page",
+    "qrTitleBio": "Le QR code de ta page"
   },
   "cardPage": {
     "call": "Appeler",

@@ -2,10 +2,10 @@
 
 import { cache } from "react";
 import { serverDb } from "@/shared/insforge";
-import type { CardContent, ClickTarget } from "../domain/card";
+import type { CardContent, ClickTarget, PageKind } from "../domain/card";
 
 export type PublicCard =
-  | ({ status: "active"; slug: string; updated_at: string } & CardContent)
+  | ({ status: "active"; slug: string; kind?: PageKind; updated_at: string } & CardContent)
   | { status: "suspended" | "draft"; slug: string; locale: CardContent["locale"]; name: string };
 
 /** Public card by slug (only what the page shows), or null when it doesn't exist. Deduped per request. */
