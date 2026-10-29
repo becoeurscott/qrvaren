@@ -53,8 +53,8 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
     <main>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
       <LandingHero />
-      <section id="generator" className="relative z-10 mx-auto -mt-12 max-w-6xl px-4 pb-16">
-        <h2 className="mb-6 text-center font-display text-3xl uppercase sm:text-4xl">{t("gen")}</h2>
+      <section id="generator" className="relative z-10 mx-auto mt-6 max-w-6xl px-4 pb-16 md:-mt-12">
+        <h2 className="mb-6 text-center font-display text-3xl uppercase leading-tight sm:text-4xl">{t("gen")}</h2>
         <Reveal y={40}><Generator /></Reveal>
       </section>
       <Ticker />

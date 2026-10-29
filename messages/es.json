@@ -390,9 +390,11 @@
     "account": "Cuenta",
     "logout": "Cerrar sesión",
     "hello": "Hola, {name}",
-    "signedInAs": "Sesión iniciada como",
     "cardSoon": "Crea y edita tu tarjeta de visita alojada.",
-    "soon": "Abrir el editor"
+    "soon": "Abrir el editor",
+    "myCards": "Mis tarjetas",
+    "editCard": "Editar mi tarjeta",
+    "scans30": "Escaneos del QR de tu tarjeta, últimos 30 días"
   },
   "legal": {
     "updated": "Última actualización: 28 de octubre de 2026",

@@ -404,8 +404,8 @@ export function Generator({ initialType = "url", initialPreset, initialFields }:
         <div className="grid grid-cols-3 gap-2">
           {(["png", "svg", "pdf"] as const).map((f) => (
             <button key={f} disabled={!svg || busy} onClick={() => exportAs(f)}
-              className="min-w-0 rounded-full bg-white px-2 py-3 text-sm font-semibold text-ink transition hover:bg-lime disabled:opacity-40 sm:text-base">
-              {f.toUpperCase()}
+              className="flex min-w-0 items-center justify-center gap-1.5 rounded-full bg-white px-2 py-3 text-sm font-bold text-ink shadow-sm transition hover:bg-lime active:scale-95 disabled:bg-white/15 disabled:text-white/70 disabled:shadow-none disabled:ring-1 disabled:ring-white/25 disabled:hover:bg-white/15 sm:text-base">
+              <span aria-hidden>↓</span>{f.toUpperCase()}
             </button>
           ))}
         </div>

@@ -390,9 +390,11 @@
     "account": "Account",
     "logout": "Log out",
     "hello": "Hi, {name}",
-    "signedInAs": "Signed in as",
     "cardSoon": "Create and edit your hosted business card.",
-    "soon": "Open the editor"
+    "soon": "Open the editor",
+    "myCards": "My cards",
+    "editCard": "Edit my card",
+    "scans30": "QR scans of your card, last 30 days"
   },
   "legal": {
     "updated": "Last updated: October 28, 2026",

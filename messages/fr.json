@@ -390,9 +390,11 @@
     "account": "Compte",
     "logout": "Déconnexion",
     "hello": "Salut, {name}",
-    "signedInAs": "Connecté en tant que",
     "cardSoon": "Crée et modifie ta carte de visite hébergée.",
-    "soon": "Ouvrir l'éditeur"
+    "soon": "Ouvrir l'éditeur",
+    "myCards": "Mes cartes",
+    "editCard": "Modifier ma carte",
+    "scans30": "Scans du QR de ta carte, 30 derniers jours"
   },
   "legal": {
     "updated": "Dernière mise à jour : 28 octobre 2026",
