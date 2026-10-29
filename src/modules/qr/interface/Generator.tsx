@@ -52,7 +52,7 @@ function mix(a: string, b: string, t: number) {
   return `#${x.map((v, i) => Math.round(v + (y[i] - v) * t).toString(16).padStart(2, "0")).join("")}`;
 }
 
-export function Generator({ initialType = "url", initialPreset }: { initialType?: QrType; initialPreset?: PresetId }) {
+export function Generator({ initialType = "url", initialPreset, initialFields }: { initialType?: QrType; initialPreset?: PresetId; initialFields?: Record<string, string> }) {
   const t = useTranslations("gen");
   const startPreset = initialPreset ? (PRESETS[initialPreset] as Preset) : undefined;
   const [type, setType] = useState<QrType>(startPreset?.type ?? initialType);
@@ -60,7 +60,7 @@ export function Generator({ initialType = "url", initialPreset }: { initialType?
   const p = preset ? (PRESETS[preset] as Preset) : undefined;
   // Templates without their own QR type build a link from their fields.
   const linkPreset = p && !p.type ? p : undefined;
-  const [fields, setFields] = useState<Fields>({ encryption: "WPA" });
+  const [fields, setFields] = useState<Fields>({ encryption: "WPA", ...initialFields });
   const [hidden, setHidden] = useState(false);
   const [template, setTemplate] = useState<TemplateKey | null>(startPreset ? null : "varen");
   const [captionEdited, setCaptionEdited] = useState(false);

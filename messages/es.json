@@ -391,8 +391,8 @@
     "logout": "Cerrar sesión",
     "hello": "Hola, {name}",
     "signedInAs": "Sesión iniciada como",
-    "cardSoon": "El editor de tarjeta de visita alojada es la próxima función. Tu cuenta ya está lista.",
-    "soon": "Próximamente"
+    "cardSoon": "Crea y edita tu tarjeta de visita alojada.",
+    "soon": "Abrir el editor"
   },
   "legal": {
     "updated": "Última actualización: 28 de octubre de 2026",
@@ -635,5 +635,129 @@
         "a": "Un QR estático guarda los datos en el patrón y no se puede editar. Uno dinámico apunta a un enlace corto que puedes cambiar y medir."
       }
     ]
+  },
+  "cardEditor": {
+    "createTitle": "Crea tu tarjeta de visita",
+    "createSub": "Empieza con el nombre de tu negocio. Completas todo lo demás justo después.",
+    "nameLabel": "Nombre del negocio",
+    "addressLabel": "La dirección de tu tarjeta",
+    "addressHelp": "Esta dirección nunca cambia: tus QR impresos siguen funcionando.",
+    "checking": "Comprobando…",
+    "available": "Disponible",
+    "taken": "Ya está ocupada, prueba otra",
+    "create": "Crear mi tarjeta",
+    "sections": {
+      "identity": "Tu negocio",
+      "contact": "Contacto",
+      "hours": "Horario",
+      "socials": "Redes sociales",
+      "links": "Enlaces",
+      "gallery": "Galería",
+      "language": "Idioma de la tarjeta"
+    },
+    "fields": {
+      "name": "Nombre del negocio",
+      "tagline": "Eslogan u oficio",
+      "description": "Descripción",
+      "logo": "Logo",
+      "photo": "Foto de portada",
+      "phone": "Teléfono",
+      "email": "Email",
+      "website": "Sitio web",
+      "address": "Dirección",
+      "upload": "Subir",
+      "remove": "Quitar",
+      "addLink": "Añadir un enlace",
+      "linkLabel": "Texto",
+      "linkUrl": "Enlace",
+      "closed": "Cerrado",
+      "addPhoto": "Añadir fotos"
+    },
+    "save": "Guardar",
+    "saving": "Guardando…",
+    "saved": "Guardado",
+    "errors": {
+      "name": "Añade el nombre de tu negocio.",
+      "email": "Revisa el email.",
+      "phone": "Revisa el teléfono.",
+      "website": "El sitio debe empezar por https://",
+      "links": "Cada enlace necesita un texto y una dirección completa.",
+      "save": "No se pudo guardar. Inténtalo de nuevo.",
+      "slug_taken": "Esta dirección ya está ocupada.",
+      "invalid": "Algunos campos no son válidos.",
+      "upload": "Error al subir: usa un JPG, PNG o WebP de menos de 5 MB.",
+      "auth": "Vuelve a iniciar sesión."
+    },
+    "status": {
+      "draft": "Borrador",
+      "active": "Publicada",
+      "suspended": "Suspendida",
+      "hidden": "Oculta"
+    },
+    "statusText": {
+      "draft": "Tu tarjeta aún no es pública. Elige un plan para publicarla.",
+      "active": "Tu tarjeta está publicada.",
+      "suspended": "Tu suscripción terminó, la tarjeta está suspendida. Se eliminará el {date} si no vuelves a suscribirte.",
+      "hidden": "Tu tarjeta fue ocultada por moderación. Escríbenos si crees que es un error."
+    },
+    "publish": "Publicar mi tarjeta",
+    "monthly": "{price} / mes",
+    "yearly": "{price} / año · 2 meses gratis",
+    "manageBilling": "Gestionar mi suscripción",
+    "viewCard": "Ver mi tarjeta",
+    "paidUntil": "Pagada hasta el {date}",
+    "billingUnavailable": "El pago en línea abre muy pronto. Tu tarjeta está guardada.",
+    "billingError": "No se pudo iniciar el pago. Inténtalo en un momento.",
+    "paidThanks": "Pago recibido. Tu tarjeta estará en línea en un minuto.",
+    "canceled": "Pago cancelado. Tu tarjeta queda guardada como borrador.",
+    "preview": "Vista previa",
+    "qrTitle": "El código QR de tu tarjeta",
+    "views": "{n} visitas en los últimos 30 días",
+    "back": "Panel",
+    "open": "Abre",
+    "close": "Cierra",
+    "days": {
+      "mon": "Lunes",
+      "tue": "Martes",
+      "wed": "Miércoles",
+      "thu": "Jueves",
+      "fri": "Viernes",
+      "sat": "Sábado",
+      "sun": "Domingo"
+    }
+  },
+  "cardPage": {
+    "call": "Llamar",
+    "save": "Guardar contacto",
+    "directions": "Cómo llegar",
+    "hours": "Horario",
+    "contact": "Contacto",
+    "links": "Enlaces",
+    "gallery": "Galería",
+    "report": "Denunciar esta tarjeta",
+    "reportReason": "¿Qué problema tiene esta tarjeta?",
+    "reportSend": "Enviar denuncia",
+    "reportThanks": "Gracias, nuestro equipo lo revisará.",
+    "closed": "Cerrado",
+    "madeWith": "Hecha con {brand}",
+    "suspendedTitle": "Esta tarjeta está en pausa",
+    "suspendedText": "La tarjeta de {name} no está disponible temporalmente.",
+    "missingTitle": "Esta tarjeta no existe",
+    "missingText": "Puede que la dirección esté mal escrita o que la tarjeta se haya eliminado.",
+    "makeYours": "Crea tu propia tarjeta",
+    "website": "Sitio web",
+    "email": "Email",
+    "phone": "Teléfono",
+    "address": "Dirección",
+    "today": "Hoy",
+    "days": {
+      "mon": "Lunes",
+      "tue": "Martes",
+      "wed": "Miércoles",
+      "thu": "Jueves",
+      "fri": "Viernes",
+      "sat": "Sábado",
+      "sun": "Domingo"
+    }
   }
 }

@@ -391,8 +391,8 @@
     "logout": "Déconnexion",
     "hello": "Salut, {name}",
     "signedInAs": "Connecté en tant que",
-    "cardSoon": "L'éditeur de carte de visite hébergée est la prochaine fonctionnalité. Ton compte est prêt.",
-    "soon": "Bientôt"
+    "cardSoon": "Crée et modifie ta carte de visite hébergée.",
+    "soon": "Ouvrir l'éditeur"
   },
   "legal": {
     "updated": "Dernière mise à jour : 28 octobre 2026",
@@ -635,5 +635,129 @@
         "a": "Un QR statique stocke les données dans le motif et ne peut pas être modifié. Un QR dynamique pointe vers un lien court modifiable avec suivi des scans."
       }
     ]
+  },
+  "cardEditor": {
+    "createTitle": "Crée ta carte de visite",
+    "createSub": "Commence par le nom de ton business. Tu complètes tout le reste juste après.",
+    "nameLabel": "Nom du business",
+    "addressLabel": "L'adresse de ta carte",
+    "addressHelp": "Cette adresse ne change jamais : tes QR imprimés restent valables.",
+    "checking": "Vérification…",
+    "available": "Disponible",
+    "taken": "Déjà prise, essaie une autre",
+    "create": "Créer ma carte",
+    "sections": {
+      "identity": "Ton business",
+      "contact": "Contact",
+      "hours": "Horaires",
+      "socials": "Réseaux sociaux",
+      "links": "Liens",
+      "gallery": "Galerie",
+      "language": "Langue de la carte"
+    },
+    "fields": {
+      "name": "Nom du business",
+      "tagline": "Slogan ou métier",
+      "description": "Description",
+      "logo": "Logo",
+      "photo": "Photo de couverture",
+      "phone": "Téléphone",
+      "email": "Email",
+      "website": "Site web",
+      "address": "Adresse",
+      "upload": "Ajouter",
+      "remove": "Retirer",
+      "addLink": "Ajouter un lien",
+      "linkLabel": "Libellé",
+      "linkUrl": "Lien",
+      "closed": "Fermé",
+      "addPhoto": "Ajouter des photos"
+    },
+    "save": "Enregistrer",
+    "saving": "Enregistrement…",
+    "saved": "Enregistré",
+    "errors": {
+      "name": "Ajoute le nom de ton business.",
+      "email": "Vérifie l'adresse email.",
+      "phone": "Vérifie le numéro de téléphone.",
+      "website": "Le site doit commencer par https://",
+      "links": "Chaque lien a besoin d'un libellé et d'une adresse complète.",
+      "save": "Enregistrement impossible. Réessaie.",
+      "slug_taken": "Cette adresse est déjà prise.",
+      "invalid": "Certains champs ne sont pas valides.",
+      "upload": "Envoi impossible : utilise un JPG, PNG ou WebP de moins de 5 Mo.",
+      "auth": "Reconnecte-toi."
+    },
+    "status": {
+      "draft": "Brouillon",
+      "active": "En ligne",
+      "suspended": "Suspendue",
+      "hidden": "Masquée"
+    },
+    "statusText": {
+      "draft": "Ta carte n'est pas encore publique. Choisis une formule pour la publier.",
+      "active": "Ta carte est en ligne.",
+      "suspended": "Ton abonnement est terminé, la carte est suspendue. Elle sera supprimée le {date} si tu ne te réabonnes pas.",
+      "hidden": "Ta carte a été masquée par la modération. Écris-nous si tu penses que c'est une erreur."
+    },
+    "publish": "Publier ma carte",
+    "monthly": "{price} / mois",
+    "yearly": "{price} / an · 2 mois offerts",
+    "manageBilling": "Gérer mon abonnement",
+    "viewCard": "Voir ma carte",
+    "paidUntil": "Payée jusqu'au {date}",
+    "billingUnavailable": "Le paiement en ligne ouvre très bientôt. Ta carte est enregistrée.",
+    "billingError": "Le paiement n'a pas pu démarrer. Réessaie dans un instant.",
+    "paidThanks": "Paiement reçu. Ta carte sera en ligne d'ici une minute.",
+    "canceled": "Paiement annulé. Ta carte reste enregistrée en brouillon.",
+    "preview": "Aperçu",
+    "qrTitle": "Le QR code de ta carte",
+    "views": "{n} vues sur les 30 derniers jours",
+    "back": "Tableau de bord",
+    "open": "Ouvre",
+    "close": "Ferme",
+    "days": {
+      "mon": "Lundi",
+      "tue": "Mardi",
+      "wed": "Mercredi",
+      "thu": "Jeudi",
+      "fri": "Vendredi",
+      "sat": "Samedi",
+      "sun": "Dimanche"
+    }
+  },
+  "cardPage": {
+    "call": "Appeler",
+    "save": "Enregistrer",
+    "directions": "Itinéraire",
+    "hours": "Horaires",
+    "contact": "Contact",
+    "links": "Liens",
+    "gallery": "Galerie",
+    "report": "Signaler cette carte",
+    "reportReason": "Quel est le problème avec cette carte ?",
+    "reportSend": "Envoyer le signalement",
+    "reportThanks": "Merci, notre équipe va vérifier.",
+    "closed": "Fermé",
+    "madeWith": "Créée avec {brand}",
+    "suspendedTitle": "Cette carte fait une pause",
+    "suspendedText": "La carte de {name} est temporairement indisponible.",
+    "missingTitle": "Cette carte n'existe pas",
+    "missingText": "L'adresse est peut-être mal saisie, ou la carte a été supprimée.",
+    "makeYours": "Crée ta propre carte",
+    "website": "Site web",
+    "email": "Email",
+    "phone": "Téléphone",
+    "address": "Adresse",
+    "today": "Aujourd'hui",
+    "days": {
+      "mon": "Lundi",
+      "tue": "Mardi",
+      "wed": "Mercredi",
+      "thu": "Jeudi",
+      "fri": "Vendredi",
+      "sat": "Samedi",
+      "sun": "Dimanche"
+    }
   }
 }

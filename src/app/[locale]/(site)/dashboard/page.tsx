@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Reveal } from "@/components/motion";
 import { Button } from "@/components/ui/Button";
+import { Link } from "@/i18n/routing";
 import { signOut } from "@/app/actions/auth";
 import { getUser } from "@/shared/auth";
 
@@ -40,7 +41,7 @@ export default async function DashboardPage({ params }: { params: Promise<{ loca
               <p className="text-sm font-bold uppercase tracking-widest text-lime">{t("card")}</p>
               <p className="mt-3 text-white/85">{t("cardSoon")}</p>
             </div>
-            <span className="mt-6 inline-flex w-max rounded-full bg-lime px-4 py-2 text-sm font-bold text-ink">{t("soon")}</span>
+            <Link href="/dashboard/card" className="mt-6 inline-flex w-max rounded-full bg-lime px-4 py-2 text-sm font-bold text-ink">{t("soon")} →</Link>
           </div>
         </Reveal>
         {(["qrs", "scans"] as const).map((k, i) => (

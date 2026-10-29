@@ -391,8 +391,8 @@
     "logout": "Log out",
     "hello": "Hi, {name}",
     "signedInAs": "Signed in as",
-    "cardSoon": "Your hosted business card editor is the next feature we're shipping. Your account is ready for it.",
-    "soon": "Coming soon"
+    "cardSoon": "Create and edit your hosted business card.",
+    "soon": "Open the editor"
   },
   "legal": {
     "updated": "Last updated: October 28, 2026",
@@ -635,5 +635,129 @@
         "a": "A static QR code stores the data inside the pattern and can't be edited. A dynamic QR code points to a short link you can change later and track scans."
       }
     ]
+  },
+  "cardEditor": {
+    "createTitle": "Create your business card",
+    "createSub": "Start with your business name. You can fill in everything else right after.",
+    "nameLabel": "Business name",
+    "addressLabel": "Your card's address",
+    "addressHelp": "This address never changes, so printed QR codes keep working.",
+    "checking": "Checking…",
+    "available": "Available",
+    "taken": "Already taken, try another one",
+    "create": "Create my card",
+    "sections": {
+      "identity": "Your business",
+      "contact": "Contact",
+      "hours": "Opening hours",
+      "socials": "Social networks",
+      "links": "Links",
+      "gallery": "Gallery",
+      "language": "Card language"
+    },
+    "fields": {
+      "name": "Business name",
+      "tagline": "Tagline or trade",
+      "description": "Description",
+      "logo": "Logo",
+      "photo": "Cover photo",
+      "phone": "Phone",
+      "email": "Email",
+      "website": "Website",
+      "address": "Address",
+      "upload": "Upload",
+      "remove": "Remove",
+      "addLink": "Add a link",
+      "linkLabel": "Label",
+      "linkUrl": "Link",
+      "closed": "Closed",
+      "addPhoto": "Add photos"
+    },
+    "save": "Save",
+    "saving": "Saving…",
+    "saved": "Saved",
+    "errors": {
+      "name": "Add your business name.",
+      "email": "Check the email address.",
+      "phone": "Check the phone number.",
+      "website": "The website must start with https://",
+      "links": "Each link needs a label and a full address.",
+      "save": "Couldn't save. Try again.",
+      "slug_taken": "This address is already taken.",
+      "invalid": "Some fields are not valid.",
+      "upload": "Upload failed: use a JPG, PNG or WebP under 5 MB.",
+      "auth": "Please sign in again."
+    },
+    "status": {
+      "draft": "Draft",
+      "active": "Live",
+      "suspended": "Suspended",
+      "hidden": "Hidden"
+    },
+    "statusText": {
+      "draft": "Your card isn't public yet. Choose a plan to publish it.",
+      "active": "Your card is live.",
+      "suspended": "Your subscription ended, so the card is suspended. It will be deleted on {date} unless you subscribe again.",
+      "hidden": "Your card was hidden by moderation. Contact us if you think this is a mistake."
+    },
+    "publish": "Publish my card",
+    "monthly": "{price} / month",
+    "yearly": "{price} / year · 2 months free",
+    "manageBilling": "Manage billing",
+    "viewCard": "Open my card",
+    "paidUntil": "Paid until {date}",
+    "billingUnavailable": "Online payment opens very soon. Your card is saved.",
+    "billingError": "Payment couldn't start. Try again in a moment.",
+    "paidThanks": "Payment received. Your card goes live within a minute.",
+    "canceled": "Payment canceled. Your card is saved as a draft.",
+    "preview": "Preview",
+    "qrTitle": "Your card's QR code",
+    "views": "{n} views in the last 30 days",
+    "back": "Dashboard",
+    "open": "Opens",
+    "close": "Closes",
+    "days": {
+      "mon": "Monday",
+      "tue": "Tuesday",
+      "wed": "Wednesday",
+      "thu": "Thursday",
+      "fri": "Friday",
+      "sat": "Saturday",
+      "sun": "Sunday"
+    }
+  },
+  "cardPage": {
+    "call": "Call",
+    "save": "Save contact",
+    "directions": "Directions",
+    "hours": "Opening hours",
+    "contact": "Contact",
+    "links": "Links",
+    "gallery": "Gallery",
+    "report": "Report this card",
+    "reportReason": "What's wrong with this card?",
+    "reportSend": "Send report",
+    "reportThanks": "Thanks, our team will review it.",
+    "closed": "Closed",
+    "madeWith": "Made with {brand}",
+    "suspendedTitle": "This card is taking a break",
+    "suspendedText": "{name}'s card is temporarily unavailable.",
+    "missingTitle": "This card doesn't exist",
+    "missingText": "The address may be mistyped, or the card was removed.",
+    "makeYours": "Create your own card",
+    "website": "Website",
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
+    "today": "Today",
+    "days": {
+      "mon": "Monday",
+      "tue": "Tuesday",
+      "wed": "Wednesday",
+      "thu": "Thursday",
+      "fri": "Friday",
+      "sat": "Saturday",
+      "sun": "Sunday"
+    }
   }
 }
