@@ -637,6 +637,7 @@
     ]
   },
   "cardEditor": {
+    "publishAsk": { "title": "Mettre ta carte en ligne ?", "text": "Ta carte est enregistrée. Publie-la maintenant pour activer ton lien et ton QR code, ou garde-la en brouillon et reviens plus tard.", "draft": "Garder en brouillon pour l'instant" },
     "createTitle": "Crée ta carte de visite",
     "createSub": "Commence par le nom de ton business. Tu complètes tout le reste juste après.",
     "nameLabel": "Nom du business",

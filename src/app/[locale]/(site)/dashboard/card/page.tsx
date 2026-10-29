@@ -95,7 +95,8 @@ export default async function CardDashboardPage({ params, searchParams }: Props)
         </div>
       </section>
 
-      <CardEditor card={card} previewLabels={previewLabels} />
+      <CardEditor card={card} previewLabels={previewLabels}
+        publish={card.status === "draft" || card.status === "suspended" ? { locale, prices: { monthly: prices.monthly, yearly: prices.yearly } } : undefined} />
 
       <section className="mt-12">
         <h2 className="mb-4 font-display text-3xl uppercase">{t("qrTitle")}</h2>

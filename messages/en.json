@@ -637,6 +637,7 @@
     ]
   },
   "cardEditor": {
+    "publishAsk": { "title": "Put your card online?", "text": "Your card is saved. Publish it now to get your link and QR code working, or keep it as a draft and come back later.", "draft": "Keep as draft for now" },
     "createTitle": "Create your business card",
     "createSub": "Start with your business name. You can fill in everything else right after.",
     "nameLabel": "Business name",

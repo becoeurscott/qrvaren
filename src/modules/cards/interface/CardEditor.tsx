@@ -4,7 +4,7 @@ import { useMemo, useState, useTransition } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { COUNTRIES, flag, joinPhone, splitPhone } from "../domain/phone";
 import { createBrowserClient } from "@insforge/sdk/ssr";
-import { saveCard } from "../application/actions";
+import { saveCard, startCheckout } from "../application/actions";
 import { DAYS, SOCIALS, withScheme, type Card, type CardContent, type Day, type MediaRef } from "../domain/card";
 import { CardView, type CardLabels } from "./CardView";
 
@@ -28,7 +28,12 @@ const pick = (c: Card): CardContent => ({
   gallery: c.gallery ?? [], logo_url: c.logo_url, logo_key: c.logo_key, photo_url: c.photo_url, photo_key: c.photo_key, locale: c.locale,
 });
 
-export function CardEditor({ card, previewLabels }: { card: Card; previewLabels: CardLabels }) {
+export function CardEditor({ card, previewLabels, publish }: {
+  card: Card; previewLabels: CardLabels;
+  /** Set when the card isn't live yet (draft or suspended): a save then offers checkout. */
+  publish?: { locale: string; prices: { monthly: number | string; yearly: number | string } };
+}) {
+  const [askPublish, setAskPublish] = useState(false);
   const t = useTranslations("cardEditor");
   const [c, setC] = useState<CardContent>(() => pick(card));
   const [status, setStatus] = useState<"idle" | "saved" | string>("idle");
@@ -92,6 +97,7 @@ export function CardEditor({ card, previewLabels }: { card: Card; previewLabels:
     const r = await saveCard(c);
     setErrPath(r.ok ? null : r.error);
     setStatus(r.ok ? "saved" : r.error.split(".")[0]);
+    if (r.ok && publish) setAskPublish(true);
     if (!r.ok) document.querySelector(`[data-field="${r.error.split(".").slice(0, 2).join(".")}"], [data-field="${r.error.split(".")[0]}"]`)
       ?.scrollIntoView({ behavior: "smooth", block: "center" });
   });
@@ -251,6 +257,32 @@ export function CardEditor({ card, previewLabels }: { card: Card; previewLabels:
         <p className="mb-3 text-sm font-bold uppercase tracking-widest text-slate">{t("preview")}</p>
         <CardView card={c} labels={previewLabels} />
       </aside>
+
+      {/* After a save, an unpublished card is offered checkout right away (or kept as a draft). */}
+      {askPublish && publish && (
+        <div className="fixed inset-0 z-[80] flex items-end justify-center bg-ink/60 p-4 backdrop-blur-sm sm:items-center" role="dialog" aria-modal="true"
+          aria-labelledby="publish-title" onClick={(e) => e.target === e.currentTarget && setAskPublish(false)}>
+          <div className="w-full max-w-md rounded-[2rem] bg-white p-6 text-ink shadow-2xl sm:p-8">
+            <p className="text-sm font-bold uppercase tracking-widest text-violet">✓ {t("saved")}</p>
+            <h2 id="publish-title" className="mt-2 font-display text-3xl uppercase leading-none">{t("publishAsk.title")}</h2>
+            <p className="mt-3 text-slate">{t("publishAsk.text")}</p>
+            <div className="mt-6 space-y-2">
+              {(["yearly", "monthly"] as const).map((plan) => (
+                <form key={plan} action={startCheckout}>
+                  <input type="hidden" name="locale" value={publish.locale} />
+                  <input type="hidden" name="plan" value={plan} />
+                  <button className={`btn w-full rounded-full px-6 py-4 font-semibold ${plan === "yearly" ? "bg-lime text-ink" : "bg-ink text-white"}`}>
+                    {t(plan, { price: `$${publish.prices[plan]}` })}
+                  </button>
+                </form>
+              ))}
+              <button type="button" autoFocus onClick={() => setAskPublish(false)} className="w-full rounded-full px-6 py-3 text-sm font-semibold underline underline-offset-4">
+                {t("publishAsk.draft")}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
