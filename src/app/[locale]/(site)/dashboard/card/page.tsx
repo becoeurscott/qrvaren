@@ -5,7 +5,7 @@ import { Link } from "@/i18n/routing";
 import { getUser, userDb } from "@/shared/auth";
 import { getPrices } from "@/modules/entitlements/application/settings";
 import { getMyCard, openBillingPortal, startCheckout } from "@/modules/cards/application/actions";
-import { cardHostLabel, cardUrl } from "@/modules/cards/domain/cardUrl";
+import { cardHostLabel, cardQrUrl, cardUrl } from "@/modules/cards/domain/cardUrl";
 import { CreateCardForm } from "@/modules/cards/interface/CreateCardForm";
 import { CardEditor } from "@/modules/cards/interface/CardEditor";
 import type { CardLabels } from "@/modules/cards/interface/CardView";
@@ -49,8 +49,16 @@ export default async function CardDashboardPage({ params, searchParams }: Props)
   const fmtDate = (d?: string | null) => (d ? new Intl.DateTimeFormat(locale, { dateStyle: "long" }).format(new Date(d)) : "");
   const db = await userDb();
   const since = new Date(Date.now() - 30 * 864e5).toISOString().slice(0, 10);
-  const { data: views } = await db.from("card_view_daily").select("views").eq("card_id", card.id).gte("day", since);
-  const viewCount = ((views ?? []) as { views: number }[]).reduce((n, r) => n + r.views, 0);
+  const [{ data: views }, { data: clicks }] = await Promise.all([
+    db.from("card_view_daily").select("views, scans").eq("card_id", card.id).gte("day", since),
+    db.from("card_click_daily").select("target, clicks").eq("card_id", card.id).gte("day", since),
+  ]);
+  const viewRows = (views ?? []) as { views: number; scans: number }[];
+  const viewCount = viewRows.reduce((n, r) => n + r.views, 0);
+  const scanCount = viewRows.reduce((n, r) => n + r.scans, 0);
+  const clickTotals = new Map<string, number>();
+  for (const r of (clicks ?? []) as { target: string; clicks: number }[]) clickTotals.set(r.target, (clickTotals.get(r.target) ?? 0) + r.clicks);
+  const clickList = [...clickTotals].sort((a, b) => b[1] - a[1]);
   const keys = ["call", "save", "directions", "hours", "contact", "links", "gallery", "closed", "website", "email", "phone", "address", "today"] as const;
   const previewLabels = { ...Object.fromEntries(keys.map((k) => [k, p(k)])), days: p.raw("days") } as CardLabels;
   const url = cardUrl(card.slug);
@@ -70,7 +78,7 @@ export default async function CardDashboardPage({ params, searchParams }: Props)
           </div>
           <p className="mt-3 text-white/80">{t(`statusText.${card.status}`, { date: fmtDate(card.expires_at) })}</p>
           {card.status === "active" && card.paid_until && <p className="mt-1 text-sm text-white/60">{t("paidUntil", { date: fmtDate(card.paid_until) })}</p>}
-          <p className="mt-1 text-sm text-white/60">{t("views", { n: viewCount })}</p>
+          <p className="mt-1 text-sm text-white/60">{t("stats", { views: viewCount, scans: scanCount, links: viewCount - scanCount })}</p>
         </div>
         <div className="flex flex-wrap gap-2 md:justify-end">
           {card.status === "draft" || card.status === "suspended" ? (
@@ -95,12 +103,23 @@ export default async function CardDashboardPage({ params, searchParams }: Props)
         </div>
       </section>
 
+      <section className="mb-6 rounded-[1.75rem] bg-white p-6">
+        <h2 className="mb-3 font-display text-xl uppercase tracking-wide">{t("clicksTitle")}</h2>
+        {clickList.length === 0 ? <p className="text-slate">{t("noClicks")}</p> : (
+          <ul className="flex flex-wrap gap-2">
+            {clickList.map(([k, n]) => (
+              <li key={k} className="rounded-full bg-lavender px-4 py-2 text-sm"><span className="font-semibold">{t(`targets.${k}` as never)}</span> · {n}</li>
+            ))}
+          </ul>
+        )}
+      </section>
+
       <CardEditor card={card} previewLabels={previewLabels}
         publish={card.status === "draft" || card.status === "suspended" ? { locale, prices: { monthly: prices.monthly, yearly: prices.yearly } } : undefined} />
 
       <section className="mt-12">
         <h2 className="mb-4 font-display text-3xl uppercase">{t("qrTitle")}</h2>
-        <Generator initialType="url" initialFields={{ url }} />
+        <Generator initialType="url" initialFields={{ url: cardQrUrl(card.slug) }} />
       </section>
     </main>
   );

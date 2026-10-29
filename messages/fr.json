@@ -637,7 +637,11 @@
     ]
   },
   "cardEditor": {
-    "publishAsk": { "title": "Mettre ta carte en ligne ?", "text": "Ta carte est enregistrée. Publie-la maintenant pour activer ton lien et ton QR code, ou garde-la en brouillon et reviens plus tard.", "draft": "Garder en brouillon pour l'instant" },
+    "publishAsk": {
+      "title": "Mettre ta carte en ligne ?",
+      "text": "Ta carte est enregistrée. Publie-la maintenant pour activer ton lien et ton QR code, ou garde-la en brouillon et reviens plus tard.",
+      "draft": "Garder en brouillon pour l'instant"
+    },
     "createTitle": "Crée ta carte de visite",
     "createSub": "Commence par le nom de ton business. Tu complètes tout le reste juste après.",
     "nameLabel": "Nom du business",
@@ -654,7 +658,8 @@
       "socials": "Réseaux sociaux",
       "links": "Liens",
       "gallery": "Galerie",
-      "language": "Langue de la carte"
+      "language": "Langue de la carte",
+      "theme": "Modèle"
     },
     "fields": {
       "country": "Pays",
@@ -726,6 +731,30 @@
       "fri": "Vendredi",
       "sat": "Samedi",
       "sun": "Dimanche"
+    },
+    "themes": {
+      "lavender": "Lavande",
+      "midnight": "Minuit",
+      "minimal": "Minimal",
+      "sunset": "Coucher de soleil"
+    },
+    "stats": "30 derniers jours : {views} visites · {scans} par scan du QR · {links} par le lien",
+    "clicksTitle": "Clics sur votre carte (30 jours)",
+    "noClicks": "Aucun clic pour le moment.",
+    "targets": {
+      "call": "Appeler",
+      "save": "Enregistrer le contact",
+      "directions": "Itinéraire",
+      "website": "Site web",
+      "email": "E-mail",
+      "link": "Liens",
+      "instagram": "Instagram",
+      "facebook": "Facebook",
+      "tiktok": "TikTok",
+      "x": "X",
+      "linkedin": "LinkedIn",
+      "youtube": "YouTube",
+      "whatsapp": "WhatsApp"
     }
   },
   "cardPage": {

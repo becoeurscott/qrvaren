@@ -1,14 +1,36 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { recordCardView, reportCard } from "@/modules/cards/application/public";
+import { recordCardClick, recordCardView, reportCard } from "@/modules/cards/application/public";
+import type { ClickTarget } from "@/modules/cards/domain/card";
 
-/** Counts one view per browser tab, after the page is shown (the page itself is cached). */
+/** Counts one view per browser tab, after the page is shown (the page itself is cached).
+ * The card's QR code carries ?src=qr, so scans are told apart from link opens; the marker is
+ * then dropped from the address bar so a shared link doesn't count as a scan. */
 export function ViewBeacon({ slug }: { slug: string }) {
   useEffect(() => {
+    const url = new URL(location.href);
+    const source = url.searchParams.get("src") === "qr" ? "qr" : "link";
+    if (url.searchParams.has("src")) {
+      url.searchParams.delete("src");
+      history.replaceState(history.state, "", url.pathname + url.search + url.hash);
+    }
     const key = `card-view:${slug}`;
     try { if (sessionStorage.getItem(key)) return; sessionStorage.setItem(key, "1"); } catch {}
-    recordCardView(slug);
+    recordCardView(slug, source);
+  }, [slug]);
+  return null;
+}
+
+/** Counts taps on the card's buttons (elements marked data-track in CardView). */
+export function ClickTracker({ slug }: { slug: string }) {
+  useEffect(() => {
+    const onClick = (e: MouseEvent) => {
+      const el = (e.target as Element | null)?.closest<HTMLElement>("[data-track]");
+      if (el?.dataset.track) recordCardClick(slug, el.dataset.track as ClickTarget);
+    };
+    document.addEventListener("click", onClick);
+    return () => document.removeEventListener("click", onClick);
   }, [slug]);
   return null;
 }

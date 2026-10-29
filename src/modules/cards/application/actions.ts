@@ -9,7 +9,7 @@ import { cookies } from "next/headers";
 import { CardContentSchema, isValidSlug, slugCandidates, type Card } from "../domain/card";
 
 const COLUMNS =
-  "id, slug, status, locale, name, tagline, description, phone, email, website, address, hours, socials, links, gallery, logo_url, logo_key, photo_url, photo_key, plan, paid_until, expires_at";
+  "id, slug, status, locale, name, tagline, description, phone, email, website, address, hours, socials, links, gallery, logo_url, logo_key, photo_url, photo_key, theme, plan, paid_until, expires_at";
 
 /** The signed-in user's card, or null. */
 export async function getMyCard(): Promise<Card | null> {

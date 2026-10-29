@@ -637,7 +637,11 @@
     ]
   },
   "cardEditor": {
-    "publishAsk": { "title": "¿Publicar tu tarjeta?", "text": "Tu tarjeta está guardada. Publícala ahora para activar tu enlace y tu código QR, o guárdala como borrador y vuelve más tarde.", "draft": "Guardar como borrador por ahora" },
+    "publishAsk": {
+      "title": "¿Publicar tu tarjeta?",
+      "text": "Tu tarjeta está guardada. Publícala ahora para activar tu enlace y tu código QR, o guárdala como borrador y vuelve más tarde.",
+      "draft": "Guardar como borrador por ahora"
+    },
     "createTitle": "Crea tu tarjeta de visita",
     "createSub": "Empieza con el nombre de tu negocio. Completas todo lo demás justo después.",
     "nameLabel": "Nombre del negocio",
@@ -654,7 +658,8 @@
       "socials": "Redes sociales",
       "links": "Enlaces",
       "gallery": "Galería",
-      "language": "Idioma de la tarjeta"
+      "language": "Idioma de la tarjeta",
+      "theme": "Plantilla"
     },
     "fields": {
       "country": "País",
@@ -726,6 +731,30 @@
       "fri": "Viernes",
       "sat": "Sábado",
       "sun": "Domingo"
+    },
+    "themes": {
+      "lavender": "Lavanda",
+      "midnight": "Medianoche",
+      "minimal": "Minimalista",
+      "sunset": "Atardecer"
+    },
+    "stats": "Últimos 30 días: {views} visitas · {scans} por escaneo del QR · {links} por el enlace",
+    "clicksTitle": "Toques en tu tarjeta (30 días)",
+    "noClicks": "Aún no hay toques.",
+    "targets": {
+      "call": "Llamar",
+      "save": "Guardar contacto",
+      "directions": "Cómo llegar",
+      "website": "Sitio web",
+      "email": "Correo",
+      "link": "Enlaces",
+      "instagram": "Instagram",
+      "facebook": "Facebook",
+      "tiktok": "TikTok",
+      "x": "X",
+      "linkedin": "LinkedIn",
+      "youtube": "YouTube",
+      "whatsapp": "WhatsApp"
     }
   },
   "cardPage": {

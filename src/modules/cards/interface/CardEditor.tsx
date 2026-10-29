@@ -5,8 +5,8 @@ import { useLocale, useTranslations } from "next-intl";
 import { COUNTRIES, flag, joinPhone, splitPhone } from "../domain/phone";
 import { createBrowserClient } from "@insforge/sdk/ssr";
 import { saveCard, startCheckout } from "../application/actions";
-import { DAYS, SOCIALS, withScheme, type Card, type CardContent, type Day, type MediaRef } from "../domain/card";
-import { CardView, type CardLabels } from "./CardView";
+import { CARD_THEMES, DAYS, SOCIALS, withScheme, type Card, type CardContent, type Day, type MediaRef } from "../domain/card";
+import { CardView, THEMES, type CardLabels } from "./CardView";
 
 const MAX_BYTES = 5 * 1024 * 1024;
 const IMAGE_TYPES = /^image\/(png|jpeg|webp)$/;
@@ -26,6 +26,7 @@ const pick = (c: Card): CardContent => ({
   name: c.name, tagline: c.tagline ?? "", description: c.description ?? "", phone: c.phone ?? "", email: c.email ?? "",
   website: c.website ?? "", address: c.address ?? "", hours: c.hours ?? [], socials: c.socials ?? {}, links: c.links ?? [],
   gallery: c.gallery ?? [], logo_url: c.logo_url, logo_key: c.logo_key, photo_url: c.photo_url, photo_key: c.photo_key, locale: c.locale,
+  theme: c.theme ?? "lavender",
 });
 
 export function CardEditor({ card, previewLabels, publish }: {
@@ -230,6 +231,22 @@ export function CardEditor({ card, previewLabels, publish }: {
               <input type="file" multiple accept="image/png,image/jpeg,image/webp" className="sr-only" onChange={(e) => onGallery(e.target.files)} />
             </label>
           )}
+        </section>
+
+        <section className={box}>
+          <h2 className={h2}>{t("sections.theme")}</h2>
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+            {CARD_THEMES.map((k) => (
+              <button key={k} type="button" onClick={() => set("theme", k)} aria-pressed={c.theme === k}
+                className={`overflow-hidden rounded-2xl text-left text-sm font-bold ring-2 transition ${c.theme === k ? "ring-violet" : "ring-ink/10 hover:ring-ink/30"}`}>
+                <span className={`block h-12 ${THEMES[k].cover}`} />
+                <span className={`flex items-center justify-between px-3 py-2 ${THEMES[k].article}`}>
+                  {t(`themes.${k}`)}
+                  <span className={`h-3 w-3 rounded-full ${THEMES[k].primary.replace(/!/g, "")}`} />
+                </span>
+              </button>
+            ))}
+          </div>
         </section>
 
         <section className={box}>

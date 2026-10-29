@@ -13,3 +13,10 @@ export function cardUrl(slug: string): string {
 export function cardHostLabel(slug: string): string {
   return cardUrl(slug).replace(/^https?:\/\//, "");
 }
+
+/** Address encoded in the card's QR code: marked so visits from a scan are counted as scans. */
+export function cardQrUrl(slug: string): string {
+  const u = new URL(cardUrl(slug));
+  u.searchParams.set("src", "qr");
+  return u.toString();
+}

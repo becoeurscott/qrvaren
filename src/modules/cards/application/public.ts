@@ -2,7 +2,7 @@
 
 import { cache } from "react";
 import { serverDb } from "@/shared/insforge";
-import type { CardContent } from "../domain/card";
+import type { CardContent, ClickTarget } from "../domain/card";
 
 export type PublicCard =
   | ({ status: "active"; slug: string; updated_at: string } & CardContent)
@@ -14,8 +14,14 @@ export const getPublicCard = cache(async (slug: string): Promise<PublicCard | nu
   return (data as PublicCard | null) ?? null;
 });
 
-export async function recordCardView(slug: string) {
-  try { await serverDb().rpc("record_card_view", { p_slug: slug }); } catch {}
+/** One visit; `qr` when it came from the card's QR code (?src=qr), else `link`. */
+export async function recordCardView(slug: string, source: "qr" | "link" = "link") {
+  try { await serverDb().rpc("record_card_view", { p_slug: slug, p_source: source }); } catch {}
+}
+
+/** One tap on a card button (the database ignores unknown targets). */
+export async function recordCardClick(slug: string, target: ClickTarget) {
+  try { await serverDb().rpc("record_card_click", { p_slug: slug, p_target: target }); } catch {}
 }
 
 export async function reportCard(slug: string, reason: string): Promise<boolean> {

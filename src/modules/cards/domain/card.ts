@@ -12,6 +12,13 @@ export type Social = (typeof SOCIALS)[number];
 
 export type MediaRef = { url: string; key: string };
 
+/** Visual templates for the public card (must match the cards.theme check). */
+export const CARD_THEMES = ["lavender", "midnight", "minimal", "sunset"] as const;
+export type CardTheme = (typeof CARD_THEMES)[number];
+
+/** Taps counted on the public card (must match public.record_card_click). */
+export type ClickTarget = "call" | "save" | "directions" | "website" | "email" | "link" | Social;
+
 export type CardContent = {
   name: string;
   tagline?: string | null;
@@ -29,6 +36,7 @@ export type CardContent = {
   photo_url?: string | null;
   photo_key?: string | null;
   locale: "en" | "es" | "fr";
+  theme?: CardTheme;
 };
 
 export type Card = CardContent & {
@@ -95,6 +103,7 @@ export const CardContentSchema = z.object({
   photo_url: z.string().url().nullable().optional(),
   photo_key: z.string().nullable().optional(),
   locale: z.enum(["en", "es", "fr"]),
+  theme: z.enum(CARD_THEMES).default("lavender"),
 });
 
 /** Public link for a social handle (usernames or pasted profile links). */

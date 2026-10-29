@@ -4,7 +4,7 @@ import { getPublicCard } from "@/modules/cards/application/public";
 import { cardUrl } from "@/modules/cards/domain/cardUrl";
 import { CardView, type CardLabels } from "@/modules/cards/interface/CardView";
 import { BRAND_NAME, SITE_URL } from "@/shared/config";
-import { ReportCard, ViewBeacon } from "./CardActions";
+import { ClickTracker, ReportCard, ViewBeacon } from "./CardActions";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -57,8 +57,8 @@ export default async function PublicCardPage({ params }: Props) {
         labels={labels}
         vcfHref={`/c/${card.slug}/vcf`}
         footer={
-          <div className="mt-8 space-y-3 border-t border-ink/10 pt-5">
-            <a href={home} className="block text-center text-xs font-semibold text-slate">{t("madeWith", { brand: BRAND_NAME })}</a>
+          <div className="mt-8 space-y-3 border-t border-current/10 pt-5">
+            <a href={home} className="block text-center text-xs font-semibold opacity-60">{t("madeWith", { brand: BRAND_NAME })}</a>
           </div>
         }
       />
@@ -66,6 +66,7 @@ export default async function PublicCardPage({ params }: Props) {
         <ReportCard slug={card.slug} labels={{ report: t("report"), reportReason: t("reportReason"), reportSend: t("reportSend"), reportThanks: t("reportThanks") }} />
       </div>
       <ViewBeacon slug={card.slug} />
+      <ClickTracker slug={card.slug} />
     </main>
   );
 }

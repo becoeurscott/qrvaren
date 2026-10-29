@@ -637,7 +637,11 @@
     ]
   },
   "cardEditor": {
-    "publishAsk": { "title": "Put your card online?", "text": "Your card is saved. Publish it now to get your link and QR code working, or keep it as a draft and come back later.", "draft": "Keep as draft for now" },
+    "publishAsk": {
+      "title": "Put your card online?",
+      "text": "Your card is saved. Publish it now to get your link and QR code working, or keep it as a draft and come back later.",
+      "draft": "Keep as draft for now"
+    },
     "createTitle": "Create your business card",
     "createSub": "Start with your business name. You can fill in everything else right after.",
     "nameLabel": "Business name",
@@ -654,7 +658,8 @@
       "socials": "Social networks",
       "links": "Links",
       "gallery": "Gallery",
-      "language": "Card language"
+      "language": "Card language",
+      "theme": "Template"
     },
     "fields": {
       "country": "Country",
@@ -726,6 +731,30 @@
       "fri": "Friday",
       "sat": "Saturday",
       "sun": "Sunday"
+    },
+    "themes": {
+      "lavender": "Lavender",
+      "midnight": "Midnight",
+      "minimal": "Minimal",
+      "sunset": "Sunset"
+    },
+    "stats": "Last 30 days: {views} visits · {scans} from QR scans · {links} from the link",
+    "clicksTitle": "Taps on your card (30 days)",
+    "noClicks": "No taps yet.",
+    "targets": {
+      "call": "Call",
+      "save": "Save contact",
+      "directions": "Directions",
+      "website": "Website",
+      "email": "Email",
+      "link": "Links",
+      "instagram": "Instagram",
+      "facebook": "Facebook",
+      "tiktok": "TikTok",
+      "x": "X",
+      "linkedin": "LinkedIn",
+      "youtube": "YouTube",
+      "whatsapp": "WhatsApp"
     }
   },
   "cardPage": {
