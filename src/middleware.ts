@@ -12,4 +12,4 @@ export default async function middleware(request: NextRequest) {
   return response;
 }
 
-export const config = { matcher: ["/((?!api|_next|_vercel|r/|c/|go/|admin|.*\\..*).*)"] };
+export const config = { matcher: ["/((?!api|_next|_vercel|r/|c/|go/|admin|apple-icon|.*\\..*).*)"] };
