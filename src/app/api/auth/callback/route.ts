@@ -15,7 +15,9 @@ export async function GET(request: NextRequest) {
   const codeVerifier = request.cookies.get("insforge_code_verifier")?.value;
   if (!codeVerifier) return fail("missing_verifier");
 
-  const response = NextResponse.redirect(new URL(`/${locale}/dashboard`, request.url));
+  // Signing in on admin.<domain> lands on the admin home; the main site lands on the dashboard.
+  const onAdmin = /^admin\./i.test(request.headers.get("host") ?? "");
+  const response = NextResponse.redirect(new URL(onAdmin ? `/${locale}` : `/${locale}/dashboard`, request.url));
   const auth = createAuthActions({ requestCookies: request.cookies, responseCookies: response.cookies });
   const { data, error } = await auth.exchangeOAuthCode(code, codeVerifier);
   if (error || !data?.user) {

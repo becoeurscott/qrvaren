@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { SITE_URL } from "@/shared/config";
 
 const ITEMS = [
   { href: "", label: "Analytics", icon: "◔", perm: "analytics" },
@@ -36,7 +37,7 @@ export function Sidebar({ base, email, brand, role, perms }: { base: string; ema
         <div className="mt-6 border-t border-white/10 px-4 pt-4 text-xs text-white/50 md:absolute md:inset-x-3 md:bottom-4">
           <p className="truncate">{email}</p>
           <p className="mt-0.5 font-bold uppercase tracking-widest text-white/70">{role}</p>
-          <Link href="/" className="mt-2 inline-block font-semibold text-lime hover:underline">← Back to site</Link>
+          <a href={SITE_URL} className="mt-2 inline-block font-semibold text-lime hover:underline">← Back to site</a>
         </div>
       </nav>
     </aside>
