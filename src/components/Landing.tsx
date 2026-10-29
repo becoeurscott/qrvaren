@@ -69,7 +69,7 @@ export async function LandingHero() {
         ))}
       </Reveal>
 
-      <svg className="absolute -bottom-px left-0 w-full text-lavender" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden>
+      <svg className="pointer-events-none absolute -bottom-px left-0 w-full text-lavender" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden>
         <path d="M0 40 C 360 0 1080 80 1440 30 L1440 80 L0 80 Z" fill="currentColor" />
       </svg>
     </section>
@@ -238,7 +238,7 @@ export function PageHero({ eyebrow, title, sub, children }: { eyebrow?: string; 
         {sub && <Reveal delay={300} y={30}><p className="mx-auto mt-6 max-w-2xl text-lg text-white/85 md:mx-0">{sub}</p></Reveal>}
         {children}
       </div>
-      <svg className="absolute -bottom-px left-0 w-full text-lavender" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden>
+      <svg className="pointer-events-none absolute -bottom-px left-0 w-full text-lavender" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden>
         <path d="M0 40 C 360 0 1080 80 1440 30 L1440 80 L0 80 Z" fill="currentColor" />
       </svg>
     </section>
