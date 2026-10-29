@@ -18,10 +18,14 @@ const MAX_SIDE = 1600;
 const IMAGE_TYPES = /^image\/(png|jpeg|webp)$/;
 let storage: ReturnType<typeof createBrowserClient>["storage"] | undefined;
 
-/**
- * Shrinks a large photo to MAX_SIDE so pages stay light: a full-size phone photo decodes to ~50 MB,
- * shown several times in the editor, and can crash Safari on iPhone. PNG/WebP keep transparency.
- */
+const supportsWebp: Promise<boolean> = (async () => {
+  if (typeof document === "undefined") return false;
+  const c = document.createElement("canvas");
+  c.width = c.height = 1;
+  const blob = await new Promise<Blob | null>((ok) => c.toBlob(ok, "image/webp", 0.8));
+  return blob?.type === "image/webp";
+})();
+
 async function shrink(file: File): Promise<{ file: File; w: number; h: number }> {
   const url = URL.createObjectURL(file);
   try {
@@ -32,12 +36,16 @@ async function shrink(file: File): Promise<{ file: File; w: number; h: number }>
     c.width = Math.round(w * Math.min(1, k));
     c.height = Math.round(h * Math.min(1, k));
     c.getContext("2d")!.drawImage(img, 0, 0, c.width, c.height);
-    const type = file.type === "image/jpeg" ? "image/jpeg" : "image/png";
-    const blob = await new Promise<Blob | null>((ok) => c.toBlob(ok, type, 0.86));
+    const webp = (await supportsWebp)
+      ? await new Promise<Blob | null>((ok) => c.toBlob(ok, "image/webp", 0.82))
+      : null;
+    const fallbackType = file.type === "image/jpeg" ? "image/jpeg" : "image/png";
+    const fallback = webp ? null : await new Promise<Blob | null>((ok) => c.toBlob(ok, fallbackType, 0.86));
+    const blob = webp ?? fallback;
     const out = { w: c.width, h: c.height };
-    c.width = c.height = 0; // frees the bitmap right away (Safari keeps canvas memory until then)
+    c.width = c.height = 0;
     if (!blob || blob.size >= file.size) return { file, w, h };
-    return { file: new File([blob], file.name, { type }), ...out };
+    return { file: new File([blob], file.name, { type: blob.type }), ...out };
   } finally { URL.revokeObjectURL(url); }
 }
 

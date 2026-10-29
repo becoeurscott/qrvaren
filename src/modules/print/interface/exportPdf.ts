@@ -19,7 +19,9 @@ export async function toDataUrl(src: string, max = 800): Promise<string> {
   c.width = Math.round(bmp.width * k);
   c.height = Math.round(bmp.height * k);
   c.getContext("2d")!.drawImage(bmp, 0, 0, c.width, c.height);
-  return c.toDataURL("image/png");
+  const url = c.toDataURL("image/jpeg", 0.85);
+  c.width = c.height = 0;
+  return url;
 }
 
 async function sidePng(side: Side, d: Design, qr: Record<string, string>, bleed: boolean) {
