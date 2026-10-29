@@ -656,6 +656,7 @@
       "language": "Idioma de la tarjeta"
     },
     "fields": {
+      "country": "País",
       "name": "Nombre del negocio",
       "tagline": "Eslogan u oficio",
       "description": "Descripción",

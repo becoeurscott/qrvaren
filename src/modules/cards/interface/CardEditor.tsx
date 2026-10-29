@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useTransition } from "react";
-import { useTranslations } from "next-intl";
+import { useMemo, useState, useTransition } from "react";
+import { useLocale, useTranslations } from "next-intl";
+import { COUNTRIES, flag, joinPhone, splitPhone } from "../domain/phone";
 import { createBrowserClient } from "@insforge/sdk/ssr";
 import { saveCard } from "../application/actions";
 import { DAYS, SOCIALS, withScheme, type Card, type CardContent, type Day, type MediaRef } from "../domain/card";
@@ -32,6 +33,11 @@ export function CardEditor({ card, previewLabels }: { card: Card; previewLabels:
   const [c, setC] = useState<CardContent>(() => pick(card));
   const [status, setStatus] = useState<"idle" | "saved" | string>("idle");
   const [errPath, setErrPath] = useState<string | null>(null);
+  // Kept apart from the number because +1 is shared (US, Canada…).
+  const [phoneIso, setPhoneIso] = useState(() => splitPhone(card.phone ?? "").iso);
+  const locale = useLocale();
+  const names = useMemo(() => new Intl.DisplayNames([locale], { type: "region" }), [locale]);
+  const countryName = (iso: string) => names.of(iso) ?? iso;
   const [busy, setBusy] = useState<string | null>(null);
   const [pending, start] = useTransition();
   const set = <K extends keyof CardContent>(k: K, v: CardContent[K]) => { setC((s) => ({ ...s, [k]: v })); setStatus("idle"); setErrPath(null); };
@@ -125,7 +131,19 @@ export function CardEditor({ card, previewLabels }: { card: Card; previewLabels:
         <section className={box}>
           <h2 className={h2}>{t("sections.contact")}</h2>
           <div className="grid grid-cols-[minmax(0,1fr)] gap-3 sm:grid-cols-2">
-            {field("phone", "tel", 40)}{field("email", "email")}{field("website", "url", 300)}{field("address", "text", 200)}
+            <label className="block text-sm font-semibold" data-field="phone">
+              <span className="mb-1 block text-slate">{t("fields.phone")}</span>
+              <div className={`flex overflow-hidden rounded-2xl border-2 bg-white transition focus-within:border-violet ${bad("phone") ? "border-coral" : "border-ink/10"}`}>
+                <select aria-label={t("fields.country")} value={phoneIso} className="max-w-[6.5rem] shrink-0 border-r-2 border-ink/10 bg-lavender px-2 text-ink outline-none"
+                  onChange={(e) => { setPhoneIso(e.target.value); set("phone", joinPhone(e.target.value, splitPhone(c.phone ?? "", phoneIso).local)); }}>
+                  {COUNTRIES.map((k) => <option key={k.iso} value={k.iso}>{flag(k.iso)} {countryName(k.iso)} +{k.dial}</option>)}
+                </select>
+                <input type="tel" maxLength={30} className="min-w-0 flex-1 px-4 py-3 text-ink outline-none" placeholder="555 010 2030"
+                  value={splitPhone(c.phone ?? "", phoneIso).local} onChange={(e) => set("phone", joinPhone(phoneIso, e.target.value))} />
+              </div>
+              {hint("phone")}
+            </label>
+            {field("email", "email")}{field("website", "url", 300)}{field("address", "text", 200)}
           </div>
         </section>
 

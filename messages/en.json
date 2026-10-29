@@ -656,6 +656,7 @@
       "language": "Card language"
     },
     "fields": {
+      "country": "Country",
       "name": "Business name",
       "tagline": "Tagline or trade",
       "description": "Description",

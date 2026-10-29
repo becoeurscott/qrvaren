@@ -656,6 +656,7 @@
       "language": "Langue de la carte"
     },
     "fields": {
+      "country": "Pays",
       "name": "Nom du business",
       "tagline": "Slogan ou métier",
       "description": "Description",
