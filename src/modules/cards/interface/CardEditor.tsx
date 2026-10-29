@@ -6,9 +6,10 @@ import { COUNTRIES, flag, joinPhone, splitPhone } from "../domain/phone";
 import { createBrowserClient } from "@insforge/sdk/ssr";
 import { saveCard, startCheckout } from "../application/actions";
 import { DAYS, SOCIALS, withScheme, type Card, type CardContent, type Day, type MediaRef, type PageKind } from "../domain/card";
-import { resolveDesign, type Design } from "../domain/design";
+import { logoFraming, resolveDesign, type Design } from "../domain/design";
 import { CardView, type CardLabels } from "./CardView";
 import { DesignEditor } from "./DesignEditor";
+import { LogoAdjuster } from "./LogoAdjuster";
 
 const MAX_BYTES = 5 * 1024 * 1024;
 const IMAGE_TYPES = /^image\/(png|jpeg|webp)$/;
@@ -22,6 +23,17 @@ async function upload(file: File, prefix: string): Promise<MediaRef> {
   const { data, error } = await storage.from("card-media").upload(`${prefix}/${crypto.randomUUID()}.${ext}`, file);
   if (error || !data) throw new Error("upload");
   return { url: data.url, key: data.key };
+}
+
+/** Natural size of an image file (0×0 if it can't be read). */
+function imageSize(file: File): Promise<{ w: number; h: number }> {
+  return new Promise((resolve) => {
+    const url = URL.createObjectURL(file);
+    const img = new Image();
+    img.onload = () => { resolve({ w: img.naturalWidth, h: img.naturalHeight }); URL.revokeObjectURL(url); };
+    img.onerror = () => { resolve({ w: 0, h: 0 }); URL.revokeObjectURL(url); };
+    img.src = url;
+  });
 }
 
 type EditorState = CardContent & { theme: string; design: Design };
@@ -57,8 +69,10 @@ export function CardEditor({ card, previewLabels, publish }: {
     if (!file) return;
     setBusy(kind);
     try {
-      const m = await upload(file, card.id);
-      setC((s) => ({ ...s, [`${kind}_url`]: m.url, [`${kind}_key`]: m.key }));
+      const [m, size] = await Promise.all([upload(file, card.id), imageSize(file)]);
+      // A new logo starts with a framing that suits its shape; the user adjusts from there.
+      setC((s) => ({ ...s, [`${kind}_url`]: m.url, [`${kind}_key`]: m.key,
+        ...(kind === "logo" ? { design: { ...s.design, logo: logoFraming(size.w, size.h) } } : {}) }));
       setStatus("idle");
     } catch { setStatus("upload"); } finally { setBusy(null); }
   }
@@ -137,6 +151,12 @@ export function CardEditor({ card, previewLabels, publish }: {
                 </div>
               </div>
             ))}
+            {c.logo_url && (
+              <div className="sm:col-span-2">
+                <LogoAdjuster src={c.logo_url} logo={c.design.logo} layout={c.design.header.layout} background={c.design.panel}
+                  onChange={(logo) => set("design", { ...c.design, logo })} />
+              </div>
+            )}
           </div>
         </section>
 

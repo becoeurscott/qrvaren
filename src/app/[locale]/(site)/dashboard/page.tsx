@@ -9,6 +9,7 @@ import { getUser, userDb } from "@/shared/auth";
 import { getMyPages } from "@/modules/cards/application/actions";
 import { cardHostLabel, cardUrl } from "@/modules/cards/domain/cardUrl";
 import { backgroundCss, resolveDesign } from "@/modules/cards/domain/design";
+import { logoStyle } from "@/modules/cards/interface/CardView";
 
 export const metadata: Metadata = { robots: { index: false } };
 
@@ -64,7 +65,7 @@ export default async function DashboardPage({ params }: { params: Promise<{ loca
                     <div className="h-20 w-20 shrink-0 overflow-hidden rounded-2xl" style={{ background: backgroundCss(d.bg) }}>
                       {page.logo_url ? (
                         // eslint-disable-next-line @next/next/no-img-element
-                        <img src={page.logo_url} alt="" className="h-full w-full object-cover" />
+                        <img src={page.logo_url} alt="" className="h-full w-full" style={logoStyle(d.logo)} />
                       ) : (
                         <div className="flex h-full w-full items-center justify-center font-display text-4xl uppercase" style={{ color: d.accent }}>{page.name.charAt(0)}</div>
                       )}

@@ -17,6 +17,11 @@ export type CardLabels = {
 const SOCIAL_ICON = { instagram: "instagram", facebook: "facebook", tiktok: "tiktok", x: "x", linkedin: "linkedin", youtube: "youtube", whatsapp: "whatsapp" } as const;
 const RADIUS = { square: "6px", rounded: "16px", pill: "9999px" } as const;
 
+/** Inline style for the logo image inside its frame: fill or fit, then the user's zoom and offset. */
+export function logoStyle(l: Design["logo"], fit: Design["logo"]["fit"] = l.fit): CSSProperties {
+  return { objectFit: fit, transform: `translate(${l.x}%, ${l.y}%) scale(${l.zoom})` };
+}
+
 /** Inline style for a link button in the design's button style. */
 export function buttonStyle(d: Design): CSSProperties {
   const b = d.buttons;
@@ -53,7 +58,7 @@ export function CardView({ card, kind = "card", labels, vcfHref, today, footer, 
     <div className={`shrink-0 overflow-hidden ${cls}`} style={{ background: avatar && contain ? "transparent" : d.panel, ...style }}>
       {avatar ? (
         // eslint-disable-next-line @next/next/no-img-element
-        <img src={avatar} alt={card.name} className={`h-full w-full ${contain ? "object-contain" : "object-cover"}`} />
+        <img src={avatar} alt={card.name} className="h-full w-full" style={logoStyle(d.logo, contain ? "contain" : undefined)} />
       ) : (
         <div className="flex h-full w-full items-center justify-center text-5xl uppercase" style={{ fontFamily: titleFont, color: d.accent }}>{initial}</div>
       )}
@@ -71,10 +76,10 @@ export function CardView({ card, kind = "card", labels, vcfHref, today, footer, 
     >
       {/* Header */}
       {layout === "hero" ? (
-        <div className="relative h-80">
+        <div className="relative h-80 overflow-hidden">
           {avatar ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={avatar} alt="" className="absolute inset-0 h-full w-full object-cover" />
+            <img src={avatar} alt="" className="absolute inset-0 h-full w-full" style={logoStyle(d.logo)} />
           ) : <div className="absolute inset-0" style={{ background: d.accent }} />}
           <div className="absolute inset-x-0 bottom-0 h-2/3" style={{ background: `linear-gradient(to top, ${d.bg.color}, transparent)` }} />
         </div>

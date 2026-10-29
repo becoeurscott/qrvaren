@@ -57,7 +57,7 @@ export function DesignEditor({ theme, design, onChange, upload }: {
             const p = presetDesign(id);
             return (
               <button key={id} type="button" aria-pressed={theme === id}
-                onClick={() => onChange(id, { ...p, header: { ...p.header, title: design.header.title, title_logo_url: design.header.title_logo_url, title_logo_key: design.header.title_logo_key } })}
+                onClick={() => onChange(id, { ...p, logo: design.logo, header: { ...p.header, title: design.header.title, title_logo_url: design.header.title_logo_url, title_logo_key: design.header.title_logo_key } })}
                 className={`overflow-hidden rounded-2xl text-left ring-2 transition ${theme === id ? "ring-violet" : "ring-transparent hover:ring-ink/20"}`}>
                 <span className="flex h-24 flex-col items-center justify-center gap-1.5 px-3" style={{ background: backgroundCss(p.bg), color: p.text }}>
                   <span className="text-lg uppercase leading-none" style={{ fontFamily: fontFamily(p.header.title_font ?? p.font) }}>Aa</span>

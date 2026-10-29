@@ -7,6 +7,7 @@ export const HEADER_LAYOUTS = ["classic", "hero", "banner", "cutout", "shape"] a
 export const BG_TYPES = ["solid", "gradient", "image"] as const;
 export const BUTTON_STYLES = ["fill", "outline", "shadow", "soft"] as const;
 export const BUTTON_RADII = ["square", "rounded", "pill"] as const;
+export const LOGO_FITS = ["cover", "contain"] as const;
 export const FONTS = ["bricolage", "anton", "inter", "playfair", "dmserif", "spacemono"] as const;
 
 export type HeaderLayout = (typeof HEADER_LAYOUTS)[number];
@@ -31,6 +32,13 @@ export const DesignSchema = z.object({
     dim: z.number().min(0).max(0.8),
   }),
   buttons: z.object({ style: z.enum(BUTTON_STYLES), radius: z.enum(BUTTON_RADII), color: hex, text: hex }),
+  // How the logo sits in its frame: fill (crop) or fit (whole image), zoom, and offset in % of the frame.
+  logo: z.object({
+    fit: z.enum(LOGO_FITS),
+    zoom: z.number().min(0.5).max(3),
+    x: z.number().min(-100).max(100),
+    y: z.number().min(-100).max(100),
+  }),
   font: z.enum(FONTS),
   text: hex,
   muted: hex,
@@ -39,10 +47,13 @@ export const DesignSchema = z.object({
 });
 export type Design = z.infer<typeof DesignSchema>;
 
+export const DEFAULT_LOGO: Design["logo"] = { fit: "cover", zoom: 1, x: 0, y: 0 };
+
 const base: Design = {
   header: { layout: "banner", title: "text", title_logo_url: null, title_logo_key: null, title_font: null, title_color: null },
   bg: { type: "solid", color: "#f3f1ff", color2: "#ffffff", angle: 180, image_url: null, image_key: null, dim: 0.3 },
   buttons: { style: "fill", radius: "rounded", color: "#17143a", text: "#ffffff" },
+  logo: DEFAULT_LOGO,
   font: "bricolage", text: "#17143a", muted: "#364255", panel: "#ffffff", accent: "#5546ff",
 };
 
@@ -93,6 +104,7 @@ function merge(a: Design, b: Preset | Record<string, unknown> | null | undefined
     header: { ...a.header, ...(p.header ?? {}) },
     bg: { ...a.bg, ...(p.bg ?? {}) },
     buttons: { ...a.buttons, ...(p.buttons ?? {}) },
+    logo: { ...a.logo, ...((b as Partial<Design>).logo ?? {}) },
   } as Design;
 }
 
@@ -114,3 +126,7 @@ export function backgroundCss(bg: Design["bg"]): string {
   }
   return bg.color;
 }
+
+/** Framing for a non-square logo: fit it whole, slightly inset; a square one fills its frame. */
+export const logoFraming = (width: number, height: number): Design["logo"] =>
+  width > 0 && height > 0 && Math.abs(width / height - 1) > 0.15 ? { fit: "contain", zoom: 0.9, x: 0, y: 0 } : DEFAULT_LOGO;

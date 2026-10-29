@@ -839,7 +839,15 @@
     "createTitleBio": "Crée ta page de liens",
     "createSubBio": "Un seul lien pour tout ce que tu partages : réseaux, boutique, vidéos. Commence par ton nom.",
     "viewBio": "Ouvrir ma page",
-    "qrTitleBio": "Le QR code de ta page"
+    "qrTitleBio": "Le QR code de ta page",
+    "logoAdjust": {
+      "title": "Ajuster votre logo",
+      "hint": "Faites glisser l’image pour la placer, puis zoomez ou dézoomez.",
+      "zoom": "Zoom",
+      "cover": "Remplir le cadre",
+      "contain": "Logo entier",
+      "reset": "Réinitialiser"
+    }
   },
   "cardPage": {
     "call": "Appeler",
