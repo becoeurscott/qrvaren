@@ -211,7 +211,9 @@
     "tagline": "Códigos QR gratis que nunca caducan.",
     "rights": "Todos los derechos reservados.",
     "privacy": "Privacidad",
-    "terms": "Términos"
+    "terms": "Términos",
+    "copyright": "Derechos de autor",
+    "operator": "Operado por"
   },
   "consent": {
     "text": "Usamos cookies esenciales. Con tu permiso también medimos visitas para mejorar el sitio. Nunca vendemos tus datos.",
@@ -361,7 +363,7 @@
         "Botones Llamar, Guardar, Cómo llegar",
         "Tu propia dirección",
         "Código QR y estadísticas",
-        "Cancela cuando quieras"
+        "Renovación automática · cancela cuando quieras"
       ],
       "cta": "Empezar mensual"
     },
@@ -376,10 +378,12 @@
     "title": "Iniciar sesión",
     "sub": "Un clic con Google. Sin contraseña que recordar.",
     "google": "Continuar con Google",
-    "why": "Solo necesitas una cuenta para una tarjeta de visita, QR de PDF y estadísticas de escaneos.",
+    "why": "Solo necesitas una cuenta para una tarjeta de visita o una página de enlaces.",
     "soon": "El inicio de sesión abre con el lanzamiento de la tarjeta.",
     "error": "No se completó el inicio de sesión. Inténtalo de nuevo.",
-    "suspended": "Esta cuenta ha sido suspendida. Si crees que es un error, escríbenos a la dirección de la página de privacidad."
+    "suspended": "Esta cuenta ha sido suspendida. Si crees que es un error, escríbenos a la dirección de la página de privacidad.",
+    "ageConsent": "Tengo 18 años o más y acepto las <terms>condiciones de uso</terms> y la <privacy>política de privacidad</privacy>.",
+    "ageError": "Confirma que tienes 18 años o más y que aceptas las condiciones para iniciar sesión."
   },
   "dash": {
     "title": "Panel",
@@ -406,8 +410,10 @@
     "open": "Abrir"
   },
   "legal": {
-    "updated": "Última actualización: 28 de octubre de 2026",
+    "updated": "Última actualización: 30 de octubre de 2026",
     "contact": "Contacto",
+    "contactSoon": "Estamos creando nuestra dirección de contacto. Aparecerá aquí muy pronto.",
+    "operator": "Operado por",
     "privacy": {
       "title": "Política de privacidad",
       "intro": "Creamos este servicio para recopilar lo mínimo posible. Esta página explica exactamente qué tratamos, por qué y qué puedes hacer.",
@@ -416,72 +422,66 @@
           "h": "Los códigos QR se crean en tu navegador",
           "p": [
             "Cuando creas un código QR sin cuenta, todo ocurre en tu dispositivo: el enlace, la contraseña WiFi, los datos de contacto o el texto que escribes, y el logo que añades, nunca se envían a nuestros servidores.",
-            "Las descargas (PNG, SVG, PDF) también se generan en tu dispositivo. No guardamos los códigos QR creados de esta forma."
+            "Las descargas (PNG, SVG, PDF) también se generan en tu dispositivo. No guardamos los códigos QR creados así."
           ]
         },
         {
           "h": "Tu cuenta",
           "p": [
-            "Solo necesitas una cuenta para la tarjeta de visita, los QR de PDF y las estadísticas de escaneos. Inicias sesión con Google, que nos comparte tu nombre, tu email y tu foto de perfil; nunca vemos tu contraseña de Google.",
-            "Usamos esta información solo para que tu cuenta funcione. Se aloja con nuestro proveedor InsForge, en Estados Unidos."
+            "Solo necesitas una cuenta para la tarjeta de visita, la página de enlaces y sus estadísticas. Inicias sesión con Google. Google nos comparte tu nombre, correo y foto de perfil; nunca vemos tu contraseña de Google.",
+            "Usamos esta información solo para que tu cuenta funcione. Los datos de la cuenta los aloja nuestro proveedor InsForge, en Estados Unidos."
           ]
         },
         {
           "h": "Cookies y almacenamiento local",
           "p": [
-            "Solo usamos lo que el sitio necesita: dos cookies de sesión (insforge_access_token, insforge_refresh_token), una cookie temporal durante el inicio con Google (insforge_code_verifier, 10 minutos), una cookie que recuerda tu idioma (NEXT_LOCALE) y una entrada de almacenamiento local que recuerda tu elección sobre cookies.",
-            "No usamos cookies publicitarias ni rastreadores de terceros."
+            "Solo usamos lo que el sitio necesita: dos cookies de sesión (insforge_access_token, insforge_refresh_token), una cookie temporal durante el inicio de sesión con Google (insforge_code_verifier, 10 minutos), una cookie que recuerda tu idioma (NEXT_LOCALE) y una entrada de almacenamiento local que recuerda tu elección de cookies.",
+            "No usamos cookies publicitarias, rastreadores de terceros ni herramientas de grabación de sesiones. Nuestras fuentes se sirven desde nuestro propio sitio, no desde Google."
           ]
         },
         {
           "h": "Medición de visitas",
           "p": [
-            "Para saber qué páginas son útiles, nuestros propios servidores registran eventos anónimos: la página vista, el idioma, las descargas de QR (solo tipo y formato, nunca el contenido), el tipo de dispositivo, el país estimado a partir de la conexión y el sitio del que vienes. No guardamos tu dirección IP y ninguna empresa de analítica externa recibe estos datos.",
-            "Si pulsas Aceptar en el aviso de cookies, se añade un identificador aleatorio que solo dura la pestaña actual, para contar visitantes únicos. Si eliges Solo esenciales, no se usa ningún identificador."
+            "Para saber qué páginas son útiles, nuestros propios servidores registran eventos anónimos: la página vista, el idioma, las descargas de QR (solo tipo y formato, nunca el contenido), el tipo de dispositivo, el país estimado a partir de la conexión y el sitio de procedencia. No guardamos tu dirección IP, nunca registramos lo que escribes y ninguna empresa de análisis externa recibe estos datos.",
+            "Si pulsas Aceptar en el aviso de cookies, se añade un identificador aleatorio guardado solo para la pestaña actual, para contar visitantes únicos. Si eliges Solo esenciales, no se usa ningún identificador."
           ]
         },
         {
-          "h": "Lista de espera",
+          "h": "Tarjetas de visita, páginas de enlaces y pagos",
           "p": [
-            "Si dejas tu email para que te avisemos cuando abran las tarjetas de visita, lo usamos solo para ese mensaje. No lo añadimos a un boletín ni lo compartimos."
+            "La información que pones en una tarjeta de visita o página de enlaces (nombre, logo, fotos, horarios, dirección, teléfono, enlaces) se publica en una página pública, porque ese es su fin.",
+            "Los pagos los gestiona Stripe. El número de tu tarjeta va directamente a Stripe y nunca pasa por nuestros servidores.",
+            "Cuando termina una suscripción, la página queda suspendida 30 días para que puedas volver, y luego se elimina."
           ]
         },
         {
-          "h": "Tarjetas de visita y pagos (próximamente)",
+          "h": "Estadísticas",
           "p": [
-            "La información que pones en una tarjeta (nombre del negocio, logo, fotos, horario, dirección, teléfono, enlaces) se publica en una página pública: ese es su propósito.",
-            "Los pagos los gestionará Stripe. El número de tu tarjeta va directamente a Stripe y nunca pasa por nuestros servidores.",
-            "Cuando termina una suscripción, la tarjeta se suspende 30 días para que puedas volver y después se elimina."
-          ]
-        },
-        {
-          "h": "Estadísticas de escaneos",
-          "p": [
-            "Para las tarjetas de visita y los QR con seguimiento, contamos cuántas veces se escanean. No creamos perfiles de quienes escanean y nunca vendemos estos datos."
+            "Para las tarjetas de visita y las páginas de enlaces contamos por día las visitas, los escaneos del QR y los toques en los botones. No creamos perfiles de los visitantes y nunca vendemos estos datos."
           ]
         },
         {
           "h": "Quién trata datos por nosotros",
           "p": [
-            "InsForge (base de datos, inicio de sesión, almacenamiento de archivos), Vercel (alojamiento del sitio), Google (inicio de sesión) y, cuando abran los pagos, Stripe. Cada uno actúa según nuestras instrucciones y solo para el servicio que presta."
+            "InsForge (base de datos, inicio de sesión, almacenamiento de archivos), Vercel (alojamiento del sitio), Google (inicio de sesión) y Stripe (pagos). Cada uno actúa según nuestras instrucciones y solo para el servicio que presta."
           ]
         },
         {
           "h": "Nunca vendemos tus datos",
           "p": [
-            "No vendemos ni alquilamos información personal ni la compartimos con fines publicitarios, incluido el sentido de la ley de privacidad de California (CCPA)."
+            "No vendemos ni alquilamos información personal y no la compartimos con fines publicitarios, incluido el sentido de venta y compartir de la California Consumer Privacy Act (CCPA)."
           ]
         },
         {
           "h": "Tus derechos",
           "p": [
-            "Puedes pedir ver la información personal que tenemos sobre ti, corregirla o eliminar tu cuenta y todo lo vinculado a ella. Los residentes de California tienen estos derechos según la CCPA; los ofrecemos a todos. Escríbenos a la dirección de abajo y responderemos en 30 días."
+            "Puedes pedir ver la información personal que tenemos sobre ti, corregirla o eliminar tu cuenta y todo lo vinculado. Los residentes de California tienen estos derechos según la CCPA; los ofrecemos a todos. Escríbenos a la dirección de abajo y responderemos en 30 días."
           ]
         },
         {
           "h": "Menores",
           "p": [
-            "Este servicio no está dirigido a menores de 13 años y no recopilamos su información a sabiendas."
+            "Las cuentas son solo para adultos: debes tener 18 años o más para iniciar sesión. El generador gratuito no necesita cuenta y no recopila información personal. No recopilamos a sabiendas información de menores de 18 años; si crees que un menor tiene una cuenta, avísanos y la eliminaremos."
           ]
         },
         {
@@ -494,38 +494,60 @@
     },
     "terms": {
       "title": "Condiciones de uso",
-      "intro": "Estas condiciones se aplican cuando usas el generador de códigos QR y, cuando esté disponible, la tarjeta de visita digital.",
+      "intro": "Estas condiciones se aplican cuando usas el generador de códigos QR, la tarjeta de visita alojada y la página de enlaces.",
       "sections": [
+        {
+          "h": "Quién puede usar el servicio",
+          "p": [
+            "El generador gratuito está abierto a todos. Crear una cuenta, una tarjeta de visita o una página de enlaces está reservado a personas de 18 años o más. Al iniciar sesión confirmas que tienes al menos 18 años y aceptas estas condiciones y la política de privacidad."
+          ]
+        },
         {
           "h": "El generador gratuito",
           "p": [
             "Puedes crear y descargar códigos QR gratis, sin cuenta y sin marca de agua.",
-            "Los QR de enlaces, WiFi, texto, vCard, email y SMS son estáticos: la información está dentro del propio código, así que funcionan para siempre y no dependen de nuestro servicio."
+            "Los códigos QR de enlaces, WiFi, texto, vCard, correo y SMS son estáticos: la información está dentro del código, así que funcionan para siempre y no dependen de nuestro servicio."
           ]
         },
         {
-          "h": "Tu contenido",
+          "h": "Tu contenido y la propiedad intelectual",
           "p": [
-            "Eres responsable de lo que pones en un código QR o en una tarjeta de visita, y de los sitios a los que apuntan tus códigos. Revisa un código impreso antes de distribuirlo."
+            "Conservas todos los derechos sobre lo que subes (logos, fotos, textos). Nos concedes una licencia limitada para almacenarlo, mostrarlo y reproducirlo solo para que tu tarjeta o página funcione y la vean los visitantes.",
+            "Debes ser propietario de tu contenido o tener permiso para usarlo. No subas imágenes, logos ni textos que pertenezcan a otra persona. Eres responsable de lo que publicas y de los sitios a los que apuntan tus códigos QR.",
+            "Si recibimos un aviso válido de infracción de derechos de autor, retiramos o bloqueamos el contenido, como se describe en nuestra política de derechos de autor. Cerramos las cuentas que infringen repetidamente."
           ]
         },
         {
           "h": "Lo que no está permitido",
           "p": [
-            "No uses el servicio para phishing, malware, estafas, contenido ilegal, acoso ni para hacerte pasar por otra persona. Cada página de tarjeta tiene un botón Denunciar; podemos ocultar o eliminar contenido que incumpla estas reglas y suspender la cuenta responsable."
+            "No uses el servicio para phishing, malware, estafas, contenido ilegal, acoso, infracción de derechos de autor ni para hacerte pasar por otra persona. Cada página pública tiene un botón Denunciar; podemos ocultar o retirar el contenido que incumpla estas reglas y suspender la cuenta."
           ]
         },
         {
-          "h": "Suscripción a la tarjeta de visita (próximamente)",
+          "h": "Suscripciones, renovación automática y cancelación",
           "p": [
-            "La tarjeta de visita alojada es una suscripción de pago, mensual o anual, al precio que muestre la página de precios al suscribirte. Se renueva automáticamente hasta que la canceles, lo que puedes hacer en cualquier momento.",
-            "Si un pago falla o cancelas, la tarjeta queda suspendida 30 días y después se elimina. La dirección de tu tarjeta nunca cambia, así que tus QR impresos apuntan al sitio correcto mientras la tarjeta exista."
+            "La tarjeta de visita y la página de enlaces son cada una una suscripción de pago, mensual o anual, al precio mostrado junto al botón de suscripción en el momento en que te suscribes, más los impuestos aplicables.",
+            "La suscripción se renueva automáticamente al final de cada periodo (cada mes o cada año) y se cobra el mismo precio en el método de pago guardado, hasta que canceles. Antes de pagar te mostramos estas condiciones y te pedimos que las aceptes.",
+            "Puedes cancelar en cualquier momento, en línea, con el botón Gestionar facturación de tu panel. La cancelación detiene la próxima renovación; tu página sigue en línea hasta el final del periodo ya pagado.",
+            "Si algún día cambiamos el precio, te avisaremos antes de tu próxima renovación y el nuevo precio solo se aplicará después."
+          ]
+        },
+        {
+          "h": "Sin reembolsos",
+          "p": [
+            "Los pagos no son reembolsables, incluido el tiempo no usado tras cancelar, salvo que la ley de tu país exija un reembolso. Mantienes el acceso completo hasta el final del periodo pagado."
+          ]
+        },
+        {
+          "h": "Fin de una suscripción",
+          "p": [
+            "Si un pago falla o termina una suscripción, la página queda suspendida 30 días y luego se elimina con sus imágenes. La dirección de tu página (su slug) nunca cambia, así que los QR impresos apuntan al lugar correcto mientras la página exista."
           ]
         },
         {
           "h": "Disponibilidad",
           "p": [
-            "Trabajamos para mantener el servicio en línea, pero no podemos garantizar que esté siempre disponible o libre de errores. Los QR estáticos ya descargados no se ven afectados por una caída."
+            "Trabajamos para mantener el servicio en línea pero no podemos garantizar que siempre esté disponible o sin errores. Los QR estáticos que descargaste no se ven afectados por una caída."
           ]
         },
         {
@@ -537,7 +559,51 @@
         {
           "h": "Cambios en estas condiciones",
           "p": [
-            "Podemos actualizar estas condiciones. Cambiaremos la fecha de arriba y, para cambios importantes, avisaremos por email a los titulares de cuenta antes de que se apliquen."
+            "Podemos actualizar estas condiciones. Cambiaremos la fecha de arriba y, para cambios importantes, avisaremos por correo a los titulares de cuenta antes de que se apliquen."
+          ]
+        }
+      ]
+    },
+    "copyright": {
+      "title": "Política de derechos de autor",
+      "intro": "Respetamos la propiedad intelectual y esperamos lo mismo de nuestros usuarios. Así puedes denunciar contenido que infringe tus derechos de autor y así lo tratamos (Digital Millennium Copyright Act, DMCA).",
+      "sections": [
+        {
+          "h": "Denunciar contenido",
+          "p": [
+            "Si crees que una tarjeta de visita o página de enlaces alojada en nuestro servicio usa tu obra sin permiso, envía un aviso por escrito a nuestro agente designado, en la dirección de contacto de abajo. También puedes usar el botón Denunciar de la página eligiendo Derechos de autor y luego enviar el aviso completo por correo."
+          ]
+        },
+        {
+          "h": "Qué debe incluir tu aviso",
+          "p": [
+            "1) Tu firma física o electrónica. 2) La obra que dices que se infringe. 3) La dirección (URL) de la página y una descripción del contenido a retirar. 4) Tu nombre, dirección postal, teléfono y correo. 5) Una declaración de que crees de buena fe que el uso no está autorizado por el titular, su representante o la ley. 6) Una declaración, bajo pena de perjurio, de que la información es exacta y de que eres el titular o estás autorizado a actuar en su nombre.",
+            "Un aviso incompleto puede no ser tramitado. Un aviso falso a sabiendas puede hacerte responsable de daños."
+          ]
+        },
+        {
+          "h": "Qué hacemos",
+          "p": [
+            "Cuando recibimos un aviso válido, retiramos o bloqueamos rápidamente el contenido e informamos al titular de la cuenta, con una copia del aviso."
+          ]
+        },
+        {
+          "h": "Contraaviso",
+          "p": [
+            "Si tu contenido se retiró por error, puedes enviar un contraaviso con: tu firma; el contenido retirado y dónde aparecía; una declaración bajo pena de perjurio de que crees de buena fe que se retiró por error; tu nombre, dirección y teléfono; y tu aceptación de la jurisdicción del tribunal federal de tu distrito (o, fuera de Estados Unidos, de cualquier distrito donde podamos ser localizados) y de recibir notificaciones de quien envió el aviso.",
+            "Lo reenviamos a esa persona y podemos restaurar el contenido tras 10 a 14 días hábiles, salvo que nos informe de que ha iniciado una acción judicial."
+          ]
+        },
+        {
+          "h": "Infractores reincidentes",
+          "p": [
+            "Cerramos las cuentas de los usuarios que infringen repetidamente los derechos de otros."
+          ]
+        },
+        {
+          "h": "Agente designado",
+          "p": [
+            "Nuestro agente designado para avisos de derechos de autor es el operador de este sitio, en la dirección postal y de correo indicada abajo."
           ]
         }
       ]
@@ -848,6 +914,11 @@
       "cover": "Llenar el marco",
       "contain": "Logo completo",
       "reset": "Restablecer"
+    },
+    "renewal": {
+      "notice": "Renovación automática: {monthly} al mes o {yearly} al año, cobrado hasta que canceles. Cancela cuando quieras en línea con Gestionar facturación; tu página sigue en línea hasta el final del periodo pagado. Sin reembolsos, salvo que la ley lo exija.",
+      "consent": "Acepto la renovación automática y las <terms>condiciones de venta</terms>.",
+      "required": "Marca la casilla para aceptar la renovación automática antes de suscribirte."
     }
   },
   "cardPage": {
@@ -885,7 +956,15 @@
       "fri": "Viernes",
       "sat": "Sábado",
       "sun": "Domingo"
-    }
+    },
+    "reportKind": "¿Cuál es el problema?",
+    "reportKinds": {
+      "copyright": "Usa mi obra (derechos de autor)",
+      "scam": "Estafa o phishing",
+      "other": "Otra cosa"
+    },
+    "copyrightHelp": "Para una reclamación de derechos de autor, envía también un aviso completo como se describe en nuestra",
+    "copyrightLink": "política de derechos de autor"
   },
   "print": {
     "title": "Tarjeta de visita impresa",

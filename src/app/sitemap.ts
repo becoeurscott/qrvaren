@@ -6,7 +6,7 @@ import { presetSlugs } from "@/modules/qr/domain/presets";
 
 // Every public, indexable page in every locale, with hreflang alternates.
 export default function sitemap(): MetadataRoute.Sitemap {
-  const paths = ["", "/create", "/business-card", "/pricing", "/privacy", "/terms", ...[...allTypeSlugs(), ...presetSlugs()].map((s) => `/create/${s}`)];
+  const paths = ["", "/create", "/business-card", "/pricing", "/privacy", "/terms", "/copyright", ...[...allTypeSlugs(), ...presetSlugs()].map((s) => `/create/${s}`)];
   const now = new Date();
   return paths.flatMap((p) =>
     routing.locales.map((l) => ({

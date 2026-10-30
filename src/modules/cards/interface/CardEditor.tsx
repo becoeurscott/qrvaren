@@ -4,7 +4,8 @@ import { useMemo, useState, useTransition } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { COUNTRIES, flag, joinPhone, splitPhone } from "../domain/phone";
 import { createBrowserClient } from "@insforge/sdk/ssr";
-import { saveCard, startCheckout } from "../application/actions";
+import { saveCard } from "../application/actions";
+import { RenewalCheckout } from "./RenewalCheckout";
 import { DAYS, SOCIALS, withScheme, type Card, type CardContent, type Day, type MediaRef, type PageKind } from "../domain/card";
 import { logoFraming, resolveDesign, type Design } from "../domain/design";
 import { CardView, type CardLabels } from "./CardView";
@@ -337,17 +338,8 @@ export function CardEditor({ card, previewLabels, publish }: {
             <p className="text-sm font-bold uppercase tracking-widest text-violet">✓ {t("saved")}</p>
             <h2 id="publish-title" className="mt-2 font-display text-3xl uppercase leading-none">{t("publishAsk.title")}</h2>
             <p className="mt-3 text-slate">{t("publishAsk.text")}</p>
-            <div className="mt-6 space-y-2">
-              {(["yearly", "monthly"] as const).map((plan) => (
-                <form key={plan} action={startCheckout}>
-                  <input type="hidden" name="locale" value={publish.locale} />
-                  <input type="hidden" name="plan" value={plan} />
-                  <input type="hidden" name="kind" value={kind} />
-                  <button className={`btn w-full rounded-full px-6 py-4 font-semibold ${plan === "yearly" ? "bg-lime text-ink" : "bg-ink text-white"}`}>
-                    {t(plan, { price: `$${publish.prices[plan]}` })}
-                  </button>
-                </form>
-              ))}
+            <div className="mt-6 space-y-3">
+              <RenewalCheckout locale={publish.locale} kind={kind} prices={publish.prices} stacked />
               <button type="button" autoFocus onClick={() => setAskPublish(false)} className="w-full rounded-full px-6 py-3 text-sm font-semibold underline underline-offset-4">
                 {t("publishAsk.draft")}
               </button>

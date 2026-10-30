@@ -101,6 +101,8 @@ export async function startCheckout(formData: FormData) {
   const plan = formData.get("plan") === "yearly" ? "yearly" : "monthly";
   const kind = asKind(formData.get("kind"));
   const back = `/${locale}${editorPath(kind)}`;
+  // Consent to the automatic renewal terms shown next to the plan buttons (RenewalCheckout).
+  if (formData.get("renew_ok") !== "1") redirect(`${back}?billing=consent`);
   const user = await getUser();
   if (!user) redirect(`/${locale}/login`);
   const card = await getMyCard(kind);

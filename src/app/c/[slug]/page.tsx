@@ -68,7 +68,9 @@ export default async function PublicCardPage({ params }: Props) {
         }
       />
       <div className="mx-auto mt-6 max-w-md">
-        <ReportCard slug={card.slug} labels={{ report: t("report"), reportReason: t("reportReason"), reportSend: t("reportSend"), reportThanks: t("reportThanks") }} />
+        <ReportCard slug={card.slug} copyrightHref={`${SITE_URL}/${card.locale}/copyright`}
+          labels={{ report: t("report"), reportReason: t("reportReason"), reportSend: t("reportSend"), reportThanks: t("reportThanks"),
+            kind: t("reportKind"), kinds: t.raw("reportKinds"), copyrightHelp: t("copyrightHelp"), copyrightLink: t("copyrightLink") }} />
       </div>
       <ViewBeacon slug={card.slug} />
       <ClickTracker slug={card.slug} />

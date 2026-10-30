@@ -1,12 +1,12 @@
 import { getTranslations } from "next-intl/server";
 import { PageHero } from "./Landing";
 import { Reveal } from "./motion";
-import { CONTACT_EMAIL } from "@/shared/config";
+import { CONTACT_EMAIL, LEGAL, legalReady } from "@/shared/config";
 
 type Section = { h: string; p: string[] };
 
-/** Shared layout for the privacy policy and the terms of use. Texts live in messages under legal.*. */
-export async function LegalPage({ doc }: { doc: "privacy" | "terms" }) {
+/** Shared layout for the privacy policy, terms of use and copyright policy. Texts live in messages under legal.*. */
+export async function LegalPage({ doc }: { doc: "privacy" | "terms" | "copyright" }) {
   const t = await getTranslations("legal");
   const sections = t.raw(`${doc}.sections`) as Section[];
   return (
@@ -30,9 +30,16 @@ export async function LegalPage({ doc }: { doc: "privacy" | "terms" }) {
         </ol>
         <div className="mt-8 rounded-[1.75rem] bg-ink p-6 text-white sm:p-8">
           <p className="text-sm font-bold uppercase tracking-widest text-lime">{t("contact")}</p>
-          <a href={`mailto:${CONTACT_EMAIL}`} className="mt-2 inline-block text-xl font-semibold underline decoration-lime underline-offset-4">
-            {CONTACT_EMAIL}
-          </a>
+          {CONTACT_EMAIL ? (
+            <a href={`mailto:${CONTACT_EMAIL}`} className="mt-2 inline-block text-xl font-semibold underline decoration-lime underline-offset-4">
+              {CONTACT_EMAIL}
+            </a>
+          ) : (
+            <p className="mt-2 text-white/80">{t("contactSoon")}</p>
+          )}
+          {legalReady() && (
+            <p className="mt-4 text-sm text-white/70">{t("operator")}: {LEGAL.name}, {LEGAL.address}, {LEGAL.country}</p>
+          )}
         </div>
       </section>
     </main>

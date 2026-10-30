@@ -18,6 +18,8 @@ async function appOrigin() {
 /** Starts Google sign-in on the server so the session ends up in httpOnly cookies. */
 export async function signInWithGoogle(formData: FormData) {
   const locale = safeLocale(String(formData.get("locale") ?? ""));
+  // Accounts are 18+ and accept the terms (checkbox on the login page).
+  if (formData.get("age_ok") !== "1") redirect(`/${locale}/login?error=age`);
   const cookieStore = await cookies();
   const auth = createAuthActions({ cookies: cookieStore });
   const callback = new URL("/api/auth/callback", await appOrigin());

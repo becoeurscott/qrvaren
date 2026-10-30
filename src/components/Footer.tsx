@@ -1,6 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/routing";
-import { BRAND_NAME } from "@/shared/config";
+import { BRAND_NAME, CONTACT_EMAIL, LEGAL, legalReady } from "@/shared/config";
 import { QR_TYPES } from "@/modules/qr/domain/encoders";
 import { typeSlug } from "@/modules/qr/interface/slugs";
 import { PRESETS, PRESET_IDS, type Preset } from "@/modules/qr/domain/presets";
@@ -32,10 +32,12 @@ export async function Footer() {
         <ul className="space-y-2 text-sm font-semibold">
           <li><Link className="hover:text-lime" href="/privacy">{t("privacy")}</Link></li>
           <li><Link className="hover:text-lime" href="/terms">{t("terms")}</Link></li>
+          <li><Link className="hover:text-lime" href="/copyright">{t("copyright")}</Link></li>
         </ul>
       </div>
       <p className="mx-auto mt-12 max-w-6xl border-t border-white/10 pt-6 text-xs text-white/50">
         © {new Date().getFullYear()} {BRAND_NAME}. {t("rights")}
+        {legalReady() && <span className="mt-1 block">{t("operator")}: {LEGAL.name} · {LEGAL.address}, {LEGAL.country} · {CONTACT_EMAIL}</span>}
       </p>
     </footer>
   );

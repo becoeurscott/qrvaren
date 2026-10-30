@@ -211,7 +211,9 @@
     "tagline": "Des QR codes gratuits qui n'expirent jamais.",
     "rights": "Tous droits réservés.",
     "privacy": "Confidentialité",
-    "terms": "Conditions"
+    "terms": "Conditions",
+    "copyright": "Droit d'auteur",
+    "operator": "Exploité par"
   },
   "consent": {
     "text": "Nous utilisons des cookies essentiels. Avec ton accord, nous mesurons aussi les visites pour améliorer le site. Nous ne vendons jamais tes données.",
@@ -361,7 +363,7 @@
         "Boutons Appeler, Enregistrer, Itinéraire",
         "Ta propre adresse",
         "QR code et statistiques de scans",
-        "Résiliable à tout moment"
+        "Renouvellement automatique · résiliable à tout moment"
       ],
       "cta": "Démarrer en mensuel"
     },
@@ -376,10 +378,12 @@
     "title": "Connexion",
     "sub": "Un clic avec Google. Aucun mot de passe à retenir.",
     "google": "Continuer avec Google",
-    "why": "Un compte n'est nécessaire que pour une carte de visite, les QR PDF et les statistiques de scans.",
+    "why": "Un compte n'est nécessaire que pour une carte de visite ou une page de liens.",
     "soon": "La connexion ouvre avec le lancement de la carte de visite.",
     "error": "La connexion n'a pas abouti. Réessaie.",
-    "suspended": "Ce compte a été suspendu. Si tu penses que c’est une erreur, écris-nous à l’adresse indiquée sur la page Confidentialité."
+    "suspended": "Ce compte a été suspendu. Si tu penses que c’est une erreur, écris-nous à l’adresse indiquée sur la page Confidentialité.",
+    "ageConsent": "J'ai 18 ans ou plus et j'accepte les <terms>conditions d'utilisation</terms> et la <privacy>politique de confidentialité</privacy>.",
+    "ageError": "Confirme que tu as 18 ans ou plus et que tu acceptes les conditions pour te connecter."
   },
   "dash": {
     "title": "Tableau de bord",
@@ -406,138 +410,200 @@
     "open": "Ouvrir"
   },
   "legal": {
-    "updated": "Dernière mise à jour : 28 octobre 2026",
+    "updated": "Dernière mise à jour : 30 octobre 2026",
     "contact": "Contact",
+    "contactSoon": "Notre adresse de contact est en cours de création. Elle apparaîtra ici très bientôt.",
+    "operator": "Exploité par",
     "privacy": {
       "title": "Politique de confidentialité",
-      "intro": "Nous avons conçu ce service pour collecter le moins possible. Cette page explique précisément ce que nous traitons, pourquoi, et ce que tu peux faire.",
+      "intro": "Nous avons conçu ce service pour collecter le moins possible. Cette page explique exactement ce que nous traitons, pourquoi, et ce que tu peux faire.",
       "sections": [
         {
           "h": "Les QR codes sont créés dans ton navigateur",
           "p": [
-            "Quand tu crées un QR code sans compte, tout se passe sur ton appareil : le lien, le mot de passe WiFi, les coordonnées ou le texte que tu saisis, et le logo que tu ajoutes ne sont jamais envoyés à nos serveurs.",
-            "Les téléchargements (PNG, SVG, PDF) sont aussi générés sur ton appareil. Nous ne conservons pas les QR codes créés de cette façon."
+            "Quand tu crées un QR code sans compte, tout se passe sur ton appareil : le lien, le mot de passe WiFi, les coordonnées ou le texte que tu tapes, et le logo que tu ajoutes, ne sont jamais envoyés à nos serveurs.",
+            "Les téléchargements (PNG, SVG, PDF) sont aussi générés sur ton appareil. Nous ne conservons pas les QR codes créés ainsi."
           ]
         },
         {
           "h": "Ton compte",
           "p": [
-            "Un compte n'est nécessaire que pour la carte de visite, les QR PDF et les statistiques de scans. Tu te connectes avec Google, qui nous transmet ton nom, ton adresse email et ta photo de profil ; nous ne voyons jamais ton mot de passe Google.",
-            "Nous utilisons ces informations uniquement pour faire fonctionner ton compte. Elles sont hébergées par notre prestataire InsForge, aux États-Unis."
+            "Un compte n'est nécessaire que pour la carte de visite, la page de liens et leurs statistiques. Tu te connectes avec Google. Google nous transmet ton nom, ton adresse e-mail et ta photo de profil ; nous ne voyons jamais ton mot de passe Google.",
+            "Nous utilisons ces informations uniquement pour faire fonctionner ton compte. Les données du compte sont hébergées par notre prestataire InsForge, aux États-Unis."
           ]
         },
         {
           "h": "Cookies et stockage local",
           "p": [
-            "Nous utilisons seulement ce dont le site a besoin : deux cookies de connexion (insforge_access_token, insforge_refresh_token), un cookie temporaire pendant la connexion Google (insforge_code_verifier, 10 minutes), un cookie qui retient ta langue (NEXT_LOCALE) et une entrée de stockage local qui retient ton choix sur les cookies.",
-            "Nous n'utilisons ni cookies publicitaires ni traceurs tiers."
+            "Nous n'utilisons que ce dont le site a besoin : deux cookies de connexion (insforge_access_token, insforge_refresh_token), un cookie temporaire pendant la connexion Google (insforge_code_verifier, 10 minutes), un cookie qui retient ta langue (NEXT_LOCALE) et une entrée de stockage local qui retient ton choix de cookies.",
+            "Nous n'utilisons ni cookies publicitaires, ni traceurs tiers, ni outil d'enregistrement de session. Nos polices sont servies depuis notre propre site, pas par Google."
           ]
         },
         {
           "h": "Mesure d'audience",
           "p": [
-            "Pour savoir quelles pages sont utiles, nos propres serveurs enregistrent des événements anonymes : la page vue, la langue, les téléchargements de QR (type et format uniquement, jamais le contenu), le type d'appareil, le pays estimé à partir de la connexion et le site d'où tu viens. Nous ne conservons pas ton adresse IP et aucune société d'analyse externe ne reçoit ces données.",
-            "Si tu cliques sur Accepter dans le bandeau cookies, un identifiant aléatoire conservé uniquement pour l'onglet en cours est ajouté, afin de compter les visiteurs uniques. Si tu choisis Essentiels seulement, aucun identifiant n'est utilisé."
+            "Pour savoir quelles pages sont utiles, nos propres serveurs enregistrent des événements anonymes : la page vue, la langue, les téléchargements de QR (type et format seulement, jamais le contenu), le type d'appareil, le pays estimé à partir de la connexion et le site d'où tu viens. Nous ne stockons pas ton adresse IP, nous n'enregistrons jamais ce que tu tapes, et aucune société d'analyse extérieure ne reçoit ces données.",
+            "Si tu cliques sur Accepter dans le bandeau cookies, un identifiant aléatoire gardé seulement pour l'onglet en cours est ajouté, pour compter les visiteurs uniques. Si tu choisis Essentiels seulement, aucun identifiant n'est utilisé."
           ]
         },
         {
-          "h": "Liste d'attente",
+          "h": "Cartes de visite, pages de liens et paiements",
           "p": [
-            "Si tu laisses ton email pour être prévenu de l'ouverture des cartes de visite, nous l'utilisons uniquement pour ce message. Il n'est ni ajouté à une newsletter ni partagé."
+            "Les informations que tu mets sur une carte de visite ou une page de liens (nom, logo, photos, horaires, adresse, téléphone, liens) sont publiées sur une page publique, car c'est leur but.",
+            "Les paiements sont gérés par Stripe. Ton numéro de carte va directement chez Stripe et ne passe jamais par nos serveurs.",
+            "Quand un abonnement se termine, la page est suspendue 30 jours pour te laisser revenir, puis supprimée."
           ]
         },
         {
-          "h": "Cartes de visite et paiements (à venir)",
+          "h": "Statistiques",
           "p": [
-            "Les informations que tu mets sur une carte (nom du business, logo, photos, horaires, adresse, téléphone, liens) sont publiées sur une page publique : c'est son rôle.",
-            "Les paiements seront gérés par Stripe. Ton numéro de carte bancaire va directement chez Stripe et ne passe jamais par nos serveurs.",
-            "À la fin d'un abonnement, la carte est suspendue pendant 30 jours pour te laisser revenir, puis supprimée."
+            "Pour les cartes de visite et les pages de liens, nous comptons par jour les visites, les scans du QR code et les clics sur les boutons. Nous ne créons pas de profil des visiteurs et nous ne vendons jamais ces données."
           ]
         },
         {
-          "h": "Statistiques de scans",
+          "h": "Qui traite des données pour nous",
           "p": [
-            "Pour les cartes de visite et les QR suivis, nous comptons le nombre de scans. Nous ne créons pas de profil des personnes qui scannent et nous ne vendons jamais ces données."
-          ]
-        },
-        {
-          "h": "Qui traite les données pour nous",
-          "p": [
-            "InsForge (base de données, connexion, stockage de fichiers), Vercel (hébergement du site), Google (connexion) et, quand les paiements ouvriront, Stripe. Chacun agit sur nos instructions et uniquement pour le service qu'il fournit."
+            "InsForge (base de données, connexion, stockage de fichiers), Vercel (hébergement du site), Google (connexion) et Stripe (paiements). Chacun agit sur nos instructions et uniquement pour le service qu'il fournit."
           ]
         },
         {
           "h": "Nous ne vendons jamais tes données",
           "p": [
-            "Nous ne vendons ni ne louons d'informations personnelles et ne les partageons pas à des fins publicitaires, y compris au sens de la loi californienne sur la vie privée (CCPA)."
+            "Nous ne vendons ni ne louons d'informations personnelles et ne les partageons pas à des fins publicitaires, y compris au sens de la vente et du partage du California Consumer Privacy Act (CCPA)."
           ]
         },
         {
           "h": "Tes droits",
           "p": [
-            "Tu peux demander à voir les informations que nous détenons sur toi, à les corriger, ou à supprimer ton compte et tout ce qui y est lié. Les résidents de Californie ont ces droits au titre du CCPA ; nous les offrons à tout le monde. Écris-nous à l'adresse ci-dessous, nous répondons sous 30 jours."
+            "Tu peux demander à voir les informations personnelles que nous détenons sur toi, à les corriger, ou à supprimer ton compte et tout ce qui y est lié. Les résidents de Californie ont ces droits au titre du CCPA ; nous les offrons à tous. Écris-nous à l'adresse ci-dessous, nous répondons sous 30 jours."
           ]
         },
         {
           "h": "Enfants",
           "p": [
-            "Ce service ne s'adresse pas aux enfants de moins de 13 ans et nous ne collectons pas sciemment leurs informations."
+            "Les comptes sont réservés aux adultes : il faut avoir 18 ans ou plus pour se connecter. Le générateur gratuit ne demande pas de compte et ne collecte aucune information personnelle. Nous ne collectons pas sciemment d'informations sur des personnes de moins de 18 ans ; si tu penses qu'un mineur a un compte, préviens-nous et nous le supprimerons."
           ]
         },
         {
           "h": "Modifications",
           "p": [
-            "Si nous changeons notre façon de traiter les données, nous mettrons à jour cette page et la date en haut avant que le changement s'applique."
+            "Si nous changeons notre façon de traiter les données, nous mettrons cette page et la date en haut à jour avant que le changement s'applique."
           ]
         }
       ]
     },
     "terms": {
       "title": "Conditions d'utilisation",
-      "intro": "Ces conditions s'appliquent quand tu utilises le générateur de QR codes et, une fois disponible, la carte de visite digitale.",
+      "intro": "Ces conditions s'appliquent quand tu utilises le générateur de QR codes, la carte de visite hébergée et la page de liens.",
       "sections": [
+        {
+          "h": "Qui peut utiliser le service",
+          "p": [
+            "Le générateur gratuit est ouvert à tous. La création d'un compte, d'une carte de visite ou d'une page de liens est réservée aux personnes de 18 ans ou plus. En te connectant, tu confirmes avoir au moins 18 ans et accepter ces conditions et la politique de confidentialité."
+          ]
+        },
         {
           "h": "Le générateur gratuit",
           "p": [
             "Tu peux créer et télécharger des QR codes gratuitement, sans compte et sans filigrane.",
-            "Les QR codes de liens, WiFi, texte, vCard, email et SMS sont statiques : l'information est dans le code lui-même, ils fonctionnent donc pour toujours et ne dépendent pas de notre service."
+            "Les QR codes de liens, WiFi, texte, vCard, e-mail et SMS sont statiques : l'information est dans le code lui-même, ils fonctionnent donc pour toujours et ne dépendent pas de notre service."
           ]
         },
         {
-          "h": "Ton contenu",
+          "h": "Ton contenu et la propriété intellectuelle",
           "p": [
-            "Tu es responsable de ce que tu mets dans un QR code ou sur une carte de visite, et des sites vers lesquels tes codes renvoient. Vérifie un code imprimé avant de le diffuser."
+            "Tu gardes tous les droits sur ce que tu mets en ligne (logos, photos, textes). Tu nous accordes une licence limitée pour le stocker, l'afficher et le reproduire uniquement pour faire fonctionner ta carte ou ta page et la montrer aux visiteurs.",
+            "Tu dois être propriétaire de ton contenu ou avoir l'autorisation de l'utiliser. N'ajoute pas d'images, de logos ou de textes qui appartiennent à quelqu'un d'autre. Tu es responsable de ce que tu publies et des sites vers lesquels pointent tes QR codes.",
+            "Si nous recevons une notification valable pour atteinte au droit d'auteur, nous retirons ou bloquons le contenu concerné, comme décrit dans notre politique droit d'auteur. Les comptes qui récidivent sont fermés."
           ]
         },
         {
           "h": "Ce qui est interdit",
           "p": [
-            "N'utilise pas le service pour de l'hameçonnage, des logiciels malveillants, des arnaques, du contenu illégal, du harcèlement ou pour te faire passer pour quelqu'un d'autre. Chaque page de carte a un bouton Signaler ; nous pouvons masquer ou supprimer un contenu qui enfreint ces règles et suspendre le compte concerné."
+            "N'utilise pas le service pour du phishing, des logiciels malveillants, des arnaques, du contenu illégal, du harcèlement, des atteintes au droit d'auteur ou pour te faire passer pour quelqu'un d'autre. Chaque page publique a un bouton Signaler ; nous pouvons masquer ou retirer le contenu qui enfreint ces règles et suspendre le compte concerné."
           ]
         },
         {
-          "h": "Abonnement carte de visite (à venir)",
+          "h": "Abonnements, renouvellement automatique et résiliation",
           "p": [
-            "La carte de visite hébergée est un abonnement payant, mensuel ou annuel, au prix affiché sur la page Tarifs au moment de la souscription. Il se renouvelle automatiquement jusqu'à résiliation, possible à tout moment.",
-            "Si un paiement échoue ou si tu résilies, la carte reste suspendue 30 jours puis est supprimée. L'adresse de ta carte ne change jamais, donc tes QR imprimés pointent au bon endroit tant que la carte existe."
+            "La carte de visite et la page de liens sont chacune un abonnement payant, mensuel ou annuel, au prix affiché à côté du bouton d'abonnement au moment où tu t'abonnes, taxes éventuelles en plus.",
+            "L'abonnement se renouvelle automatiquement à la fin de chaque période (chaque mois ou chaque année) et le même prix est prélevé sur le moyen de paiement enregistré, jusqu'à ce que tu résilies. Avant de payer, nous t'affichons ces conditions et te demandons de les accepter.",
+            "Tu peux résilier à tout moment, en ligne, avec le bouton Gérer la facturation de ton tableau de bord. La résiliation arrête le prochain renouvellement ; ta page reste en ligne jusqu'à la fin de la période déjà payée.",
+            "Si nous changeons un jour le prix, nous te prévenons avant ton prochain renouvellement et le nouveau prix ne s'applique qu'après."
+          ]
+        },
+        {
+          "h": "Pas de remboursement",
+          "p": [
+            "Les paiements ne sont pas remboursables, y compris pour le temps non utilisé après une résiliation, sauf si la loi de ton pays impose un remboursement. Tu gardes un accès complet jusqu'à la fin de la période payée."
+          ]
+        },
+        {
+          "h": "Fin d'un abonnement",
+          "p": [
+            "Si un paiement échoue ou si un abonnement se termine, la page est suspendue 30 jours puis supprimée avec ses images. L'adresse de ta page (son slug) ne change jamais, donc les QR codes imprimés pointent toujours au bon endroit tant que la page existe."
           ]
         },
         {
           "h": "Disponibilité",
           "p": [
-            "Nous faisons en sorte que le service reste en ligne, sans pouvoir garantir qu'il soit toujours disponible ou sans erreur. Les QR statiques déjà téléchargés ne sont pas concernés par une panne."
+            "Nous faisons tout pour garder le service en ligne mais ne pouvons pas garantir qu'il sera toujours disponible ou sans erreur. Les QR codes statiques que tu as téléchargés ne sont pas touchés par une panne."
           ]
         },
         {
           "h": "Responsabilité",
           "p": [
-            "Le service est fourni tel quel. Dans la mesure permise par la loi, nous ne sommes pas responsables des pertes indirectes, ni des pertes causées par un contenu que toi ou d'autres publiez."
+            "Le service est fourni tel quel. Dans la mesure permise par la loi, nous ne sommes pas responsables des pertes indirectes, ni des pertes causées par du contenu que toi ou d'autres publiez."
           ]
         },
         {
           "h": "Modification des conditions",
           "p": [
-            "Nous pouvons mettre à jour ces conditions. Nous changerons la date en haut et, pour les changements importants, nous préviendrons les titulaires de compte par email avant leur application."
+            "Nous pouvons mettre à jour ces conditions. Nous changerons la date en haut et, pour les changements importants, nous préviendrons les titulaires de compte par e-mail avant qu'ils s'appliquent."
+          ]
+        }
+      ]
+    },
+    "copyright": {
+      "title": "Politique droit d'auteur",
+      "intro": "Nous respectons la propriété intellectuelle et attendons la même chose de nos utilisateurs. Voici comment signaler un contenu qui porte atteinte à tes droits d'auteur et comment nous le traitons (Digital Millennium Copyright Act, DMCA).",
+      "sections": [
+        {
+          "h": "Signaler un contenu",
+          "p": [
+            "Si tu penses qu'une carte de visite ou une page de liens hébergée chez nous utilise ton œuvre sans autorisation, envoie une notification écrite à notre agent désigné, à l'adresse de contact ci-dessous. Tu peux aussi utiliser le bouton Signaler de la page en choisissant Droit d'auteur, puis envoyer la notification complète par e-mail."
+          ]
+        },
+        {
+          "h": "Ce que ta notification doit contenir",
+          "p": [
+            "1) Ta signature manuscrite ou électronique. 2) L'œuvre dont tu dis qu'elle est copiée. 3) L'adresse (URL) de la page et une description du contenu à retirer. 4) Ton nom, ton adresse postale, ton téléphone et ton e-mail. 5) Une déclaration indiquant que tu crois de bonne foi que l'utilisation n'est pas autorisée par le titulaire des droits, son représentant ou la loi. 6) Une déclaration, sous peine de parjure, que les informations sont exactes et que tu es le titulaire des droits ou autorisé à agir pour lui.",
+            "Une notification incomplète peut ne pas être traitée. Une notification sciemment fausse peut engager ta responsabilité."
+          ]
+        },
+        {
+          "h": "Ce que nous faisons",
+          "p": [
+            "Quand nous recevons une notification valable, nous retirons ou bloquons rapidement le contenu et prévenons le titulaire du compte, avec une copie de la notification."
+          ]
+        },
+        {
+          "h": "Contre-notification",
+          "p": [
+            "Si ton contenu a été retiré par erreur, tu peux envoyer une contre-notification avec : ta signature ; le contenu retiré et où il apparaissait ; une déclaration sous peine de parjure que tu crois de bonne foi qu'il a été retiré par erreur ; ton nom, ton adresse et ton téléphone ; et ton accord pour la compétence du tribunal fédéral de ton district (ou, hors des États-Unis, de tout district où nous pouvons être trouvés) et pour recevoir les actes de la personne à l'origine de la notification.",
+            "Nous la transmettons à cette personne et pouvons rétablir le contenu après 10 à 14 jours ouvrés, sauf si elle nous informe avoir engagé une action en justice."
+          ]
+        },
+        {
+          "h": "Récidive",
+          "p": [
+            "Nous fermons les comptes des utilisateurs qui portent atteinte de façon répétée aux droits d'autrui."
+          ]
+        },
+        {
+          "h": "Agent désigné",
+          "p": [
+            "Notre agent désigné pour les notifications de droit d'auteur est l'exploitant de ce site, à l'adresse postale et e-mail indiquée ci-dessous."
           ]
         }
       ]
@@ -848,6 +914,11 @@
       "cover": "Remplir le cadre",
       "contain": "Logo entier",
       "reset": "Réinitialiser"
+    },
+    "renewal": {
+      "notice": "Renouvellement automatique : {monthly} par mois ou {yearly} par an, prélevé jusqu'à résiliation. Résilie quand tu veux en ligne avec Gérer la facturation ; ta page reste en ligne jusqu'à la fin de la période payée. Pas de remboursement, sauf si la loi l'impose.",
+      "consent": "J'accepte le renouvellement automatique et les <terms>conditions de vente</terms>.",
+      "required": "Coche la case pour accepter le renouvellement automatique avant de t'abonner."
     }
   },
   "cardPage": {
@@ -885,7 +956,15 @@
       "fri": "Vendredi",
       "sat": "Samedi",
       "sun": "Dimanche"
-    }
+    },
+    "reportKind": "Quel est le problème ?",
+    "reportKinds": {
+      "copyright": "Elle utilise mon œuvre (droit d'auteur)",
+      "scam": "Arnaque ou phishing",
+      "other": "Autre chose"
+    },
+    "copyrightHelp": "Pour une réclamation de droit d'auteur, envoie aussi une notification complète comme décrit dans notre",
+    "copyrightLink": "politique droit d'auteur"
   },
   "print": {
     "title": "Carte de visite imprimée",

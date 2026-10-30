@@ -6,6 +6,7 @@ import { Reveal } from "@/components/motion";
 import { signInWithGoogle } from "@/app/actions/auth";
 import { getUser } from "@/shared/auth";
 import { safeNext } from "@/shared/safeNext";
+import { Link } from "@/i18n/routing";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -29,10 +30,20 @@ export default async function LoginPage({ params, searchParams }: {
       <section className="mx-auto max-w-md px-4 py-20">
         <Reveal>
           <div className="rounded-[2rem] bg-white p-8 shadow-[0_30px_60px_-30px_rgba(23,20,58,0.4)]">
-            {error && <p className="mb-4 rounded-xl bg-coral/15 p-3 text-sm font-medium text-ink">{t(error === "suspended" ? "suspended" : "error")}</p>}
+            {error && <p className="mb-4 rounded-xl bg-coral/15 p-3 text-sm font-medium text-ink">{t(error === "suspended" ? "suspended" : error === "age" ? "ageError" : "error")}</p>}
             <form action={signInWithGoogle}>
               <input type="hidden" name="locale" value={locale} />
               {after && <input type="hidden" name="next" value={after} />}
+              {/* 18+ and terms: required by the browser, checked again by the server action. */}
+              <label className="mb-5 flex items-start gap-3 text-sm text-ink">
+                <input type="checkbox" name="age_ok" value="1" required className="peer mt-0.5 h-5 w-5 shrink-0 accent-violet" />
+                <span>
+                  {t.rich("ageConsent", {
+                    terms: (c) => <Link href="/terms" className="font-semibold underline" target="_blank">{c}</Link>,
+                    privacy: (c) => <Link href="/privacy" className="font-semibold underline" target="_blank">{c}</Link>,
+                  })}
+                </span>
+              </label>
               <button className="btn flex w-full items-center justify-center gap-3 rounded-full bg-ink px-6 py-4 font-semibold text-white transition hover:bg-violet">
                 <svg width="20" height="20" viewBox="0 0 48 48" aria-hidden>
                   <path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3l5.7-5.7C34.1 6.1 29.3 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.4-.4-3.5z" />

@@ -4,11 +4,12 @@ import { Link } from "@/i18n/routing";
 import { getUser, userDb } from "@/shared/auth";
 import { getPrices } from "@/modules/entitlements/application/settings";
 import { Generator } from "@/modules/qr/interface/Generator";
-import { getMyCard, openBillingPortal, startCheckout } from "../application/actions";
+import { getMyCard, openBillingPortal } from "../application/actions";
 import type { PageKind } from "../domain/card";
 import { cardHostLabel, cardQrUrl, cardUrl } from "../domain/cardUrl";
 import { CreateCardForm } from "./CreateCardForm";
 import { CardEditor } from "./CardEditor";
+import { RenewalCheckout } from "./RenewalCheckout";
 import type { CardLabels } from "./CardView";
 
 export type DashboardQuery = { paid?: string; canceled?: string; billing?: string };
@@ -23,7 +24,7 @@ export async function PageDashboard({ kind, locale, q }: { kind: PageKind; local
   const p = await getTranslations("cardPage");
   const card = await getMyCard(kind);
 
-  const notice = q.paid ? t("paidThanks") : q.canceled ? t("canceled") : q.billing === "unavailable" ? t("billingUnavailable") : q.billing === "error" ? t("billingError") : null;
+  const notice = q.paid ? t("paidThanks") : q.canceled ? t("canceled") : q.billing === "unavailable" ? t("billingUnavailable") : q.billing === "error" ? t("billingError") : q.billing === "consent" ? t("renewal.required") : null;
   const header = (
     <div className="mb-8 flex flex-wrap items-end justify-between gap-3">
       <div>
@@ -81,16 +82,7 @@ export async function PageDashboard({ kind, locale, q }: { kind: PageKind; local
         </div>
         <div className="flex flex-wrap gap-2 md:justify-end">
           {card.status === "draft" || card.status === "suspended" ? (
-            (["monthly", "yearly"] as const).map((plan) => (
-              <form key={plan} action={startCheckout}>
-                <input type="hidden" name="locale" value={locale} />
-                <input type="hidden" name="plan" value={plan} />
-                <input type="hidden" name="kind" value={kind} />
-                <button className={`btn rounded-full px-5 py-3 text-sm font-semibold ${plan === "yearly" ? "bg-lime text-ink" : "bg-white text-ink"}`}>
-                  {t(plan, { price: `$${plan === "yearly" ? prices.yearly : prices.monthly}` })}
-                </button>
-              </form>
-            ))
+            <RenewalCheckout locale={locale} kind={kind} prices={prices} dark />
           ) : (
             <>
               <a href={url} target="_blank" rel="noopener" className="btn rounded-full bg-lime px-5 py-3 text-sm font-semibold text-ink">{t(kind === "bio" ? "viewBio" : "viewCard")}</a>
