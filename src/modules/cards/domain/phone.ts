@@ -40,13 +40,16 @@ export const COUNTRIES: readonly { iso: string; dial: string }[] = [
 /** "US" → 🇺🇸 (regional indicator letters). */
 export const flag = (iso: string) => String.fromCodePoint(...[...iso.toUpperCase()].map((ch) => 0x1f1e6 + ch.charCodeAt(0) - 65));
 
+// Pre-sorted by dial length descending so splitPhone doesn't re-sort on every call.
+const BY_DIAL_LEN = [...COUNTRIES].sort((a, b) => b.dial.length - a.dial.length);
+
 /** Splits a stored "+33 6 12 34 56 78" into its country and local part; numbers without "+" stay local. */
 export function splitPhone(phone: string, fallback = "US"): { iso: string; local: string } {
   const v = phone.trim();
   if (!v.startsWith("+")) return { iso: fallback, local: v };
   const digits = v.slice(1).replace(/\D/g, "");
   // Longest code wins (+351 before +35…); a shared code (+1) keeps the fallback when it matches.
-  const match = [...COUNTRIES].sort((a, b) => b.dial.length - a.dial.length).find((c) => digits.startsWith(c.dial));
+  const match = BY_DIAL_LEN.find((c) => digits.startsWith(c.dial));
   if (!match) return { iso: fallback, local: v };
   const iso = COUNTRIES.some((c) => c.iso === fallback && c.dial === match.dial) ? fallback : match.iso;
   const rest = v.slice(1).replace(/^\s*/, "");

@@ -89,8 +89,15 @@ export function CardEditor({ card, previewLabels, publish }: {
   // Kept apart from the number because +1 is shared (US, Canada…).
   const [phoneIso, setPhoneIso] = useState(() => splitPhone(card.phone ?? "").iso);
   const locale = useLocale();
-  const names = useMemo(() => new Intl.DisplayNames([locale], { type: "region" }), [locale]);
-  const countryName = (iso: string) => names.of(iso) ?? iso;
+  const countryOptions = useMemo(() => {
+    let names: Intl.DisplayNames | null = null;
+    try { names = new Intl.DisplayNames([locale], { type: "region" }); } catch { /* SSR or unsupported */ }
+    return COUNTRIES.map((k) => {
+      let label: string;
+      try { label = `${flag(k.iso)} +${k.dial} ${names?.of(k.iso) ?? k.iso}`; } catch { label = `${flag(k.iso)} +${k.dial} ${k.iso}`; }
+      return { iso: k.iso, label };
+    });
+  }, [locale]);
   const [busy, setBusy] = useState<string | null>(null);
   const [pending, start] = useTransition();
   const set = <K extends keyof EditorState>(k: K, v: EditorState[K]) => { setC((s) => ({ ...s, [k]: v })); setStatus("idle"); setErrPath(null); };
@@ -198,9 +205,9 @@ export function CardEditor({ card, previewLabels, publish }: {
             <label className="block text-sm font-semibold" data-field="phone">
               <span className="mb-1 block text-slate">{t("fields.phone")}</span>
               <div className={`flex overflow-hidden rounded-2xl border-2 bg-white transition focus-within:border-violet ${bad("phone") ? "border-coral" : "border-ink/10"}`}>
-                <select aria-label={t("fields.country")} value={phoneIso} className="max-w-[8rem] shrink-0 border-r-2 border-ink/10 bg-lavender px-2 text-ink outline-none"
+                <select aria-label={t("fields.country")} value={phoneIso} suppressHydrationWarning className="max-w-[8rem] shrink-0 border-r-2 border-ink/10 bg-lavender px-2 text-ink outline-none"
                   onChange={(e) => { setPhoneIso(e.target.value); set("phone", joinPhone(e.target.value, splitPhone(c.phone ?? "", phoneIso).local)); }}>
-                  {COUNTRIES.map((k) => <option key={k.iso} value={k.iso}>{flag(k.iso)} +{k.dial} {countryName(k.iso)}</option>)}
+                  {countryOptions.map((k) => <option key={k.iso} value={k.iso} suppressHydrationWarning>{k.label}</option>)}
                 </select>
                 <input type="tel" maxLength={30} className="min-w-0 flex-1 px-4 py-3 text-ink outline-none" placeholder="555 010 2030"
                   value={splitPhone(c.phone ?? "", phoneIso).local} onChange={(e) => set("phone", joinPhone(phoneIso, e.target.value))} />
