@@ -7,6 +7,8 @@ import { Reveal } from "@/components/motion";
 import { Generator } from "@/modules/qr/interface/Generator";
 import { allTypeSlugs, typeFromSlug } from "@/modules/qr/interface/slugs";
 import { presetFromSlug, presetSlugs } from "@/modules/qr/domain/presets";
+import { guideContent } from "@/content/guides";
+import { TypeGuide } from "@/components/TypeGuide";
 
 type Props = { params: Promise<{ locale: string; slug: string }> };
 
@@ -55,6 +57,7 @@ export default async function TypePage({ params }: Props) {
           <Generator initialType={page.type} initialPreset={page.preset} />
         </Reveal>
       </div>
+      {page.type && <TypeGuide guide={guideContent(locale).types[page.type]} />}
       <Ticker />
       <TypesGrid />
       <Trust />

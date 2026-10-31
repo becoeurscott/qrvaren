@@ -10,6 +10,7 @@ const LOCAL = new Set(["phone"]);
 export async function Footer() {
   const t = await getTranslations("footer");
   const g = await getTranslations("gen.types");
+  const n = await getTranslations("nav");
   return (
     <footer className="bg-ink px-6 pb-10 pt-16 text-white">
       <div className="mx-auto grid max-w-6xl gap-10 sm:grid-cols-2 md:grid-cols-[2fr_1fr_1fr_1fr]">
@@ -30,6 +31,7 @@ export async function Footer() {
           ))}
         </ul>
         <ul className="space-y-2 text-sm font-semibold">
+          <li><Link className="hover:text-lime" href="/guides">{n("guides")}</Link></li>
           <li><Link className="hover:text-lime" href="/privacy">{t("privacy")}</Link></li>
           <li><Link className="hover:text-lime" href="/terms">{t("terms")}</Link></li>
           <li><Link className="hover:text-lime" href="/copyright">{t("copyright")}</Link></li>

@@ -14,6 +14,7 @@ export async function Nav() {
   const items = [
     { href: "/create", label: t("generator") },
     { href: "/business-card", label: t("card") },
+    { href: "/guides", label: t("guides") },
     { href: "/pricing", label: t("pricing") },
     { href: "/login", label: t("login") },
   ];
@@ -24,7 +25,7 @@ export async function Nav() {
           <span className="text-lime" aria-hidden>✺</span>
           {BRAND_NAME}
         </Link>
-        {items.slice(0, 3).map((it) => (
+        {items.slice(0, 4).map((it) => (
           <Link key={it.href} href={it.href} className="hidden px-2 text-sm font-semibold transition hover:text-lime md:block">{it.label}</Link>
         ))}
         <span className="hidden md:block">
