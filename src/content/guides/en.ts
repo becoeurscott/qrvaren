@@ -288,6 +288,78 @@ const en: GuideContent = {
   },
   tutorials: [
     {
+      slug: "what-is-a-qr-code",
+      title: "What is a QR code? How it works, how to scan it, and is it safe",
+      desc: "Everything you need to know about QR codes: how they store data, error correction, static vs dynamic codes, how to scan them and how to stay safe.",
+      minutes: 6,
+      cta: { href: "/create", label: "Create a QR code" },
+      sections: [
+        {
+          h: "What is a QR code?",
+          p: [
+            "A QR code (short for Quick Response code) is a two-dimensional barcode made of black and white squares. Unlike a classic barcode, which stores data in one row of lines, a QR code stores data both horizontally and vertically, so it can hold much more: a website address, a WiFi password, contact details, a text or a phone number.",
+            "QR codes were invented in 1994 by Masahiro Hara at Denso Wave, a Japanese company, to track car parts in factories. Denso Wave chose not to enforce its patent, which helped QR codes spread everywhere. Today they are an international standard (ISO/IEC 18004), and every modern smartphone camera can read them.",
+          ],
+        },
+        {
+          h: "How a QR code works",
+          list: [
+            "Modules: each small square is a module. A dark module is a 1 and a light module is a 0, so the pattern is binary data.",
+            "Finder patterns: the three large squares in the corners tell the camera where the code is and which way it is turned, so it can be read at any angle.",
+            "Alignment and timing patterns: smaller markers help the scanner correct for perspective and count the rows and columns.",
+            "Versions: QR codes come in 40 sizes, from 21 × 21 modules (version 1) to 177 × 177 modules (version 40). The more data you store, the bigger and denser the code.",
+            "Quiet zone: the white margin around the code helps the scanner separate the code from its surroundings. Never crop it.",
+          ],
+        },
+        {
+          h: "Error correction: why a QR code still works with a logo",
+          p: [
+            "QR codes use Reed-Solomon error correction, the same kind of maths used on CDs. Part of the code stores backup data, so the code can still be read when it is dirty, scratched or partly covered.",
+            "There are four levels: L recovers about 7% of the code, M about 15%, Q about 25% and H about 30%. This is why you can place a small logo in the middle of a QR code: the hidden part is rebuilt from the backup data. QRVAREN raises the error correction automatically when you add a logo.",
+          ],
+        },
+        {
+          h: "How much can a QR code hold?",
+          p: [
+            "A single QR code can store up to 7,089 digits, 4,296 letters and numbers, or about 2,950 bytes of data. In practice, keep the content short: a short link or a few lines of text give a simple code that every phone scans instantly.",
+          ],
+        },
+        {
+          h: "Static vs dynamic QR codes",
+          list: [
+            "Static QR code: the data is stored directly inside the pattern. It is free, works forever and needs no server, but you can't change the content after printing. QRVAREN's link, WiFi, text, vCard, email and SMS codes are static.",
+            "Dynamic QR code: the code holds a short link that redirects to your content. You can change the destination later and count scans, but it depends on the service staying online. QRVAREN's PDF codes and business cards work this way.",
+          ],
+        },
+        {
+          h: "How to scan a QR code",
+          steps: [
+            "On iPhone: open the Camera app, point it at the code and tap the banner that appears.",
+            "On Android: open the Camera app or Google Lens, point it at the code and tap the link.",
+            "On a computer, or for a screenshot: use our free online QR code scanner. Upload the picture or use your webcam.",
+          ],
+        },
+        {
+          h: "Are QR codes safe?",
+          p: [
+            "A QR code itself can't harm your phone: it only contains text. The risk is where it sends you. Scammers sometimes stick fake QR codes over real ones, on parking meters or restaurant tables, to send people to phishing websites.",
+          ],
+          list: [
+            "Check the website address your phone shows before opening it.",
+            "Be careful with stickers placed over another code.",
+            "Never enter passwords or payment details on a page you reached through a QR code unless you trust the website.",
+            "Don't install apps or files from a QR code you don't trust.",
+          ],
+        },
+        {
+          h: "How to create your own QR code",
+          p: [
+            "You can create a QR code for free on QRVAREN in about 30 seconds: choose a type, fill in your content, add your colors and logo, then download it as PNG, SVG or PDF. No sign-up is needed for static codes, and they never expire.",
+          ],
+        },
+      ],
+    },
+    {
       slug: "how-to-create-a-qr-code",
       title: "How to create a QR code for free (step by step)",
       desc: "The complete beginner's guide to making your first QR code with QRVAREN, from choosing a type to downloading the file.",

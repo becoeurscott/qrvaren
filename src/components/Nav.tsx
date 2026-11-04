@@ -14,6 +14,7 @@ export async function Nav() {
   const items = [
     { href: "/create", label: t("generator") },
     { href: "/business-card", label: t("card") },
+    { href: "/qr-code-scanner", label: t("scanner") },
     { href: "/guides", label: t("guides") },
     { href: "/pricing", label: t("pricing") },
     { href: "/login", label: t("login") },
@@ -25,17 +26,17 @@ export async function Nav() {
           <span className="text-lime" aria-hidden>✺</span>
           {BRAND_NAME}
         </Link>
-        {items.slice(0, 4).map((it) => (
-          <Link key={it.href} href={it.href} className="hidden px-2 text-sm font-semibold transition hover:text-lime md:block">{it.label}</Link>
+        {items.slice(0, 5).map((it, i) => (
+          <Link key={it.href} href={it.href} className={`hidden whitespace-nowrap px-2 text-sm font-semibold transition hover:text-lime ${i < 3 ? "md:block" : "lg:block"}`}>{it.label}</Link>
         ))}
-        <span className="hidden md:block">
+        <span className="hidden whitespace-nowrap md:block">
           <AuthLink login={t("login")} dashboard={t("dashboard")} className="px-2 text-sm font-semibold transition hover:text-lime" />
         </span>
         <span className="hidden md:block">
           <LogoutButton label={t("logout")} locale={locale} className="px-2 text-sm font-semibold text-white/75 transition hover:text-lime disabled:opacity-50" />
         </span>
         <span className="hidden md:block"><LocaleSwitcher current={locale} /></span>
-        <span className="hidden sm:block"><Button href="/create" variant="light" size="sm">{t("cta")}</Button></span>
+        <span className="hidden whitespace-nowrap sm:block"><Button href="/create" variant="light" size="sm">{t("cta")}</Button></span>
         <MobileMenu items={items} cta={{ href: "/create", label: t("cta") }} locale={locale} openLabel={t("menu")} closeLabel={t("close")} dashboardLabel={t("dashboard")} logoutLabel={t("logout")} />
       </nav>
     </header>

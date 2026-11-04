@@ -10,7 +10,8 @@
     "dashboard": "Panel",
     "menu": "Menú",
     "close": "Cerrar el menú",
-    "logout": "Cerrar sesión"
+    "logout": "Cerrar sesión",
+    "scanner": "Escáner"
   },
   "hero": {
     "badge": "Gratis · Sin registro · Nunca caduca",
@@ -1063,5 +1064,71 @@
         "image": "Tu imagen de QR se imprime tal cual. Usa una imagen nítida con borde blanco."
       }
     }
+  },
+  "scanner": {
+    "nav": "Escáner",
+    "title": "Escáner de códigos QR online — desde imagen o cámara, gratis",
+    "h1": "Escáner de códigos QR",
+    "desc": "Escanea un código QR online gratis: sube una imagen o captura de pantalla, pégala o usa tu webcam. Funciona en tu navegador, no se sube nada.",
+    "drop": "Suelta aquí una imagen con un código QR",
+    "dropHint": "o haz clic para elegir un archivo · también puedes pegar una captura (Ctrl+V)",
+    "useCamera": "Usar mi cámara",
+    "stop": "Detener la cámara",
+    "private": "El escaneo se hace en tu navegador. Tus imágenes nunca salen de tu dispositivo.",
+    "waiting": "El contenido de tu código QR aparecerá aquí.",
+    "notFound": "No encontramos un código QR en esta imagen. Prueba con una foto más nítida, con el código entero visible y un margen blanco alrededor.",
+    "cameraDenied": "No podemos acceder a tu cámara. Permite el acceso en tu navegador o sube una imagen.",
+    "kind": {
+      "url": "Enlace",
+      "wifi": "Red WiFi",
+      "text": "Texto"
+    },
+    "checkHost": "Este enlace abre {host}. Comprueba que confías en este sitio antes de introducir datos personales.",
+    "open": "Abrir el enlace",
+    "ssid": "Nombre de la red",
+    "password": "Contraseña",
+    "security": "Seguridad",
+    "copy": "Copiar",
+    "copyPassword": "Copiar contraseña",
+    "copied": "¡Copiado!",
+    "again": "Escanear otro",
+    "makeOwn": "¿Necesitas tu propio código QR?",
+    "makeOwnCta": "Créalo gratis",
+    "howTitle": "Cómo escanear un código QR online",
+    "how": [
+      "Haz clic en el recuadro de arriba y elige una imagen o captura con un código QR, o arrástrala al recuadro.",
+      "O pega una captura directamente con Ctrl+V (Cmd+V en Mac).",
+      "O haz clic en Usar mi cámara y pon el código QR delante de tu webcam.",
+      "Lee el resultado: los enlaces muestran primero la web, los códigos WiFi el nombre de la red y la contraseña, y el texto se muestra completo."
+    ],
+    "phoneTitle": "Cómo escanear un código QR con el móvil",
+    "phone": [
+      "iPhone: abre la Cámara, apunta al código y toca el aviso amarillo.",
+      "Android: abre la Cámara o Google Lens, apunta al código y toca el enlace que aparece.",
+      "Para escanear un código QR que ya está en tu móvil, como una captura, súbela en esta página desde el navegador del móvil."
+    ],
+    "faqTitle": "Preguntas frecuentes del escáner de QR",
+    "faq": [
+      {
+        "q": "¿Este escáner de códigos QR es gratis?",
+        "a": "Sí. Es gratis, sin registro y sin límite."
+      },
+      {
+        "q": "¿Se suben mis imágenes?",
+        "a": "No. El código QR se decodifica en tu navegador. Tus imágenes y tu cámara nunca salen de tu dispositivo."
+      },
+      {
+        "q": "¿Puedo escanear un código QR desde una captura de pantalla?",
+        "a": "Sí. Sube la captura o pégala con Ctrl+V. Es la forma más fácil de leer un código QR que está en tu propia pantalla."
+      },
+      {
+        "q": "¿Por qué no se lee mi código QR?",
+        "a": "La imagen puede estar borrosa, ser pequeña, estar recortada o tener poco contraste. Usa una imagen nítida con el código entero y su margen blanco."
+      },
+      {
+        "q": "¿Es seguro abrir un enlace escaneado?",
+        "a": "Comprueba la dirección antes de abrirla. A veces se usan pegatinas QR falsas para phishing: nunca introduzcas contraseñas ni datos de pago en un sitio que no reconozcas."
+      }
+    ]
   }
 }

@@ -288,6 +288,78 @@ const es: GuideContent = {
   },
   tutorials: [
     {
+      slug: "what-is-a-qr-code",
+      title: "¿Qué es un código QR? Cómo funciona, cómo escanearlo y si es seguro",
+      desc: "Todo sobre los códigos QR: cómo guardan los datos, la corrección de errores, códigos estáticos o dinámicos, cómo escanearlos y cómo protegerte.",
+      minutes: 6,
+      cta: { href: "/create", label: "Crear un código QR" },
+      sections: [
+        {
+          h: "¿Qué es un código QR?",
+          p: [
+            "Un código QR (de Quick Response, «respuesta rápida») es un código de barras bidimensional formado por cuadrados negros y blancos. A diferencia de un código de barras clásico, que guarda los datos en una sola fila de barras, el código QR los guarda en horizontal y en vertical, así que contiene mucho más: una dirección web, una contraseña WiFi, datos de contacto, un texto o un número de teléfono.",
+            "El código QR lo inventó en 1994 Masahiro Hara en Denso Wave, una empresa japonesa, para seguir piezas de coche en las fábricas. Denso Wave decidió no hacer valer su patente, lo que ayudó a que los códigos QR se extendieran por todas partes. Hoy son un estándar internacional (ISO/IEC 18004) y la cámara de cualquier móvil moderno puede leerlos.",
+          ],
+        },
+        {
+          h: "Cómo funciona un código QR",
+          list: [
+            "Módulos: cada cuadradito es un módulo. Un módulo oscuro es un 1 y uno claro es un 0, así que el patrón son datos binarios.",
+            "Patrones de localización: los tres cuadrados grandes de las esquinas indican a la cámara dónde está el código y cómo está girado, para leerlo desde cualquier ángulo.",
+            "Patrones de alineación y sincronización: marcas más pequeñas ayudan al lector a corregir la perspectiva y contar filas y columnas.",
+            "Versiones: hay 40 tamaños de código QR, desde 21 × 21 módulos (versión 1) hasta 177 × 177 módulos (versión 40). Cuantos más datos guardas, más grande y denso es el código.",
+            "Zona de silencio: el margen blanco alrededor del código ayuda al lector a separarlo de lo que lo rodea. No lo recortes nunca.",
+          ],
+        },
+        {
+          h: "Corrección de errores: por qué un código QR funciona con un logo",
+          p: [
+            "Los códigos QR usan la corrección de errores Reed-Solomon, las mismas matemáticas que los CD. Una parte del código guarda datos de respaldo, así que sigue siendo legible aunque esté sucio, rayado o tapado en parte.",
+            "Hay cuatro niveles: L recupera alrededor del 7 % del código, M el 15 %, Q el 25 % y H el 30 %. Por eso puedes poner un logo pequeño en el centro de un código QR: la parte tapada se reconstruye con los datos de respaldo. QRVAREN sube la corrección de errores automáticamente cuando añades un logo.",
+          ],
+        },
+        {
+          h: "¿Cuánto cabe en un código QR?",
+          p: [
+            "Un solo código QR puede guardar hasta 7.089 dígitos, 4.296 letras y números o unos 2.950 bytes de datos. En la práctica, mantén el contenido corto: un enlace corto o unas pocas líneas de texto dan un código simple que cualquier móvil escanea al instante.",
+          ],
+        },
+        {
+          h: "Códigos QR estáticos o dinámicos",
+          list: [
+            "Código QR estático: los datos se guardan directamente en el patrón. Es gratis, funciona para siempre y no necesita servidor, pero no puedes cambiar el contenido tras imprimirlo. Los códigos de enlace, WiFi, texto, vCard, email y SMS de QRVAREN son estáticos.",
+            "Código QR dinámico: el código contiene un enlace corto que redirige a tu contenido. Puedes cambiar el destino y contar escaneos, pero depende de que el servicio siga en línea. Los códigos PDF y las tarjetas de visita de QRVAREN funcionan así.",
+          ],
+        },
+        {
+          h: "Cómo escanear un código QR",
+          steps: [
+            "En iPhone: abre la Cámara, apunta al código y toca el aviso que aparece.",
+            "En Android: abre la Cámara o Google Lens, apunta al código y toca el enlace.",
+            "En un ordenador, o para una captura de pantalla: usa nuestro escáner de códigos QR online gratis. Sube la imagen o usa tu webcam.",
+          ],
+        },
+        {
+          h: "¿Son seguros los códigos QR?",
+          p: [
+            "Un código QR no puede dañar tu móvil: solo contiene texto. El riesgo está en adónde te lleva. A veces los estafadores pegan códigos QR falsos encima de los reales, en parquímetros o mesas de restaurante, para llevar a webs de phishing.",
+          ],
+          list: [
+            "Comprueba la dirección web que muestra tu móvil antes de abrirla.",
+            "Desconfía de pegatinas puestas encima de otro código.",
+            "Nunca introduzcas contraseñas ni datos de pago en una página abierta desde un código QR si no confías en el sitio.",
+            "No instales apps ni archivos desde un código QR del que no te fíes.",
+          ],
+        },
+        {
+          h: "Cómo crear tu propio código QR",
+          p: [
+            "Puedes crear un código QR gratis en QRVAREN en unos 30 segundos: elige un tipo, rellena el contenido, añade tus colores y tu logo y descárgalo en PNG, SVG o PDF. Los códigos estáticos no requieren registro y nunca caducan.",
+          ],
+        },
+      ],
+    },
+    {
       slug: "how-to-create-a-qr-code",
       title: "Cómo crear un código QR gratis (paso a paso)",
       desc: "La guía completa para principiantes: crea tu primer código QR con QRVAREN, desde elegir el tipo hasta descargar el archivo.",

@@ -10,7 +10,8 @@
     "dashboard": "Tableau de bord",
     "menu": "Menu",
     "close": "Fermer le menu",
-    "logout": "Déconnexion"
+    "logout": "Déconnexion",
+    "scanner": "Scanner"
   },
   "hero": {
     "badge": "Gratuit · Sans inscription · N'expire jamais",
@@ -1063,5 +1064,71 @@
         "image": "Votre image de QR est imprimée telle quelle. Utilisez une image nette avec une bordure blanche."
       }
     }
+  },
+  "scanner": {
+    "nav": "Scanner",
+    "title": "Scanner QR code en ligne — depuis une image ou la caméra, gratuit",
+    "h1": "Scanner de QR code",
+    "desc": "Scannez un QR code en ligne gratuitement : importez une image ou une capture d'écran, collez-la, ou utilisez votre webcam. Tout se passe dans votre navigateur, rien n'est envoyé.",
+    "drop": "Déposez une image de QR code ici",
+    "dropHint": "ou cliquez pour choisir un fichier · vous pouvez aussi coller une capture d'écran (Ctrl+V)",
+    "useCamera": "Utiliser ma caméra",
+    "stop": "Arrêter la caméra",
+    "private": "Le scan se fait dans votre navigateur. Vos images ne quittent jamais votre appareil.",
+    "waiting": "Le contenu de votre QR code apparaîtra ici.",
+    "notFound": "Aucun QR code trouvé dans cette image. Essayez une photo plus nette, avec le code entier visible et une marge blanche autour.",
+    "cameraDenied": "Impossible d'accéder à votre caméra. Autorisez l'accès dans votre navigateur, ou importez plutôt une image.",
+    "kind": {
+      "url": "Lien",
+      "wifi": "Réseau WiFi",
+      "text": "Texte"
+    },
+    "checkHost": "Ce lien ouvre {host}. Vérifiez que vous faites confiance à ce site avant d'y saisir des informations personnelles.",
+    "open": "Ouvrir le lien",
+    "ssid": "Nom du réseau",
+    "password": "Mot de passe",
+    "security": "Sécurité",
+    "copy": "Copier",
+    "copyPassword": "Copier le mot de passe",
+    "copied": "Copié !",
+    "again": "Scanner un autre",
+    "makeOwn": "Besoin de votre propre QR code ?",
+    "makeOwnCta": "Créez-en un gratuitement",
+    "howTitle": "Comment scanner un QR code en ligne",
+    "how": [
+      "Cliquez sur le cadre ci-dessus et choisissez une image ou une capture d'écran contenant un QR code, ou glissez-la dans le cadre.",
+      "Ou collez une capture d'écran directement avec Ctrl+V (Cmd+V sur Mac).",
+      "Ou cliquez sur Utiliser ma caméra et placez le QR code devant votre webcam.",
+      "Lisez le résultat : les liens affichent d'abord le site, les codes WiFi le nom du réseau et le mot de passe, et le texte s'affiche en entier."
+    ],
+    "phoneTitle": "Comment scanner un QR code avec son téléphone",
+    "phone": [
+      "iPhone : ouvrez l'appareil photo, visez le code et touchez la bannière jaune.",
+      "Android : ouvrez l'appareil photo ou Google Lens, visez le code et touchez le lien qui apparaît.",
+      "Pour scanner un QR code déjà sur votre téléphone, comme une capture d'écran, importez-la sur cette page depuis le navigateur du téléphone."
+    ],
+    "faqTitle": "FAQ du scanner de QR code",
+    "faq": [
+      {
+        "q": "Ce scanner de QR code est-il gratuit ?",
+        "a": "Oui. Il est gratuit, sans inscription et sans limite."
+      },
+      {
+        "q": "Mes images sont-elles envoyées ?",
+        "a": "Non. Le QR code est décodé dans votre navigateur. Vos images et votre caméra ne quittent jamais votre appareil."
+      },
+      {
+        "q": "Puis-je scanner un QR code depuis une capture d'écran ?",
+        "a": "Oui. Importez la capture ou collez-la avec Ctrl+V. C'est le plus simple pour lire un QR code affiché sur votre propre écran."
+      },
+      {
+        "q": "Pourquoi mon QR code n'est-il pas lu ?",
+        "a": "L'image est peut-être floue, trop petite, coupée ou peu contrastée. Utilisez une image nette où tout le code est visible, avec sa marge blanche."
+      },
+      {
+        "q": "Est-il sûr d'ouvrir un lien scanné ?",
+        "a": "Vérifiez l'adresse du site avant de l'ouvrir. De faux autocollants QR servent parfois au phishing : ne saisissez jamais de mot de passe ni de carte bancaire sur un site inconnu."
+      }
+    ]
   }
 }

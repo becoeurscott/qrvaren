@@ -31,6 +31,7 @@ export async function Footer() {
           ))}
         </ul>
         <ul className="space-y-2 text-sm font-semibold">
+          <li><Link className="hover:text-lime" href="/qr-code-scanner">{n("scanner")}</Link></li>
           <li><Link className="hover:text-lime" href="/guides">{n("guides")}</Link></li>
           <li><Link className="hover:text-lime" href="/privacy">{t("privacy")}</Link></li>
           <li><Link className="hover:text-lime" href="/terms">{t("terms")}</Link></li>

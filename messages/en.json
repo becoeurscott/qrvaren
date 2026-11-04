@@ -10,7 +10,8 @@
     "dashboard": "Dashboard",
     "menu": "Menu",
     "close": "Close menu",
-    "logout": "Log out"
+    "logout": "Log out",
+    "scanner": "Scanner"
   },
   "hero": {
     "badge": "Free · No sign-up · Never expires",
@@ -1063,5 +1064,71 @@
         "image": "Your own QR picture is printed as it is. Use a sharp image with a white border."
       }
     }
+  },
+  "scanner": {
+    "nav": "Scanner",
+    "title": "QR Code Scanner Online — Scan from Image or Camera, Free",
+    "h1": "QR code scanner",
+    "desc": "Scan a QR code online for free: upload an image or screenshot, paste it, or use your webcam. Works in your browser, nothing is uploaded.",
+    "drop": "Drop a QR code image here",
+    "dropHint": "or click to choose a file · you can also paste a screenshot (Ctrl+V)",
+    "useCamera": "Use my camera",
+    "stop": "Stop camera",
+    "private": "Scanning happens in your browser. Your images never leave your device.",
+    "waiting": "The content of your QR code will appear here.",
+    "notFound": "We couldn't find a QR code in this image. Try a sharper picture, with the whole code visible and a white border around it.",
+    "cameraDenied": "We can't access your camera. Allow camera access in your browser, or upload a picture instead.",
+    "kind": {
+      "url": "Link",
+      "wifi": "WiFi network",
+      "text": "Text"
+    },
+    "checkHost": "This link opens {host}. Check that you trust this website before entering any personal information.",
+    "open": "Open the link",
+    "ssid": "Network name",
+    "password": "Password",
+    "security": "Security",
+    "copy": "Copy",
+    "copyPassword": "Copy password",
+    "copied": "Copied!",
+    "again": "Scan another",
+    "makeOwn": "Need your own QR code?",
+    "makeOwnCta": "Create one for free",
+    "howTitle": "How to scan a QR code online",
+    "how": [
+      "Click the box above and choose a picture or screenshot that contains a QR code, or drag it onto the box.",
+      "Or paste a screenshot directly with Ctrl+V (Cmd+V on Mac).",
+      "Or click Use my camera and hold the QR code in front of your webcam.",
+      "Read the result: links show the website first, WiFi codes show the network name and password, and text is shown in full."
+    ],
+    "phoneTitle": "How to scan a QR code with your phone",
+    "phone": [
+      "iPhone: open the Camera app, point it at the code and tap the yellow banner.",
+      "Android: open the Camera app or Google Lens, point it at the code and tap the link that appears.",
+      "To scan a QR code that is already on your phone, such as a screenshot, upload it on this page from your phone's browser."
+    ],
+    "faqTitle": "QR code scanner FAQ",
+    "faq": [
+      {
+        "q": "Is this QR code scanner free?",
+        "a": "Yes. It is free, with no sign-up and no limit."
+      },
+      {
+        "q": "Are my images uploaded?",
+        "a": "No. The QR code is decoded in your browser. Your pictures and camera feed never leave your device."
+      },
+      {
+        "q": "Can I scan a QR code from a screenshot?",
+        "a": "Yes. Upload the screenshot or paste it with Ctrl+V. This is the easiest way to read a QR code that is on your own screen."
+      },
+      {
+        "q": "Why can't my QR code be read?",
+        "a": "The picture may be blurry, too small, cropped or low in contrast. Use a sharp image where the whole code is visible, with its white border."
+      },
+      {
+        "q": "Is it safe to open a scanned link?",
+        "a": "Check the website address before opening it. Fake QR stickers are sometimes used for phishing, so never enter passwords or payment details on a site you don't recognize."
+      }
+    ]
   }
 }
