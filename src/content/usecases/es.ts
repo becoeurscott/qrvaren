@@ -253,6 +253,67 @@ const content: UseCaseContent = {
         ],
       },
     },
+    {
+      "slug": "google-form-qr-code",
+      "type": "url",
+      "title": "Generador de código QR para Google Forms (gratis, no caduca)",
+      "h1": "Código QR para Google Forms",
+      "desc": "Convierte cualquier formulario de Google en un código QR para encuestas, inscripciones, asistencia y opiniones. Un escaneo abre el formulario.",
+      "guide": {
+        "title": "Cómo crear un código QR para un formulario de Google",
+        "intro": [
+          "Un código QR de Google Forms abre tu formulario en cuanto alguien apunta el móvil. Sin teclear una larga dirección docs.google.com ni «¿me mandas el enlace?». Perfecto para encuestas, inscripciones a eventos, asistencia a clase, opiniones y cuestionarios.",
+          "El código contiene el enlace del formulario: es estático, gratis y nunca caduca. Las respuestas siguen llegando a Google Forms y Sheets como siempre."
+        ],
+        "stepsTitle": "Crea un código QR para tu formulario de Google",
+        "steps": [
+          "Abre tu formulario en Google Forms y haz clic en Enviar (arriba a la derecha).",
+          "Elige la pestaña de enlace (el icono de cadena), marca «Acortar URL» y haz clic en Copiar.",
+          "Pega el enlace en el campo URL del sitio web del generador de arriba.",
+          "Añade un marco como «ESCANEA PARA INSCRIBIRTE» y tus colores, y descárgalo en PNG para presentaciones o en SVG/PDF para imprimir.",
+          "Escanéalo con tu móvil y envía una respuesta de prueba para comprobar que todo funciona."
+        ],
+        "usesTitle": "Usos habituales",
+        "uses": [
+          "Asistencia a clase o reuniones: pon el código en la primera diapositiva",
+          "Inscripción a eventos en carteles y folletos",
+          "Tarjetas de opinión de clientes en mesas y mostradores",
+          "Encuestas al final de una presentación o en el ticket",
+          "Inscripciones de voluntarios, concursos y newsletter"
+        ],
+        "tipsTitle": "Consejos para conseguir más respuestas",
+        "tips": [
+          "En la configuración, desactiva «Restringir a usuarios de tu organización» si deben responder personas externas, o se toparán con un inicio de sesión.",
+          "Mantén el formulario corto y adaptado al móvil: una pregunta por línea y pocos campos obligatorios.",
+          "Di qué ganan junto al código: «Encuesta de 2 minutos, gana un café».",
+          "Para la asistencia, activa «Recopilar direcciones de correo» o añade una pregunta de nombre, y cierra el formulario tras la sesión.",
+          "No borres y vuelvas a crear el formulario: uno nuevo tiene otro enlace y el código impreso apuntaría al antiguo."
+        ],
+        "faqTitle": "Preguntas frecuentes sobre el QR de Google Forms",
+        "faq": [
+          {
+            "q": "¿Google Forms tiene un código QR integrado?",
+            "a": "No para descargar. Copia el enlace para compartir del formulario y pégalo en el generador de arriba para obtener un código QR que puedes personalizar e imprimir."
+          },
+          {
+            "q": "¿El código QR caduca?",
+            "a": "No. Contiene el enlace del formulario, así que funciona mientras exista el formulario, aunque edites las preguntas."
+          },
+          {
+            "q": "¿Puedo editar el formulario después de imprimir el QR?",
+            "a": "Sí. Editar las preguntas no cambia el enlace. Solo un formulario nuevo tiene un enlace nuevo."
+          },
+          {
+            "q": "¿Hace falta una cuenta de Google para responder?",
+            "a": "Solo si el formulario exige iniciar sesión. En la configuración, desactiva las opciones que limitan las respuestas a usuarios con sesión iniciada o de tu organización."
+          },
+          {
+            "q": "¿Puedo cerrar las respuestas después de un evento?",
+            "a": "Sí. En la pestaña Respuestas, desactiva «Se aceptan respuestas». Quien escanee verá un mensaje de formulario cerrado."
+          }
+        ]
+      }
+    },
   ],
 };
 

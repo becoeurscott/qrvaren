@@ -253,6 +253,67 @@ const content: UseCaseContent = {
         ],
       },
     },
+    {
+      "slug": "google-form-qr-code",
+      "type": "url",
+      "title": "Google Form QR code generator (free, never expires)",
+      "h1": "Google Form QR code",
+      "desc": "Turn any Google Form into a QR code for surveys, sign-ups, attendance and feedback. One scan opens the form.",
+      "guide": {
+        "title": "How to make a QR code for a Google Form",
+        "intro": [
+          "A Google Form QR code opens your form the moment someone points their phone at it. No typing a long docs.google.com address, no “can you email me the link?”. Perfect for surveys, event sign-ups, class attendance, feedback and quizzes.",
+          "The code holds your form's link, so it is static, free and never expires. Responses still land in your Google Form and Sheets exactly as usual."
+        ],
+        "stepsTitle": "Create a QR code for your Google Form",
+        "steps": [
+          "Open your form in Google Forms and click Send (top right).",
+          "Choose the link tab (the chain icon), tick “Shorten URL” and click Copy.",
+          "Paste the link in the Website URL field of the generator above.",
+          "Add a frame like “SCAN TO SIGN UP” and your colors, then download PNG for slides or SVG/PDF for print.",
+          "Scan it with your phone and submit a test response to make sure everything works."
+        ],
+        "usesTitle": "Popular uses",
+        "uses": [
+          "Class or meeting attendance: put the code on the first slide",
+          "Event registration on posters and flyers",
+          "Customer feedback cards on tables and counters",
+          "Surveys at the end of a presentation or on a receipt",
+          "Volunteer, contest and newsletter sign-ups"
+        ],
+        "tipsTitle": "Tips for more responses",
+        "tips": [
+          "In the form settings, turn off “Restrict to users in your organization” if outsiders must answer, or they'll hit a sign-in wall.",
+          "Keep the form short and phone-friendly: one question per line, few required fields.",
+          "Say what's in it for them next to the code: “2-minute survey, win a coffee”.",
+          "For attendance, turn on “Collect email addresses” or add a name question, and close the form after the session.",
+          "Don't delete and recreate the form: a new form has a new link, and the printed code would point to the old one."
+        ],
+        "faqTitle": "Google Form QR code FAQ",
+        "faq": [
+          {
+            "q": "Does Google Forms have a built-in QR code?",
+            "a": "Not as a download. Copy the form's share link and paste it into the generator above to get a QR code you can style and print."
+          },
+          {
+            "q": "Does the QR code expire?",
+            "a": "No. It contains your form's link, so it works as long as the form exists, even if you edit the questions."
+          },
+          {
+            "q": "Can I edit the form after printing the QR code?",
+            "a": "Yes. Editing questions doesn't change the link. Only creating a new form gives a new link."
+          },
+          {
+            "q": "Do people need a Google account to answer?",
+            "a": "Only if the form requires sign-in. In Settings, turn off the options that restrict responses to signed-in or organization users."
+          },
+          {
+            "q": "Can I stop responses after an event?",
+            "a": "Yes. In the Responses tab, switch off “Accepting responses”. Anyone scanning then sees a closed-form message."
+          }
+        ]
+      }
+    },
   ],
 };
 

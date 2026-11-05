@@ -253,6 +253,67 @@ const content: UseCaseContent = {
         ],
       },
     },
+    {
+      "slug": "google-form-qr-code",
+      "type": "url",
+      "title": "Générateur de QR code Google Forms (gratuit, sans expiration)",
+      "h1": "QR code Google Forms",
+      "desc": "Transformez n'importe quel Google Forms en QR code pour vos sondages, inscriptions, appels de présence et avis. Un scan ouvre le formulaire.",
+      "guide": {
+        "title": "Comment créer un QR code pour un Google Forms",
+        "intro": [
+          "Un QR code Google Forms ouvre votre formulaire dès qu'on pointe un téléphone dessus. Plus besoin de taper une longue adresse docs.google.com, ni de « tu peux m'envoyer le lien ? ». Idéal pour les sondages, inscriptions, appels de présence, avis et quiz.",
+          "Le code contient le lien du formulaire : il est statique, gratuit et n'expire jamais. Les réponses arrivent toujours dans Google Forms et Sheets comme d'habitude."
+        ],
+        "stepsTitle": "Créez un QR code pour votre Google Forms",
+        "steps": [
+          "Ouvrez votre formulaire dans Google Forms et cliquez sur Envoyer (en haut à droite).",
+          "Choisissez l'onglet lien (icône de chaîne), cochez « Raccourcir l'URL » et cliquez sur Copier.",
+          "Collez le lien dans le champ URL du site du générateur ci-dessus.",
+          "Ajoutez un cadre comme « SCANNEZ POUR VOUS INSCRIRE » et vos couleurs, puis téléchargez en PNG pour les slides ou en SVG/PDF pour l'impression.",
+          "Scannez-le avec votre téléphone et envoyez une réponse test pour vérifier que tout fonctionne."
+        ],
+        "usesTitle": "Usages courants",
+        "uses": [
+          "Appel de présence en cours ou en réunion : mettez le code sur la première slide",
+          "Inscriptions à un événement sur affiches et flyers",
+          "Cartes d'avis clients sur les tables et au comptoir",
+          "Sondages en fin de présentation ou sur un ticket",
+          "Inscriptions bénévoles, concours et newsletter"
+        ],
+        "tipsTitle": "Astuces pour plus de réponses",
+        "tips": [
+          "Dans les paramètres, désactivez « Limiter aux utilisateurs de votre organisation » si des personnes externes doivent répondre, sinon elles devront se connecter.",
+          "Gardez un formulaire court et adapté au mobile : une question par ligne, peu de champs obligatoires.",
+          "Dites ce qu'on y gagne à côté du code : « Sondage de 2 minutes, un café à gagner ».",
+          "Pour un appel, activez « Collecter les adresses e-mail » ou ajoutez une question Nom, et fermez le formulaire après la séance.",
+          "Ne supprimez pas le formulaire pour le recréer : un nouveau formulaire a un nouveau lien, et le code imprimé pointerait vers l'ancien."
+        ],
+        "faqTitle": "FAQ QR code Google Forms",
+        "faq": [
+          {
+            "q": "Google Forms propose-t-il un QR code ?",
+            "a": "Pas en téléchargement. Copiez le lien de partage du formulaire et collez-le dans le générateur ci-dessus pour obtenir un QR code personnalisable et imprimable."
+          },
+          {
+            "q": "Le QR code expire-t-il ?",
+            "a": "Non. Il contient le lien du formulaire : il fonctionne tant que le formulaire existe, même si vous modifiez les questions."
+          },
+          {
+            "q": "Puis-je modifier le formulaire après avoir imprimé le QR code ?",
+            "a": "Oui. Modifier les questions ne change pas le lien. Seul un nouveau formulaire a un nouveau lien."
+          },
+          {
+            "q": "Faut-il un compte Google pour répondre ?",
+            "a": "Seulement si le formulaire exige une connexion. Dans les paramètres, désactivez les options qui limitent les réponses aux utilisateurs connectés ou à votre organisation."
+          },
+          {
+            "q": "Puis-je arrêter les réponses après un événement ?",
+            "a": "Oui. Dans l'onglet Réponses, désactivez « Accepter les réponses ». Les personnes qui scannent verront alors un message de formulaire fermé."
+          }
+        ]
+      }
+    },
   ],
 };
 
