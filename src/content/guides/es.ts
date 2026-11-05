@@ -565,6 +565,84 @@ const es: GuideContent = {
         },
       ],
     },
+    {
+      "slug": "how-to-scan-qr-code-on-pc",
+      "title": "Cómo escanear un código QR en el PC (Windows y Mac) sin móvil",
+      "desc": "Cuatro formas gratis de leer un código QR en el ordenador: desde una captura de pantalla, una imagen, la webcam o el navegador. En Windows, Mac y Chromebook.",
+      "minutes": 4,
+      "cta": {
+        "href": "/qr-code-scanner",
+        "label": "Abrir el escáner QR gratis"
+      },
+      "sections": [
+        {
+          "h": "¿Se puede escanear un código QR en el ordenador?",
+          "p": [
+            "Sí. No necesitas un móvil para leer un código QR en el PC. Un código QR es solo una imagen, y cualquier programa que pueda leer la imagen puede decodificarlo. El truco es meter el código en el ordenador: como captura de pantalla, como imagen guardada o con la webcam.",
+            "Aquí tienes cuatro formas gratis de leer un código QR en Windows, Mac o Chromebook, de la más rápida a la más manual. Ninguna requiere instalar nada."
+          ]
+        },
+        {
+          "h": "Método 1: escanear un QR desde una captura de pantalla (el más rápido)",
+          "p": [
+            "Úsalo cuando el código QR está en tu pantalla: en un email, un PDF, una web o una videollamada."
+          ],
+          "steps": [
+            "Haz una captura de la zona del código QR: Windows + Mayús + S en Windows, Cmd + Mayús + Ctrl + 4 en Mac (la copia al portapapeles).",
+            "Abre el escáner de códigos QR gratis de QRVAREN en tu navegador.",
+            "Pulsa Ctrl + V (Cmd + V en Mac) para pegar la captura. El escáner lee el código al instante.",
+            "Revisa el resultado: si es un enlace, lee la dirección antes de hacer clic."
+          ]
+        },
+        {
+          "h": "Método 2: abrir un código QR desde un archivo de imagen",
+          "p": [
+            "Úsalo cuando te han enviado el código QR como imagen (PNG, JPG) o lo has guardado de una web."
+          ],
+          "steps": [
+            "Abre el escáner de códigos QR.",
+            "Haz clic para subir la imagen, o arrastra y suelta el archivo en la página.",
+            "El contenido decodificado aparece bajo la imagen: un enlace, texto, datos WiFi o de contacto."
+          ]
+        },
+        {
+          "h": "Método 3: escanear con la webcam del portátil",
+          "p": [
+            "Úsalo para un código QR impreso en papel, un producto o un cartel."
+          ],
+          "steps": [
+            "Abre el escáner de códigos QR y elige la opción de cámara.",
+            "Permite el acceso a la cámara cuando el navegador lo pida.",
+            "Sujeta el código QR impreso a 15–30 cm de la webcam, plano y bien iluminado.",
+            "Quédate quieto un segundo: el código se lee en cuanto está enfocado."
+          ]
+        },
+        {
+          "h": "Método 4: otras opciones integradas",
+          "list": [
+            "Windows 10 y 11: la app Cámara lee códigos QR. Abre Cámara, activa la lectura de códigos de barras en su configuración si hace falta y apunta la webcam al código.",
+            "Chrome y Edge: Google Lens (clic derecho en una imagen y Buscar imagen con Google) puede leer un código QR de una página web.",
+            "Mac: la cámara integrada no lee códigos QR, así que el método de la captura de pantalla es el más rápido."
+          ]
+        },
+        {
+          "h": "¿Es seguro escanear un código QR en el PC?",
+          "p": [
+            "El escáner de QRVAREN funciona por completo en tu navegador: la imagen se decodifica en tu ordenador y nunca se sube a nuestros servidores.",
+            "El riesgo de un código QR es a dónde lleva, no el escaneo. Lee siempre el enlace antes de abrirlo, desconfía de los códigos que piden iniciar sesión o pagar, y nunca escribas una contraseña en una página a la que llegaste desde un QR desconocido."
+          ]
+        },
+        {
+          "h": "¿El código QR no se escanea? Soluciones rápidas",
+          "list": [
+            "Recorta la captura más cerca del código, pero deja el margen blanco alrededor.",
+            "Usa una imagen más grande o más nítida: los códigos borrosos o diminutos fallan.",
+            "Con la webcam, añade luz y evita reflejos en papel brillante.",
+            "Comprueba que se ve todo el código, incluidos los tres cuadrados de las esquinas."
+          ]
+        }
+      ]
+    },
   ],
 };
 

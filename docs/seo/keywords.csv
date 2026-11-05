@@ -1,0 +1,32 @@
+keyword,page_kind,qr_type,priority,status,notes
+how to open a qrcode on pc,guide,-,1,done,/guides/how-to-scan-qr-code-on-pc (Semrush: 320/mo KD 28)
+qr code for google form,usecase,url,1,todo,also covers "qr code for attendance" and "qr code for survey"
+qr code for wedding guests to upload photos,usecase,url,1,todo,"wedding photos, party pictures, event photos, photo sharing"
+qr code for contact info,usecase,vcard,1,todo,"contact card, contact info iphone, luggage tag"
+do qr codes expire,guide,-,1,todo,"how to make a qr code for free that doesn't expire"
+qr code for amazon wish list,usecase,url,2,todo,"amazon registry, baby registry, honeymoon fund"
+qr code for donations,usecase,url,2,todo,"gofundme, tips, church giving"
+qr code for cash app,usecase,url,2,todo,cash.app/$tag; could become a preset like venmo
+qr code for resume,usecase,url,2,todo,linkedin profile + pdf resume
+qr code for headstone,usecase,url,2,todo,"memorial, gravestone, funeral program"
+qr code for seating chart wedding,usecase,pdf,2,todo,
+qr code for references on poster,usecase,url,2,todo,academic posters
+qr code for google doc,usecase,url,2,todo,"google drive, google sheets, google slides, word document"
+qr code for discord server,usecase,url,3,todo,
+qr code for etsy shop,usecase,url,3,todo,"ebay store, online shop"
+qr code for linktree,guide,-,3,todo,"multiple links -> link-in-bio page"
+qr code for rsvp,usecase,url,3,todo,"birthday party rsvp, the knot rsvp"
+qr code for youtube video,usecase,url,3,todo,youtube preset is channel only
+qr code for dog tag,usecase,text,3,todo,pet id tag
+qr code for storage bins,usecase,text,3,todo,moving and labeling
+qr code for text message,usecase,sms,3,todo,
+qr code for email address,usecase,email,3,todo,existing /create/email-qr-code may cover it
+how to qr code a screenshot,guide,-,3,todo,"how to qr code from photo; overlaps the PC scanning guide"
+qr code for word document,usecase,pdf,3,todo,
+qr code for whatsapp group,usecase,url,3,todo,whatsapp preset is a chat; groups use invite links
+qr code for event,usecase,url,3,todo,"eventbrite, tickets"
+qr code for tiktok,preset,-,0,done,/create/tiktok-qr-code exists
+qr code for google reviews,usecase,url,0,done,/create/google-review-qr-code
+qr code for wifi password,usecase,wifi,0,done,/create/wifi-qr-code + airbnb-wifi-qr-code
+qr code for menu,usecase,pdf,0,done,/create/restaurant-menu-qr-code
+qr code for wedding,usecase,url,0,done,/create/wedding-qr-code

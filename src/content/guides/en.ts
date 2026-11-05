@@ -565,6 +565,84 @@ const en: GuideContent = {
         },
       ],
     },
+    {
+      "slug": "how-to-scan-qr-code-on-pc",
+      "title": "How to scan a QR code on PC (Windows and Mac), no phone needed",
+      "desc": "Four free ways to open a QR code on your computer: from a screenshot, an image file, your webcam or your browser. Works on Windows, Mac and Chromebook.",
+      "minutes": 4,
+      "cta": {
+        "href": "/qr-code-scanner",
+        "label": "Open the free QR scanner"
+      },
+      "sections": [
+        {
+          "h": "Can you scan a QR code on a computer?",
+          "p": [
+            "Yes. You don't need a phone to open a QR code on PC. A QR code is just an image, and any software that can read the image can decode it. The trick is getting the code into your computer: as a screenshot, as a saved image, or through your webcam.",
+            "Below are four free ways to read a QR code on Windows, Mac or Chromebook, from fastest to most hands-on. None of them requires installing anything."
+          ]
+        },
+        {
+          "h": "Method 1: scan a QR code from a screenshot (fastest)",
+          "p": [
+            "Use this when the QR code is on your screen: in an email, a PDF, a website or a video call."
+          ],
+          "steps": [
+            "Take a screenshot of the area with the QR code: Windows + Shift + S on Windows, Cmd + Shift + Ctrl + 4 on Mac (copies it to the clipboard).",
+            "Open the free QRVAREN QR code scanner in your browser.",
+            "Press Ctrl + V (Cmd + V on Mac) to paste the screenshot. The scanner reads the code instantly.",
+            "Check the result: if it is a link, read the address before you click it."
+          ]
+        },
+        {
+          "h": "Method 2: open a QR code from an image file",
+          "p": [
+            "Use this when someone sent you the QR code as a picture (PNG, JPG) or you saved it from a website."
+          ],
+          "steps": [
+            "Open the QR code scanner.",
+            "Click to upload the image, or drag and drop the file onto the page.",
+            "The decoded content appears under the image: a link, text, WiFi details or contact information."
+          ]
+        },
+        {
+          "h": "Method 3: scan with your laptop webcam",
+          "p": [
+            "Use this for a QR code printed on paper, a product or a poster."
+          ],
+          "steps": [
+            "Open the QR code scanner and choose the camera option.",
+            "Allow camera access when your browser asks.",
+            "Hold the printed QR code 15 to 30 cm (6 to 12 in) in front of the webcam, flat and well lit.",
+            "Hold still for a second: the code is read as soon as it is in focus."
+          ]
+        },
+        {
+          "h": "Method 4: other built-in options",
+          "list": [
+            "Windows 10 and 11: the Camera app can read QR codes. Open Camera, turn on barcode scanning in its settings if needed, and point the webcam at the code.",
+            "Chrome and Edge: Google Lens (right-click an image, then Search image with Google) can read a QR code on a web page.",
+            "Mac: there is no QR reader in the built-in camera app, so the screenshot method above is the quickest way."
+          ]
+        },
+        {
+          "h": "Is it safe to scan a QR code on PC?",
+          "p": [
+            "The QRVAREN scanner runs entirely in your browser: the image is decoded on your computer and never uploaded to our servers.",
+            "The risk with any QR code is where it leads, not the scan itself. Always read the link before opening it, be wary of codes that ask you to log in or pay, and never type a password on a page you reached from an unknown QR code."
+          ]
+        },
+        {
+          "h": "QR code not scanning? Quick fixes",
+          "list": [
+            "Crop the screenshot closer to the code, but keep the white border around it.",
+            "Use a bigger or sharper image: blurry or tiny codes fail.",
+            "For the webcam, add light and avoid glare on glossy paper.",
+            "Make sure the whole code is visible, including the three corner squares."
+          ]
+        }
+      ]
+    },
   ],
 };
 

@@ -565,6 +565,84 @@ const fr: GuideContent = {
         },
       ],
     },
+    {
+      "slug": "how-to-scan-qr-code-on-pc",
+      "title": "Comment scanner un QR code sur PC (Windows et Mac), sans téléphone",
+      "desc": "Quatre façons gratuites de lire un QR code sur ordinateur : depuis une capture d'écran, une image, la webcam ou le navigateur. Sur Windows, Mac et Chromebook.",
+      "minutes": 4,
+      "cta": {
+        "href": "/qr-code-scanner",
+        "label": "Ouvrir le scanner QR gratuit"
+      },
+      "sections": [
+        {
+          "h": "Peut-on scanner un QR code sur un ordinateur ?",
+          "p": [
+            "Oui. Pas besoin de téléphone pour lire un QR code sur PC. Un QR code n'est qu'une image, et tout logiciel capable de lire l'image peut le décoder. L'astuce, c'est de faire entrer le code dans l'ordinateur : en capture d'écran, en image enregistrée ou via la webcam.",
+            "Voici quatre méthodes gratuites pour lire un QR code sur Windows, Mac ou Chromebook, de la plus rapide à la plus manuelle. Aucune n'oblige à installer quoi que ce soit."
+          ]
+        },
+        {
+          "h": "Méthode 1 : scanner un QR code depuis une capture d'écran (la plus rapide)",
+          "p": [
+            "À utiliser quand le QR code est sur votre écran : dans un e-mail, un PDF, un site ou une visio."
+          ],
+          "steps": [
+            "Faites une capture de la zone du QR code : Windows + Maj + S sur Windows, Cmd + Maj + Ctrl + 4 sur Mac (copie dans le presse-papiers).",
+            "Ouvrez le scanner de QR code gratuit QRVAREN dans votre navigateur.",
+            "Appuyez sur Ctrl + V (Cmd + V sur Mac) pour coller la capture. Le scanner lit le code instantanément.",
+            "Vérifiez le résultat : si c'est un lien, lisez l'adresse avant de cliquer."
+          ]
+        },
+        {
+          "h": "Méthode 2 : ouvrir un QR code depuis un fichier image",
+          "p": [
+            "À utiliser quand on vous a envoyé le QR code en image (PNG, JPG) ou que vous l'avez enregistré depuis un site."
+          ],
+          "steps": [
+            "Ouvrez le scanner de QR code.",
+            "Cliquez pour importer l'image, ou glissez-déposez le fichier sur la page.",
+            "Le contenu décodé s'affiche sous l'image : lien, texte, infos WiFi ou coordonnées."
+          ]
+        },
+        {
+          "h": "Méthode 3 : scanner avec la webcam de l'ordinateur",
+          "p": [
+            "À utiliser pour un QR code imprimé sur papier, un produit ou une affiche."
+          ],
+          "steps": [
+            "Ouvrez le scanner de QR code et choisissez l'option caméra.",
+            "Autorisez l'accès à la caméra quand le navigateur le demande.",
+            "Tenez le QR code imprimé à 15 à 30 cm de la webcam, bien à plat et bien éclairé.",
+            "Restez immobile une seconde : le code est lu dès qu'il est net."
+          ]
+        },
+        {
+          "h": "Méthode 4 : autres options intégrées",
+          "list": [
+            "Windows 10 et 11 : l'application Caméra lit les QR codes. Ouvrez Caméra, activez la lecture des codes-barres dans ses paramètres si besoin, et pointez la webcam vers le code.",
+            "Chrome et Edge : Google Lens (clic droit sur une image, puis Rechercher l'image avec Google) peut lire un QR code sur une page web.",
+            "Mac : l'appareil photo intégré ne lit pas les QR codes, la méthode de la capture d'écran est donc la plus rapide."
+          ]
+        },
+        {
+          "h": "Est-ce sûr de scanner un QR code sur PC ?",
+          "p": [
+            "Le scanner QRVAREN fonctionne entièrement dans votre navigateur : l'image est décodée sur votre ordinateur et n'est jamais envoyée à nos serveurs.",
+            "Le risque d'un QR code, c'est sa destination, pas le scan. Lisez toujours le lien avant de l'ouvrir, méfiez-vous des codes qui demandent de se connecter ou de payer, et ne tapez jamais de mot de passe sur une page atteinte via un QR code inconnu."
+          ]
+        },
+        {
+          "h": "Le QR code ne se scanne pas ? Solutions rapides",
+          "list": [
+            "Recadrez la capture plus près du code, en gardant la marge blanche autour.",
+            "Utilisez une image plus grande ou plus nette : les codes flous ou minuscules échouent.",
+            "Pour la webcam, ajoutez de la lumière et évitez les reflets sur le papier brillant.",
+            "Vérifiez que tout le code est visible, y compris les trois carrés des coins."
+          ]
+        }
+      ]
+    },
   ],
 };
 
