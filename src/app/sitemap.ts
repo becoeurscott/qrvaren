@@ -4,10 +4,11 @@ import { SITE_URL } from "@/shared/config";
 import { allTypeSlugs } from "@/modules/qr/interface/slugs";
 import { presetSlugs } from "@/modules/qr/domain/presets";
 import { tutorialSlugs } from "@/content/guides";
+import { useCaseSlugs } from "@/content/usecases";
 
 // Every public, indexable page in every locale, with hreflang alternates.
 export default function sitemap(): MetadataRoute.Sitemap {
-  const paths = ["", "/create", "/business-card", "/pricing", "/privacy", "/terms", "/copyright", "/qr-code-scanner", "/guides", ...tutorialSlugs().map((s) => `/guides/${s}`), ...[...allTypeSlugs(), ...presetSlugs()].map((s) => `/create/${s}`)];
+  const paths = ["", "/create", "/business-card", "/pricing", "/privacy", "/terms", "/copyright", "/qr-code-scanner", "/guides", ...tutorialSlugs().map((s) => `/guides/${s}`), ...[...allTypeSlugs(), ...presetSlugs(), ...useCaseSlugs()].map((s) => `/create/${s}`)];
   const now = new Date();
   return paths.flatMap((p) =>
     routing.locales.map((l) => ({

@@ -22,6 +22,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     metadataBase: new URL(SITE_URL),
     title: { default: `${BRAND_NAME} — ${t("title1")} ${t("title2")}`, template: `%s — ${BRAND_NAME}` },
     description: t("sub"),
+    applicationName: BRAND_NAME,
+    openGraph: { type: "website", siteName: BRAND_NAME, locale },
+    twitter: { card: "summary_large_image" },
+    // Google Search Console ownership tag; set NEXT_PUBLIC_GSC_VERIFICATION in the deploy env.
+    verification: process.env.NEXT_PUBLIC_GSC_VERIFICATION ? { google: process.env.NEXT_PUBLIC_GSC_VERIFICATION } : undefined,
   };
 }
 
