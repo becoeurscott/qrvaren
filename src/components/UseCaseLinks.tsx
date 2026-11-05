@@ -1,9 +1,9 @@
 import { Link } from "@/i18n/routing";
-import { useCaseContent } from "@/content/usecases";
+import { getUseCases } from "@/content/usecases";
 
 // Internal links between the /create landing pages, so each use-case page is reachable and passes relevance.
 export function UseCaseLinks({ locale, current }: { locale: string; current?: string }) {
-  const { related, items } = useCaseContent(locale);
+  const { related, items } = getUseCases(locale);
   return (
     <section className="mx-auto max-w-6xl px-4 pb-16">
       <h2 className="mb-6 font-display text-3xl uppercase">{related}</h2>

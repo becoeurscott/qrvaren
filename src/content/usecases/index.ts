@@ -5,7 +5,7 @@ import type { UseCaseContent } from "./types";
 
 const CONTENT: Record<string, UseCaseContent> = { en, es, fr };
 
-export const useCaseContent = (locale: string) => CONTENT[locale] ?? en;
-export const useCaseSlugs = () => en.items.map((u) => u.slug);
-export const useCaseFromSlug = (locale: string, slug: string) => useCaseContent(locale).items.find((u) => u.slug === slug);
+export const getUseCases = (locale: string) => CONTENT[locale] ?? en;
+export const usecaseSlugs = () => en.items.map((u) => u.slug);
+export const findUseCase = (locale: string, slug: string) => getUseCases(locale).items.find((u) => u.slug === slug);
 export type { UseCase, UseCaseContent } from "./types";

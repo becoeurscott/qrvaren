@@ -10,20 +10,20 @@ import { presetFromSlug, presetSlugs } from "@/modules/qr/domain/presets";
 import { guideContent } from "@/content/guides";
 import { TypeGuide } from "@/components/TypeGuide";
 import { UseCaseLinks } from "@/components/UseCaseLinks";
-import { useCaseFromSlug, useCaseSlugs } from "@/content/usecases";
+import { findUseCase, usecaseSlugs } from "@/content/usecases";
 import { BRAND_NAME } from "@/shared/config";
 
 type Props = { params: Promise<{ locale: string; slug: string }> };
 
 // One page per QR type (wifi-qr-code...) and per use-case template (instagram-qr-code...).
 export function generateStaticParams() {
-  const slugs = [...allTypeSlugs(), ...presetSlugs(), ...useCaseSlugs()];
+  const slugs = [...allTypeSlugs(), ...presetSlugs(), ...usecaseSlugs()];
   return routing.locales.flatMap((locale) => slugs.map((slug) => ({ locale, slug })));
 }
 export const dynamicParams = false;
 
 function resolve(slug: string) {
-  if (useCaseSlugs().includes(slug)) return { useCase: true as const };
+  if (usecaseSlugs().includes(slug)) return { useCase: true as const };
   const preset = presetFromSlug(slug);
   if (preset) return { preset, ns: `seoPresets.${preset}` as const };
   const type = typeFromSlug(slug);
@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!page) return {};
   let title: string, description: string;
   if ("useCase" in page) {
-    const u = useCaseFromSlug(locale, slug)!;
+    const u = findUseCase(locale, slug)!;
     title = u.title; description = u.desc;
   } else {
     const t = await getTranslations({ locale, namespace: page.ns });
@@ -61,7 +61,7 @@ export default async function TypePage({ params }: Props) {
   if (!page) notFound();
   setRequestLocale(locale);
   if ("useCase" in page) {
-    const u = useCaseFromSlug(locale, slug)!;
+    const u = findUseCase(locale, slug)!;
     const h = await getTranslations("hero");
     return (
       <main>
