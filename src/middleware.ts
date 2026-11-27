@@ -35,6 +35,13 @@ function withCountryLocale(request: NextRequest): NextRequest {
 
 // Locale routing first, then refresh the InsForge session so pages render with a valid token.
 export default async function middleware(request: NextRequest) {
+  // The platform's default *.insforge.site address serves the same pages: send it to the real domain
+  // with a permanent redirect so search engines index one site only.
+  const site = process.env.NEXT_PUBLIC_SITE_URL;
+  const host = request.headers.get("host") ?? "";
+  if (site && /\.insforge\.site$/i.test(host.split(":")[0]) && !site.includes(host)) {
+    return NextResponse.redirect(new URL(request.nextUrl.pathname + request.nextUrl.search, site), 301);
+  }
   const response = adminRewrite(request) ?? intl(withCountryLocale(request));
   await updateSession({ requestCookies: request.cookies, responseCookies: response.cookies });
   return response;
